@@ -20,10 +20,15 @@ from src.depth import DepthPoset
 from src import poset_scores, node_scores
 
 from tqdm import tqdm
+from datetime import datetime
 
 
 ns = np.arange(4, 13, 8)
-dims = np.arange(1, 3)
+dims = np.arange(1, 4)
+repeat = 10
+number_nodes_to_check = 10
+
+path_template = "results/scores-on-random-alpha-complexes/{0}.pkl"
 
 poset_scores_to_check = [
     poset_scores.number_of_nodes, 
@@ -36,49 +41,84 @@ poset_scores_to_check = [
 ]
 
 node_scores_to_check = [
-
+    node_scores.incomparable_number, 
+    node_scores.incestors_number, 
+    node_scores.incestors_height, 
+    node_scores.incestors_width, 
+    node_scores.successors_number, 
+    node_scores.successors_height, 
+    node_scores.successors_width, 
 ]
 
-with tqdm(total=len(ns)*len(dims)) as pbar:
-	for n, dim in itertools.product(ns, dims):
-		result = {'n': n, 'dim': dim}
 
-		# generate a cloud of points
-		pbar.set_postfix_str(f'dim={dim}, n={n}: generating points')
-		pbar.refresh()
-		points = np.random.random([n, dim])
-		result.update({'points': points})
+def calculate_result_for_random_alpha_complex(n, dim):
+	# calculate the dictionary of values and scores for case with n points of given dimension
+	result = {'n': n, 'dim': dim}
 
-		# generate SimplexTree
-		pbar.set_postfix_str(f'dim={dim}, n={n}: generating SimplexTree')
-		pbar.refresh()
-		stree = AlphaComplex(points).create_simplex_tree()
-		result.update({'stree': stree})
+	# generate a cloud of points
+	points = np.random.random([n, dim])
+	result.update({'points': points})
 
-		# searching depth poset
-		pbar.set_postfix_str(f'dim={dim}, n={n}: finding DepthPoset')
-		pbar.refresh()
-		depth_poset = DepthPoset.from_simplex_tree(stree)
-		result.update({'depth poset': depth_poset})
+	# generate SimplexTree
+	stree = AlphaComplex(points).create_simplex_tree()
+	#result.update({'stree': stree}) # should we save SimplexTree?
 
-		# find poset scores on full poset
-		result.update({('poset scores', 'full'): {}})
+	# find depth poset
+	depth_poset = DepthPoset.from_simplex_tree(stree)
+	result.update({'depth poset': depth_poset})	
+
+	# find poset scores for full depth poset
+	for score in poset_scores_to_check:
+		score_value = score(depth_poset)
+		result.update({score.__name__: {"full": score_value}})
+
+	# find poset scores for subposets of different dimensions
+	for sdim in range(dim):
+		subposet = depth_poset.subposet_dim(sdim)
 		for score in poset_scores_to_check:
-			pbar.set_postfix_str(f'dim={dim}, n={n}: calculate {score.__name__} on full poset')
-			pbar.refresh()
-			score_value = score(depth_poset)
-			result[('poset scores', 'full')].update({score.__name__: score_value})
+			score_value = score(subposet)
+			result[score.__name__].update({sdim: score_value})
 
-		# find poset scores on subposets
-		pass
+	# choose the nodes to check and sort them by dimension
+	nodes_to_check = np.random.choice(depth_poset.nodes, min(number_nodes_to_check, len(depth_poset.nodes)), replace=False)
+	nodes_to_check = nodes_to_check[np.argsort([node.dim for node in nodes_to_check])]
+	
 
-		# find node scores on full poset
-		pass
+	for score in node_scores_to_check:
+		result.update({score.__name__: {node: {} for node in nodes_to_check}})
 
-		# find node scores on subposets
-		pass
+	# calculate node scores for the full poset
+	for node in nodes_to_check:
+		for score in node_scores_to_check:
+			score_value = score(depth_poset, node)
+			result[score.__name__][node].update({'full': score_value})
 
-		# save the result
-		pass
 
-		pbar.update()
+	# calculate node scores for subposets
+	sdim = -1
+	for node in nodes_to_check:
+		if node.dim != sdim:
+			sdim = node.dim
+			subposet = depth_poset.subposet_dim(sdim)
+			for score in node_scores_to_check:
+				score_value = score(subposet, node)
+				result[score.__name__].update({node: {sdim: score_value}})
+	return result
+
+
+with tqdm(total=len(ns)*len(dims)*repeat) as pbar:
+	for n, dim in itertools.product(ns, dims):
+		for i in range(repeat):
+			result = calculate_result_for_random_alpha_complex(n, dim)
+
+			# create the directory if not exist and save file
+			path = path_template.format(datetime.now())
+			directory = os.path.dirname(path)
+			if directory and not os.path.exists(directory):
+				os.makedirs(directory)
+
+			# save file
+			with open(path, "wb") as file:
+				pkl.dump(result, file)
+
+			pbar.update()
