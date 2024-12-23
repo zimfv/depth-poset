@@ -1,6 +1,5 @@
 #!/bin/bash
 
-cd ..
 mkdir -p logs
 
 #SBATCH --job-name=depth_stats_of_random_alpha_complex

@@ -164,3 +164,7 @@ cython_debug/
 
 # data directories
 results
+
+# slurm logs
+*.out
+
