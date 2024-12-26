@@ -1,16 +1,11 @@
 #!/bin/bash
-
-mkdir -p logs
-
+#SBATCH --ntasks=1
+#
 #SBATCH --job-name=depth_stats_of_random_alpha_complex
 #SBATCH --output=logs/output_%j.log
-
-#SBATCH -c 1
+#
 #SBATCH --time=12:00:00
 #SBATCH --mem=8G
-
-#SBATCH --ntasks=1
-#SBATCH --cpus-per-task=1
 
 param_file="params.txt"
 param=$(sed -n "${SLURM_ARRAY_TASK_ID}p" $param_file)
