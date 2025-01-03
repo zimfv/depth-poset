@@ -34,31 +34,33 @@ class Proximity:
 		values = np.array(values)
 		if values.shape == ():
 			values = values*np.ones(xmin.shape)
-		x = np.unique(np.concatenate([xmin, xmax]))
-		y = np.unique(np.concatenate([ymin, ymax]))
+		x = np.unique(np.concatenate([xmin, xmax, [-np.inf, +np.inf]]))
+		y = np.unique(np.concatenate([ymin, ymax, [-np.inf, +np.inf]]))
 
 		matrix = np.zeros([len(x) - 1, len(y) - 1])
+
 		x_mid = 0.5*(x[1:] + x[:-1])
 		y_mid = 0.5*(y[1:] + y[:-1])
+		
 		for i in range(len(xmin)):
 			x_cond = (x_mid >= xmin[i])&(x_mid <= xmax[i])
 			x_cond = x_cond.reshape([len(x_cond), 1])
 			y_cond = (y_mid >= ymin[i])&(y_mid <= ymax[i])
 			cond = np.logical_and(x_cond*np.ones(matrix.shape), y_cond*np.ones(matrix.shape))
 			matrix[cond] += values[i]
-		# очень херовое, костыльное решение. It's bas solution, should be rewritten.
-		if (np.inf in x) and (-np.inf in x) and (np.inf in y) and (-np.inf in y):
-			values = matrix
-		else:
-			values = np.zeros([len(x) + 1, len(y) + 1])
-			values[1:-1, 1:-1] = matrix
-		return Proximity(x, y, values)
+
+		return Proximity(x, y, matrix)
+
+
 
 	@classmethod
 	def from_depth_poset(self, dp: DepthPoset):
 		"""
 		"""
-		xmin, xmax, ymin, ymax = np.array([(e1.birth_value, e0.birth_value, e0.death_value, e1.death_value) for e0, e1 in dp.edges]).transpose()
+		if len(dp.edges) == 0:
+			xmin, xmax, ymin, ymax = [], [], [], []
+		else:
+			xmin, xmax, ymin, ymax = np.array([(e1.birth_value, e0.birth_value, e0.death_value, e1.death_value) for e0, e1 in dp.edges]).transpose()
 		return Proximity.from_rectangles(xmin, xmax, ymin, ymax, values=1)
 
 	def __call__(self, x, y):
@@ -86,11 +88,11 @@ class Proximity:
 	def __add__(self, other):
 		"""
 		"""
-		x = np.unique(np.concatenate([self.x, other.x]))[1:-1]
-		y = np.unique(np.concatenate([self.y, other.y]))[1:-1]
+		x = np.unique(np.concatenate([self.x, other.x]))
+		y = np.unique(np.concatenate([self.y, other.y]))
 
-		x_grid = np.append(x - 0.5*(x[1:] - x[:-1]).min(), x[-1] + 1)
-		y_grid = np.append(y - 0.5*(y[1:] - y[:-1]).min(), y[-1] + 1)
+		x_grid = 0.5*(x[1:] + x[:-1])
+		y_grid = 0.5*(y[1:] + y[:-1])
 		y_grid, x_grid = np.meshgrid(y_grid, x_grid)
 		values = self(x_grid, y_grid) + other(x_grid, y_grid)
 
