@@ -3,6 +3,9 @@ import numpy as np
 from src.depth import DepthPoset
 
 from matplotlib import pyplot as plt
+from matplotlib.colors import Normalize
+from matplotlib.cm import ScalarMappable
+
 
 class Proximity:
 	def __init__(self, x, y, values):
@@ -128,15 +131,23 @@ class Proximity:
 		"""
 		return self.values.max()
 
-	def show(self, xmin=-np.inf, xmax=np.inf, ymin=-np.inf, ymax=np.inf, cmap='winter', alpha=None, vmin=None, vmax=None, ax=plt, ignore=0, **kwargs):
+	def show(self, xmin=-np.inf, xmax=np.inf, ymin=-np.inf, ymax=np.inf, cmap='Blues', alpha=None, vmin=None, vmax=None, ax=None, ignore=0, **kwargs):
 		"""
 		"""
+		if ax is None:
+			fig, ax = plt.subplots()
+
 		cmap = plt.get_cmap(cmap)
 
 		if vmin is None:
 			vmin = self.min()
 		if vmax is None:
 			vmax = self.max()
+		if vmin == vmax:
+			if vmin == 0:
+				vmin, vmax = 0, 1
+			else:
+				vmin, vmax = np.sort([0, vmin])
 
 		x = np.concatenate([[xmin], self.x[(self.x > xmin)&(self.x < xmax)], [xmax]])
 		y = np.concatenate([[ymin], self.y[(self.y > ymin)&(self.y < ymax)], [ymax]])
@@ -156,6 +167,11 @@ class Proximity:
 						val = (val - vmin)/(vmax - vmin)
 						col = cmap(val, alpha=alpha)
 						ax.fill([x0, x1, x1, x0], [y0, y0, y1, y1], color=col, **kwargs)
+
+		# create and return mappable object
+		norm = Normalize(vmin=vmin, vmax=vmax)
+		sm = ScalarMappable(cmap=cmap, norm=norm)
+		return sm
 
 	def integral(self, xmin=-np.inf, xmax=np.inf, ymin=-np.inf, ymax=np.inf):
 		"""
