@@ -1,3 +1,13 @@
+'''
+Here should be callable classes of density measure on R^2.
+They could be defined from depth poset and used to define the metric between posets 
+by taking L_p distance between density functions.
+So these classes also should contain integral method.
+
+Now there is only SquareDensity class is realised, but this gives an unstable metric.
+'''
+
+
 import numpy as np
 
 from src.depth import DepthPoset
@@ -7,7 +17,12 @@ from matplotlib.colors import Normalize
 from matplotlib.cm import ScalarMappable
 
 
-class Proximity:
+
+class Density:
+	pass
+
+
+class SquareDensity(Density):
 	def __init__(self, x, y, values):
 		"""
 		"""
@@ -52,7 +67,7 @@ class Proximity:
 			cond = np.logical_and(x_cond*np.ones(matrix.shape), y_cond*np.ones(matrix.shape))
 			matrix[cond] += values[i]
 
-		return Proximity(x, y, matrix)
+		return SquareDensity(x, y, matrix)
 
 
 
@@ -64,7 +79,7 @@ class Proximity:
 			xmin, xmax, ymin, ymax = [], [], [], []
 		else:
 			xmin, xmax, ymin, ymax = np.array([(e1.birth_value, e0.birth_value, e0.death_value, e1.death_value) for e0, e1 in dp.edges]).transpose()
-		return Proximity.from_rectangles(xmin, xmax, ymin, ymax, values=1)
+		return SquareDensity.from_rectangles(xmin, xmax, ymin, ymax, values=1)
 
 	def __call__(self, x, y):
 		"""
@@ -99,12 +114,12 @@ class Proximity:
 		y_grid, x_grid = np.meshgrid(y_grid, x_grid)
 		values = self(x_grid, y_grid) + other(x_grid, y_grid)
 
-		return Proximity(x, y, values)
+		return SquareDensity(x, y, values)
 
 	def __mul__(self, num):
 		"""
 		"""
-		return Proximity(self.x, self.y, self.values*num)
+		return SquareDensity(self.x, self.y, self.values*num)
 
 	def __sub__(self, other):
 		"""
@@ -114,12 +129,12 @@ class Proximity:
 	def __abs__(self):
 		"""
 		"""
-		return Proximity(self.x, self.y, abs(self.values))
+		return SquareDensity(self.x, self.y, abs(self.values))
 
 	def __pow__(self, num):
 		"""
 		"""
-		return Proximity(self.x, self.y, self.values**num)
+		return SquareDensity(self.x, self.y, self.values**num)
 
 	def min(self):
 		"""
