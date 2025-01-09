@@ -212,7 +212,7 @@ class Poset:
         new_edges = [edge for edge in self.edges 
                      if edge_condition(edge) and node_condition(edge[0]) and node_condition(edge[1])]
 
-        return Poset(nodes=new_nodes, edges=new_edges)
+        return self.__class__(nodes=new_nodes, edges=new_edges)
 
     def comparable(self, a, b):
         """

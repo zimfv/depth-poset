@@ -153,16 +153,22 @@ class DepthPoset(Poset):
 		nodes = [ShallowPair(birth_index=bdi[0], death_index=bdi[1], birth_value=filter_values[bdi[0]], death_value=filter_values[bdi[1]], 
 							 dim=dims[bdi[0]], source=sources[bdi[0]]) for bdi in bd]
 		edges = [(nodes[e0], nodes[e1]) for e0, e1 in r]
-		return DepthPoset(nodes=nodes, edges=edges)
+		return cls(nodes=nodes, edges=edges)
 
 	@classmethod
-	def from_simplex_tree(cls, stree: SimplexTree):
+	def from_simplex_tree(cls, stree: SimplexTree, remove_zero_persistant_pairs: bool=True):
 		"""
 		"""
 		simplices, matrix = get_ordered_border_matrix_from_simplex_tree(stree)
 		dims = [len(simplex) - 1 for simplex in simplices]
 		filter_values = [value for key, value in stree.get_filtration()]
-		return DepthPoset.from_border_matrix(matrix, dims, filter_values, sources=simplices)
+
+		if remove_zero_persistant_pairs:
+			node_condition = lambda node: node.birth_value != node.death_value
+		else:
+			node_condition = lambda node: True
+
+		return cls.from_border_matrix(matrix, dims, filter_values, sources=simplices).subposet(node_condition=node_condition)
 
 	def get_dim(self):
 		"""
