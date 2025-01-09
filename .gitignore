@@ -165,6 +165,8 @@ cython_debug/
 # data directories
 results
 
-# slurm logs
+# slurm and LaTeX logs
 *.out
+*.aux
+
 

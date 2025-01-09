@@ -2,7 +2,7 @@ from src.poset import Poset
 from src.poset_scores import height as poset_height
 from src.poset_scores import width as poset_width
 
-def incestors_number(poset: Poset, node) -> int:
+def ancestors_number(poset: Poset, node) -> int:
 	"""
 	Returns the number of nodes higher than given
 	"""
@@ -31,7 +31,7 @@ def incomparable_number(poset: Poset, node) -> int:
 		s += int(not poset.comparable(other, node))
 	return s
 
-def incestors_height(poset: Poset, node) -> int:
+def ancestors_height(poset: Poset, node) -> int:
 	"""
 	Returns the size of maximum chain of subposet of nodes higher or equal than given
 	"""
@@ -47,7 +47,7 @@ def successors_height(poset: Poset, node) -> int:
 	subposet = poset.subposet(node_condition=node_condition)
 	return poset_height(subposet)
 
-def incestors_width(poset: Poset, node) -> int:
+def ancestors_width(poset: Poset, node) -> int:
 	"""
 	Returns the size of maximum chain of subposet of nodes higher or equal than given
 	"""

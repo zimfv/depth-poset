@@ -5,7 +5,7 @@ from src.poset import Poset
 
 def number_of_nodes(poset: Poset) -> int:
     """
-    Returns the number of nodes in the poset
+    Returns the number of nodes in the poset.
     """
     return len(poset.nodes)
 
@@ -26,21 +26,21 @@ def number_of_maximal_nodes(poset: Poset) -> int:
 
 def number_of_edges_in_reduction(poset: Poset) -> int:
     """
-    Returns the number of nodes in the poset transitive reduction
+    Returns the number of nodes in the poset transitive reduction.
     """
     return len(poset.get_transitive_reduction().edges)
 
 
 def number_of_edges_in_closure(poset: Poset) -> int:
     """
-    Returns the number of nodes in the poset transitive closure
+    Returns the number of nodes in the poset transitive closure.
     """
     return len(poset.get_transitive_closure().edges)
 
 
 def height(poset: Poset) -> int:
     """
-    Returns the poset height - the length of the longest chain
+    Returns the poset height - the length of the longest chain.
     """
     g = poset.get_transitive_reduction()
     return nx.dag_longest_path_length(g)
@@ -48,8 +48,8 @@ def height(poset: Poset) -> int:
 
 def width(poset: Poset) -> int:
     """
-    Returns the poset width - the length of the longest antichain (subset, s.t. all elements are pairwise incomparable)
-    The algorithm is based on Dilworth's theorem and it's proof via Kőnig's theorem
+    Returns the poset width - the length of the longest antichain (subset, s.t. all elements are pairwise incomparable).
+    The algorithm is based on Dilworth's theorem and it's proof via Kőnig's theorem:
     https://en.wikipedia.org/wiki/Dilworth%27s_theorem
     """
     g = poset.get_transitive_closure()
@@ -64,6 +64,7 @@ def width(poset: Poset) -> int:
 
 def avarage_maximal_chain(poset: Poset) -> float:
     """
+    Returns the avarage size of maximal chains in the poset.
     """
     s = 0
     n = 0
@@ -74,6 +75,7 @@ def avarage_maximal_chain(poset: Poset) -> float:
 
 def minimum_maximal_chain(poset: Poset) -> int:
     """
+    Returns the minimum size of maximal chains in the poset.
     """
     return min([len(chain) for chain in poset.maximal_chains()])
     
