@@ -42,9 +42,9 @@ poset_scores_to_check = [
 number_nodes_to_check = 16
 node_scores_to_check = [
     node_scores.incomparable_number, 
-    node_scores.incestors_number, 
-    node_scores.incestors_height, 
-    node_scores.incestors_width, 
+    node_scores.ancestors_number, 
+    node_scores.ancestors_height, 
+    node_scores.ancestors_width, 
     node_scores.successors_number, 
     node_scores.successors_height, 
     node_scores.successors_width, 
