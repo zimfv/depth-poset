@@ -12,32 +12,32 @@
 \section{Scores}
 \subsection{Poset Scores}
 \begin{itemize}
-\item \textbf{avarage\_maximal\_chain }: Returns the avarage size of maximal chains in the poset.
-\item \textbf{height }: Returns the poset height - the length of the longest chain.
-\item \textbf{minimum\_maximal\_chain }: Returns the minimum size of maximal chains in the poset.
-\item \textbf{number\_of\_edges\_in\_closure }: Returns the number of nodes in the poset transitive closure.
-\item \textbf{number\_of\_edges\_in\_reduction }: Returns the number of nodes in the poset transitive reduction.
-\item \textbf{number\_of\_maximal\_nodes }: Returns the number of maximal nodes.
-\item \textbf{number\_of\_minimal\_nodes }: Returns the number of minimal nodes.
 \item \textbf{number\_of\_nodes }: Returns the number of nodes in the poset.
+\item \textbf{number\_of\_relations }: Returns the number of relations in the transitive reduction.
+\item \textbf{number\_of\_compounds }: Returns the number of connetcted compounds in the poset
+\item \textbf{cycle\_dimension }: Returns the dimension of space of cycles in reduction.
+\item \textbf{number\_of\_minimal\_nodes }: Returns the number of minimal nodes.
+\item \textbf{number\_of\_maximal\_nodes }: Returns the number of maximal nodes.
+\item \textbf{height }: Returns the poset height - the length of the longest chain.
 \item \textbf{width }: Returns the poset width - the length of the longest antichain (subset, s.t. all elements are pairwise incomparable).
     The algorithm is based on Dilworth's theorem and it's proof via Kőnig's theorem:
     \href{https://en.wikipedia.org/wiki/Dilworth%27s_theorem}{link}
+\item \textbf{minimum\_maximal\_chain }: Returns the minimum size of maximal chains in the poset.
+\item \textbf{avarage\_maximal\_chain }: Returns the avarage size of maximal chains in the poset.
 \end{itemize}
 
 \subsection{Node Scores}
 \begin{itemize}
-\item \textbf{ancestors\_height}: Returns the size of maximum chain of subposet of nodes higher or equal than given
 \item \textbf{ancestors\_number}: Returns the number of nodes higher than given
+\item \textbf{ancestors\_height}: Returns the size of maximum chain of subposet of nodes higher or equal than given
 \item \textbf{ancestors\_width}: Returns the size of maximum chain of subposet of nodes higher or equal than given
-\item \textbf{incomparable\_number}: Returns the number of incomparable elements for given node
-\item \textbf{successors\_height}: Returns the size of maximum chain of subposet of nodes lower or equal than given
 \item \textbf{successors\_number}: Returns the number of nodes higher than given
+\item \textbf{successors\_height}: Returns the size of maximum chain of subposet of nodes lower or equal than given
 \item \textbf{successors\_width}: Returns the size of maximum chain of subposet of nodes lower or equal than given
 \end{itemize}
 
 \section{Experiments and Results}
-\par There are 814 experiments done. In the Figure \ref{fig:cases_distribution} we can see how cases are distributed by size and dimension.
+\par There are 1114 experiments done. In the Figure \ref{fig:cases_distribution} we can see how cases are distributed by size and dimension.
 \begin{figure}[ht]
   \centering
   \includegraphics[width=\textwidth]{pics/scores - cases.png}
@@ -47,43 +47,32 @@
 
 \par In the Figure \ref{fig:scores_poset_mean} we can see the avarage poset scores values for each number of points $n$.
 \begin{figure}[ht]
-  \vspace{-108pt}
+  \vspace{-48pt}
   \centering
-  \hspace*{-0.48\textwidth}
-  \resizebox{1.96\textwidth}{!}{\includegraphics[width=\textwidth]{pics/scores - mean poset scores.png}}
+  \hspace*{-0.19999999999999996\textwidth}
+  \resizebox{1.4\textwidth}{!}{\includegraphics[width=\textwidth]{pics/scores - mean poset scores.png}}
   \caption{Mean poset scores}
   \label{fig:scores_poset_mean}
 \end{figure}
 
 \par In the Figure \ref{fig:scores_node_mean} we can see the avarage mean node scores values in poset for each number of points $n$.
 \begin{figure}[ht]
-  \vspace{-108pt}
+  \vspace{-48pt}
   \centering
-  \hspace*{-0.48\textwidth}
-  \resizebox{1.96\textwidth}{!}{\includegraphics[width=\textwidth]{pics/scores - mean node scores.png}}
+  \hspace*{-0.19999999999999996\textwidth}
+  \resizebox{1.4\textwidth}{!}{\includegraphics[width=\textwidth]{pics/scores - mean node scores.png}}
   \caption{Mean node scores}
   \label{fig:scores_node_mean}
 \end{figure}
 
 \par In the Figure \ref{fig:scores_node_max} we can see the avarage maximum node scores values in poset for each number of points $n$.
 \begin{figure}[ht]
-  \vspace{-108pt}
+  \vspace{-48pt}
   \centering
-  \hspace*{-0.48\textwidth}
-  \resizebox{1.96\textwidth}{!}{\includegraphics[width=\textwidth]{pics/scores - max node scores.png}}
+  \hspace*{-0.19999999999999996\textwidth}
+  \resizebox{1.4\textwidth}{!}{\includegraphics[width=\textwidth]{pics/scores - max node scores.png}}
   \caption{Max node scores}
   \label{fig:scores_node_max}
-\end{figure}
-
-\par In the Figure \ref{fig:scores_node_min} we can see the avarage minimum node scores values in poset for each number of points $n$.
-\begin{figure}[ht]
-  \vspace{-108pt}
-  \centering
-  \hspace*{-0.48\textwidth}
-  \resizebox{1.96\textwidth}{!}{\includegraphics[width=\textwidth]{pics/scores - min node scores.png}}
-  %\includegraphics[width=\textwidth]{pics/scores - min node scores.png}
-  \caption{Min node scores}
-  \label{fig:scores_node_min}
 \end{figure}
 
 

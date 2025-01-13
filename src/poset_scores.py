@@ -71,11 +71,33 @@ def avarage_maximal_chain(poset: Poset) -> float:
     for chain in poset.maximal_chains():
         s += len(chain)
         n += 1
+    if n == 0:
+        return 0.0
     return s/n
 
 def minimum_maximal_chain(poset: Poset) -> int:
     """
     Returns the minimum size of maximal chains in the poset.
     """
-    return min([len(chain) for chain in poset.maximal_chains()])
-    
+    try:
+        return min([len(chain) for chain in poset.maximal_chains()])
+    except ValueError:
+        return 0
+
+def number_of_relations(poset: Poset) -> int:
+    """
+    Returns the number of relations in the transitive reduction.
+    """
+    return len(poset.get_transitive_reduction().edges)
+
+def number_of_compounds(poset: Poset) -> int:
+    """
+    Returns the number of connetcted compounds in the poset
+    """
+    return nx.number_connected_components(poset.get_transitive_reduction().to_undirected())
+
+def cycle_dimension(poset: Poset) -> int:
+    """
+    Returns the dimension of space of cycles in reduction.
+    """
+    return len(nx.cycle_basis(poset.get_transitive_reduction().to_undirected()))
