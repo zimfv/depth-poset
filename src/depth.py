@@ -28,7 +28,7 @@ def reduct_column_bottom_to_top(delta):
 		# delete rows s and t and columns s and t from delta0
 		delta0[(s, t), :] = 0
 		delta0[:, (s, t)] = 0
-        
+
 		i += 1
 	return alpha, b0
 
@@ -55,17 +55,14 @@ def reduct_row_left_to_right(delta):
 		# delete rows s and t and columns s and t from delta1
 		delta1[(s, t), :] = 0
 		delta1[:, (s, t)] = 0
-        
+
 		j += 1
 	return omega, b1
 
 
-def get_shallow_pairs_relations(delta):
+def get_shallow_pairs_relations_from_reductions(alpha, b0, omega, b1):
 	"""
 	"""
-	alpha, b0 = reduct_column_bottom_to_top(delta)
-	omega, b1 = reduct_row_left_to_right(delta)
-    
 	bd = list(alpha.values())
 
 	r = []
@@ -78,8 +75,17 @@ def get_shallow_pairs_relations(delta):
 	g = nx.DiGraph()
 	g.add_edges_from(r)
 	r = list(nx.transitive_closure(g).edges())
-    
+
 	return bd, r
+
+
+def get_shallow_pairs_relations(delta):
+	"""
+	"""
+	alpha, b0 = reduct_column_bottom_to_top(delta)
+	omega, b1 = reduct_row_left_to_right(delta)
+
+	return get_shallow_pairs_relations_from_reductions(alpha, b0, omega, b1)
 
 
 def find(l, v):
@@ -97,7 +103,7 @@ def get_ordered_border_matrix_from_simplex_tree(stree: SimplexTree):
 	Returns the ordered border matrix from SimplexTree with given filtration
 	"""
 	simplices = [tuple(simplex) for simplex, filtration_value in stree.get_filtration()]
-    
+
 	col_indices = []
 	row_indices = []
 	for i, simplex in enumerate(simplices):
@@ -125,7 +131,7 @@ class ShallowPair:
 		self.source = source
 
 	def __repr__(self):
-		return f'ShallowPair([{self.birth_value:.4f}, {self.death_value:.4f}], dim={self.dim})' # should there be simplier and shorter representation
+		return f'ShallowPair([{self.birth_value:.4f}, {self.death_value:.4f}]{f", source={self.source}" if self.source is not None else ""}, dim={self.dim})'
 
 	def __eq__(self, other):
 		if not isinstance(other, ShallowPair):
@@ -145,15 +151,22 @@ class DepthPoset(Poset):
 		"""
 		if filter_values is None:
 			filter_values = np.arange(len(border_matrix))
-		if sources is None:
-			sources = [None for i in range(len(border_matrix))]
+		#if sources is None:
+		#	sources = [None for i in range(len(border_matrix))]
 
-		bd, r = get_shallow_pairs_relations(border_matrix)
+		alpha, b0 = reduct_column_bottom_to_top(border_matrix)
+		omega, b1 = reduct_row_left_to_right(border_matrix)
+		bd, r = get_shallow_pairs_relations_from_reductions(alpha, b0, omega, b1)
 
 		nodes = [ShallowPair(birth_index=bdi[0], death_index=bdi[1], birth_value=filter_values[bdi[0]], death_value=filter_values[bdi[1]], 
-							 dim=dims[bdi[0]], source=sources[bdi[0]]) for bdi in bd]
+							 dim=dims[bdi[0]], source=None if sources is None else (sources[bdi[0]], sources[bdi[1]])) for bdi in bd]
 		edges = [(nodes[e0], nodes[e1]) for e0, e1 in r]
-		return cls(nodes=nodes, edges=edges)
+
+		obj = cls(nodes=nodes, edges=edges)
+		obj._b0_set = set((e0, e1) for e0, e1 in b0) # define the reduct_column_bottom_to_top pairs
+		obj._b1_set = set((e0, e1) for e0, e1 in b1) # define the reduct_row_left_to_right pairs
+
+		return obj
 
 	@classmethod
 	def from_simplex_tree(cls, stree: SimplexTree, remove_zero_persistant_pairs: bool=True):
@@ -182,7 +195,6 @@ class DepthPoset(Poset):
 		"""
 		return np.unique([[node.birth_value, node.death_value] for node in self.nodes])
 
-
 	def persistant_layout(self, by_index=False):
 		"""
 		Returns the dict: keys are nodes and values are their positions.
@@ -209,3 +221,23 @@ class DepthPoset(Poset):
 		"""
 		node_condition = lambda node: node.dim == dim
 		return self.subposet(node_condition=node_condition)
+
+	def get_column_bottom_to_top_reduction(self):
+		"""
+		Returns the subposet, which is the origin, given by algorithm 1 Column Bottom to Top Reduction
+		"""
+		try:
+			condition = lambda edge: (edge[0].death_index, edge[1].death_index) in self._b0_set
+			return self.subposet(edge_condition=condition)
+		except AttributeError:
+			raise AttributeError("The Dpeth poset should be defined from border matrix.")
+
+	def get_row_left_to_right_reduction(self):
+		"""
+		Returns the subposet, which is the origin, given by algorithm 2 Row Left to Right Reduction
+		"""
+		try:
+			condition = lambda edge: (edge[0].birth_index, edge[1].birth_index) in self._b1_set
+			return self.subposet(edge_condition=condition)
+		except AttributeError:
+			raise AttributeError("The Dpeth poset should be defined from border matrix.")

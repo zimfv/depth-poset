@@ -212,7 +212,15 @@ class Poset:
         new_edges = [edge for edge in self.edges 
                      if edge_condition(edge) and node_condition(edge[0]) and node_condition(edge[1])]
 
-        return self.__class__(nodes=new_nodes, edges=new_edges)
+        # Create a new object with filtered nodes and edges
+        new_obj = self.__class__(nodes=new_nodes, edges=new_edges)
+
+        # Copy additional attributes
+        for attr, value in self.__dict__.items():
+            if attr not in ('nodes', 'edges'):  # Avoid overwriting nodes and edges
+                setattr(new_obj, attr, value)
+        
+        return new_obj
 
     def comparable(self, a, b):
         """
