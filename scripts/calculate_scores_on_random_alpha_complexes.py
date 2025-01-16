@@ -9,6 +9,7 @@ sys.path.append(str(project_root))
 
 # main imports
 import itertools
+import inspect
 import time
 import os
 
@@ -27,28 +28,16 @@ from tqdm import tqdm
 
 
 # select poset scores to check
-poset_scores_to_check = [
-    poset_scores.number_of_nodes, 
-    poset_scores.number_of_minimal_nodes, 
-    poset_scores.number_of_maximal_nodes, 
-    poset_scores.height, 
-    poset_scores.width, 
-    poset_scores.minimum_maximal_chain, 
-    poset_scores.avarage_maximal_chain, 
-]
+poset_scores_to_check = [obj for name, obj in inspect.getmembers(poset_scores, inspect.isfunction) if obj.__module__ == poset_scores.__name__]
 
 
 # select nodes number and nodes scores to check
 number_nodes_to_check = 16
-node_scores_to_check = [
-    node_scores.incomparable_number, 
-    node_scores.ancestors_number, 
-    node_scores.ancestors_height, 
-    node_scores.ancestors_width, 
-    node_scores.successors_number, 
-    node_scores.successors_height, 
-    node_scores.successors_width, 
-]
+node_scores_to_check = [obj for name, obj in inspect.getmembers(node_scores, inspect.isfunction) if obj.__module__ == node_scores.__name__]
+
+
+# define objects
+
 
 
 def calculate_result_for_random_alpha_complex(n, dim):
