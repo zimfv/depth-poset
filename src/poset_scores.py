@@ -90,13 +90,13 @@ def number_of_relations(poset: Poset) -> int:
     """
     return len(poset.get_transitive_reduction().edges)
 
-def number_of_compounds(poset: Poset) -> int:
+def number_of_components(poset: Poset) -> int:
     """
-    Returns the number of connetcted compounds in the poset
+    Returns the number of connetcted components in the poset
     """
     return nx.number_connected_components(poset.get_transitive_reduction().to_undirected())
 
-def cycle_dimension(poset: Poset) -> int:
+def cycles_dimension(poset: Poset) -> int:
     """
     Returns the dimension of space of cycles in reduction.
     """
