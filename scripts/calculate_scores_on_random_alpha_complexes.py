@@ -36,10 +36,6 @@ number_nodes_to_check = 16
 node_scores_to_check = [obj for name, obj in inspect.getmembers(node_scores, inspect.isfunction) if obj.__module__ == node_scores.__name__]
 
 
-# define objects
-
-
-
 def calculate_result_for_random_alpha_complex(n, dim):
 	# calculate the dictionary of values and scores for case with n points of given dimension
 	result = {'n': n, 'dim': dim}
@@ -60,10 +56,18 @@ def calculate_result_for_random_alpha_complex(n, dim):
 	result.update({'depth poset': depth_poset})	
 	print(f"Found the depth poset for given simplicial complex.")
 
-	# define full septh poset and subposets
+	# define full depth poset and subposets
 	poset_dict = {'full': depth_poset}
 	for sdim in range(dim):
 		poset_dict.update({f'subposet dim={sdim}': depth_poset.subposet_dim(sdim)})
+	poset_dict.update({'column reduction': depth_poset.get_column_bottom_to_top_reduction()})
+	for sdim in range(dim):
+		poset_dict.update({f'column reduction subposet dim={sdim}': poset_dict['column reduction'].subposet_dim(sdim)})
+	poset_dict.update({'row reduction': depth_poset.get_row_left_to_right_reduction()})
+	for sdim in range(dim):
+		poset_dict.update({f'row reduction subposet dim={sdim}': poset_dict['row reduction'].subposet_dim(sdim)})
+
+
 
 	# calculate poset score values
 	poset_scores_values = []
@@ -85,9 +89,10 @@ def calculate_result_for_random_alpha_complex(n, dim):
 
 	# calculate node scores
 	node_scores_values = []
-	with tqdm(total=len(nodes_to_check)*len(node_scores_to_check)*2, desc="Node scores") as pbar:
+	with tqdm(total=len(nodes_to_check)*len(node_scores_to_check)*2*np.sum([key.find('dim=') == -1 for key in poset_dict.keys()]), desc="Node scores") as pbar:
 		for inode, node in enumerate(nodes_to_check):
-			for key in ["full", f"subposet dim={node.dim}"]:
+			keys = [key for key in poset_dict.keys() if key.find('dim') == -1 or key.find(f'dim={node.dim}') != -1]
+			for key in keys:
 				subposet = poset_dict[key]
 				node_scores_values_i = {'object': key, 'node': node}
 				for score in node_scores_to_check:
@@ -98,6 +103,8 @@ def calculate_result_for_random_alpha_complex(n, dim):
 					pbar.update()
 				node_scores_values.append(node_scores_values_i)
 	result.update({'node scores': node_scores_values})
+
+
 	return result
 
 
