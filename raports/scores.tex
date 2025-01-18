@@ -39,7 +39,7 @@
 \end{itemize}
 
 \section{Experiments and Results}
-\par There are 27 experiments done. In the Figure \ref{fig:cases_distribution} we can see how cases are distributed by size and dimension.
+\par There are 1100 experiments done. In the Figure \ref{fig:cases_distribution} we can see how cases are distributed by size and dimension.
 \begin{figure}[ht]
   \centering
   \includegraphics[width=\textwidth]{pics/scores - cases.png}
@@ -47,34 +47,97 @@
   \label{fig:cases_distribution}
 \end{figure}
 
-\par In the Figure \ref{fig:scores_poset_mean} we can see the avarage poset scores values for each number of points $n$.
+\subsection{Depth Poset Features}
+\par In the Figure \ref{fig:scores_poset_mean} we can see the avarage poset scores values for each number of points $n$ in the depth poset.
 \begin{figure}[ht]
   \vspace{-96pt}
   \centering
-  \hspace*{-0.19999999999999996\textwidth}
-  \resizebox{1.4\textwidth}{!}{\includegraphics[width=\textwidth]{pics/scores - mean poset scores.png}}
-  \caption{Mean poset scores}
+  \hspace*{-0.18999999999999995\textwidth}
+  \resizebox{1.38\textwidth}{!}{\includegraphics[width=\textwidth]{pics/scores - mean poset scores.png}}
+  \caption{Depth Poset: Mean poset scores}
   \label{fig:scores_poset_mean}
 \end{figure}
 
-\par In the Figure \ref{fig:scores_node_mean} we can see the avarage mean node scores values in poset for each number of points $n$.
+\par In the Figure \ref{fig:scores_node_mean} we can see the avarage mean node scores values in poset for each number of points $n$ in the depth poset.
 \begin{figure}[ht]
   \vspace{-96pt}
   \centering
-  \hspace*{-0.19999999999999996\textwidth}
-  \resizebox{1.4\textwidth}{!}{\includegraphics[width=\textwidth]{pics/scores - mean node scores.png}}
-  \caption{Mean node scores}
+  \hspace*{-0.18999999999999995\textwidth}
+  \resizebox{1.38\textwidth}{!}{\includegraphics[width=\textwidth]{pics/scores - mean node scores.png}}
+  \caption{Depth Poset: Mean node scores}
   \label{fig:scores_node_mean}
 \end{figure}
 
-\par In the Figure \ref{fig:scores_node_max} we can see the avarage maximum node scores values in poset for each number of points $n$.
+\par In the Figure \ref{fig:scores_node_max} we can see the avarage maximum node scores values in poset for each number of points $n$ in the depth poset.
 \begin{figure}[ht]
   \vspace{-96pt}
   \centering
-  \hspace*{-0.19999999999999996\textwidth}
-  \resizebox{1.4\textwidth}{!}{\includegraphics[width=\textwidth]{pics/scores - max node scores.png}}
-  \caption{Max node scores}
+  \hspace*{-0.18999999999999995\textwidth}
+  \resizebox{1.38\textwidth}{!}{\includegraphics[width=\textwidth]{pics/scores - max node scores.png}}
+  \caption{Depth Poset: Max node scores}
   \label{fig:scores_node_max}
+\end{figure}
+
+\subsection{Column Reduction Poset Features}
+\par In the Figure \ref{fig:scores_poset_mean_crp} we can see the avarage poset scores values for each number of points $n$ in the column reduction poset.
+\begin{figure}[ht]
+  \vspace{-96pt}
+  \centering
+  \hspace*{-0.18999999999999995\textwidth}
+  \resizebox{1.38\textwidth}{!}{\includegraphics[width=\textwidth]{pics/scores - mean poset scores - column reduction.png}}
+  \caption{Column Reduction Poset: Mean poset scores}
+  \label{fig:scores_poset_mean_crp}
+\end{figure}
+
+\par In the Figure \ref{fig:scores_node_mean_crp} we can see the avarage mean node scores values in poset for each number of points $n$ in the column reduction poset.
+\begin{figure}[ht]
+  \vspace{-96pt}
+  \centering
+  \hspace*{-0.18999999999999995\textwidth}
+  \resizebox{1.38\textwidth}{!}{\includegraphics[width=\textwidth]{pics/scores - mean node scores - column reduction.png}}
+  \caption{Column Reduction Poset: Mean node scores}
+  \label{fig:scores_node_mean_crp}
+\end{figure}
+
+\par In the Figure \ref{fig:scores_node_max_crp} we can see the avarage maximum node scores values in poset for each number of points $n$ in the column reduction poset.
+\begin{figure}[ht]
+  \vspace{-96pt}
+  \centering
+  \hspace*{-0.18999999999999995\textwidth}
+  \resizebox{1.38\textwidth}{!}{\includegraphics[width=\textwidth]{pics/scores - max node scores - column reduction.png}}
+  \caption{Column Reduction Poset: Max node scores}
+  \label{fig:scores_node_max_crp}
+\end{figure}
+
+\subsection{Row Reduction Poset Features}
+\par In the Figure \ref{fig:scores_poset_mean_rrp} we can see the avarage poset scores values for each number of points $n$ in the row reduction poset.
+\begin{figure}[ht]
+  \vspace{-96pt}
+  \centering
+  \hspace*{-0.18999999999999995\textwidth}
+  \resizebox{1.38\textwidth}{!}{\includegraphics[width=\textwidth]{pics/scores - mean poset scores - row reduction.png}}
+  \caption{Row Reduction Poset: Mean poset scores}
+  \label{fig:scores_poset_mean_rrp}
+\end{figure}
+
+\par In the Figure \ref{fig:scores_node_mean_rrp} we can see the avarage mean node scores values in poset for each number of points $n$ in the row reduction poset.
+\begin{figure}[ht]
+  \vspace{-96pt}
+  \centering
+  \hspace*{-0.18999999999999995\textwidth}
+  \resizebox{1.38\textwidth}{!}{\includegraphics[width=\textwidth]{pics/scores - mean node scores - row reduction.png}}
+  \caption{Row Reduction Poset: Mean node scores}
+  \label{fig:scores_node_mean_rrp}
+\end{figure}
+
+\par In the Figure \ref{fig:scores_node_max_rrp} we can see the avarage maximum node scores values in poset for each number of points $n$ in the row reduction poset.
+\begin{figure}[ht]
+  \vspace{-96pt}
+  \centering
+  \hspace*{-0.18999999999999995\textwidth}
+  \resizebox{1.38\textwidth}{!}{\includegraphics[width=\textwidth]{pics/scores - max node scores - row reduction.png}}
+  \caption{Row Reduction Poset: Max node scores}
+  \label{fig:scores_node_max_rrp}
 \end{figure}
 
 
