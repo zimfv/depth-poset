@@ -169,4 +169,5 @@ results
 *.out
 *.aux
 
-
+# technical pictures
+pics
