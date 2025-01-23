@@ -136,10 +136,29 @@ class ShallowPair:
 	def __eq__(self, other):
 		if not isinstance(other, ShallowPair):
 			return NotImplemented
+		if self.source is not None and other.source is not None:
+			return self.source == other.source
 		return (self.birth_index == other.birth_index) and (self.death_index == other.death_index)
 
 	def __hash__(self):
 		return hash((self.birth_index, self.death_index))
+
+	def __str__(self):
+		# 
+		try:
+			strs = []
+			for simplex in self.source:
+				try:
+					if len(simplex) == 1:
+						strs.append(str(simplex[0]))
+					else:
+						strs.append(str(simplex).replace(' ', ''))
+				except TypeError:
+						strs.append(str(simplex))
+			return ','.join(strs)
+		except Exception:
+			return self.__repr__()
+
 
 
 class DepthPoset(Poset):
@@ -241,3 +260,9 @@ class DepthPoset(Poset):
 			return self.subposet(edge_condition=condition)
 		except AttributeError:
 			raise AttributeError("The Dpeth poset should be defined from border matrix.")
+
+	def get_labels(self):
+		"""
+		Returns the dict labaling the Nodes
+		"""
+		return {node: str(node) for node in self.nodes}
