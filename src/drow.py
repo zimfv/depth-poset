@@ -55,3 +55,10 @@ def plot_filtred_complex2d(stree: gh.SimplexTree, points, cmap='viridis', ax=Non
 					 pointwidth=pointwidth, linewidth=linewidth, 
 					 hatch=None)
 	return sm
+
+def enumerate_points(points, color='black', ax=None):
+	if ax is None:
+		ax = plt.gca()
+	for i, p in enumerate(points):
+		x, y = p*np.ones(2)
+		ax.text(x, y, i, color=color)
