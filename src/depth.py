@@ -6,8 +6,31 @@ from src.poset import Poset
 from gudhi import SimplexTree
 
 
-def reduct_column_bottom_to_top(delta):
+def reduct_column_bottom_to_top(delta, stop_condition=None):
 	"""
+	Returns the result of algorithm 1: Bottom to Top Column Reduction
+	from the article The Poset of Cancellations in a Filtered Complex
+	by Herbert Edelsbrunner, Michał Lipiński, Marian Mrozek, Manuel Soriano-Trigueros
+	https://arxiv.org/abs/2311.14364
+
+	Parameters:
+	-----------
+	delta : np.array shape (n, n) of ones and zeros
+		Border matrix
+
+	stop_condition: None or function
+		Returns the intermediary delta for the condition, if it's not None
+
+	Returns:
+	--------
+	alpha : list of tuples
+		The birth-death index pairs, coresponding the shallow pairs
+
+	b0 : list of tuples 
+		The death-death index pairs, coresponding the relations 
+
+	delta : np.array shape (n, n) of ones and zeros
+		Modified border matrix, the intermediary delta for the condition, if it's not None
 	"""
 	delta0 = np.array(delta)
 	b0 = []
@@ -25,11 +48,18 @@ def reduct_column_bottom_to_top(delta):
 			y = t + 1 + int(np.where(delta0[s, t+1:] != 0)[0][0])
 			delta0[:, y] = (delta0[:, t] + delta0[:, y])%2
 			b0.append((t, y))
+			if stop_condition is not None:
+				if stop_condition(alpha, b0, delta0):
+					return alpha, b0, delta0
+
 		# delete rows s and t and columns s and t from delta0
 		delta0[(s, t), :] = 0
 		delta0[:, (s, t)] = 0
 
 		i += 1
+	
+	if stop_condition is not None:
+		return alpha, b0, delta0
 	return alpha, b0
 
 
