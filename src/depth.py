@@ -29,7 +29,7 @@ def reduct_column_bottom_to_top(delta, stop_condition=None):
 	b0 : list of tuples 
 		The death-death index pairs, coresponding the relations 
 
-	delta : np.array shape (n, n) of ones and zeros
+	delta0 : np.array shape (n, n) of ones and zeros
 		Modified border matrix, the intermediary delta for the condition, if it's not None
 	"""
 	delta0 = np.array(delta)
@@ -37,40 +37,74 @@ def reduct_column_bottom_to_top(delta, stop_condition=None):
 	i = 0
 	alpha = {}
 	while (delta0 != 0).any():
+		if stop_condition is not None:
+			if stop_condition(alpha, b0, delta0):
+				return alpha, b0, delta0
 		# let delta0[s, t] be leftmost non-zero entry in last row, alpha_i = (s, t)
 		ss, ts = np.where(delta0 != 0)
 		s = int(np.max(ss))
 		t = int(np.min(ts[ss == s]))
 		alpha.update({i: (s, t)})
 		# while there exists y > t such that delta0[s, y] = 1
+
 		while (delta0[s, t+1:] != 0).any():
 			# add column t to column y in delta0; append (t, y) to b0
 			y = t + 1 + int(np.where(delta0[s, t+1:] != 0)[0][0])
-			delta0[:, y] = (delta0[:, t] + delta0[:, y])%2
 			b0.append((t, y))
 			if stop_condition is not None:
 				if stop_condition(alpha, b0, delta0):
 					return alpha, b0, delta0
+			delta0[:, y] = (delta0[:, t] + delta0[:, y])%2
+
+		if stop_condition is not None:
+			if stop_condition(alpha, b0, delta0):
+				return alpha, b0, delta0
 
 		# delete rows s and t and columns s and t from delta0
 		delta0[(s, t), :] = 0
 		delta0[:, (s, t)] = 0
 
 		i += 1
-	
+
 	if stop_condition is not None:
 		return alpha, b0, delta0
 	return alpha, b0
 
 
-def reduct_row_left_to_right(delta):
+def reduct_row_left_to_right(delta, stop_condition=None):
 	"""
+	Returns the result of algorithm 2: Left to Right Row Reduction
+	from the article The Poset of Cancellations in a Filtered Complex
+	by Herbert Edelsbrunner, Michał Lipiński, Marian Mrozek, Manuel Soriano-Trigueros
+	https://arxiv.org/abs/2311.14364
+
+	Parameters:
+	-----------
+	delta : np.array shape (n, n) of ones and zeros
+		Border matrix
+
+	stop_condition: None or function
+		Returns the intermediary delta for the condition, if it's not None
+
+	Returns:
+	--------
+	omega : list of tuples
+		The birth-death index pairs, coresponding the shallow pairs
+
+	b1 : list of tuples 
+		The death-death index pairs, coresponding the relations 
+
+	delta1 : np.array shape (n, n) of ones and zeros
+		Modified border matrix, the intermediary delta for the condition, if it's not None
 	"""
 	delta1 = np.array(delta)
 	b1 = []
 	j = 0
 	omega = {}
 	while (delta1 != 0).any():
+		if stop_condition is not None:
+			if stop_condition(omega, b1, delta1):
+				return omega, b1, delta1
 		# let delta1[s, t] lowest non-zero entry in first, omega_i = (s, t)
 		ss, ts = np.where(delta1 != 0)
 		t = int(np.min(ts))
@@ -80,13 +114,24 @@ def reduct_row_left_to_right(delta):
 		while (delta1[:s, t] != 0).any():
 			# add row s to row x in delta1; append (s, x) to b1
 			x = int(np.where(delta1[:s, t] != 0)[0][0])
-			delta1[x, :] = (delta1[s, :] + delta1[x, :])%2
 			b1.append((s, x))
+			if stop_condition is not None:
+				if stop_condition(omega, b1, delta1):
+					return omega, b1, delta1
+			delta1[x, :] = (delta1[s, :] + delta1[x, :])%2
+
+
+		if stop_condition is not None:
+			if stop_condition(omega, b1, delta1):
+				return omega, b1, delta1
+		
 		# delete rows s and t and columns s and t from delta1
 		delta1[(s, t), :] = 0
 		delta1[:, (s, t)] = 0
 
 		j += 1
+	if stop_condition is not None:
+		return omega, b1, delta1
 	return omega, b1
 
 
