@@ -57,16 +57,9 @@ Let's denote $DP_{f}$ the transitive reduction of the Depth Poset defined by the
 
 \section{Model}
 \par The probabilistic model is simple. The first we just generate the cloud of $n$ points uniformly distributed in $[0, 1]^d$. After this we calculate the Alpha complex with these points, and then find its depth poset. Then we itarate all neighbour pairs of simplices and check if their transposition will be possible filtration, calculating the scores for the switch-forward transpositions.
-\par We can see the generated cloud and its simplicial complex in the Figure \ref{fig:cloud}.
 
-\begin{figure}[ht]
-\centering
-\includegraphics[width=\textwidth]{pics/transpositions-cloud.png}
-\label{fig:cloud}
-\caption{The generated cloud and coresponding simplicial complex}
-\end{figure}
 
-\section{Scores description}
+\section{Scores}
 
 \begin{itemize}
 
@@ -114,12 +107,8 @@ Let's denote $DP_{f}$ the transitive reduction of the Depth Poset defined by the
 \toprule
 index 0 & index 1 & simplex 0 & simplex 1 & type & jacard\_nodes\_filtration & jacard\_nodes\_simplex \\
 \midrule
-23 & 24 & [11, 13] & [5, 11] & birth-death & 1.00 & 0.90 \\
-29 & 30 & [6, 8] & [6, 15] & birth-death & 1.00 & 0.90 \\
-35 & 36 & [8, 10] & [1, 10] & death-death & 1.00 & 0.90 \\
-46 & 47 & [7, 9] & [7, 14] & birth-birth & 1.00 & 0.90 \\
-62 & 63 & [7, 8, 12] & [6, 8, 12] & death-death & 1.00 & 0.90 \\
-65 & 66 & [2, 4, 11] & [2, 11, 14] & death-death & 1.00 & 0.90 \\
+3 & 4 & [1] & [2] & birth-birth & 1.00 & 0.33 \\
+7 & 8 & [2, 3] & [1, 4] & death-death & 1.00 & 0.33 \\
 \bottomrule
 \end{tabular}
 \end{center}
@@ -129,12 +118,8 @@ index 0 & index 1 & simplex 0 & simplex 1 & type & jacard\_nodes\_filtration & j
 \toprule
 index 0 & index 1 & simplex 0 & simplex 1 & type & jacard\_edges\_filtration & jacard\_edges\_simplex \\
 \midrule
-23 & 24 & [11, 13] & [5, 11] & birth-death & 0.96 & 0.81 \\
-29 & 30 & [6, 8] & [6, 15] & birth-death & 0.92 & 0.85 \\
-35 & 36 & [8, 10] & [1, 10] & death-death & 0.92 & 0.71 \\
-46 & 47 & [7, 9] & [7, 14] & birth-birth & 1.00 & 0.85 \\
-62 & 63 & [7, 8, 12] & [6, 8, 12] & death-death & 1.00 & 0.85 \\
-65 & 66 & [2, 4, 11] & [2, 11, 14] & death-death & 1.00 & 0.60 \\
+3 & 4 & [1] & [2] & birth-birth & 1.00 & 0.20 \\
+7 & 8 & [2, 3] & [1, 4] & death-death & 1.00 & 0.20 \\
 \bottomrule
 \end{tabular}
 \end{center}
@@ -144,12 +129,8 @@ index 0 & index 1 & simplex 0 & simplex 1 & type & jacard\_edges\_filtration & j
 \toprule
 index 0 & index 1 & simplex 0 & simplex 1 & type & jacard\_l31a & jacard\_l31b \\
 \midrule
-23 & 24 & [11, 13] & [5, 11] & birth-death & NaN & NaN \\
-29 & 30 & [6, 8] & [6, 15] & birth-death & NaN & NaN \\
-35 & 36 & [8, 10] & [1, 10] & death-death & 0.80 & 0.00 \\
-46 & 47 & [7, 9] & [7, 14] & birth-birth & 1.00 & 1.00 \\
-62 & 63 & [7, 8, 12] & [6, 8, 12] & death-death & 0.67 & 1.00 \\
-65 & 66 & [2, 4, 11] & [2, 11, 14] & death-death & 0.86 & 1.00 \\
+3 & 4 & [1] & [2] & birth-birth & 1.00 & 1.00 \\
+7 & 8 & [2, 3] & [1, 4] & death-death & 0.67 & 0.00 \\
 \bottomrule
 \end{tabular}
 \end{center}
@@ -159,27 +140,19 @@ index 0 & index 1 & simplex 0 & simplex 1 & type & jacard\_l31a & jacard\_l31b \
 \toprule
 index 0 & index 1 & simplex 0 & simplex 1 & type & jacard\_l32a & jacard\_l32b \\
 \midrule
-23 & 24 & [11, 13] & [5, 11] & birth-death & NaN & NaN \\
-29 & 30 & [6, 8] & [6, 15] & birth-death & NaN & NaN \\
-35 & 36 & [8, 10] & [1, 10] & death-death & 0.00 & 0.00 \\
-46 & 47 & [7, 9] & [7, 14] & birth-birth & 0.00 & 0.00 \\
-62 & 63 & [7, 8, 12] & [6, 8, 12] & death-death & 0.00 & 0.00 \\
-65 & 66 & [2, 4, 11] & [2, 11, 14] & death-death & 0.00 & 0.00 \\
+3 & 4 & [1] & [2] & birth-birth & 0.00 & 0.00 \\
+7 & 8 & [2, 3] & [1, 4] & death-death & 0.00 & 0.00 \\
 \bottomrule
 \end{tabular}
 \end{center}
 
 \begin{center}
-\begin{tabular}{rrlllrr}
+\begin{tabular}{rrlllll}
 \toprule
 index 0 & index 1 & simplex 0 & simplex 1 & type & jacard\_l33a & jacard\_l33b \\
 \midrule
-23 & 24 & [11, 13] & [5, 11] & birth-death & 0.50 & 0.50 \\
-29 & 30 & [6, 8] & [6, 15] & birth-death & 0.00 & 0.00 \\
-35 & 36 & [8, 10] & [1, 10] & death-death & NaN & NaN \\
-46 & 47 & [7, 9] & [7, 14] & birth-birth & NaN & NaN \\
-62 & 63 & [7, 8, 12] & [6, 8, 12] & death-death & NaN & NaN \\
-65 & 66 & [2, 4, 11] & [2, 11, 14] & death-death & NaN & NaN \\
+3 & 4 & [1] & [2] & birth-birth & NaN & NaN \\
+7 & 8 & [2, 3] & [1, 4] & death-death & NaN & NaN \\
 \bottomrule
 \end{tabular}
 \end{center}
@@ -189,105 +162,45 @@ index 0 & index 1 & simplex 0 & simplex 1 & type & jacard\_l33a & jacard\_l33b \
 \toprule
 index 0 & index 1 & simplex 0 & simplex 1 & type & jacard\_nn\_nodes & jacard\_nn\_edges \\
 \midrule
-23 & 24 & [11, 13] & [5, 11] & birth-death & 1.00 & 1.00 \\
-29 & 30 & [6, 8] & [6, 15] & birth-death & 1.00 & 1.00 \\
-35 & 36 & [8, 10] & [1, 10] & death-death & 1.00 & 1.00 \\
-46 & 47 & [7, 9] & [7, 14] & birth-birth & 1.00 & 1.00 \\
-62 & 63 & [7, 8, 12] & [6, 8, 12] & death-death & 1.00 & 1.00 \\
-65 & 66 & [2, 4, 11] & [2, 11, 14] & death-death & 1.00 & 1.00 \\
+3 & 4 & [1] & [2] & birth-birth & 1.00 & 1 \\
+7 & 8 & [2, 3] & [1, 4] & death-death & 1.00 & 1 \\
 \bottomrule
 \end{tabular}
 \end{center}
 
 
-\section{Unexpected results}
+\subsection{Unexpected results}
 
     \par The Hypothesis problem can be measured by 2 scores with expected 
     values: \textbf{jacard\_nn\_edges}, \textbf{jacard\_nn\_nodes}
-    There are 1 cases, which does not require the expectations: 
-\begin{center}
-\begin{tabular}{rrlllrrl}
-\toprule
-index 0 & index 1 & simplex 0 & simplex 1 & type & jacard\_nn\_edges & jacard\_nn\_nodes & Figure \\
-\midrule
-30 & 31 & [6, 15] & [0, 6] & birth-birth & 0.95 & 1.00 & Figure \ref{fig:unexpected29} \\
-\bottomrule
-\end{tabular}
-\end{center}.
+    There are 0 cases, which does not corespond the expectations. 
     
     \par The Lemma 3.1 problem can be measured by 2 scores with expected 
     values: \textbf{jacard\_l31a}, \textbf{jacard\_l31b}
-    There are 0 cases, which does not require the expectations. 
+    There are 0 cases, which does not corespond the expectations. 
     
     \par The Lemma 3.2 problem can be measured by 2 scores with expected 
     values: \textbf{jacard\_l32a}, \textbf{jacard\_l32b}
-    There are 3 cases, which does not require the expectations: 
+    There are 1 cases, which does not corespond the expectations: 
 \begin{center}
 \begin{tabular}{rrlllrrl}
 \toprule
 index 0 & index 1 & simplex 0 & simplex 1 & type & jacard\_l32a & jacard\_l32b & Figure \\
 \midrule
-35 & 36 & [8, 10] & [1, 10] & death-death & 0.00 & 0.00 & Figure \ref{fig:unexpected33} \\
-62 & 63 & [7, 8, 12] & [6, 8, 12] & death-death & 0.00 & 0.00 & Figure \ref{fig:unexpected51} \\
-65 & 66 & [2, 4, 11] & [2, 11, 14] & death-death & 0.00 & 0.00 & Figure \ref{fig:unexpected53} \\
+7 & 8 & [2, 3] & [1, 4] & death-death & 0.00 & 0.00 & Figure \ref{fig:unexpected6} \\
 \bottomrule
 \end{tabular}
 \end{center}.
     
     \par The Lemma 3.3 problem can be measured by 2 scores with expected 
     values: \textbf{jacard\_l33a}, \textbf{jacard\_l33b}
-    There are 2 cases, which does not require the expectations: 
-\begin{center}
-\begin{tabular}{rrlllrrl}
-\toprule
-index 0 & index 1 & simplex 0 & simplex 1 & type & jacard\_l33a & jacard\_l33b & Figure \\
-\midrule
-23 & 24 & [11, 13] & [5, 11] & birth-death & 0.50 & 0.50 & Figure \ref{fig:unexpected23} \\
-29 & 30 & [6, 8] & [6, 15] & birth-death & 0.00 & 0.00 & Figure \ref{fig:unexpected28} \\
-\bottomrule
-\end{tabular}
-\end{center}.
+    There are 0 cases, which does not corespond the expectations. 
     
     \begin{figure}[ht]
     \centering
-    \includegraphics[width=\textwidth]{pics/transpositions-unexpected-23.png}
-    \label{fig:unexpected23}
-    \caption{The Birth-Death Transposition of simplices [11, 13] and [5, 11]}
-    \end{figure}
-    
-    \begin{figure}[ht]
-    \centering
-    \includegraphics[width=\textwidth]{pics/transpositions-unexpected-28.png}
-    \label{fig:unexpected28}
-    \caption{The Birth-Death Transposition of simplices [6, 8] and [6, 15]}
-    \end{figure}
-    
-    \begin{figure}[ht]
-    \centering
-    \includegraphics[width=\textwidth]{pics/transpositions-unexpected-29.png}
-    \label{fig:unexpected29}
-    \caption{The Birth-Birth Transposition of simplices [6, 15] and [0, 6]}
-    \end{figure}
-    
-    \begin{figure}[ht]
-    \centering
-    \includegraphics[width=\textwidth]{pics/transpositions-unexpected-33.png}
-    \label{fig:unexpected33}
-    \caption{The Death-Death Transposition of simplices [8, 10] and [1, 10]}
-    \end{figure}
-    
-    \begin{figure}[ht]
-    \centering
-    \includegraphics[width=\textwidth]{pics/transpositions-unexpected-51.png}
-    \label{fig:unexpected51}
-    \caption{The Death-Death Transposition of simplices [7, 8, 12] and [6, 8, 12]}
-    \end{figure}
-    
-    \begin{figure}[ht]
-    \centering
-    \includegraphics[width=\textwidth]{pics/transpositions-unexpected-53.png}
-    \label{fig:unexpected53}
-    \caption{The Death-Death Transposition of simplices [2, 4, 11] and [2, 11, 14]}
+    \includegraphics[width=\textwidth]{pics/transpositions-unexpected-6.png}
+    \caption{The Death-Death Transposition of simplices [2, 3] and [1, 4]}
+    \label{fig:unexpected6}
     \end{figure}
     
 
