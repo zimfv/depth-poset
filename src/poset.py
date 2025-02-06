@@ -209,7 +209,7 @@ class Poset:
         new_nodes = [node for node in self.nodes if node_condition(node)]
 
         # Filter edges
-        new_edges = [edge for edge in self.edges 
+        new_edges = [edge for edge in self.get_transitive_closure().edges 
                      if edge_condition(edge) and node_condition(edge[0]) and node_condition(edge[1])]
 
         # Create a new object with filtered nodes and edges
