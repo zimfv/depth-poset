@@ -1,5 +1,5 @@
 \documentclass{article}
-\usepackage{amsfonts} 
+\usepackage{amsfonts}
 \usepackage{amsmath}
 \usepackage{hyperref}
 \usepackage{graphicx}
@@ -20,85 +20,87 @@ $$
 \text{Succ}'(a, y) = \{(x, b)\} \cup \text{Succ}'(a, b) \cup \{(s, t)\in \text{Succ}'(x, y) | f(t)<f(b)\}
 $$
 $$
-\text{Succ}'(x, b) = \{(s, t)\in \text{Succ}'(x, y) | f(t) > f(b)\}
+%\text{Succ}'(x, b) = \{(s, t)\in \text{Succ}'(x, y) \oplus \text{Succ}'(a, b) | f(t) > f(b)\}
+\text{Succ}'(x, b) = \{(s, t)\in \text{Succ}'(x, y) \cup \text{Succ}'(a, b) | f(t) > f(b)\}
 $$
 
 \subsection{Lemma 3.2.}
 \par Suppose $(a, b)$ and $(x, y)$ are birth-death pairs of $f:X\to R$, $y, b$ are consecutive in the ordering by $f$, and transposition of $y, b$ is a switch. Then
 $$
-\text{Succ}''(x, b) = \{(a, y)\} \cup \text{Succ}''(a, b) \cup \{(s, t)\in \text{Succ}''(x, y) | f(a) < f(s) < f(x)\}
+\text{Succ}''(x, b) = \{(a, y)\} \cup \text{Succ}''(a, b) \cup \{(s, t)\in \text{Succ}''(x, y) | f(a) < f(s)\}
 $$
 $$
-\text{Succ}''(a, y) = \{(s, t)\in\text{Succ}''(x, y) | f(s) < f(a)\}
+%\text{Succ}''(a, y) = \{(s, t)\in \text{Succ}''(a, b) \oplus \text{Succ}''(x, y) | f(s) < f(a)\}
+\text{Succ}''(a, y) = \{(s, t)\in \text{Succ}''(a, b) \cup \text{Succ}''(x, y) | f(s) < f(a)\}
 $$
 
 \subsection{Lemma 3.3.}
 \par Suppose $(a, b)$ and $(x, y)$ are birth-death pairs of $f$: $X\to R$, $b, x$ are consecutive in the ordering by $f$, and the transposition of $b, x$ is a switch. Then
 $$
 \text{Succ}(a, x) = \text{Succ}(a, b)
-\;\;\text{and}\;\; 
+\;\;\text{and}\;\;
 \text{Succ}(b, y) = \text{Succ}(x, y)
 $$
 
-\subsection{Hypothesis 1}: 
-\par Suppose $a$ and $b$ are 2-simplices consecutive in the ordering by $f$. And there is another Morse function $f^*$: 
+\subsection{Hypothesis 1}:
+\par Suppose $a$ and $b$ are 2-simplices consecutive in the ordering by $f$. And there is another Morse function $f^*$:
 $$
-f^*(s) = 
+f^*(s) =
 \begin{cases}
 f(s), \; \text{if} \; s\ne a, b \\
 f(b), \; \text{if} \; s = a \\
 f(a), \; \text{if} \; s = b
 \end{cases}
 $$
-Let's denote $DP_{f}$ the transitive reduction of the Depth Poset defined by the filtration $f$. And let's deonote $DP_{f}(s)$ the set of nodes in $DP_f(s)$ which are pairs containing cell $s$ and the set of edges with these nodes.
+Let's denote $DP_{f}^\text{min}$ the transitive reduction of the Depth Poset defined by the filtration $f$. And let's deonote $DP_{f}^\text{min}(s)$ the set of nodes in $DP_f(s)$ which are pairs containing cell $s$ and the set of edges with these nodes.
 
-\par \textbf{Hypothesis:} if the cell $s$ has no faces and cofaces with $a$ and $b$, then $DP_f(s) = DP_{f^*}(s)$.
+\par \textbf{Hypothesis:} if the cell $s$ has no faces and cofaces with $a$ and $b$, then $DP_f^\text{min}(s) = DP_{f^*}^\text{min}(s)$.
 
 
 \section{Model}
 
 \par The probabilistic model is simple. The first we just generate the cloud of $n$ points uniformly distributed in $[0, 1]^d$. After this we calculate the Alpha complex with these points, and then find its depth poset. Then we itarate all neighbour pairs of simplices and check if their transposition will be possible filtration, calculating the scores for the switch-forward transpositions.
 
-\par The number of points in the cloud $n$ and the dimension $d = \text{dim}$ 
+\par The number of points in the cloud $n$ and the dimension $d = \text{dim}$
 for each generated cloud and coresponding complex are given in the table:
 
 \begin{tabular}{rrrr}
 \toprule
 complex & n & dim & simplices \\
 \midrule
-0 & 6 & 2 & 23 \\
-1 & 6 & 2 & 21 \\
+0 & 6 & 2 & 21 \\
+1 & 6 & 2 & 23 \\
 2 & 6 & 2 & 23 \\
-3 & 6 & 2 & 23 \\
-4 & 8 & 2 & 33 \\
-5 & 8 & 2 & 33 \\
+3 & 6 & 2 & 21 \\
+4 & 8 & 2 & 29 \\
+5 & 8 & 2 & 31 \\
 6 & 8 & 2 & 31 \\
-7 & 8 & 2 & 29 \\
+7 & 8 & 2 & 33 \\
 8 & 8 & 2 & 31 \\
-9 & 8 & 2 & 37 \\
+9 & 8 & 2 & 33 \\
 10 & 8 & 2 & 33 \\
-11 & 8 & 2 & 35 \\
-12 & 12 & 2 & 53 \\
-13 & 12 & 2 & 51 \\
+11 & 8 & 2 & 33 \\
+12 & 12 & 2 & 51 \\
+13 & 12 & 2 & 53 \\
 \bottomrule
 \end{tabular}
 \begin{tabular}{rrrr}
 \toprule
 complex & n & dim & simplices \\
 \midrule
-13 & 12 & 2 & 51 \\
-14 & 12 & 2 & 55 \\
-15 & 12 & 2 & 53 \\
+13 & 12 & 2 & 53 \\
+14 & 12 & 2 & 51 \\
+15 & 12 & 2 & 55 \\
 16 & 12 & 2 & 55 \\
-17 & 12 & 2 & 55 \\
-18 & 16 & 2 & 77 \\
-19 & 16 & 2 & 77 \\
-20 & 8 & 3 & 65 \\
-21 & 8 & 3 & 65 \\
-22 & 8 & 3 & 73 \\
-23 & 8 & 3 & 69 \\
-24 & 8 & 3 & 73 \\
-25 & 8 & 3 & 65 \\
+17 & 12 & 2 & 53 \\
+18 & 16 & 2 & 79 \\
+19 & 16 & 2 & 79 \\
+20 & 8 & 3 & 67 \\
+21 & 8 & 3 & 77 \\
+22 & 8 & 3 & 67 \\
+23 & 8 & 3 & 65 \\
+24 & 8 & 3 & 69 \\
+25 & 8 & 3 & 73 \\
 \bottomrule
 \end{tabular}
 
@@ -108,1044 +110,1079 @@ complex & n & dim & simplices \\
 
 \begin{itemize}
 
-    \item \textbf{jacard\_nodes\_filtration}: The Jacard index of node sets from 2 depth posets.
-    The birth-death pairs are equal in terms of filtration values.
-    
-    \item \textbf{jacard\_nodes\_simplex}: The Jacard index of nodes from 2 depth posets.
-    The birth-death pairs are equal in terms of simplices.
-    
-    \item \textbf{jacard\_edges\_filtration}: The Jacard index of edge sets from transitive reductions of 2 depth posets.
-    The birth-death pairs are equal in terms of filtration values.
-    
-    \item \textbf{jacard\_edges\_simplex}: The Jacard index of edge sets from transitive reductions of 2 depth posets.
-    The birth-death pairs are equal in terms of simplices.
-    
-    \item \textbf{jacard\_l31a}: Jacard Index of $\text{Succ}'(x, b)$ and $\{(a, y)\} \cup \text{Succ}'(a, b) \cup \{(s, t)\in \text{Succ}'(x, y) | f(t) < f(b)\}$
-    
-    \item \textbf{jacard\_l31b}: Jacard Index of $\text{Succ}'(x, b)$ and $\{(s, t)\in \text{Succ}'(x, y) | f(t) > f(b)\}$
-    
-    \item \textbf{jacard\_l32a}: Jacard Index of $\text{Succ}''(x, b)$ and $\{(a, y)\} \cup \text{Succ}''(a, b) \cup \{(s, t)\in \text{Succ}''(x, y) | f(a) < f(s) < f(x)\}$
-    
-    \item \textbf{jacard\_l32b}: Jacard Index of $\text{Succ}''(a, y)$ and $\{(s, t)\in \text{Succ}''(x, y) | f(s) < f(a)\}$
-    
-    \item \textbf{jacard\_l33a}: Jacard Index of $\text{Succ}(a, x)$ and $\text{Succ}(a, b)$
-    
-    \item \textbf{jacard\_l33b}: Jacard Index of $\text{Succ}(b, y)$ and $\text{Succ}(x, y)$
-    
-    \item \textbf{jacard\_nn\_nodes}: The Jacard index of subsets of nodes $(s, t)$ from 2 depth posets, s.t. 
-    $s, t \notin \nabla\partial\sigma_0 \cup \partial\nabla\sigma_0 \cup \nabla\partial\sigma_1 \cup \partial\nabla\sigma_1$,
-    where $\sigma_0$ and $\sigma_1$ are transposing simplices.
-    
-    \item \textbf{jacard\_nn\_edges}: The Jacard index of subsets of edges $((s_0, t_0), (s_1, t_1))$ from 2 depth posets, s.t. 
-    $s_0, t_0, s_1, t_1 \notin \nabla\partial\sigma_0 \cup \partial\nabla\sigma_0 \cup \nabla\partial\sigma_1 \cup \partial\nabla\sigma_1$,
-    where $\sigma_0$ and $\sigma_1$ are transposing simplices.
-    
+\item \textbf{jacard\_nodes\_filtration}: The Jacard index of node sets from 2 depth posets.
+The birth-death pairs are equal in terms of filtration values.
+
+\item \textbf{jacard\_nodes\_simplex}: The Jacard index of nodes from 2 depth posets.
+The birth-death pairs are equal in terms of simplices.
+
+\item \textbf{jacard\_edges\_filtration}: The Jacard index of edge sets from transitive reductions of 2 depth posets.
+The birth-death pairs are equal in terms of filtration values.
+
+\item \textbf{jacard\_edges\_simplex}: The Jacard index of edge sets from transitive reductions of 2 depth posets.
+The birth-death pairs are equal in terms of simplices.
+
+\item \textbf{jacard\_l31a}: Jacard Index of $\text{Succ}'(x, b)$ and $\{(a, y)\} \cup \text{Succ}'(a, b) \cup \{(s, t)\in \text{Succ}'(x, y) | f(t) < f(b)\}$
+
+\item \textbf{jacard\_l31b}: % Jacard Index of $\text{Succ}'(x, b)$ and $\{(s, t)\in \text{Succ}'(x, y) \oplus \text{Succ}'(a, b) | f(t) > f(b)\}$
+Jacard Index of $\text{Succ}'(x, b)$ and $\{(s, t)\in \text{Succ}'(x, y) \cup \text{Succ}'(a, b) | f(t) > f(b)\}$
+
+\item \textbf{jacard\_l32a}: Jacard Index of $\text{Succ}''(x, b)$ and $\{(a, y)\} \cup \text{Succ}''(a, b) \cup \{(s, t)\in \text{Succ}''(x, y) | f(a) < f(s) < f(x)\}$
+
+\item \textbf{jacard\_l32b}: % Jacard Index of $\text{Succ}''(a, y)$ and $\{(s, t)\in \text{Succ}''(x, y) \oplus \text{Succ}''(a, b) | f(s) < f(a)\}$
+Jacard Index of $\text{Succ}''(a, y)$ and $\{(s, t)\in \text{Succ}''(x, y) \cup \text{Succ}''(a, b) | f(s) < f(a)\}$
+
+\item \textbf{jacard\_l33a}: Jacard Index of $\text{Succ}(a, x)$ and $\text{Succ}(a, b)$
+
+\item \textbf{jacard\_l33b}: Jacard Index of $\text{Succ}(b, y)$ and $\text{Succ}(x, y)$
+
+\item \textbf{jacard\_nn\_nodes}: The Jacard index of subsets of nodes $(s, t)$ from 2 depth posets, s.t.
+$s, t \notin \nabla\partial\sigma_0 \cup \partial\nabla\sigma_0 \cup \nabla\partial\sigma_1 \cup \partial\nabla\sigma_1$,
+where $\sigma_0$ and $\sigma_1$ are transposing simplices.
+
+\item \textbf{jacard\_nn\_edges}: The Jacard index of subsets of edges $((s_0, t_0), (s_1, t_1))$ from 2 depth posets, s.t.
+$s_0, t_0, s_1, t_1 \notin \nabla\partial\sigma_0 \cup \partial\nabla\sigma_0 \cup \nabla\partial\sigma_1 \cup \partial\nabla\sigma_1$,
+where $\sigma_0$ and $\sigma_1$ are transposing simplices.
+
 \end{itemize}
 
 
 \section{Results}
-
-\par Here are the tables, containing the scores for the switch transpositions in the experiment:
-
-\begin{center}
-\begin{tabular}{rrrrrlrr}
-\toprule
-complex & dim & n & dim 0 & dim 1 & type & jacard\_nodes\_filtration & jacard\_nodes\_simplex \\
-\midrule
-0 & 2 & 6 & 0 & 0 & birth-birth & 1.00 & 0.69 \\
-0 & 2 & 6 & 1 & 1 & birth-death & 1.00 & 0.69 \\
-0 & 2 & 6 & 1 & 1 & birth-death & 1.00 & 0.69 \\
-1 & 2 & 6 & 0 & 0 & birth-birth & 1.00 & 0.67 \\
-1 & 2 & 6 & 1 & 1 & birth-death & 1.00 & 0.67 \\
-2 & 2 & 6 & 0 & 0 & birth-birth & 1.00 & 0.69 \\
-2 & 2 & 6 & 1 & 1 & birth-death & 1.00 & 0.69 \\
-2 & 2 & 6 & 1 & 1 & birth-death & 1.00 & 0.69 \\
-3 & 2 & 6 & 1 & 1 & birth-death & 1.00 & 0.69 \\
-3 & 2 & 6 & 1 & 1 & birth-death & 1.00 & 0.69 \\
-4 & 2 & 8 & 0 & 0 & birth-birth & 1.00 & 0.78 \\
-4 & 2 & 8 & 1 & 1 & birth-death & 1.00 & 0.78 \\
-4 & 2 & 8 & 1 & 1 & birth-birth & 1.00 & 0.78 \\
-5 & 2 & 8 & 1 & 1 & birth-death & 1.00 & 0.78 \\
-5 & 2 & 8 & 2 & 2 & death-death & 1.00 & 0.78 \\
-5 & 2 & 8 & 1 & 1 & birth-death & 1.00 & 0.78 \\
-6 & 2 & 8 & 1 & 1 & death-death & 1.00 & 0.76 \\
-6 & 2 & 8 & 1 & 1 & birth-death & 1.00 & 0.76 \\
-6 & 2 & 8 & 1 & 1 & death-death & 1.00 & 0.76 \\
-7 & 2 & 8 & 1 & 1 & birth-birth & 1.00 & 0.75 \\
-7 & 2 & 8 & 2 & 2 & death-death & 1.00 & 0.75 \\
-8 & 2 & 8 & 1 & 1 & birth-death & 1.00 & 0.76 \\
-8 & 2 & 8 & 1 & 1 & death-death & 1.00 & 0.76 \\
-8 & 2 & 8 & 1 & 1 & birth-death & 1.00 & 0.76 \\
-8 & 2 & 8 & 2 & 2 & death-death & 1.00 & 0.76 \\
-9 & 2 & 8 & 1 & 1 & birth-death & 1.00 & 0.80 \\
-9 & 2 & 8 & 1 & 1 & birth-death & 1.00 & 0.80 \\
-9 & 2 & 8 & 1 & 1 & birth-death & 1.00 & 0.80 \\
-10 & 2 & 8 & 1 & 1 & birth-death & 1.00 & 0.78 \\
-11 & 2 & 8 & 1 & 1 & birth-death & 1.00 & 0.79 \\
-12 & 2 & 12 & 0 & 0 & birth-birth & 1.00 & 0.86 \\
-12 & 2 & 12 & 1 & 1 & birth-death & 1.00 & 0.86 \\
-12 & 2 & 12 & 2 & 2 & death-death & 1.00 & 0.86 \\
-12 & 2 & 12 & 1 & 1 & birth-birth & 1.00 & 0.86 \\
-13 & 2 & 12 & 0 & 0 & birth-birth & 1.00 & 0.85 \\
-13 & 2 & 12 & 1 & 1 & birth-death & 1.00 & 0.85 \\
-13 & 2 & 12 & 1 & 1 & birth-death & 1.00 & 0.85 \\
-14 & 2 & 12 & 1 & 1 & birth-death & 1.00 & 0.86 \\
-14 & 2 & 12 & 1 & 1 & death-death & 1.00 & 0.86 \\
-14 & 2 & 12 & 2 & 2 & death-death & 1.00 & 0.86 \\
-14 & 2 & 12 & 1 & 1 & birth-birth & 1.00 & 0.86 \\
-15 & 2 & 12 & 0 & 0 & birth-birth & 1.00 & 0.86 \\
-15 & 2 & 12 & 1 & 1 & birth-death & 1.00 & 0.86 \\
-16 & 2 & 12 & 0 & 0 & birth-birth & 1.00 & 0.86 \\
-16 & 2 & 12 & 1 & 1 & death-death & 1.00 & 0.86 \\
-16 & 2 & 12 & 1 & 1 & birth-death & 1.00 & 0.86 \\
-17 & 2 & 12 & 1 & 1 & birth-death & 1.00 & 0.86 \\
-17 & 2 & 12 & 1 & 1 & birth-death & 1.00 & 0.86 \\
-18 & 2 & 16 & 0 & 0 & birth-birth & 1.00 & 0.90 \\
-18 & 2 & 16 & 1 & 1 & birth-death & 1.00 & 0.90 \\
-\bottomrule
-\end{tabular}
-
-\begin{tabular}{rrrrrlrr}
-\toprule
-complex & dim & n & dim 0 & dim 1 & type & jacard\_nodes\_filtration & jacard\_nodes\_simplex \\
-\midrule
-18 & 2 & 16 & 1 & 1 & birth-death & 1.00 & 0.90 \\
-18 & 2 & 16 & 1 & 1 & birth-death & 1.00 & 0.90 \\
-18 & 2 & 16 & 2 & 2 & death-death & 1.00 & 0.90 \\
-19 & 2 & 16 & 0 & 0 & birth-birth & 1.00 & 0.90 \\
-19 & 2 & 16 & 1 & 1 & death-death & 1.00 & 0.90 \\
-20 & 3 & 8 & 0 & 0 & birth-birth & 1.00 & 0.88 \\
-20 & 3 & 8 & 1 & 1 & death-death & 1.00 & 0.88 \\
-20 & 3 & 8 & 1 & 1 & birth-death & 1.00 & 0.88 \\
-20 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 0.88 \\
-20 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 0.88 \\
-20 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 0.88 \\
-20 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 0.88 \\
-20 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 0.88 \\
-20 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 0.88 \\
-20 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 0.88 \\
-21 & 3 & 8 & 0 & 0 & birth-birth & 1.00 & 0.88 \\
-21 & 3 & 8 & 0 & 0 & birth-birth & 1.00 & 0.88 \\
-21 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 0.88 \\
-21 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 0.88 \\
-21 & 3 & 8 & 1 & 1 & birth-death & 1.00 & 0.88 \\
-21 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 0.88 \\
-21 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 0.88 \\
-21 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 0.88 \\
-21 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 0.88 \\
-21 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 0.88 \\
-21 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 0.88 \\
-22 & 3 & 8 & 0 & 0 & birth-birth & 1.00 & 0.89 \\
-22 & 3 & 8 & 1 & 1 & birth-death & 1.00 & 0.89 \\
-22 & 3 & 8 & 1 & 1 & birth-death & 1.00 & 0.89 \\
-22 & 3 & 8 & 1 & 1 & birth-death & 1.00 & 0.89 \\
-22 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 0.89 \\
-22 & 3 & 8 & 2 & 2 & death-death & 1.00 & 0.89 \\
-22 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 0.89 \\
-22 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 0.89 \\
-22 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 0.89 \\
-22 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 0.89 \\
-22 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 0.89 \\
-22 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 0.89 \\
-22 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 0.89 \\
-22 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 0.89 \\
-23 & 3 & 8 & 0 & 0 & birth-birth & 1.00 & 0.89 \\
-23 & 3 & 8 & 1 & 1 & death-death & 1.00 & 0.89 \\
-23 & 3 & 8 & 1 & 1 & birth-death & 1.00 & 0.89 \\
-23 & 3 & 8 & 2 & 2 & death-death & 1.00 & 0.89 \\
-23 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 0.89 \\
-23 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 0.89 \\
-23 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 0.89 \\
-23 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 0.89 \\
-23 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 0.89 \\
-23 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 0.89 \\
-\bottomrule
-\end{tabular}
-
-\begin{tabular}{rrrrrlrr}
-\toprule
-complex & dim & n & dim 0 & dim 1 & type & jacard\_nodes\_filtration & jacard\_nodes\_simplex \\
-\midrule
-23 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 0.89 \\
-24 & 3 & 8 & 1 & 1 & birth-death & 1.00 & 0.89 \\
-24 & 3 & 8 & 1 & 1 & birth-death & 1.00 & 0.89 \\
-24 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 0.89 \\
-24 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 0.89 \\
-24 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 0.89 \\
-24 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 0.89 \\
-24 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 0.89 \\
-24 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 0.89 \\
-25 & 3 & 8 & 0 & 0 & birth-birth & 1.00 & 0.88 \\
-25 & 3 & 8 & 0 & 0 & birth-birth & 1.00 & 0.88 \\
-25 & 3 & 8 & 1 & 1 & birth-death & 1.00 & 0.88 \\
-25 & 3 & 8 & 2 & 2 & death-death & 1.00 & 0.88 \\
-25 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 0.88 \\
-25 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 0.88 \\
-25 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 0.88 \\
-25 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 0.88 \\
-25 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 0.88 \\
-25 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 0.88 \\
-25 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 0.88 \\
-25 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 0.88 \\
-\bottomrule
-\end{tabular}
-\end{center}
-
-\begin{center}
-\begin{tabular}{rrrrrlrr}
-\toprule
-complex & dim & n & dim 0 & dim 1 & type & jacard\_edges\_filtration & jacard\_edges\_simplex \\
-\midrule
-0 & 2 & 6 & 0 & 0 & birth-birth & 1.00 & 0.20 \\
-0 & 2 & 6 & 1 & 1 & birth-death & 1.00 & 0.20 \\
-0 & 2 & 6 & 1 & 1 & birth-death & 1.00 & 1.00 \\
-1 & 2 & 6 & 0 & 0 & birth-birth & 0.50 & 0.20 \\
-1 & 2 & 6 & 1 & 1 & birth-death & 1.00 & 0.20 \\
-2 & 2 & 6 & 0 & 0 & birth-birth & 1.00 & 0.33 \\
-2 & 2 & 6 & 1 & 1 & birth-death & 0.60 & 0.14 \\
-2 & 2 & 6 & 1 & 1 & birth-death & 1.00 & 0.33 \\
-3 & 2 & 6 & 1 & 1 & birth-death & 1.00 & 0.20 \\
-3 & 2 & 6 & 1 & 1 & birth-death & 1.00 & 0.20 \\
-4 & 2 & 8 & 0 & 0 & birth-birth & 1.00 & 0.67 \\
-4 & 2 & 8 & 1 & 1 & birth-death & 0.80 & 0.50 \\
-4 & 2 & 8 & 1 & 1 & birth-birth & 1.00 & 0.67 \\
-5 & 2 & 8 & 1 & 1 & birth-death & 0.60 & 0.00 \\
-5 & 2 & 8 & 2 & 2 & death-death & 1.00 & 0.60 \\
-5 & 2 & 8 & 1 & 1 & birth-death & 0.80 & 0.29 \\
-6 & 2 & 8 & 1 & 1 & death-death & 1.00 & 0.50 \\
-6 & 2 & 8 & 1 & 1 & birth-death & 0.71 & 0.50 \\
-6 & 2 & 8 & 1 & 1 & death-death & 1.00 & 0.50 \\
-7 & 2 & 8 & 1 & 1 & birth-birth & 1.00 & 0.45 \\
-7 & 2 & 8 & 2 & 2 & death-death & 1.00 & 0.45 \\
-8 & 2 & 8 & 1 & 1 & birth-death & 0.67 & 0.43 \\
-8 & 2 & 8 & 1 & 1 & death-death & 1.00 & 0.43 \\
-8 & 2 & 8 & 1 & 1 & birth-death & 1.00 & 0.67 \\
-8 & 2 & 8 & 2 & 2 & death-death & 1.00 & 0.67 \\
-9 & 2 & 8 & 1 & 1 & birth-death & 1.00 & 0.25 \\
-9 & 2 & 8 & 1 & 1 & birth-death & 1.00 & 0.43 \\
-9 & 2 & 8 & 1 & 1 & birth-death & 0.67 & 0.67 \\
-10 & 2 & 8 & 1 & 1 & birth-death & 0.75 & 0.56 \\
-11 & 2 & 8 & 1 & 1 & birth-death & 0.75 & 0.75 \\
-12 & 2 & 12 & 0 & 0 & birth-birth & 1.00 & 0.45 \\
-12 & 2 & 12 & 1 & 1 & birth-death & 1.00 & 0.78 \\
-12 & 2 & 12 & 2 & 2 & death-death & 1.00 & 0.78 \\
-12 & 2 & 12 & 1 & 1 & birth-birth & 1.00 & 0.78 \\
-13 & 2 & 12 & 0 & 0 & birth-birth & 1.00 & 0.67 \\
-13 & 2 & 12 & 1 & 1 & birth-death & 0.82 & 0.67 \\
-13 & 2 & 12 & 1 & 1 & birth-death & 1.00 & 1.00 \\
-14 & 2 & 12 & 1 & 1 & birth-death & 0.92 & 0.79 \\
-14 & 2 & 12 & 1 & 1 & death-death & 1.00 & 0.60 \\
-14 & 2 & 12 & 2 & 2 & death-death & 1.00 & 0.85 \\
-14 & 2 & 12 & 1 & 1 & birth-birth & 1.00 & 0.71 \\
-15 & 2 & 12 & 0 & 0 & birth-birth & 0.83 & 0.47 \\
-15 & 2 & 12 & 1 & 1 & birth-death & 1.00 & 0.57 \\
-16 & 2 & 12 & 0 & 0 & birth-birth & 0.80 & 0.38 \\
-16 & 2 & 12 & 1 & 1 & death-death & 0.80 & 0.29 \\
-16 & 2 & 12 & 1 & 1 & birth-death & 0.70 & 0.70 \\
-17 & 2 & 12 & 1 & 1 & birth-death & 1.00 & 0.60 \\
-17 & 2 & 12 & 1 & 1 & birth-death & 0.70 & 0.31 \\
-18 & 2 & 16 & 0 & 0 & birth-birth & 0.88 & 0.52 \\
-18 & 2 & 16 & 1 & 1 & birth-death & 0.88 & 0.67 \\
-\bottomrule
-\end{tabular}
-
-\begin{tabular}{rrrrrlrr}
-\toprule
-complex & dim & n & dim 0 & dim 1 & type & jacard\_edges\_filtration & jacard\_edges\_simplex \\
-\midrule
-18 & 2 & 16 & 1 & 1 & birth-death & 0.88 & 0.78 \\
-18 & 2 & 16 & 1 & 1 & birth-death & 1.00 & 0.68 \\
-18 & 2 & 16 & 2 & 2 & death-death & 1.00 & 0.78 \\
-19 & 2 & 16 & 0 & 0 & birth-birth & 0.75 & 0.47 \\
-19 & 2 & 16 & 1 & 1 & death-death & 1.00 & 0.75 \\
-20 & 3 & 8 & 0 & 0 & birth-birth & 0.62 & 0.18 \\
-20 & 3 & 8 & 1 & 1 & death-death & 0.62 & 0.30 \\
-20 & 3 & 8 & 1 & 1 & birth-death & 0.86 & 0.62 \\
-20 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
-20 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
-20 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
-20 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
-20 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
-20 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
-20 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
-21 & 3 & 8 & 0 & 0 & birth-birth & 0.71 & 0.20 \\
-21 & 3 & 8 & 0 & 0 & birth-birth & 1.00 & 0.50 \\
-21 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
-21 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
-21 & 3 & 8 & 1 & 1 & birth-death & 0.86 & 0.18 \\
-21 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
-21 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
-21 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
-21 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
-21 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
-21 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
-22 & 3 & 8 & 0 & 0 & birth-birth & 1.00 & 0.33 \\
-22 & 3 & 8 & 1 & 1 & birth-death & 1.00 & 0.71 \\
-22 & 3 & 8 & 1 & 1 & birth-death & 1.00 & 0.71 \\
-22 & 3 & 8 & 1 & 1 & birth-death & 0.86 & 0.62 \\
-22 & 3 & 8 & 2 & 2 & birth-death & 0.86 & 0.62 \\
-22 & 3 & 8 & 2 & 2 & death-death & 1.00 & 0.71 \\
-22 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
-22 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
-22 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
-22 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
-22 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
-22 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
-22 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
-22 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
-23 & 3 & 8 & 0 & 0 & birth-birth & 1.00 & 0.23 \\
-23 & 3 & 8 & 1 & 1 & death-death & 1.00 & 0.45 \\
-23 & 3 & 8 & 1 & 1 & birth-death & 0.88 & 0.36 \\
-23 & 3 & 8 & 2 & 2 & death-death & 1.00 & 0.78 \\
-23 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
-23 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
-23 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
-23 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
-23 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
-23 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
-\bottomrule
-\end{tabular}
-
-\begin{tabular}{rrrrrlrr}
-\toprule
-complex & dim & n & dim 0 & dim 1 & type & jacard\_edges\_filtration & jacard\_edges\_simplex \\
-\midrule
-23 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
-24 & 3 & 8 & 1 & 1 & birth-death & 1.00 & 0.43 \\
-24 & 3 & 8 & 1 & 1 & birth-death & 1.00 & 1.00 \\
-24 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
-24 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
-24 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
-24 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
-24 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
-24 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
-25 & 3 & 8 & 0 & 0 & birth-birth & 1.00 & 0.33 \\
-25 & 3 & 8 & 0 & 0 & birth-birth & 1.00 & 0.50 \\
-25 & 3 & 8 & 1 & 1 & birth-death & 1.00 & 0.50 \\
-25 & 3 & 8 & 2 & 2 & death-death & 1.00 & 0.71 \\
-25 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
-25 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
-25 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
-25 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
-25 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
-25 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
-25 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
-25 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
-\bottomrule
-\end{tabular}
-\end{center}
-
-\begin{center}
-\begin{tabular}{rrrrrlrr}
-\toprule
-complex & dim & n & dim 0 & dim 1 & type & jacard\_l31a & jacard\_l31b \\
-\midrule
-0 & 2 & 6 & 0 & 0 & birth-birth & 1.00 & 1.00 \\
-0 & 2 & 6 & 1 & 1 & birth-death & NaN & NaN \\
-0 & 2 & 6 & 1 & 1 & birth-death & NaN & NaN \\
-1 & 2 & 6 & 0 & 0 & birth-birth & 1.00 & 1.00 \\
-1 & 2 & 6 & 1 & 1 & birth-death & NaN & NaN \\
-2 & 2 & 6 & 0 & 0 & birth-birth & 1.00 & 1.00 \\
-2 & 2 & 6 & 1 & 1 & birth-death & NaN & NaN \\
-2 & 2 & 6 & 1 & 1 & birth-death & NaN & NaN \\
-3 & 2 & 6 & 1 & 1 & birth-death & NaN & NaN \\
-3 & 2 & 6 & 1 & 1 & birth-death & NaN & NaN \\
-4 & 2 & 8 & 0 & 0 & birth-birth & 1.00 & 1.00 \\
-4 & 2 & 8 & 1 & 1 & birth-death & NaN & NaN \\
-4 & 2 & 8 & 1 & 1 & birth-birth & 1.00 & 1.00 \\
-5 & 2 & 8 & 1 & 1 & birth-death & NaN & NaN \\
-5 & 2 & 8 & 2 & 2 & death-death & 0.00 & 0.00 \\
-5 & 2 & 8 & 1 & 1 & birth-death & NaN & NaN \\
-6 & 2 & 8 & 1 & 1 & death-death & 0.50 & 0.50 \\
-6 & 2 & 8 & 1 & 1 & birth-death & NaN & NaN \\
-6 & 2 & 8 & 1 & 1 & death-death & 0.00 & 0.00 \\
-7 & 2 & 8 & 1 & 1 & birth-birth & 1.00 & 1.00 \\
-7 & 2 & 8 & 2 & 2 & death-death & 0.00 & 0.00 \\
-8 & 2 & 8 & 1 & 1 & birth-death & NaN & NaN \\
-8 & 2 & 8 & 1 & 1 & death-death & 0.00 & 0.00 \\
-8 & 2 & 8 & 1 & 1 & birth-death & NaN & NaN \\
-8 & 2 & 8 & 2 & 2 & death-death & 0.00 & 0.00 \\
-9 & 2 & 8 & 1 & 1 & birth-death & NaN & NaN \\
-9 & 2 & 8 & 1 & 1 & birth-death & NaN & NaN \\
-9 & 2 & 8 & 1 & 1 & birth-death & NaN & NaN \\
-10 & 2 & 8 & 1 & 1 & birth-death & NaN & NaN \\
-11 & 2 & 8 & 1 & 1 & birth-death & NaN & NaN \\
-12 & 2 & 12 & 0 & 0 & birth-birth & 1.00 & 1.00 \\
-12 & 2 & 12 & 1 & 1 & birth-death & NaN & NaN \\
-12 & 2 & 12 & 2 & 2 & death-death & 0.00 & 0.00 \\
-12 & 2 & 12 & 1 & 1 & birth-birth & 1.00 & 1.00 \\
-13 & 2 & 12 & 0 & 0 & birth-birth & 1.00 & 1.00 \\
-13 & 2 & 12 & 1 & 1 & birth-death & NaN & NaN \\
-13 & 2 & 12 & 1 & 1 & birth-death & NaN & NaN \\
-14 & 2 & 12 & 1 & 1 & birth-death & NaN & NaN \\
-14 & 2 & 12 & 1 & 1 & death-death & 0.00 & 0.00 \\
-14 & 2 & 12 & 2 & 2 & death-death & 0.00 & 0.00 \\
-14 & 2 & 12 & 1 & 1 & birth-birth & 1.00 & 1.00 \\
-15 & 2 & 12 & 0 & 0 & birth-birth & 1.00 & 1.00 \\
-15 & 2 & 12 & 1 & 1 & birth-death & NaN & NaN \\
-16 & 2 & 12 & 0 & 0 & birth-birth & 1.00 & 1.00 \\
-16 & 2 & 12 & 1 & 1 & death-death & 0.00 & 0.50 \\
-16 & 2 & 12 & 1 & 1 & birth-death & NaN & NaN \\
-17 & 2 & 12 & 1 & 1 & birth-death & NaN & NaN \\
-17 & 2 & 12 & 1 & 1 & birth-death & NaN & NaN \\
-18 & 2 & 16 & 0 & 0 & birth-birth & 1.00 & 1.00 \\
-18 & 2 & 16 & 1 & 1 & birth-death & NaN & NaN \\
-\bottomrule
-\end{tabular}
-
-\begin{tabular}{rrrrrlrr}
-\toprule
-complex & dim & n & dim 0 & dim 1 & type & jacard\_l31a & jacard\_l31b \\
-\midrule
-18 & 2 & 16 & 1 & 1 & birth-death & NaN & NaN \\
-18 & 2 & 16 & 1 & 1 & birth-death & NaN & NaN \\
-18 & 2 & 16 & 2 & 2 & death-death & 0.00 & 0.00 \\
-19 & 2 & 16 & 0 & 0 & birth-birth & 1.00 & 1.00 \\
-19 & 2 & 16 & 1 & 1 & death-death & 0.67 & 0.67 \\
-20 & 3 & 8 & 0 & 0 & birth-birth & 1.00 & 1.00 \\
-20 & 3 & 8 & 1 & 1 & death-death & 0.33 & 0.67 \\
-20 & 3 & 8 & 1 & 1 & birth-death & NaN & NaN \\
-20 & 3 & 8 & 2 & 2 & birth-death & NaN & NaN \\
-20 & 3 & 8 & 2 & 2 & birth-death & NaN & NaN \\
-20 & 3 & 8 & 2 & 2 & birth-death & NaN & NaN \\
-20 & 3 & 8 & 2 & 2 & birth-death & NaN & NaN \\
-20 & 3 & 8 & 2 & 2 & birth-death & NaN & NaN \\
-20 & 3 & 8 & 2 & 2 & birth-death & NaN & NaN \\
-20 & 3 & 8 & 2 & 2 & birth-death & NaN & NaN \\
-21 & 3 & 8 & 0 & 0 & birth-birth & 1.00 & 1.00 \\
-21 & 3 & 8 & 0 & 0 & birth-birth & 1.00 & 1.00 \\
-21 & 3 & 8 & 2 & 2 & birth-death & NaN & NaN \\
-21 & 3 & 8 & 2 & 2 & birth-death & NaN & NaN \\
-21 & 3 & 8 & 1 & 1 & birth-death & NaN & NaN \\
-21 & 3 & 8 & 2 & 2 & birth-death & NaN & NaN \\
-21 & 3 & 8 & 2 & 2 & birth-death & NaN & NaN \\
-21 & 3 & 8 & 2 & 2 & birth-death & NaN & NaN \\
-21 & 3 & 8 & 2 & 2 & birth-death & NaN & NaN \\
-21 & 3 & 8 & 2 & 2 & birth-death & NaN & NaN \\
-21 & 3 & 8 & 2 & 2 & birth-death & NaN & NaN \\
-22 & 3 & 8 & 0 & 0 & birth-birth & 1.00 & 1.00 \\
-22 & 3 & 8 & 1 & 1 & birth-death & NaN & NaN \\
-22 & 3 & 8 & 1 & 1 & birth-death & NaN & NaN \\
-22 & 3 & 8 & 1 & 1 & birth-death & NaN & NaN \\
-22 & 3 & 8 & 2 & 2 & birth-death & NaN & NaN \\
-22 & 3 & 8 & 2 & 2 & death-death & 0.00 & 0.00 \\
-22 & 3 & 8 & 2 & 2 & birth-death & NaN & NaN \\
-22 & 3 & 8 & 2 & 2 & birth-death & NaN & NaN \\
-22 & 3 & 8 & 2 & 2 & birth-death & NaN & NaN \\
-22 & 3 & 8 & 2 & 2 & birth-death & NaN & NaN \\
-22 & 3 & 8 & 2 & 2 & birth-death & NaN & NaN \\
-22 & 3 & 8 & 2 & 2 & birth-death & NaN & NaN \\
-22 & 3 & 8 & 2 & 2 & birth-death & NaN & NaN \\
-22 & 3 & 8 & 2 & 2 & birth-death & NaN & NaN \\
-23 & 3 & 8 & 0 & 0 & birth-birth & 1.00 & 0.00 \\
-23 & 3 & 8 & 1 & 1 & death-death & 0.00 & 0.50 \\
-23 & 3 & 8 & 1 & 1 & birth-death & NaN & NaN \\
-23 & 3 & 8 & 2 & 2 & death-death & 0.00 & 0.00 \\
-23 & 3 & 8 & 2 & 2 & birth-death & NaN & NaN \\
-23 & 3 & 8 & 2 & 2 & birth-death & NaN & NaN \\
-23 & 3 & 8 & 2 & 2 & birth-death & NaN & NaN \\
-23 & 3 & 8 & 2 & 2 & birth-death & NaN & NaN \\
-23 & 3 & 8 & 2 & 2 & birth-death & NaN & NaN \\
-23 & 3 & 8 & 2 & 2 & birth-death & NaN & NaN \\
-\bottomrule
-\end{tabular}
-
-\begin{tabular}{rrrrrlrr}
-\toprule
-complex & dim & n & dim 0 & dim 1 & type & jacard\_l31a & jacard\_l31b \\
-\midrule
-23 & 3 & 8 & 2 & 2 & birth-death & NaN & NaN \\
-24 & 3 & 8 & 1 & 1 & birth-death & NaN & NaN \\
-24 & 3 & 8 & 1 & 1 & birth-death & NaN & NaN \\
-24 & 3 & 8 & 2 & 2 & birth-death & NaN & NaN \\
-24 & 3 & 8 & 2 & 2 & birth-death & NaN & NaN \\
-24 & 3 & 8 & 2 & 2 & birth-death & NaN & NaN \\
-24 & 3 & 8 & 2 & 2 & birth-death & NaN & NaN \\
-24 & 3 & 8 & 2 & 2 & birth-death & NaN & NaN \\
-24 & 3 & 8 & 2 & 2 & birth-death & NaN & NaN \\
-25 & 3 & 8 & 0 & 0 & birth-birth & 1.00 & 1.00 \\
-25 & 3 & 8 & 0 & 0 & birth-birth & 1.00 & 0.50 \\
-25 & 3 & 8 & 1 & 1 & birth-death & NaN & NaN \\
-25 & 3 & 8 & 2 & 2 & death-death & 0.00 & 0.00 \\
-25 & 3 & 8 & 2 & 2 & birth-death & NaN & NaN \\
-25 & 3 & 8 & 2 & 2 & birth-death & NaN & NaN \\
-25 & 3 & 8 & 2 & 2 & birth-death & NaN & NaN \\
-25 & 3 & 8 & 2 & 2 & birth-death & NaN & NaN \\
-25 & 3 & 8 & 2 & 2 & birth-death & NaN & NaN \\
-25 & 3 & 8 & 2 & 2 & birth-death & NaN & NaN \\
-25 & 3 & 8 & 2 & 2 & birth-death & NaN & NaN \\
-25 & 3 & 8 & 2 & 2 & birth-death & NaN & NaN \\
-\bottomrule
-\end{tabular}
-\end{center}
-
-\begin{center}
-\begin{tabular}{rrrrrlrr}
-\toprule
-complex & dim & n & dim 0 & dim 1 & type & jacard\_l32a & jacard\_l32b \\
-\midrule
-0 & 2 & 6 & 0 & 0 & birth-birth & 0.00 & 0.00 \\
-0 & 2 & 6 & 1 & 1 & birth-death & NaN & NaN \\
-0 & 2 & 6 & 1 & 1 & birth-death & NaN & NaN \\
-1 & 2 & 6 & 0 & 0 & birth-birth & 0.00 & 0.00 \\
-1 & 2 & 6 & 1 & 1 & birth-death & NaN & NaN \\
-2 & 2 & 6 & 0 & 0 & birth-birth & 0.50 & 0.50 \\
-2 & 2 & 6 & 1 & 1 & birth-death & NaN & NaN \\
-2 & 2 & 6 & 1 & 1 & birth-death & NaN & NaN \\
-3 & 2 & 6 & 1 & 1 & birth-death & NaN & NaN \\
-3 & 2 & 6 & 1 & 1 & birth-death & NaN & NaN \\
-4 & 2 & 8 & 0 & 0 & birth-birth & 0.00 & 0.00 \\
-4 & 2 & 8 & 1 & 1 & birth-death & NaN & NaN \\
-4 & 2 & 8 & 1 & 1 & birth-birth & 0.00 & 0.00 \\
-5 & 2 & 8 & 1 & 1 & birth-death & NaN & NaN \\
-5 & 2 & 8 & 2 & 2 & death-death & 1.00 & 1.00 \\
-5 & 2 & 8 & 1 & 1 & birth-death & NaN & NaN \\
-6 & 2 & 8 & 1 & 1 & death-death & 1.00 & 1.00 \\
-6 & 2 & 8 & 1 & 1 & birth-death & NaN & NaN \\
-6 & 2 & 8 & 1 & 1 & death-death & 1.00 & 1.00 \\
-7 & 2 & 8 & 1 & 1 & birth-birth & 0.00 & 0.00 \\
-7 & 2 & 8 & 2 & 2 & death-death & 1.00 & 1.00 \\
-8 & 2 & 8 & 1 & 1 & birth-death & NaN & NaN \\
-8 & 2 & 8 & 1 & 1 & death-death & 1.00 & 1.00 \\
-8 & 2 & 8 & 1 & 1 & birth-death & NaN & NaN \\
-8 & 2 & 8 & 2 & 2 & death-death & 1.00 & 1.00 \\
-9 & 2 & 8 & 1 & 1 & birth-death & NaN & NaN \\
-9 & 2 & 8 & 1 & 1 & birth-death & NaN & NaN \\
-9 & 2 & 8 & 1 & 1 & birth-death & NaN & NaN \\
-10 & 2 & 8 & 1 & 1 & birth-death & NaN & NaN \\
-11 & 2 & 8 & 1 & 1 & birth-death & NaN & NaN \\
-12 & 2 & 12 & 0 & 0 & birth-birth & 0.00 & 0.00 \\
-12 & 2 & 12 & 1 & 1 & birth-death & NaN & NaN \\
-12 & 2 & 12 & 2 & 2 & death-death & 1.00 & 1.00 \\
-12 & 2 & 12 & 1 & 1 & birth-birth & 0.00 & 0.00 \\
-13 & 2 & 12 & 0 & 0 & birth-birth & 0.50 & 0.50 \\
-13 & 2 & 12 & 1 & 1 & birth-death & NaN & NaN \\
-13 & 2 & 12 & 1 & 1 & birth-death & NaN & NaN \\
-14 & 2 & 12 & 1 & 1 & birth-death & NaN & NaN \\
-14 & 2 & 12 & 1 & 1 & death-death & 1.00 & 1.00 \\
-14 & 2 & 12 & 2 & 2 & death-death & 1.00 & 1.00 \\
-14 & 2 & 12 & 1 & 1 & birth-birth & 0.00 & 0.00 \\
-15 & 2 & 12 & 0 & 0 & birth-birth & 0.50 & 0.50 \\
-15 & 2 & 12 & 1 & 1 & birth-death & NaN & NaN \\
-16 & 2 & 12 & 0 & 0 & birth-birth & 0.00 & 0.00 \\
-16 & 2 & 12 & 1 & 1 & death-death & 1.00 & 1.00 \\
-16 & 2 & 12 & 1 & 1 & birth-death & NaN & NaN \\
-17 & 2 & 12 & 1 & 1 & birth-death & NaN & NaN \\
-17 & 2 & 12 & 1 & 1 & birth-death & NaN & NaN \\
-18 & 2 & 16 & 0 & 0 & birth-birth & 0.00 & 0.00 \\
-18 & 2 & 16 & 1 & 1 & birth-death & NaN & NaN \\
-\bottomrule
-\end{tabular}
-
-\begin{tabular}{rrrrrlrr}
-\toprule
-complex & dim & n & dim 0 & dim 1 & type & jacard\_l32a & jacard\_l32b \\
-\midrule
-18 & 2 & 16 & 1 & 1 & birth-death & NaN & NaN \\
-18 & 2 & 16 & 1 & 1 & birth-death & NaN & NaN \\
-18 & 2 & 16 & 2 & 2 & death-death & 1.00 & 1.00 \\
-19 & 2 & 16 & 0 & 0 & birth-birth & 0.50 & 0.50 \\
-19 & 2 & 16 & 1 & 1 & death-death & 1.00 & 1.00 \\
-20 & 3 & 8 & 0 & 0 & birth-birth & 0.00 & 0.00 \\
-20 & 3 & 8 & 1 & 1 & death-death & 1.00 & 1.00 \\
-20 & 3 & 8 & 1 & 1 & birth-death & NaN & NaN \\
-20 & 3 & 8 & 2 & 2 & birth-death & NaN & NaN \\
-20 & 3 & 8 & 2 & 2 & birth-death & NaN & NaN \\
-20 & 3 & 8 & 2 & 2 & birth-death & NaN & NaN \\
-20 & 3 & 8 & 2 & 2 & birth-death & NaN & NaN \\
-20 & 3 & 8 & 2 & 2 & birth-death & NaN & NaN \\
-20 & 3 & 8 & 2 & 2 & birth-death & NaN & NaN \\
-20 & 3 & 8 & 2 & 2 & birth-death & NaN & NaN \\
-21 & 3 & 8 & 0 & 0 & birth-birth & 0.00 & 0.00 \\
-21 & 3 & 8 & 0 & 0 & birth-birth & 0.50 & 0.50 \\
-21 & 3 & 8 & 2 & 2 & birth-death & NaN & NaN \\
-21 & 3 & 8 & 2 & 2 & birth-death & NaN & NaN \\
-21 & 3 & 8 & 1 & 1 & birth-death & NaN & NaN \\
-21 & 3 & 8 & 2 & 2 & birth-death & NaN & NaN \\
-21 & 3 & 8 & 2 & 2 & birth-death & NaN & NaN \\
-21 & 3 & 8 & 2 & 2 & birth-death & NaN & NaN \\
-21 & 3 & 8 & 2 & 2 & birth-death & NaN & NaN \\
-21 & 3 & 8 & 2 & 2 & birth-death & NaN & NaN \\
-21 & 3 & 8 & 2 & 2 & birth-death & NaN & NaN \\
-22 & 3 & 8 & 0 & 0 & birth-birth & 0.00 & 0.00 \\
-22 & 3 & 8 & 1 & 1 & birth-death & NaN & NaN \\
-22 & 3 & 8 & 1 & 1 & birth-death & NaN & NaN \\
-22 & 3 & 8 & 1 & 1 & birth-death & NaN & NaN \\
-22 & 3 & 8 & 2 & 2 & birth-death & NaN & NaN \\
-22 & 3 & 8 & 2 & 2 & death-death & 1.00 & 1.00 \\
-22 & 3 & 8 & 2 & 2 & birth-death & NaN & NaN \\
-22 & 3 & 8 & 2 & 2 & birth-death & NaN & NaN \\
-22 & 3 & 8 & 2 & 2 & birth-death & NaN & NaN \\
-22 & 3 & 8 & 2 & 2 & birth-death & NaN & NaN \\
-22 & 3 & 8 & 2 & 2 & birth-death & NaN & NaN \\
-22 & 3 & 8 & 2 & 2 & birth-death & NaN & NaN \\
-22 & 3 & 8 & 2 & 2 & birth-death & NaN & NaN \\
-22 & 3 & 8 & 2 & 2 & birth-death & NaN & NaN \\
-23 & 3 & 8 & 0 & 0 & birth-birth & 0.50 & 0.50 \\
-23 & 3 & 8 & 1 & 1 & death-death & 1.00 & 1.00 \\
-23 & 3 & 8 & 1 & 1 & birth-death & NaN & NaN \\
-23 & 3 & 8 & 2 & 2 & death-death & 1.00 & 1.00 \\
-23 & 3 & 8 & 2 & 2 & birth-death & NaN & NaN \\
-23 & 3 & 8 & 2 & 2 & birth-death & NaN & NaN \\
-23 & 3 & 8 & 2 & 2 & birth-death & NaN & NaN \\
-23 & 3 & 8 & 2 & 2 & birth-death & NaN & NaN \\
-23 & 3 & 8 & 2 & 2 & birth-death & NaN & NaN \\
-23 & 3 & 8 & 2 & 2 & birth-death & NaN & NaN \\
-\bottomrule
-\end{tabular}
-
-\begin{tabular}{rrrrrlrr}
-\toprule
-complex & dim & n & dim 0 & dim 1 & type & jacard\_l32a & jacard\_l32b \\
-\midrule
-23 & 3 & 8 & 2 & 2 & birth-death & NaN & NaN \\
-24 & 3 & 8 & 1 & 1 & birth-death & NaN & NaN \\
-24 & 3 & 8 & 1 & 1 & birth-death & NaN & NaN \\
-24 & 3 & 8 & 2 & 2 & birth-death & NaN & NaN \\
-24 & 3 & 8 & 2 & 2 & birth-death & NaN & NaN \\
-24 & 3 & 8 & 2 & 2 & birth-death & NaN & NaN \\
-24 & 3 & 8 & 2 & 2 & birth-death & NaN & NaN \\
-24 & 3 & 8 & 2 & 2 & birth-death & NaN & NaN \\
-24 & 3 & 8 & 2 & 2 & birth-death & NaN & NaN \\
-25 & 3 & 8 & 0 & 0 & birth-birth & 0.00 & 0.00 \\
-25 & 3 & 8 & 0 & 0 & birth-birth & 0.50 & 0.50 \\
-25 & 3 & 8 & 1 & 1 & birth-death & NaN & NaN \\
-25 & 3 & 8 & 2 & 2 & death-death & 1.00 & 1.00 \\
-25 & 3 & 8 & 2 & 2 & birth-death & NaN & NaN \\
-25 & 3 & 8 & 2 & 2 & birth-death & NaN & NaN \\
-25 & 3 & 8 & 2 & 2 & birth-death & NaN & NaN \\
-25 & 3 & 8 & 2 & 2 & birth-death & NaN & NaN \\
-25 & 3 & 8 & 2 & 2 & birth-death & NaN & NaN \\
-25 & 3 & 8 & 2 & 2 & birth-death & NaN & NaN \\
-25 & 3 & 8 & 2 & 2 & birth-death & NaN & NaN \\
-25 & 3 & 8 & 2 & 2 & birth-death & NaN & NaN \\
-\bottomrule
-\end{tabular}
-\end{center}
-
-\begin{center}
-\begin{tabular}{rrrrrlrr}
-\toprule
-complex & dim & n & dim 0 & dim 1 & type & jacard\_l33a & jacard\_l33b \\
-\midrule
-0 & 2 & 6 & 0 & 0 & birth-birth & NaN & NaN \\
-0 & 2 & 6 & 1 & 1 & birth-death & 1.00 & 1.00 \\
-0 & 2 & 6 & 1 & 1 & birth-death & 1.00 & 1.00 \\
-1 & 2 & 6 & 0 & 0 & birth-birth & NaN & NaN \\
-1 & 2 & 6 & 1 & 1 & birth-death & 1.00 & 1.00 \\
-2 & 2 & 6 & 0 & 0 & birth-birth & NaN & NaN \\
-2 & 2 & 6 & 1 & 1 & birth-death & 1.00 & 1.00 \\
-2 & 2 & 6 & 1 & 1 & birth-death & 1.00 & 1.00 \\
-3 & 2 & 6 & 1 & 1 & birth-death & 1.00 & 1.00 \\
-3 & 2 & 6 & 1 & 1 & birth-death & 1.00 & 1.00 \\
-4 & 2 & 8 & 0 & 0 & birth-birth & NaN & NaN \\
-4 & 2 & 8 & 1 & 1 & birth-death & 1.00 & 1.00 \\
-4 & 2 & 8 & 1 & 1 & birth-birth & NaN & NaN \\
-5 & 2 & 8 & 1 & 1 & birth-death & 1.00 & 1.00 \\
-5 & 2 & 8 & 2 & 2 & death-death & NaN & NaN \\
-5 & 2 & 8 & 1 & 1 & birth-death & 1.00 & 1.00 \\
-6 & 2 & 8 & 1 & 1 & death-death & NaN & NaN \\
-6 & 2 & 8 & 1 & 1 & birth-death & 1.00 & 1.00 \\
-6 & 2 & 8 & 1 & 1 & death-death & NaN & NaN \\
-7 & 2 & 8 & 1 & 1 & birth-birth & NaN & NaN \\
-7 & 2 & 8 & 2 & 2 & death-death & NaN & NaN \\
-8 & 2 & 8 & 1 & 1 & birth-death & 1.00 & 1.00 \\
-8 & 2 & 8 & 1 & 1 & death-death & NaN & NaN \\
-8 & 2 & 8 & 1 & 1 & birth-death & 1.00 & 1.00 \\
-8 & 2 & 8 & 2 & 2 & death-death & NaN & NaN \\
-9 & 2 & 8 & 1 & 1 & birth-death & 1.00 & 1.00 \\
-9 & 2 & 8 & 1 & 1 & birth-death & 1.00 & 1.00 \\
-9 & 2 & 8 & 1 & 1 & birth-death & 1.00 & 1.00 \\
-10 & 2 & 8 & 1 & 1 & birth-death & 1.00 & 1.00 \\
-11 & 2 & 8 & 1 & 1 & birth-death & 1.00 & 1.00 \\
-12 & 2 & 12 & 0 & 0 & birth-birth & NaN & NaN \\
-12 & 2 & 12 & 1 & 1 & birth-death & 1.00 & 1.00 \\
-12 & 2 & 12 & 2 & 2 & death-death & NaN & NaN \\
-12 & 2 & 12 & 1 & 1 & birth-birth & NaN & NaN \\
-13 & 2 & 12 & 0 & 0 & birth-birth & NaN & NaN \\
-13 & 2 & 12 & 1 & 1 & birth-death & 1.00 & 1.00 \\
-13 & 2 & 12 & 1 & 1 & birth-death & 1.00 & 1.00 \\
-14 & 2 & 12 & 1 & 1 & birth-death & 1.00 & 1.00 \\
-14 & 2 & 12 & 1 & 1 & death-death & NaN & NaN \\
-14 & 2 & 12 & 2 & 2 & death-death & NaN & NaN \\
-14 & 2 & 12 & 1 & 1 & birth-birth & NaN & NaN \\
-15 & 2 & 12 & 0 & 0 & birth-birth & NaN & NaN \\
-15 & 2 & 12 & 1 & 1 & birth-death & 1.00 & 1.00 \\
-16 & 2 & 12 & 0 & 0 & birth-birth & NaN & NaN \\
-16 & 2 & 12 & 1 & 1 & death-death & NaN & NaN \\
-16 & 2 & 12 & 1 & 1 & birth-death & 1.00 & 1.00 \\
-17 & 2 & 12 & 1 & 1 & birth-death & 1.00 & 1.00 \\
-17 & 2 & 12 & 1 & 1 & birth-death & 1.00 & 1.00 \\
-18 & 2 & 16 & 0 & 0 & birth-birth & NaN & NaN \\
-18 & 2 & 16 & 1 & 1 & birth-death & 1.00 & 1.00 \\
-\bottomrule
-\end{tabular}
-
-\begin{tabular}{rrrrrlrr}
-\toprule
-complex & dim & n & dim 0 & dim 1 & type & jacard\_l33a & jacard\_l33b \\
-\midrule
-18 & 2 & 16 & 1 & 1 & birth-death & 1.00 & 1.00 \\
-18 & 2 & 16 & 1 & 1 & birth-death & 1.00 & 1.00 \\
-18 & 2 & 16 & 2 & 2 & death-death & NaN & NaN \\
-19 & 2 & 16 & 0 & 0 & birth-birth & NaN & NaN \\
-19 & 2 & 16 & 1 & 1 & death-death & NaN & NaN \\
-20 & 3 & 8 & 0 & 0 & birth-birth & NaN & NaN \\
-20 & 3 & 8 & 1 & 1 & death-death & NaN & NaN \\
-20 & 3 & 8 & 1 & 1 & birth-death & 1.00 & 1.00 \\
-20 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
-20 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
-20 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
-20 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
-20 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
-20 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
-20 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
-21 & 3 & 8 & 0 & 0 & birth-birth & NaN & NaN \\
-21 & 3 & 8 & 0 & 0 & birth-birth & NaN & NaN \\
-21 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
-21 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
-21 & 3 & 8 & 1 & 1 & birth-death & 1.00 & 1.00 \\
-21 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
-21 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
-21 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
-21 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
-21 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
-21 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
-22 & 3 & 8 & 0 & 0 & birth-birth & NaN & NaN \\
-22 & 3 & 8 & 1 & 1 & birth-death & 1.00 & 1.00 \\
-22 & 3 & 8 & 1 & 1 & birth-death & 1.00 & 1.00 \\
-22 & 3 & 8 & 1 & 1 & birth-death & 1.00 & 1.00 \\
-22 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
-22 & 3 & 8 & 2 & 2 & death-death & NaN & NaN \\
-22 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
-22 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
-22 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
-22 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
-22 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
-22 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
-22 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
-22 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
-23 & 3 & 8 & 0 & 0 & birth-birth & NaN & NaN \\
-23 & 3 & 8 & 1 & 1 & death-death & NaN & NaN \\
-23 & 3 & 8 & 1 & 1 & birth-death & 1.00 & 1.00 \\
-23 & 3 & 8 & 2 & 2 & death-death & NaN & NaN \\
-23 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
-23 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
-23 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
-23 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
-23 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
-23 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
-\bottomrule
-\end{tabular}
-
-\begin{tabular}{rrrrrlrr}
-\toprule
-complex & dim & n & dim 0 & dim 1 & type & jacard\_l33a & jacard\_l33b \\
-\midrule
-23 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
-24 & 3 & 8 & 1 & 1 & birth-death & 1.00 & 1.00 \\
-24 & 3 & 8 & 1 & 1 & birth-death & 1.00 & 1.00 \\
-24 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
-24 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
-24 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
-24 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
-24 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
-24 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
-25 & 3 & 8 & 0 & 0 & birth-birth & NaN & NaN \\
-25 & 3 & 8 & 0 & 0 & birth-birth & NaN & NaN \\
-25 & 3 & 8 & 1 & 1 & birth-death & 1.00 & 1.00 \\
-25 & 3 & 8 & 2 & 2 & death-death & NaN & NaN \\
-25 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
-25 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
-25 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
-25 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
-25 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
-25 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
-25 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
-25 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
-\bottomrule
-\end{tabular}
-\end{center}
-
-\begin{center}
-\begin{tabular}{rrrrrlrr}
-\toprule
-complex & dim & n & dim 0 & dim 1 & type & jacard\_nn\_nodes & jacard\_nn\_edges \\
-\midrule
-0 & 2 & 6 & 0 & 0 & birth-birth & 1.00 & 1.00 \\
-0 & 2 & 6 & 1 & 1 & birth-death & 1.00 & 1.00 \\
-0 & 2 & 6 & 1 & 1 & birth-death & 1.00 & 1.00 \\
-1 & 2 & 6 & 0 & 0 & birth-birth & 1.00 & 1.00 \\
-1 & 2 & 6 & 1 & 1 & birth-death & 1.00 & 1.00 \\
-2 & 2 & 6 & 0 & 0 & birth-birth & 1.00 & 1.00 \\
-2 & 2 & 6 & 1 & 1 & birth-death & 1.00 & 1.00 \\
-2 & 2 & 6 & 1 & 1 & birth-death & 1.00 & 1.00 \\
-3 & 2 & 6 & 1 & 1 & birth-death & 1.00 & 1.00 \\
-3 & 2 & 6 & 1 & 1 & birth-death & 1.00 & 1.00 \\
-4 & 2 & 8 & 0 & 0 & birth-birth & 1.00 & 1.00 \\
-4 & 2 & 8 & 1 & 1 & birth-death & 1.00 & 1.00 \\
-4 & 2 & 8 & 1 & 1 & birth-birth & 1.00 & 1.00 \\
-5 & 2 & 8 & 1 & 1 & birth-death & 1.00 & 1.00 \\
-5 & 2 & 8 & 2 & 2 & death-death & 1.00 & 1.00 \\
-5 & 2 & 8 & 1 & 1 & birth-death & 1.00 & 1.00 \\
-6 & 2 & 8 & 1 & 1 & death-death & 1.00 & 1.00 \\
-6 & 2 & 8 & 1 & 1 & birth-death & 1.00 & 1.00 \\
-6 & 2 & 8 & 1 & 1 & death-death & 1.00 & 1.00 \\
-7 & 2 & 8 & 1 & 1 & birth-birth & 1.00 & 1.00 \\
-7 & 2 & 8 & 2 & 2 & death-death & 1.00 & 1.00 \\
-8 & 2 & 8 & 1 & 1 & birth-death & 1.00 & 1.00 \\
-8 & 2 & 8 & 1 & 1 & death-death & 1.00 & 1.00 \\
-8 & 2 & 8 & 1 & 1 & birth-death & 1.00 & 1.00 \\
-8 & 2 & 8 & 2 & 2 & death-death & 1.00 & 1.00 \\
-9 & 2 & 8 & 1 & 1 & birth-death & 1.00 & 1.00 \\
-9 & 2 & 8 & 1 & 1 & birth-death & 1.00 & 1.00 \\
-9 & 2 & 8 & 1 & 1 & birth-death & 1.00 & 1.00 \\
-10 & 2 & 8 & 1 & 1 & birth-death & 1.00 & 1.00 \\
-11 & 2 & 8 & 1 & 1 & birth-death & 1.00 & 1.00 \\
-12 & 2 & 12 & 0 & 0 & birth-birth & 1.00 & 1.00 \\
-12 & 2 & 12 & 1 & 1 & birth-death & 1.00 & 1.00 \\
-12 & 2 & 12 & 2 & 2 & death-death & 1.00 & 1.00 \\
-12 & 2 & 12 & 1 & 1 & birth-birth & 1.00 & 1.00 \\
-13 & 2 & 12 & 0 & 0 & birth-birth & 1.00 & 1.00 \\
-13 & 2 & 12 & 1 & 1 & birth-death & 1.00 & 1.00 \\
-13 & 2 & 12 & 1 & 1 & birth-death & 1.00 & 1.00 \\
-14 & 2 & 12 & 1 & 1 & birth-death & 1.00 & 1.00 \\
-14 & 2 & 12 & 1 & 1 & death-death & 1.00 & 1.00 \\
-14 & 2 & 12 & 2 & 2 & death-death & 1.00 & 1.00 \\
-14 & 2 & 12 & 1 & 1 & birth-birth & 1.00 & 1.00 \\
-15 & 2 & 12 & 0 & 0 & birth-birth & 1.00 & 1.00 \\
-15 & 2 & 12 & 1 & 1 & birth-death & 1.00 & 1.00 \\
-16 & 2 & 12 & 0 & 0 & birth-birth & 1.00 & 1.00 \\
-16 & 2 & 12 & 1 & 1 & death-death & 1.00 & 1.00 \\
-16 & 2 & 12 & 1 & 1 & birth-death & 1.00 & 1.00 \\
-17 & 2 & 12 & 1 & 1 & birth-death & 1.00 & 1.00 \\
-17 & 2 & 12 & 1 & 1 & birth-death & 1.00 & 1.00 \\
-18 & 2 & 16 & 0 & 0 & birth-birth & 1.00 & 1.00 \\
-18 & 2 & 16 & 1 & 1 & birth-death & 1.00 & 1.00 \\
-\bottomrule
-\end{tabular}
-
-\begin{tabular}{rrrrrlrr}
-\toprule
-complex & dim & n & dim 0 & dim 1 & type & jacard\_nn\_nodes & jacard\_nn\_edges \\
-\midrule
-18 & 2 & 16 & 1 & 1 & birth-death & 1.00 & 1.00 \\
-18 & 2 & 16 & 1 & 1 & birth-death & 1.00 & 1.00 \\
-18 & 2 & 16 & 2 & 2 & death-death & 1.00 & 1.00 \\
-19 & 2 & 16 & 0 & 0 & birth-birth & 1.00 & 1.00 \\
-19 & 2 & 16 & 1 & 1 & death-death & 1.00 & 1.00 \\
-20 & 3 & 8 & 0 & 0 & birth-birth & 1.00 & 1.00 \\
-20 & 3 & 8 & 1 & 1 & death-death & 1.00 & 1.00 \\
-20 & 3 & 8 & 1 & 1 & birth-death & 1.00 & 1.00 \\
-20 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
-20 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
-20 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
-20 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
-20 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
-20 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
-20 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
-21 & 3 & 8 & 0 & 0 & birth-birth & 1.00 & 1.00 \\
-21 & 3 & 8 & 0 & 0 & birth-birth & 1.00 & 1.00 \\
-21 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
-21 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
-21 & 3 & 8 & 1 & 1 & birth-death & 1.00 & 1.00 \\
-21 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
-21 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
-21 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
-21 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
-21 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
-21 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
-22 & 3 & 8 & 0 & 0 & birth-birth & 1.00 & 1.00 \\
-22 & 3 & 8 & 1 & 1 & birth-death & 1.00 & 1.00 \\
-22 & 3 & 8 & 1 & 1 & birth-death & 1.00 & 1.00 \\
-22 & 3 & 8 & 1 & 1 & birth-death & 1.00 & 1.00 \\
-22 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
-22 & 3 & 8 & 2 & 2 & death-death & 1.00 & 1.00 \\
-22 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
-22 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
-22 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
-22 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
-22 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
-22 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
-22 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
-22 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
-23 & 3 & 8 & 0 & 0 & birth-birth & 1.00 & 1.00 \\
-23 & 3 & 8 & 1 & 1 & death-death & 1.00 & 1.00 \\
-23 & 3 & 8 & 1 & 1 & birth-death & 1.00 & 1.00 \\
-23 & 3 & 8 & 2 & 2 & death-death & 1.00 & 1.00 \\
-23 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
-23 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
-23 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
-23 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
-23 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
-23 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
-\bottomrule
-\end{tabular}
-
-\begin{tabular}{rrrrrlrr}
-\toprule
-complex & dim & n & dim 0 & dim 1 & type & jacard\_nn\_nodes & jacard\_nn\_edges \\
-\midrule
-23 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
-24 & 3 & 8 & 1 & 1 & birth-death & 1.00 & 1.00 \\
-24 & 3 & 8 & 1 & 1 & birth-death & 1.00 & 1.00 \\
-24 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
-24 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
-24 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
-24 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
-24 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
-24 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
-25 & 3 & 8 & 0 & 0 & birth-birth & 1.00 & 1.00 \\
-25 & 3 & 8 & 0 & 0 & birth-birth & 1.00 & 1.00 \\
-25 & 3 & 8 & 1 & 1 & birth-death & 1.00 & 1.00 \\
-25 & 3 & 8 & 2 & 2 & death-death & 1.00 & 1.00 \\
-25 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
-25 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
-25 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
-25 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
-25 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
-25 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
-25 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
-25 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
-\bottomrule
-\end{tabular}
-\end{center}
-
+%
+%\par Here are the tables, containing the scores for the switch transpositions in the experiment:
+%
+%\begin{center}
+%\begin{tabular}{rrrrrlrr}
+%\toprule
+%complex & dim & n & dim 0 & dim 1 & type & jacard\_nodes\_filtration & jacard\_nodes\_simplex \\
+%\midrule
+%0 & 2 & 6 & 0 & 0 & birth-birth & 1.00 & 0.67 \\
+%0 & 2 & 6 & 0 & 0 & birth-birth & 1.00 & 0.67 \\
+%0 & 2 & 6 & 1 & 1 & birth-death & 1.00 & 0.67 \\
+%1 & 2 & 6 & 0 & 0 & birth-birth & 1.00 & 0.69 \\
+%1 & 2 & 6 & 1 & 1 & death-death & 1.00 & 0.69 \\
+%1 & 2 & 6 & 1 & 1 & birth-death & 1.00 & 0.69 \\
+%1 & 2 & 6 & 1 & 1 & birth-death & 1.00 & 0.69 \\
+%1 & 2 & 6 & 1 & 1 & birth-death & 1.00 & 0.69 \\
+%1 & 2 & 6 & 2 & 2 & death-death & 1.00 & 0.69 \\
+%2 & 2 & 6 & 1 & 1 & death-death & 1.00 & 0.69 \\
+%3 & 2 & 6 & 1 & 1 & birth-death & 1.00 & 0.67 \\
+%3 & 2 & 6 & 1 & 1 & birth-death & 1.00 & 0.67 \\
+%3 & 2 & 6 & 2 & 2 & death-death & 1.00 & 0.67 \\
+%4 & 2 & 8 & 1 & 1 & birth-death & 1.00 & 0.75 \\
+%5 & 2 & 8 & 1 & 1 & death-death & 1.00 & 0.76 \\
+%5 & 2 & 8 & 1 & 1 & birth-death & 1.00 & 0.76 \\
+%6 & 2 & 8 & 1 & 1 & death-death & 1.00 & 0.76 \\
+%6 & 2 & 8 & 1 & 1 & birth-death & 1.00 & 0.76 \\
+%6 & 2 & 8 & 1 & 1 & birth-death & 1.00 & 0.76 \\
+%6 & 2 & 8 & 1 & 1 & birth-death & 1.00 & 0.76 \\
+%6 & 2 & 8 & 1 & 1 & birth-death & 1.00 & 0.76 \\
+%6 & 2 & 8 & 1 & 1 & birth-birth & 1.00 & 0.76 \\
+%7 & 2 & 8 & 0 & 0 & birth-birth & 1.00 & 0.78 \\
+%7 & 2 & 8 & 1 & 1 & death-death & 1.00 & 0.78 \\
+%7 & 2 & 8 & 1 & 1 & birth-death & 1.00 & 0.78 \\
+%7 & 2 & 8 & 1 & 1 & birth-death & 1.00 & 0.78 \\
+%8 & 2 & 8 & 0 & 0 & birth-birth & 1.00 & 0.76 \\
+%8 & 2 & 8 & 1 & 1 & birth-death & 1.00 & 0.76 \\
+%8 & 2 & 8 & 2 & 2 & death-death & 1.00 & 0.76 \\
+%9 & 2 & 8 & 0 & 0 & birth-birth & 1.00 & 0.78 \\
+%9 & 2 & 8 & 2 & 2 & death-death & 1.00 & 0.78 \\
+%10 & 2 & 8 & 2 & 2 & death-death & 1.00 & 0.78 \\
+%11 & 2 & 8 & 0 & 0 & birth-birth & 1.00 & 0.78 \\
+%11 & 2 & 8 & 1 & 1 & birth-death & 1.00 & 0.78 \\
+%12 & 2 & 12 & 0 & 0 & birth-birth & 1.00 & 0.85 \\
+%12 & 2 & 12 & 0 & 0 & birth-birth & 1.00 & 0.85 \\
+%12 & 2 & 12 & 1 & 1 & death-death & 1.00 & 0.85 \\
+%12 & 2 & 12 & 1 & 1 & death-death & 1.00 & 0.85 \\
+%13 & 2 & 12 & 1 & 1 & birth-death & 1.00 & 0.86 \\
+%14 & 2 & 12 & 0 & 0 & birth-birth & 1.00 & 0.85 \\
+%14 & 2 & 12 & 1 & 1 & death-death & 1.00 & 0.85 \\
+%14 & 2 & 12 & 1 & 1 & birth-birth & 1.00 & 0.85 \\
+%14 & 2 & 12 & 2 & 2 & death-death & 1.00 & 0.85 \\
+%15 & 2 & 12 & 0 & 0 & birth-birth & 1.00 & 0.86 \\
+%15 & 2 & 12 & 1 & 1 & birth-birth & 1.00 & 0.86 \\
+%\bottomrule
+%\end{tabular}
+%
+%\begin{tabular}{rrrrrlrr}
+%\toprule
+%complex & dim & n & dim 0 & dim 1 & type & jacard\_nodes\_filtration & jacard\_nodes\_simplex \\
+%\midrule
+%16 & 2 & 12 & 1 & 1 & birth-death & 1.00 & 0.86 \\
+%17 & 2 & 12 & 1 & 1 & birth-death & 1.00 & 0.86 \\
+%17 & 2 & 12 & 2 & 2 & death-death & 1.00 & 0.86 \\
+%17 & 2 & 12 & 1 & 1 & birth-death & 1.00 & 0.86 \\
+%17 & 2 & 12 & 2 & 2 & death-death & 1.00 & 0.86 \\
+%18 & 2 & 16 & 0 & 0 & birth-birth & 1.00 & 0.90 \\
+%18 & 2 & 16 & 1 & 1 & birth-death & 1.00 & 0.90 \\
+%18 & 2 & 16 & 1 & 1 & death-death & 1.00 & 0.90 \\
+%18 & 2 & 16 & 1 & 1 & birth-death & 1.00 & 0.90 \\
+%18 & 2 & 16 & 1 & 1 & birth-death & 1.00 & 0.90 \\
+%18 & 2 & 16 & 2 & 2 & death-death & 1.00 & 0.90 \\
+%19 & 2 & 16 & 0 & 0 & birth-birth & 1.00 & 0.90 \\
+%19 & 2 & 16 & 0 & 0 & birth-birth & 1.00 & 0.90 \\
+%19 & 2 & 16 & 1 & 1 & birth-death & 1.00 & 0.90 \\
+%20 & 3 & 8 & 1 & 1 & death-death & 1.00 & 0.89 \\
+%20 & 3 & 8 & 1 & 1 & birth-death & 1.00 & 0.89 \\
+%20 & 3 & 8 & 1 & 1 & death-death & 1.00 & 0.89 \\
+%20 & 3 & 8 & 2 & 2 & death-death & 1.00 & 0.89 \\
+%20 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 0.89 \\
+%20 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 0.89 \\
+%20 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 0.89 \\
+%20 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 0.89 \\
+%20 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 0.89 \\
+%20 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 0.89 \\
+%20 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 0.89 \\
+%20 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 0.89 \\
+%20 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 0.89 \\
+%21 & 3 & 8 & 1 & 1 & birth-death & 1.00 & 0.90 \\
+%21 & 3 & 8 & 1 & 1 & birth-birth & 1.00 & 0.90 \\
+%21 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 0.90 \\
+%21 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 0.90 \\
+%21 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 0.90 \\
+%21 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 0.90 \\
+%21 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 0.90 \\
+%21 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 0.90 \\
+%21 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 0.90 \\
+%21 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 0.90 \\
+%22 & 3 & 8 & 1 & 1 & birth-death & 1.00 & 0.89 \\
+%22 & 3 & 8 & 1 & 1 & death-death & 1.00 & 0.89 \\
+%22 & 3 & 8 & 2 & 2 & death-death & 1.00 & 0.89 \\
+%22 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 0.89 \\
+%22 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 0.89 \\
+%22 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 0.89 \\
+%22 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 0.89 \\
+%22 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 0.89 \\
+%\bottomrule
+%\end{tabular}
+%
+%\begin{tabular}{rrrrrlrr}
+%\toprule
+%complex & dim & n & dim 0 & dim 1 & type & jacard\_nodes\_filtration & jacard\_nodes\_simplex \\
+%\midrule
+%22 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 0.89 \\
+%22 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 0.89 \\
+%22 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 0.89 \\
+%23 & 3 & 8 & 1 & 1 & birth-death & 1.00 & 0.88 \\
+%23 & 3 & 8 & 1 & 1 & birth-death & 1.00 & 0.88 \\
+%23 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 0.88 \\
+%23 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 0.88 \\
+%23 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 0.88 \\
+%23 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 0.88 \\
+%23 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 0.88 \\
+%24 & 3 & 8 & 1 & 1 & birth-death & 1.00 & 0.89 \\
+%24 & 3 & 8 & 1 & 1 & death-death & 1.00 & 0.89 \\
+%24 & 3 & 8 & 1 & 1 & birth-death & 1.00 & 0.89 \\
+%24 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 0.89 \\
+%24 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 0.89 \\
+%24 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 0.89 \\
+%24 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 0.89 \\
+%24 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 0.89 \\
+%24 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 0.89 \\
+%25 & 3 & 8 & 0 & 0 & birth-birth & 1.00 & 0.89 \\
+%25 & 3 & 8 & 1 & 1 & death-death & 1.00 & 0.89 \\
+%25 & 3 & 8 & 1 & 1 & birth-death & 1.00 & 0.89 \\
+%25 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 0.89 \\
+%25 & 3 & 8 & 2 & 2 & death-death & 1.00 & 0.89 \\
+%25 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 0.89 \\
+%25 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 0.89 \\
+%25 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 0.89 \\
+%25 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 0.89 \\
+%25 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 0.89 \\
+%25 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 0.89 \\
+%\bottomrule
+%\end{tabular}
+%\end{center}
+%
+%\begin{center}
+%\begin{tabular}{rrrrrlrr}
+%\toprule
+%complex & dim & n & dim 0 & dim 1 & type & jacard\_edges\_filtration & jacard\_edges\_simplex \\
+%\midrule
+%0 & 2 & 6 & 0 & 0 & birth-birth & 0.60 & 0.00 \\
+%0 & 2 & 6 & 0 & 0 & birth-birth & 1.00 & 0.14 \\
+%0 & 2 & 6 & 1 & 1 & birth-death & 1.00 & 0.60 \\
+%1 & 2 & 6 & 0 & 0 & birth-birth & 1.00 & 0.14 \\
+%1 & 2 & 6 & 1 & 1 & death-death & 1.00 & 0.33 \\
+%1 & 2 & 6 & 1 & 1 & birth-death & 0.60 & 0.33 \\
+%1 & 2 & 6 & 1 & 1 & birth-death & 1.00 & 0.60 \\
+%1 & 2 & 6 & 1 & 1 & birth-death & 1.00 & 0.60 \\
+%1 & 2 & 6 & 2 & 2 & death-death & 1.00 & 0.60 \\
+%2 & 2 & 6 & 1 & 1 & death-death & 1.00 & 0.00 \\
+%3 & 2 & 6 & 1 & 1 & birth-death & 0.80 & 0.50 \\
+%3 & 2 & 6 & 1 & 1 & birth-death & 0.50 & 0.00 \\
+%3 & 2 & 6 & 2 & 2 & death-death & 1.00 & 0.33 \\
+%4 & 2 & 8 & 1 & 1 & birth-death & 1.00 & 0.60 \\
+%5 & 2 & 8 & 1 & 1 & death-death & 0.67 & 0.43 \\
+%5 & 2 & 8 & 1 & 1 & birth-death & 0.67 & 0.43 \\
+%6 & 2 & 8 & 1 & 1 & death-death & 1.00 & 0.43 \\
+%6 & 2 & 8 & 1 & 1 & birth-death & 0.67 & 0.43 \\
+%6 & 2 & 8 & 1 & 1 & birth-death & 0.83 & 0.57 \\
+%6 & 2 & 8 & 1 & 1 & birth-death & 0.83 & 0.57 \\
+%6 & 2 & 8 & 1 & 1 & birth-death & 0.67 & 0.11 \\
+%6 & 2 & 8 & 1 & 1 & birth-birth & 1.00 & 0.67 \\
+%7 & 2 & 8 & 0 & 0 & birth-birth & 1.00 & 0.25 \\
+%7 & 2 & 8 & 1 & 1 & death-death & 0.67 & 0.11 \\
+%7 & 2 & 8 & 1 & 1 & birth-death & 1.00 & 0.43 \\
+%7 & 2 & 8 & 1 & 1 & birth-death & 1.00 & 0.67 \\
+%8 & 2 & 8 & 0 & 0 & birth-birth & 0.67 & 0.43 \\
+%8 & 2 & 8 & 1 & 1 & birth-death & 0.83 & 0.22 \\
+%8 & 2 & 8 & 2 & 2 & death-death & 1.00 & 0.67 \\
+%9 & 2 & 8 & 0 & 0 & birth-birth & 1.00 & 0.40 \\
+%9 & 2 & 8 & 2 & 2 & death-death & 1.00 & 0.56 \\
+%10 & 2 & 8 & 2 & 2 & death-death & 1.00 & 0.67 \\
+%11 & 2 & 8 & 0 & 0 & birth-birth & 0.83 & 0.22 \\
+%11 & 2 & 8 & 1 & 1 & birth-death & 0.80 & 0.80 \\
+%12 & 2 & 12 & 0 & 0 & birth-birth & 0.88 & 0.58 \\
+%12 & 2 & 12 & 0 & 0 & birth-birth & 1.00 & 0.76 \\
+%12 & 2 & 12 & 1 & 1 & death-death & 0.94 & 0.72 \\
+%12 & 2 & 12 & 1 & 1 & death-death & 0.93 & 0.61 \\
+%13 & 2 & 12 & 1 & 1 & birth-death & 0.83 & 0.38 \\
+%14 & 2 & 12 & 0 & 0 & birth-birth & 0.86 & 0.44 \\
+%14 & 2 & 12 & 1 & 1 & death-death & 0.86 & 0.37 \\
+%14 & 2 & 12 & 1 & 1 & birth-birth & 1.00 & 0.44 \\
+%14 & 2 & 12 & 2 & 2 & death-death & 1.00 & 0.44 \\
+%15 & 2 & 12 & 0 & 0 & birth-birth & 0.62 & 0.53 \\
+%15 & 2 & 12 & 1 & 1 & birth-birth & 1.00 & 0.62 \\
+%\bottomrule
+%\end{tabular}
+%
+%\begin{tabular}{rrrrrlrr}
+%\toprule
+%complex & dim & n & dim 0 & dim 1 & type & jacard\_edges\_filtration & jacard\_edges\_simplex \\
+%\midrule
+%16 & 2 & 12 & 1 & 1 & birth-death & 1.00 & 0.67 \\
+%17 & 2 & 12 & 1 & 1 & birth-death & 1.00 & 0.50 \\
+%17 & 2 & 12 & 2 & 2 & death-death & 1.00 & 0.76 \\
+%17 & 2 & 12 & 1 & 1 & birth-death & 1.00 & 0.88 \\
+%17 & 2 & 12 & 2 & 2 & death-death & 1.00 & 0.76 \\
+%18 & 2 & 16 & 0 & 0 & birth-birth & 0.92 & 0.59 \\
+%18 & 2 & 16 & 1 & 1 & birth-death & 0.92 & 0.84 \\
+%18 & 2 & 16 & 1 & 1 & death-death & 0.96 & 0.67 \\
+%18 & 2 & 16 & 1 & 1 & birth-death & 1.00 & 0.70 \\
+%18 & 2 & 16 & 1 & 1 & birth-death & 0.88 & 0.41 \\
+%18 & 2 & 16 & 2 & 2 & death-death & 1.00 & 0.84 \\
+%19 & 2 & 16 & 0 & 0 & birth-birth & 0.71 & 0.50 \\
+%19 & 2 & 16 & 0 & 0 & birth-birth & 1.00 & 0.71 \\
+%19 & 2 & 16 & 1 & 1 & birth-death & 1.00 & 0.71 \\
+%20 & 3 & 8 & 1 & 1 & death-death & 1.00 & 0.33 \\
+%20 & 3 & 8 & 1 & 1 & birth-death & 0.80 & 0.29 \\
+%20 & 3 & 8 & 1 & 1 & death-death & 1.00 & 0.60 \\
+%20 & 3 & 8 & 2 & 2 & death-death & 1.00 & 0.60 \\
+%20 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
+%20 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
+%20 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
+%20 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
+%20 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
+%20 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
+%20 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
+%20 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
+%20 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
+%21 & 3 & 8 & 1 & 1 & birth-death & 0.83 & 0.83 \\
+%21 & 3 & 8 & 1 & 1 & birth-birth & 0.71 & 0.50 \\
+%21 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
+%21 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
+%21 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
+%21 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
+%21 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
+%21 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
+%21 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
+%21 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
+%22 & 3 & 8 & 1 & 1 & birth-death & 1.00 & 0.71 \\
+%22 & 3 & 8 & 1 & 1 & death-death & 0.50 & 0.20 \\
+%22 & 3 & 8 & 2 & 2 & death-death & 1.00 & 0.71 \\
+%22 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
+%22 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
+%22 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
+%22 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
+%22 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
+%\bottomrule
+%\end{tabular}
+%
+%\begin{tabular}{rrrrrlrr}
+%\toprule
+%complex & dim & n & dim 0 & dim 1 & type & jacard\_edges\_filtration & jacard\_edges\_simplex \\
+%\midrule
+%22 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
+%22 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
+%22 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
+%23 & 3 & 8 & 1 & 1 & birth-death & 1.00 & 0.33 \\
+%23 & 3 & 8 & 1 & 1 & birth-death & 1.00 & 1.00 \\
+%23 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
+%23 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
+%23 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
+%23 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
+%23 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
+%24 & 3 & 8 & 1 & 1 & birth-death & 0.67 & 0.43 \\
+%24 & 3 & 8 & 1 & 1 & death-death & 1.00 & 0.11 \\
+%24 & 3 & 8 & 1 & 1 & birth-death & 0.67 & 0.25 \\
+%24 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
+%24 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
+%24 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
+%24 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
+%24 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
+%24 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
+%25 & 3 & 8 & 0 & 0 & birth-birth & 1.00 & 0.33 \\
+%25 & 3 & 8 & 1 & 1 & death-death & 1.00 & 0.09 \\
+%25 & 3 & 8 & 1 & 1 & birth-death & 1.00 & 0.33 \\
+%25 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
+%25 & 3 & 8 & 2 & 2 & death-death & 1.00 & 0.71 \\
+%25 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
+%25 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
+%25 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
+%25 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
+%25 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
+%25 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
+%\bottomrule
+%\end{tabular}
+%\end{center}
+%
+%\begin{center}
+%\begin{tabular}{rrrrrlrr}
+%\toprule
+%complex & dim & n & dim 0 & dim 1 & type & jacard\_l31a & jacard\_l31b \\
+%\midrule
+%0 & 2 & 6 & 0 & 0 & birth-birth & 1.00 & 1.00 \\
+%0 & 2 & 6 & 0 & 0 & birth-birth & 1.00 & 1.00 \\
+%0 & 2 & 6 & 1 & 1 & birth-death & NaN & NaN \\
+%1 & 2 & 6 & 0 & 0 & birth-birth & 1.00 & 1.00 \\
+%1 & 2 & 6 & 1 & 1 & death-death & 0.00 & 0.50 \\
+%1 & 2 & 6 & 1 & 1 & birth-death & NaN & NaN \\
+%1 & 2 & 6 & 1 & 1 & birth-death & NaN & NaN \\
+%1 & 2 & 6 & 1 & 1 & birth-death & NaN & NaN \\
+%1 & 2 & 6 & 2 & 2 & death-death & 0.00 & 0.00 \\
+%2 & 2 & 6 & 1 & 1 & death-death & 0.00 & 0.00 \\
+%3 & 2 & 6 & 1 & 1 & birth-death & NaN & NaN \\
+%3 & 2 & 6 & 1 & 1 & birth-death & NaN & NaN \\
+%3 & 2 & 6 & 2 & 2 & death-death & 0.00 & 0.00 \\
+%4 & 2 & 8 & 1 & 1 & birth-death & NaN & NaN \\
+%5 & 2 & 8 & 1 & 1 & death-death & 0.00 & 0.00 \\
+%5 & 2 & 8 & 1 & 1 & birth-death & NaN & NaN \\
+%6 & 2 & 8 & 1 & 1 & death-death & 0.50 & 0.50 \\
+%6 & 2 & 8 & 1 & 1 & birth-death & NaN & NaN \\
+%6 & 2 & 8 & 1 & 1 & birth-death & NaN & NaN \\
+%6 & 2 & 8 & 1 & 1 & birth-death & NaN & NaN \\
+%6 & 2 & 8 & 1 & 1 & birth-death & NaN & NaN \\
+%6 & 2 & 8 & 1 & 1 & birth-birth & 1.00 & 1.00 \\
+%7 & 2 & 8 & 0 & 0 & birth-birth & 1.00 & 1.00 \\
+%7 & 2 & 8 & 1 & 1 & death-death & 0.33 & 0.67 \\
+%7 & 2 & 8 & 1 & 1 & birth-death & NaN & NaN \\
+%7 & 2 & 8 & 1 & 1 & birth-death & NaN & NaN \\
+%8 & 2 & 8 & 0 & 0 & birth-birth & 1.00 & 1.00 \\
+%8 & 2 & 8 & 1 & 1 & birth-death & NaN & NaN \\
+%8 & 2 & 8 & 2 & 2 & death-death & 0.00 & 0.00 \\
+%9 & 2 & 8 & 0 & 0 & birth-birth & 1.00 & 0.50 \\
+%9 & 2 & 8 & 2 & 2 & death-death & 0.00 & 0.00 \\
+%10 & 2 & 8 & 2 & 2 & death-death & 0.00 & 0.00 \\
+%11 & 2 & 8 & 0 & 0 & birth-birth & 1.00 & 1.00 \\
+%11 & 2 & 8 & 1 & 1 & birth-death & NaN & NaN \\
+%12 & 2 & 12 & 0 & 0 & birth-birth & 1.00 & 1.00 \\
+%12 & 2 & 12 & 0 & 0 & birth-birth & 1.00 & 1.00 \\
+%12 & 2 & 12 & 1 & 1 & death-death & 0.00 & 0.67 \\
+%12 & 2 & 12 & 1 & 1 & death-death & 0.00 & 0.00 \\
+%13 & 2 & 12 & 1 & 1 & birth-death & NaN & NaN \\
+%14 & 2 & 12 & 0 & 0 & birth-birth & 1.00 & 1.00 \\
+%14 & 2 & 12 & 1 & 1 & death-death & 0.00 & 0.00 \\
+%14 & 2 & 12 & 1 & 1 & birth-birth & 1.00 & 1.00 \\
+%14 & 2 & 12 & 2 & 2 & death-death & 0.00 & 0.00 \\
+%15 & 2 & 12 & 0 & 0 & birth-birth & 1.00 & 1.00 \\
+%15 & 2 & 12 & 1 & 1 & birth-birth & 1.00 & 1.00 \\
+%\bottomrule
+%\end{tabular}
+%
+%\begin{tabular}{rrrrrlrr}
+%\toprule
+%complex & dim & n & dim 0 & dim 1 & type & jacard\_l31a & jacard\_l31b \\
+%\midrule
+%16 & 2 & 12 & 1 & 1 & birth-death & NaN & NaN \\
+%17 & 2 & 12 & 1 & 1 & birth-death & NaN & NaN \\
+%17 & 2 & 12 & 2 & 2 & death-death & 0.00 & 0.00 \\
+%17 & 2 & 12 & 1 & 1 & birth-death & NaN & NaN \\
+%17 & 2 & 12 & 2 & 2 & death-death & 0.00 & 0.00 \\
+%18 & 2 & 16 & 0 & 0 & birth-birth & 1.00 & 1.00 \\
+%18 & 2 & 16 & 1 & 1 & birth-death & NaN & NaN \\
+%18 & 2 & 16 & 1 & 1 & death-death & 0.00 & 0.00 \\
+%18 & 2 & 16 & 1 & 1 & birth-death & NaN & NaN \\
+%18 & 2 & 16 & 1 & 1 & birth-death & NaN & NaN \\
+%18 & 2 & 16 & 2 & 2 & death-death & 0.50 & 0.50 \\
+%19 & 2 & 16 & 0 & 0 & birth-birth & 1.00 & 1.00 \\
+%19 & 2 & 16 & 0 & 0 & birth-birth & 1.00 & 1.00 \\
+%19 & 2 & 16 & 1 & 1 & birth-death & NaN & NaN \\
+%20 & 3 & 8 & 1 & 1 & death-death & 0.50 & 0.50 \\
+%20 & 3 & 8 & 1 & 1 & birth-death & NaN & NaN \\
+%20 & 3 & 8 & 1 & 1 & death-death & 0.00 & 0.00 \\
+%20 & 3 & 8 & 2 & 2 & death-death & 0.00 & 0.00 \\
+%20 & 3 & 8 & 2 & 2 & birth-death & NaN & NaN \\
+%20 & 3 & 8 & 2 & 2 & birth-death & NaN & NaN \\
+%20 & 3 & 8 & 2 & 2 & birth-death & NaN & NaN \\
+%20 & 3 & 8 & 2 & 2 & birth-death & NaN & NaN \\
+%20 & 3 & 8 & 2 & 2 & birth-death & NaN & NaN \\
+%20 & 3 & 8 & 2 & 2 & birth-death & NaN & NaN \\
+%20 & 3 & 8 & 2 & 2 & birth-death & NaN & NaN \\
+%20 & 3 & 8 & 2 & 2 & birth-death & NaN & NaN \\
+%20 & 3 & 8 & 2 & 2 & birth-death & NaN & NaN \\
+%21 & 3 & 8 & 1 & 1 & birth-death & NaN & NaN \\
+%21 & 3 & 8 & 1 & 1 & birth-birth & 1.00 & 1.00 \\
+%21 & 3 & 8 & 2 & 2 & birth-death & NaN & NaN \\
+%21 & 3 & 8 & 2 & 2 & birth-death & NaN & NaN \\
+%21 & 3 & 8 & 2 & 2 & birth-death & NaN & NaN \\
+%21 & 3 & 8 & 2 & 2 & birth-death & NaN & NaN \\
+%21 & 3 & 8 & 2 & 2 & birth-death & NaN & NaN \\
+%21 & 3 & 8 & 2 & 2 & birth-death & NaN & NaN \\
+%21 & 3 & 8 & 2 & 2 & birth-death & NaN & NaN \\
+%21 & 3 & 8 & 2 & 2 & birth-death & NaN & NaN \\
+%22 & 3 & 8 & 1 & 1 & birth-death & NaN & NaN \\
+%22 & 3 & 8 & 1 & 1 & death-death & 0.00 & 0.00 \\
+%22 & 3 & 8 & 2 & 2 & death-death & 0.00 & 0.00 \\
+%22 & 3 & 8 & 2 & 2 & birth-death & NaN & NaN \\
+%22 & 3 & 8 & 2 & 2 & birth-death & NaN & NaN \\
+%22 & 3 & 8 & 2 & 2 & birth-death & NaN & NaN \\
+%22 & 3 & 8 & 2 & 2 & birth-death & NaN & NaN \\
+%22 & 3 & 8 & 2 & 2 & birth-death & NaN & NaN \\
+%\bottomrule
+%\end{tabular}
+%
+%\begin{tabular}{rrrrrlrr}
+%\toprule
+%complex & dim & n & dim 0 & dim 1 & type & jacard\_l31a & jacard\_l31b \\
+%\midrule
+%22 & 3 & 8 & 2 & 2 & birth-death & NaN & NaN \\
+%22 & 3 & 8 & 2 & 2 & birth-death & NaN & NaN \\
+%22 & 3 & 8 & 2 & 2 & birth-death & NaN & NaN \\
+%23 & 3 & 8 & 1 & 1 & birth-death & NaN & NaN \\
+%23 & 3 & 8 & 1 & 1 & birth-death & NaN & NaN \\
+%23 & 3 & 8 & 2 & 2 & birth-death & NaN & NaN \\
+%23 & 3 & 8 & 2 & 2 & birth-death & NaN & NaN \\
+%23 & 3 & 8 & 2 & 2 & birth-death & NaN & NaN \\
+%23 & 3 & 8 & 2 & 2 & birth-death & NaN & NaN \\
+%23 & 3 & 8 & 2 & 2 & birth-death & NaN & NaN \\
+%24 & 3 & 8 & 1 & 1 & birth-death & NaN & NaN \\
+%24 & 3 & 8 & 1 & 1 & death-death & 0.00 & 0.00 \\
+%24 & 3 & 8 & 1 & 1 & birth-death & NaN & NaN \\
+%24 & 3 & 8 & 2 & 2 & birth-death & NaN & NaN \\
+%24 & 3 & 8 & 2 & 2 & birth-death & NaN & NaN \\
+%24 & 3 & 8 & 2 & 2 & birth-death & NaN & NaN \\
+%24 & 3 & 8 & 2 & 2 & birth-death & NaN & NaN \\
+%24 & 3 & 8 & 2 & 2 & birth-death & NaN & NaN \\
+%24 & 3 & 8 & 2 & 2 & birth-death & NaN & NaN \\
+%25 & 3 & 8 & 0 & 0 & birth-birth & 1.00 & 0.00 \\
+%25 & 3 & 8 & 1 & 1 & death-death & 0.00 & 0.00 \\
+%25 & 3 & 8 & 1 & 1 & birth-death & NaN & NaN \\
+%25 & 3 & 8 & 2 & 2 & birth-death & NaN & NaN \\
+%25 & 3 & 8 & 2 & 2 & death-death & 0.00 & 0.00 \\
+%25 & 3 & 8 & 2 & 2 & birth-death & NaN & NaN \\
+%25 & 3 & 8 & 2 & 2 & birth-death & NaN & NaN \\
+%25 & 3 & 8 & 2 & 2 & birth-death & NaN & NaN \\
+%25 & 3 & 8 & 2 & 2 & birth-death & NaN & NaN \\
+%25 & 3 & 8 & 2 & 2 & birth-death & NaN & NaN \\
+%25 & 3 & 8 & 2 & 2 & birth-death & NaN & NaN \\
+%\bottomrule
+%\end{tabular}
+%\end{center}
+%
+%\begin{center}
+%\begin{tabular}{rrrrrlrr}
+%\toprule
+%complex & dim & n & dim 0 & dim 1 & type & jacard\_l32a & jacard\_l32b \\
+%\midrule
+%0 & 2 & 6 & 0 & 0 & birth-birth & 0.00 & 1.00 \\
+%0 & 2 & 6 & 0 & 0 & birth-birth & 0.50 & 1.00 \\
+%0 & 2 & 6 & 1 & 1 & birth-death & NaN & 1.00 \\
+%1 & 2 & 6 & 0 & 0 & birth-birth & 0.00 & 1.00 \\
+%1 & 2 & 6 & 1 & 1 & death-death & 1.00 & 1.00 \\
+%1 & 2 & 6 & 1 & 1 & birth-death & NaN & 1.00 \\
+%1 & 2 & 6 & 1 & 1 & birth-death & NaN & 1.00 \\
+%1 & 2 & 6 & 1 & 1 & birth-death & NaN & 1.00 \\
+%1 & 2 & 6 & 2 & 2 & death-death & 1.00 & 1.00 \\
+%2 & 2 & 6 & 1 & 1 & death-death & 1.00 & 1.00 \\
+%3 & 2 & 6 & 1 & 1 & birth-death & NaN & 1.00 \\
+%3 & 2 & 6 & 1 & 1 & birth-death & NaN & 1.00 \\
+%3 & 2 & 6 & 2 & 2 & death-death & 1.00 & 1.00 \\
+%4 & 2 & 8 & 1 & 1 & birth-death & NaN & 1.00 \\
+%5 & 2 & 8 & 1 & 1 & death-death & 1.00 & 1.00 \\
+%5 & 2 & 8 & 1 & 1 & birth-death & NaN & 1.00 \\
+%6 & 2 & 8 & 1 & 1 & death-death & 1.00 & 1.00 \\
+%6 & 2 & 8 & 1 & 1 & birth-death & NaN & 1.00 \\
+%6 & 2 & 8 & 1 & 1 & birth-death & NaN & 1.00 \\
+%6 & 2 & 8 & 1 & 1 & birth-death & NaN & 1.00 \\
+%6 & 2 & 8 & 1 & 1 & birth-death & NaN & 1.00 \\
+%6 & 2 & 8 & 1 & 1 & birth-birth & 0.00 & 1.00 \\
+%7 & 2 & 8 & 0 & 0 & birth-birth & 0.00 & 1.00 \\
+%7 & 2 & 8 & 1 & 1 & death-death & 1.00 & 1.00 \\
+%7 & 2 & 8 & 1 & 1 & birth-death & NaN & 1.00 \\
+%7 & 2 & 8 & 1 & 1 & birth-death & NaN & 1.00 \\
+%8 & 2 & 8 & 0 & 0 & birth-birth & 0.00 & 1.00 \\
+%8 & 2 & 8 & 1 & 1 & birth-death & NaN & 1.00 \\
+%8 & 2 & 8 & 2 & 2 & death-death & 1.00 & 1.00 \\
+%9 & 2 & 8 & 0 & 0 & birth-birth & 0.00 & 1.00 \\
+%9 & 2 & 8 & 2 & 2 & death-death & 1.00 & 1.00 \\
+%10 & 2 & 8 & 2 & 2 & death-death & 1.00 & 1.00 \\
+%11 & 2 & 8 & 0 & 0 & birth-birth & 0.00 & 1.00 \\
+%11 & 2 & 8 & 1 & 1 & birth-death & NaN & 1.00 \\
+%12 & 2 & 12 & 0 & 0 & birth-birth & 0.00 & 1.00 \\
+%12 & 2 & 12 & 0 & 0 & birth-birth & 0.50 & 1.00 \\
+%12 & 2 & 12 & 1 & 1 & death-death & 1.00 & 1.00 \\
+%12 & 2 & 12 & 1 & 1 & death-death & 1.00 & 1.00 \\
+%13 & 2 & 12 & 1 & 1 & birth-death & NaN & 1.00 \\
+%14 & 2 & 12 & 0 & 0 & birth-birth & 0.00 & 1.00 \\
+%14 & 2 & 12 & 1 & 1 & death-death & 1.00 & 1.00 \\
+%14 & 2 & 12 & 1 & 1 & birth-birth & 0.00 & 1.00 \\
+%14 & 2 & 12 & 2 & 2 & death-death & 1.00 & 1.00 \\
+%15 & 2 & 12 & 0 & 0 & birth-birth & 0.00 & 1.00 \\
+%15 & 2 & 12 & 1 & 1 & birth-birth & 0.00 & 1.00 \\
+%\bottomrule
+%\end{tabular}
+%
+%\begin{tabular}{rrrrrlrr}
+%\toprule
+%complex & dim & n & dim 0 & dim 1 & type & jacard\_l32a & jacard\_l32b \\
+%\midrule
+%16 & 2 & 12 & 1 & 1 & birth-death & NaN & 1.00 \\
+%17 & 2 & 12 & 1 & 1 & birth-death & NaN & 1.00 \\
+%17 & 2 & 12 & 2 & 2 & death-death & 1.00 & 1.00 \\
+%17 & 2 & 12 & 1 & 1 & birth-death & NaN & 1.00 \\
+%17 & 2 & 12 & 2 & 2 & death-death & 1.00 & 1.00 \\
+%18 & 2 & 16 & 0 & 0 & birth-birth & 0.00 & 1.00 \\
+%18 & 2 & 16 & 1 & 1 & birth-death & NaN & 1.00 \\
+%18 & 2 & 16 & 1 & 1 & death-death & 1.00 & 1.00 \\
+%18 & 2 & 16 & 1 & 1 & birth-death & NaN & 1.00 \\
+%18 & 2 & 16 & 1 & 1 & birth-death & NaN & 1.00 \\
+%18 & 2 & 16 & 2 & 2 & death-death & 1.00 & 1.00 \\
+%19 & 2 & 16 & 0 & 0 & birth-birth & 0.00 & 1.00 \\
+%19 & 2 & 16 & 0 & 0 & birth-birth & 0.50 & 1.00 \\
+%19 & 2 & 16 & 1 & 1 & birth-death & NaN & 1.00 \\
+%20 & 3 & 8 & 1 & 1 & death-death & 1.00 & 1.00 \\
+%20 & 3 & 8 & 1 & 1 & birth-death & NaN & 1.00 \\
+%20 & 3 & 8 & 1 & 1 & death-death & 1.00 & 1.00 \\
+%20 & 3 & 8 & 2 & 2 & death-death & 1.00 & 1.00 \\
+%20 & 3 & 8 & 2 & 2 & birth-death & NaN & 1.00 \\
+%20 & 3 & 8 & 2 & 2 & birth-death & NaN & 1.00 \\
+%20 & 3 & 8 & 2 & 2 & birth-death & NaN & 1.00 \\
+%20 & 3 & 8 & 2 & 2 & birth-death & NaN & 1.00 \\
+%20 & 3 & 8 & 2 & 2 & birth-death & NaN & 1.00 \\
+%20 & 3 & 8 & 2 & 2 & birth-death & NaN & 1.00 \\
+%20 & 3 & 8 & 2 & 2 & birth-death & NaN & 1.00 \\
+%20 & 3 & 8 & 2 & 2 & birth-death & NaN & 1.00 \\
+%20 & 3 & 8 & 2 & 2 & birth-death & NaN & 1.00 \\
+%21 & 3 & 8 & 1 & 1 & birth-death & NaN & 1.00 \\
+%21 & 3 & 8 & 1 & 1 & birth-birth & 0.00 & 1.00 \\
+%21 & 3 & 8 & 2 & 2 & birth-death & NaN & 1.00 \\
+%21 & 3 & 8 & 2 & 2 & birth-death & NaN & 1.00 \\
+%21 & 3 & 8 & 2 & 2 & birth-death & NaN & 1.00 \\
+%21 & 3 & 8 & 2 & 2 & birth-death & NaN & 1.00 \\
+%21 & 3 & 8 & 2 & 2 & birth-death & NaN & 1.00 \\
+%21 & 3 & 8 & 2 & 2 & birth-death & NaN & 1.00 \\
+%21 & 3 & 8 & 2 & 2 & birth-death & NaN & 1.00 \\
+%21 & 3 & 8 & 2 & 2 & birth-death & NaN & 1.00 \\
+%22 & 3 & 8 & 1 & 1 & birth-death & NaN & 1.00 \\
+%22 & 3 & 8 & 1 & 1 & death-death & 1.00 & 1.00 \\
+%22 & 3 & 8 & 2 & 2 & death-death & 1.00 & 1.00 \\
+%22 & 3 & 8 & 2 & 2 & birth-death & NaN & 1.00 \\
+%22 & 3 & 8 & 2 & 2 & birth-death & NaN & 1.00 \\
+%22 & 3 & 8 & 2 & 2 & birth-death & NaN & 1.00 \\
+%22 & 3 & 8 & 2 & 2 & birth-death & NaN & 1.00 \\
+%22 & 3 & 8 & 2 & 2 & birth-death & NaN & 1.00 \\
+%\bottomrule
+%\end{tabular}
+%
+%\begin{tabular}{rrrrrlrr}
+%\toprule
+%complex & dim & n & dim 0 & dim 1 & type & jacard\_l32a & jacard\_l32b \\
+%\midrule
+%22 & 3 & 8 & 2 & 2 & birth-death & NaN & 1.00 \\
+%22 & 3 & 8 & 2 & 2 & birth-death & NaN & 1.00 \\
+%22 & 3 & 8 & 2 & 2 & birth-death & NaN & 1.00 \\
+%23 & 3 & 8 & 1 & 1 & birth-death & NaN & 1.00 \\
+%23 & 3 & 8 & 1 & 1 & birth-death & NaN & 1.00 \\
+%23 & 3 & 8 & 2 & 2 & birth-death & NaN & 1.00 \\
+%23 & 3 & 8 & 2 & 2 & birth-death & NaN & 1.00 \\
+%23 & 3 & 8 & 2 & 2 & birth-death & NaN & 1.00 \\
+%23 & 3 & 8 & 2 & 2 & birth-death & NaN & 1.00 \\
+%23 & 3 & 8 & 2 & 2 & birth-death & NaN & 1.00 \\
+%24 & 3 & 8 & 1 & 1 & birth-death & NaN & 1.00 \\
+%24 & 3 & 8 & 1 & 1 & death-death & 1.00 & 1.00 \\
+%24 & 3 & 8 & 1 & 1 & birth-death & NaN & 1.00 \\
+%24 & 3 & 8 & 2 & 2 & birth-death & NaN & 1.00 \\
+%24 & 3 & 8 & 2 & 2 & birth-death & NaN & 1.00 \\
+%24 & 3 & 8 & 2 & 2 & birth-death & NaN & 1.00 \\
+%24 & 3 & 8 & 2 & 2 & birth-death & NaN & 1.00 \\
+%24 & 3 & 8 & 2 & 2 & birth-death & NaN & 1.00 \\
+%24 & 3 & 8 & 2 & 2 & birth-death & NaN & 1.00 \\
+%25 & 3 & 8 & 0 & 0 & birth-birth & 0.00 & 1.00 \\
+%25 & 3 & 8 & 1 & 1 & death-death & 1.00 & 1.00 \\
+%25 & 3 & 8 & 1 & 1 & birth-death & NaN & 1.00 \\
+%25 & 3 & 8 & 2 & 2 & birth-death & NaN & 1.00 \\
+%25 & 3 & 8 & 2 & 2 & death-death & 1.00 & 1.00 \\
+%25 & 3 & 8 & 2 & 2 & birth-death & NaN & 1.00 \\
+%25 & 3 & 8 & 2 & 2 & birth-death & NaN & 1.00 \\
+%25 & 3 & 8 & 2 & 2 & birth-death & NaN & 1.00 \\
+%25 & 3 & 8 & 2 & 2 & birth-death & NaN & 1.00 \\
+%25 & 3 & 8 & 2 & 2 & birth-death & NaN & 1.00 \\
+%25 & 3 & 8 & 2 & 2 & birth-death & NaN & 1.00 \\
+%\bottomrule
+%\end{tabular}
+%\end{center}
+%
+%\begin{center}
+%\begin{tabular}{rrrrrlrr}
+%\toprule
+%complex & dim & n & dim 0 & dim 1 & type & jacard\_l33a & jacard\_l33b \\
+%\midrule
+%0 & 2 & 6 & 0 & 0 & birth-birth & NaN & NaN \\
+%0 & 2 & 6 & 0 & 0 & birth-birth & NaN & NaN \\
+%0 & 2 & 6 & 1 & 1 & birth-death & 1.00 & 1.00 \\
+%1 & 2 & 6 & 0 & 0 & birth-birth & NaN & NaN \\
+%1 & 2 & 6 & 1 & 1 & death-death & NaN & NaN \\
+%1 & 2 & 6 & 1 & 1 & birth-death & 1.00 & 1.00 \\
+%1 & 2 & 6 & 1 & 1 & birth-death & 1.00 & 1.00 \\
+%1 & 2 & 6 & 1 & 1 & birth-death & 1.00 & 1.00 \\
+%1 & 2 & 6 & 2 & 2 & death-death & NaN & NaN \\
+%2 & 2 & 6 & 1 & 1 & death-death & NaN & NaN \\
+%3 & 2 & 6 & 1 & 1 & birth-death & 1.00 & 1.00 \\
+%3 & 2 & 6 & 1 & 1 & birth-death & 1.00 & 1.00 \\
+%3 & 2 & 6 & 2 & 2 & death-death & NaN & NaN \\
+%4 & 2 & 8 & 1 & 1 & birth-death & 1.00 & 1.00 \\
+%5 & 2 & 8 & 1 & 1 & death-death & NaN & NaN \\
+%5 & 2 & 8 & 1 & 1 & birth-death & 1.00 & 1.00 \\
+%6 & 2 & 8 & 1 & 1 & death-death & NaN & NaN \\
+%6 & 2 & 8 & 1 & 1 & birth-death & 1.00 & 1.00 \\
+%6 & 2 & 8 & 1 & 1 & birth-death & 1.00 & 1.00 \\
+%6 & 2 & 8 & 1 & 1 & birth-death & 1.00 & 1.00 \\
+%6 & 2 & 8 & 1 & 1 & birth-death & 1.00 & 1.00 \\
+%6 & 2 & 8 & 1 & 1 & birth-birth & NaN & NaN \\
+%7 & 2 & 8 & 0 & 0 & birth-birth & NaN & NaN \\
+%7 & 2 & 8 & 1 & 1 & death-death & NaN & NaN \\
+%7 & 2 & 8 & 1 & 1 & birth-death & 1.00 & 1.00 \\
+%7 & 2 & 8 & 1 & 1 & birth-death & 1.00 & 1.00 \\
+%8 & 2 & 8 & 0 & 0 & birth-birth & NaN & NaN \\
+%8 & 2 & 8 & 1 & 1 & birth-death & 1.00 & 1.00 \\
+%8 & 2 & 8 & 2 & 2 & death-death & NaN & NaN \\
+%9 & 2 & 8 & 0 & 0 & birth-birth & NaN & NaN \\
+%9 & 2 & 8 & 2 & 2 & death-death & NaN & NaN \\
+%10 & 2 & 8 & 2 & 2 & death-death & NaN & NaN \\
+%11 & 2 & 8 & 0 & 0 & birth-birth & NaN & NaN \\
+%11 & 2 & 8 & 1 & 1 & birth-death & 1.00 & 1.00 \\
+%12 & 2 & 12 & 0 & 0 & birth-birth & NaN & NaN \\
+%12 & 2 & 12 & 0 & 0 & birth-birth & NaN & NaN \\
+%12 & 2 & 12 & 1 & 1 & death-death & NaN & NaN \\
+%12 & 2 & 12 & 1 & 1 & death-death & NaN & NaN \\
+%13 & 2 & 12 & 1 & 1 & birth-death & 1.00 & 1.00 \\
+%14 & 2 & 12 & 0 & 0 & birth-birth & NaN & NaN \\
+%14 & 2 & 12 & 1 & 1 & death-death & NaN & NaN \\
+%14 & 2 & 12 & 1 & 1 & birth-birth & NaN & NaN \\
+%14 & 2 & 12 & 2 & 2 & death-death & NaN & NaN \\
+%15 & 2 & 12 & 0 & 0 & birth-birth & NaN & NaN \\
+%15 & 2 & 12 & 1 & 1 & birth-birth & NaN & NaN \\
+%\bottomrule
+%\end{tabular}
+%
+%\begin{tabular}{rrrrrlrr}
+%\toprule
+%complex & dim & n & dim 0 & dim 1 & type & jacard\_l33a & jacard\_l33b \\
+%\midrule
+%16 & 2 & 12 & 1 & 1 & birth-death & 1.00 & 1.00 \\
+%17 & 2 & 12 & 1 & 1 & birth-death & 1.00 & 1.00 \\
+%17 & 2 & 12 & 2 & 2 & death-death & NaN & NaN \\
+%17 & 2 & 12 & 1 & 1 & birth-death & 1.00 & 1.00 \\
+%17 & 2 & 12 & 2 & 2 & death-death & NaN & NaN \\
+%18 & 2 & 16 & 0 & 0 & birth-birth & NaN & NaN \\
+%18 & 2 & 16 & 1 & 1 & birth-death & 1.00 & 1.00 \\
+%18 & 2 & 16 & 1 & 1 & death-death & NaN & NaN \\
+%18 & 2 & 16 & 1 & 1 & birth-death & 1.00 & 1.00 \\
+%18 & 2 & 16 & 1 & 1 & birth-death & 1.00 & 1.00 \\
+%18 & 2 & 16 & 2 & 2 & death-death & NaN & NaN \\
+%19 & 2 & 16 & 0 & 0 & birth-birth & NaN & NaN \\
+%19 & 2 & 16 & 0 & 0 & birth-birth & NaN & NaN \\
+%19 & 2 & 16 & 1 & 1 & birth-death & 1.00 & 1.00 \\
+%20 & 3 & 8 & 1 & 1 & death-death & NaN & NaN \\
+%20 & 3 & 8 & 1 & 1 & birth-death & 1.00 & 1.00 \\
+%20 & 3 & 8 & 1 & 1 & death-death & NaN & NaN \\
+%20 & 3 & 8 & 2 & 2 & death-death & NaN & NaN \\
+%20 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
+%20 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
+%20 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
+%20 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
+%20 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
+%20 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
+%20 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
+%20 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
+%20 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
+%21 & 3 & 8 & 1 & 1 & birth-death & 1.00 & 1.00 \\
+%21 & 3 & 8 & 1 & 1 & birth-birth & NaN & NaN \\
+%21 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
+%21 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
+%21 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
+%21 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
+%21 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
+%21 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
+%21 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
+%21 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
+%22 & 3 & 8 & 1 & 1 & birth-death & 1.00 & 1.00 \\
+%22 & 3 & 8 & 1 & 1 & death-death & NaN & NaN \\
+%22 & 3 & 8 & 2 & 2 & death-death & NaN & NaN \\
+%22 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
+%22 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
+%22 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
+%22 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
+%22 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
+%\bottomrule
+%\end{tabular}
+%
+%\begin{tabular}{rrrrrlrr}
+%\toprule
+%complex & dim & n & dim 0 & dim 1 & type & jacard\_l33a & jacard\_l33b \\
+%\midrule
+%22 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
+%22 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
+%22 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
+%23 & 3 & 8 & 1 & 1 & birth-death & 1.00 & 1.00 \\
+%23 & 3 & 8 & 1 & 1 & birth-death & 1.00 & 1.00 \\
+%23 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
+%23 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
+%23 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
+%23 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
+%23 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
+%24 & 3 & 8 & 1 & 1 & birth-death & 1.00 & 1.00 \\
+%24 & 3 & 8 & 1 & 1 & death-death & NaN & NaN \\
+%24 & 3 & 8 & 1 & 1 & birth-death & 1.00 & 1.00 \\
+%24 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
+%24 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
+%24 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
+%24 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
+%24 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
+%24 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
+%25 & 3 & 8 & 0 & 0 & birth-birth & NaN & NaN \\
+%25 & 3 & 8 & 1 & 1 & death-death & NaN & NaN \\
+%25 & 3 & 8 & 1 & 1 & birth-death & 1.00 & 1.00 \\
+%25 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
+%25 & 3 & 8 & 2 & 2 & death-death & NaN & NaN \\
+%25 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
+%25 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
+%25 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
+%25 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
+%25 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
+%25 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
+%\bottomrule
+%\end{tabular}
+%\end{center}
+%
+%\begin{center}
+%\begin{tabular}{rrrrrlrr}
+%\toprule
+%complex & dim & n & dim 0 & dim 1 & type & jacard\_nn\_nodes & jacard\_nn\_edges \\
+%\midrule
+%0 & 2 & 6 & 0 & 0 & birth-birth & 1.00 & 1.00 \\
+%0 & 2 & 6 & 0 & 0 & birth-birth & 1.00 & 1.00 \\
+%0 & 2 & 6 & 1 & 1 & birth-death & 1.00 & 1.00 \\
+%1 & 2 & 6 & 0 & 0 & birth-birth & 1.00 & 1.00 \\
+%1 & 2 & 6 & 1 & 1 & death-death & 1.00 & 1.00 \\
+%1 & 2 & 6 & 1 & 1 & birth-death & 1.00 & 1.00 \\
+%1 & 2 & 6 & 1 & 1 & birth-death & 1.00 & 1.00 \\
+%1 & 2 & 6 & 1 & 1 & birth-death & 1.00 & 1.00 \\
+%1 & 2 & 6 & 2 & 2 & death-death & 1.00 & 1.00 \\
+%2 & 2 & 6 & 1 & 1 & death-death & 1.00 & 1.00 \\
+%3 & 2 & 6 & 1 & 1 & birth-death & 1.00 & 1.00 \\
+%3 & 2 & 6 & 1 & 1 & birth-death & 1.00 & 1.00 \\
+%3 & 2 & 6 & 2 & 2 & death-death & 1.00 & 1.00 \\
+%4 & 2 & 8 & 1 & 1 & birth-death & 1.00 & 1.00 \\
+%5 & 2 & 8 & 1 & 1 & death-death & 1.00 & 1.00 \\
+%5 & 2 & 8 & 1 & 1 & birth-death & 1.00 & 1.00 \\
+%6 & 2 & 8 & 1 & 1 & death-death & 1.00 & 1.00 \\
+%6 & 2 & 8 & 1 & 1 & birth-death & 1.00 & 1.00 \\
+%6 & 2 & 8 & 1 & 1 & birth-death & 1.00 & 1.00 \\
+%6 & 2 & 8 & 1 & 1 & birth-death & 1.00 & 1.00 \\
+%6 & 2 & 8 & 1 & 1 & birth-death & 1.00 & 1.00 \\
+%6 & 2 & 8 & 1 & 1 & birth-birth & 1.00 & 1.00 \\
+%7 & 2 & 8 & 0 & 0 & birth-birth & 1.00 & 1.00 \\
+%7 & 2 & 8 & 1 & 1 & death-death & 1.00 & 1.00 \\
+%7 & 2 & 8 & 1 & 1 & birth-death & 1.00 & 1.00 \\
+%7 & 2 & 8 & 1 & 1 & birth-death & 1.00 & 1.00 \\
+%8 & 2 & 8 & 0 & 0 & birth-birth & 1.00 & 1.00 \\
+%8 & 2 & 8 & 1 & 1 & birth-death & 1.00 & 1.00 \\
+%8 & 2 & 8 & 2 & 2 & death-death & 1.00 & 1.00 \\
+%9 & 2 & 8 & 0 & 0 & birth-birth & 1.00 & 1.00 \\
+%9 & 2 & 8 & 2 & 2 & death-death & 1.00 & 1.00 \\
+%10 & 2 & 8 & 2 & 2 & death-death & 1.00 & 1.00 \\
+%11 & 2 & 8 & 0 & 0 & birth-birth & 1.00 & 1.00 \\
+%11 & 2 & 8 & 1 & 1 & birth-death & 1.00 & 1.00 \\
+%12 & 2 & 12 & 0 & 0 & birth-birth & 1.00 & 1.00 \\
+%12 & 2 & 12 & 0 & 0 & birth-birth & 1.00 & 1.00 \\
+%12 & 2 & 12 & 1 & 1 & death-death & 1.00 & 1.00 \\
+%12 & 2 & 12 & 1 & 1 & death-death & 1.00 & 1.00 \\
+%13 & 2 & 12 & 1 & 1 & birth-death & 1.00 & 1.00 \\
+%14 & 2 & 12 & 0 & 0 & birth-birth & 1.00 & 1.00 \\
+%14 & 2 & 12 & 1 & 1 & death-death & 1.00 & 1.00 \\
+%14 & 2 & 12 & 1 & 1 & birth-birth & 1.00 & 1.00 \\
+%14 & 2 & 12 & 2 & 2 & death-death & 1.00 & 1.00 \\
+%15 & 2 & 12 & 0 & 0 & birth-birth & 1.00 & 1.00 \\
+%15 & 2 & 12 & 1 & 1 & birth-birth & 1.00 & 1.00 \\
+%\bottomrule
+%\end{tabular}
+%
+%\begin{tabular}{rrrrrlrr}
+%\toprule
+%complex & dim & n & dim 0 & dim 1 & type & jacard\_nn\_nodes & jacard\_nn\_edges \\
+%\midrule
+%16 & 2 & 12 & 1 & 1 & birth-death & 1.00 & 1.00 \\
+%17 & 2 & 12 & 1 & 1 & birth-death & 1.00 & 1.00 \\
+%17 & 2 & 12 & 2 & 2 & death-death & 1.00 & 1.00 \\
+%17 & 2 & 12 & 1 & 1 & birth-death & 1.00 & 1.00 \\
+%17 & 2 & 12 & 2 & 2 & death-death & 1.00 & 1.00 \\
+%18 & 2 & 16 & 0 & 0 & birth-birth & 1.00 & 1.00 \\
+%18 & 2 & 16 & 1 & 1 & birth-death & 1.00 & 1.00 \\
+%18 & 2 & 16 & 1 & 1 & death-death & 1.00 & 1.00 \\
+%18 & 2 & 16 & 1 & 1 & birth-death & 1.00 & 1.00 \\
+%18 & 2 & 16 & 1 & 1 & birth-death & 1.00 & 1.00 \\
+%18 & 2 & 16 & 2 & 2 & death-death & 1.00 & 1.00 \\
+%19 & 2 & 16 & 0 & 0 & birth-birth & 1.00 & 1.00 \\
+%19 & 2 & 16 & 0 & 0 & birth-birth & 1.00 & 1.00 \\
+%19 & 2 & 16 & 1 & 1 & birth-death & 1.00 & 1.00 \\
+%20 & 3 & 8 & 1 & 1 & death-death & 1.00 & 1.00 \\
+%20 & 3 & 8 & 1 & 1 & birth-death & 1.00 & 1.00 \\
+%20 & 3 & 8 & 1 & 1 & death-death & 1.00 & 1.00 \\
+%20 & 3 & 8 & 2 & 2 & death-death & 1.00 & 1.00 \\
+%20 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
+%20 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
+%20 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
+%20 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
+%20 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
+%20 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
+%20 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
+%20 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
+%20 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
+%21 & 3 & 8 & 1 & 1 & birth-death & 1.00 & 1.00 \\
+%21 & 3 & 8 & 1 & 1 & birth-birth & 1.00 & 1.00 \\
+%21 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
+%21 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
+%21 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
+%21 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
+%21 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
+%21 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
+%21 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
+%21 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
+%22 & 3 & 8 & 1 & 1 & birth-death & 1.00 & 1.00 \\
+%22 & 3 & 8 & 1 & 1 & death-death & 1.00 & 1.00 \\
+%22 & 3 & 8 & 2 & 2 & death-death & 1.00 & 1.00 \\
+%22 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
+%22 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
+%22 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
+%22 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
+%22 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
+%\bottomrule
+%\end{tabular}
+%
+%\begin{tabular}{rrrrrlrr}
+%\toprule
+%complex & dim & n & dim 0 & dim 1 & type & jacard\_nn\_nodes & jacard\_nn\_edges \\
+%\midrule
+%22 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
+%22 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
+%22 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
+%23 & 3 & 8 & 1 & 1 & birth-death & 1.00 & 1.00 \\
+%23 & 3 & 8 & 1 & 1 & birth-death & 1.00 & 1.00 \\
+%23 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
+%23 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
+%23 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
+%23 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
+%23 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
+%24 & 3 & 8 & 1 & 1 & birth-death & 1.00 & 1.00 \\
+%24 & 3 & 8 & 1 & 1 & death-death & 1.00 & 1.00 \\
+%24 & 3 & 8 & 1 & 1 & birth-death & 1.00 & 1.00 \\
+%24 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
+%24 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
+%24 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
+%24 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
+%24 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
+%24 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
+%25 & 3 & 8 & 0 & 0 & birth-birth & 1.00 & 1.00 \\
+%25 & 3 & 8 & 1 & 1 & death-death & 1.00 & 1.00 \\
+%25 & 3 & 8 & 1 & 1 & birth-death & 1.00 & 1.00 \\
+%25 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
+%25 & 3 & 8 & 2 & 2 & death-death & 1.00 & 1.00 \\
+%25 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
+%25 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
+%25 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
+%25 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
+%25 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
+%25 & 3 & 8 & 2 & 2 & birth-death & 1.00 & 1.00 \\
+%\bottomrule
+%\end{tabular}
+%\end{center}
+%
 
 \subsection{Unexpected results}
 
-    \par The Hypothesis problem can be measured by 2 scores with expected 
-    values: \textbf{jacard\_nn\_edges}, \textbf{jacard\_nn\_nodes}
-    There are 2 cases, which does not corespond the expectations: 
+\par The Hypothesis problem can be measured by 2 scores with expected
+values: \textbf{jacard\_nn\_edges}, \textbf{jacard\_nn\_nodes}
+There are 4 cases, which does not corespond the expectations:
 \begin{center}
-\begin{tabular}{rrrlrrl}
+\begin{tabular}{rlllrrl}
 \toprule
-complex & dim 0 & dim 1 & type & jacard\_nn\_edges & jacard\_nn\_nodes & Figure \\
+complex & simplex 0 & simplex 1 & type & jacard\_nn\_edges & jacard\_nn\_nodes & Figure \\
 \midrule
-11 & 1 & 1 & death-death & 0.00 & 1.00 & Figure \ref{fig:unexpected231} \\
-25 & 1 & 1 & birth-birth & 0.00 & 1.00 &  \\
+1 & [0, 4] & [0, 2] & birth-birth & 0.00 & 1.00 & Figure \ref{fig:unexpected28} \\
+8 & [5, 6] & [0, 6] & birth-birth & 0.00 & 1.00 & Figure \ref{fig:unexpected168} \\
+9 & [0, 1] & [0, 6] & birth-birth & 0.00 & 1.00 &  \\
+10 & [1, 3] & [0, 1] & death-death & 0.50 & 1.00 &  \\
 \bottomrule
 \end{tabular}
 \end{center}.
-    
-    \par The Lemma 3.1 problem can be measured by 2 scores with expected 
-    values: \textbf{jacard\_l31a}, \textbf{jacard\_l31b}
-    There are 2 cases, which does not corespond the expectations: 
-\begin{center}
-\begin{tabular}{rrrlrrl}
-\toprule
-complex & dim 0 & dim 1 & type & jacard\_l31a & jacard\_l31b & Figure \\
-\midrule
-23 & 0 & 0 & birth-birth & 1.00 & 0.00 &  \\
-25 & 0 & 0 & birth-birth & 1.00 & 0.50 &  \\
-\bottomrule
-\end{tabular}
-\end{center}.
-    
-    \par The Lemma 3.2 problem can be measured by 2 scores with expected 
-    values: \textbf{jacard\_l32a}, \textbf{jacard\_l32b}
-    There are 0 cases, which does not corespond the expectations. 
-    
-    \par The Lemma 3.3 problem can be measured by 2 scores with expected 
-    values: \textbf{jacard\_l33a}, \textbf{jacard\_l33b}
-    There are 0 cases, which does not corespond the expectations. 
-    
-    \begin{figure}[ht]
-    \centering
-    \includegraphics[width=\textwidth]{pics/transpositions-unexpected-231.png}
-    \caption{The Death-Death Transposition of simplices [1, 6] and [0, 1]}
-    \label{fig:unexpected231}
-    \end{figure}
-    
 
-    \subsubsection{Complex 11}
-    \par The switch transposition and unexpected scores are given in the table:
-    \begin{center}
+\par The Lemma 3.1 problem can be measured by 2 scores with expected
+values: \textbf{jacard\_l31a}, \textbf{jacard\_l31b}
+There are 2 cases, which does not corespond the expectations:
+\begin{center}
+\begin{tabular}{rlllrrl}
+\toprule
+complex & simplex 0 & simplex 1 & type & jacard\_l31a & jacard\_l31b & Figure \\
+\midrule
+9 & [5] & [6] & birth-birth & 1.00 & 0.50 & Figure \ref{fig:unexpected179} \\
+25 & [5] & [6] & birth-birth & 1.00 & 0.00 &  \\
+\bottomrule
+\end{tabular}
+\end{center}.
+
+\par The Lemma 3.2 problem can be measured by 2 scores with expected
+values: \textbf{jacard\_l32a}, \textbf{jacard\_l32b}
+There are 0 cases, which does not corespond the expectations.
+
+\par The Lemma 3.3 problem can be measured by 2 scores with expected
+values: \textbf{jacard\_l33a}, \textbf{jacard\_l33b}
+There are 0 cases, which does not corespond the expectations.
+
+\begin{figure}[ht]
+\centering
+\includegraphics[width=\textwidth]{pics/transpositions-unexpected-28.png}
+\caption{The Birth-Birth Transposition of simplices [0, 4] and [0, 2]}
+\label{fig:unexpected28}
+\end{figure}
+
+\begin{figure}[ht]
+\centering
+\includegraphics[width=\textwidth]{pics/transpositions-unexpected-168.png}
+\caption{The Birth-Birth Transposition of simplices [5, 6] and [0, 6]}
+\label{fig:unexpected168}
+\end{figure}
+
+\begin{figure}[ht]
+\centering
+\includegraphics[width=\textwidth]{pics/transpositions-unexpected-179.png}
+\caption{The Birth-Birth Transposition of simplices [5] and [6]}
+\label{fig:unexpected179}
+\end{figure}
+
+
+\subsubsection{Complex 1}
+\par The switch transposition and unexpected scores are given in the table:
+\begin{center}
 \begin{tabular}{lll}
 \toprule
 simplex 0 & simplex 1 & type \\
 \midrule
-(3, 5) & (0, 3) & birth-death \\
+(1) & (2) & birth-birth \\
+(1, 3) & (2, 3) & death-death \\
+(2, 3) & (1, 2) & birth-death \\
+(1, 5) & (2, 5) & birth-death \\
+(2, 4) & (0, 4) & birth-death \\
+(0, 2, 3) & (0, 2, 4) & death-death \\
 \bottomrule
 \end{tabular}
 \end{center}
-    
-    
-    \subsubsection{Complex 25}
-    \par The switch transposition and unexpected scores are given in the table:
-    \begin{center}
+
+
+\subsubsection{Complex 8}
+\par The switch transposition and unexpected scores are given in the table:
+\begin{center}
+\begin{tabular}{lll}
+\toprule
+simplex 0 & simplex 1 & type \\
+\midrule
+(3) & (4) & birth-birth \\
+(0, 3) & (5, 6) & birth-death \\
+(0, 3, 6) & (0, 5, 6) & death-death \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+
+\subsubsection{Complex 9}
+\par The switch transposition and unexpected scores are given in the table:
+\begin{center}
 \begin{tabular}{lllr}
 \toprule
 simplex 0 & simplex 1 & type & jacard\_l31b \\
 \midrule
-(1) & (2) & birth-birth & 1.00 \\
 (5) & (6) & birth-birth & 0.50 \\
-(1, 5) & (1, 6) & birth-death & NaN \\
-(0, 5, 6) & (0, 4, 6) & death-death & 0.00 \\
-(1, 2, 5) & (2, 5, 6) & birth-death & NaN \\
-(0, 1, 5) & (0, 1, 6) & birth-death & NaN \\
-(1, 4, 6) & (0, 1, 4) & birth-death & NaN \\
-(2, 4, 6) & (1, 2, 4) & birth-death & NaN \\
-(0, 1, 3) & (0, 3, 5) & birth-death & NaN \\
-(0, 3, 7) & (3, 5, 7) & birth-death & NaN \\
-(1, 3, 4) & (0, 3, 4) & birth-death & NaN \\
-(0, 4, 7) & (3, 4, 7) & birth-death & NaN \\
+(0, 6, 7) & (0, 1, 7) & death-death & 0.00 \\
 \bottomrule
 \end{tabular}
 \end{center}
-    
-        \begin{figure}[ht]
-        \centering
-        \includegraphics[width=\textwidth]{pics/transposition complex25 transposition813.png}
-        \end{figure}
-    
 
-        \begin{figure}[ht]
-        \centering
-        \includegraphics[width=\textwidth]{pics/transposition complex25 transposition827.png}
-        \end{figure}
-    
-    
-    \subsubsection{Complex 23}
-    \par The switch transposition and unexpected scores are given in the table:
-    \begin{center}
+\begin{figure}[ht]
+\centering
+\includegraphics[width=\textwidth]{pics/transposition complex 9 - unexpected transposition 179.png}
+\end{figure}
+
+
+\begin{figure}[ht]
+\centering
+\includegraphics[width=\textwidth]{pics/transposition complex 9 - unexpected transposition 193.png}
+\end{figure}
+
+
+\subsubsection{Complex 10}
+\par The switch transposition and unexpected scores are given in the table:
+\begin{center}
+\begin{tabular}{lll}
+\toprule
+simplex 0 & simplex 1 & type \\
+\midrule
+(1, 2, 5) & (1, 2, 6) & death-death \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+
+\subsubsection{Complex 25}
+\par The switch transposition and unexpected scores are given in the table:
+\begin{center}
 \begin{tabular}{lllr}
 \toprule
 simplex 0 & simplex 1 & type & jacard\_l31b \\
 \midrule
-(2) & (3) & birth-birth & 0.00 \\
-(2, 7) & (3, 7) & death-death & 0.50 \\
-(5, 7) & (2, 4) & birth-death & NaN \\
-(4, 5, 7) & (2, 4, 7) & death-death & 0.00 \\
-(2, 4, 6) & (4, 6, 7) & birth-death & NaN \\
-(0, 2, 4) & (0, 2, 6) & birth-death & NaN \\
-(4, 5, 6) & (5, 6, 7) & birth-death & NaN \\
-(2, 3, 6) & (3, 6, 7) & birth-death & NaN \\
-(2, 3, 4) & (3, 4, 7) & birth-death & NaN \\
-(1, 5, 6) & (1, 5, 7) & birth-death & NaN \\
-(0, 4, 5) & (0, 5, 6) & birth-death & NaN \\
+(5) & (6) & birth-birth & 0.00 \\
+(0, 5) & (2, 5) & death-death & 0.00 \\
+(2, 5) & (2, 6) & birth-death & NaN \\
+(1, 5, 6) & (1, 2, 6) & birth-death & NaN \\
+(1, 3, 6) & (3, 6, 7) & death-death & 0.00 \\
+(1, 3, 7) & (1, 6, 7) & birth-death & NaN \\
+(0, 1, 3) & (0, 3, 7) & birth-death & NaN \\
+(2, 3, 7) & (2, 6, 7) & birth-death & NaN \\
+(1, 2, 4) & (2, 3, 4) & birth-death & NaN \\
+(0, 5, 7) & (5, 6, 7) & birth-death & NaN \\
+(0, 1, 2) & (0, 2, 5) & birth-death & NaN \\
 \bottomrule
 \end{tabular}
 \end{center}
-    
-        \begin{figure}[ht]
-        \centering
-        \includegraphics[width=\textwidth]{pics/transposition complex23 transposition722.png}
-        \end{figure}
-    
 
-        \begin{figure}[ht]
-        \centering
-        \includegraphics[width=\textwidth]{pics/transposition complex23 transposition729.png}
-        \end{figure}
-    
+\begin{figure}[ht]
+\centering
+\includegraphics[width=\textwidth]{pics/transposition complex 25 - unexpected transposition 832.png}
+\end{figure}
 
-        \begin{figure}[ht]
-        \centering
-        \includegraphics[width=\textwidth]{pics/transposition complex23 transposition733.png}
-        \end{figure}
-    
-    
+
+\begin{figure}[ht]
+\centering
+\includegraphics[width=\textwidth]{pics/transposition complex 25 - unexpected transposition 839.png}
+\end{figure}
+
+
+\begin{figure}[ht]
+\centering
+\includegraphics[width=\textwidth]{pics/transposition complex 25 - unexpected transposition 852.png}
+\end{figure}
+
+
 
 
 \end{document}
