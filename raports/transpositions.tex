@@ -99,6 +99,8 @@ case & n & dim &  &  \\
 \cline{1-5} \cline{2-5}
 15 & 8 & 2 & 28 & 29 \\
 \cline{1-5} \cline{2-5}
+16 & 8 & 2 & 30 & 31 \\
+\cline{1-5} \cline{2-5}
 \bottomrule
 \end{tabular}
 \begin{tabular}{lllrr}
@@ -106,11 +108,9 @@ case & n & dim &  &  \\
 &  & complex & alpha & dual \\
 case & n & dim &  &  \\
 \midrule
-16 & 8 & 2 & 30 & 31 \\
+17 & 8 & 2 & 32 & 33 \\
 \cline{1-5} \cline{2-5}
-17 & 12 & 2 & 32 & 33 \\
-\cline{1-5} \cline{2-5}
-18 & 12 & 2 & 34 & 35 \\
+18 & 8 & 2 & 34 & 35 \\
 \cline{1-5} \cline{2-5}
 19 & 12 & 2 & 36 & 37 \\
 \cline{1-5} \cline{2-5}
@@ -120,13 +120,13 @@ case & n & dim &  &  \\
 \cline{1-5} \cline{2-5}
 22 & 12 & 2 & 42 & 43 \\
 \cline{1-5} \cline{2-5}
-23 & 16 & 2 & 44 & 45 \\
+23 & 12 & 2 & 44 & 45 \\
 \cline{1-5} \cline{2-5}
-24 & 16 & 2 & 46 & 47 \\
+24 & 12 & 2 & 46 & 47 \\
 \cline{1-5} \cline{2-5}
-25 & 8 & 3 & 48 & 49 \\
+25 & 16 & 2 & 48 & 49 \\
 \cline{1-5} \cline{2-5}
-26 & 8 & 3 & 50 & 51 \\
+26 & 16 & 2 & 50 & 51 \\
 \cline{1-5} \cline{2-5}
 27 & 8 & 3 & 52 & 53 \\
 \cline{1-5} \cline{2-5}
@@ -135,6 +135,10 @@ case & n & dim &  &  \\
 29 & 8 & 3 & 56 & 57 \\
 \cline{1-5} \cline{2-5}
 30 & 8 & 3 & 58 & 59 \\
+\cline{1-5} \cline{2-5}
+31 & 8 & 3 & 60 & 61 \\
+\cline{1-5} \cline{2-5}
+32 & 8 & 3 & 62 & 63 \\
 \cline{1-5} \cline{2-5}
 \bottomrule
 \end{tabular}
@@ -146,63 +150,65 @@ case & n & dim &  &  \\
 \subsection{Lemma 3.1}
 
 \par Lemma 3.1 can be measured by 2 scores: \textbf{jacard\_l31a} and \textbf{jacard\_l31b}.
-And there are 5 of 29 switch-forward birth-birth transpositions found where these scores are not 1.
+And there are 7 of 38 switch-forward birth-birth transpositions found where these scores are not 1.
 \par We can see these situations in the table:
 \begin{center}\begin{tabular}{rrllrrl}
 \toprule
 case & complex & simplex 0 & simplex 1 & jacard\_l31a & jacard\_l31b & Figure \\
 \midrule
-16 & 31 & (5, 6) & (6, 7) & 1.00 & NaN & Figure \ref{fig:unexpected639} \\
-18 & 35 & (9, 11) & (5, 11) & 1.00 & NaN & Figure \ref{fig:unexpected814} \\
-20 & 38 & (7,) & (8,) & 1.00 & NaN &  \\
-24 & 46 & (14,) & (15,) & 1.00 & 0.00 & Figure \ref{fig:unexpected1280} \\
-29 & 57 & (3, 7) & (2, 7) & 1.00 & NaN &  \\
+3 & 4 & (4,) & (5,) & 1.00 & 0.00 & Figure \ref{fig:unexpected66} \\
+12 & 23 & (4, 5) & (1, 5) & 1.00 & NaN & Figure \ref{fig:unexpected468} \\
+17 & 33 & (3, 5) & (2, 5) & 1.00 & NaN & Figure \ref{fig:unexpected703} \\
+18 & 35 & (5, 7) & (4, 7) & 1.00 & NaN &  \\
+24 & 47 & (3, 7) & (2, 7) & 1.00 & NaN &  \\
+25 & 48 & (10,) & (11,) & 1.00 & NaN &  \\
+27 & 53 & (6, 7) & (1, 7) & 1.00 & NaN &  \\
 \bottomrule
 \end{tabular}
 \end{center}
 \subsection{Lemma 3.2}
 
 \par Lemma 3.2 can be measured by 2 scores: \textbf{jacard\_l32a} and \textbf{jacard\_l32b}.
-And there are 5 of 29 switch-forward death-death transpositions found where these scores are not 1.
+And there are 7 of 38 switch-forward death-death transpositions found where these scores are not 1.
 \par We can see these situations in the table:
 \begin{center}\begin{tabular}{rrllrrl}
 \toprule
 case & complex & simplex 0 & simplex 1 & jacard\_l32a & jacard\_l32b & Figure \\
 \midrule
-16 & 30 & (6, 7) & (5, 6) & 1.00 & NaN & Figure \ref{fig:unexpected620} \\
-18 & 34 & (5, 11) & (9, 11) & 1.00 & NaN & Figure \ref{fig:unexpected755} \\
-20 & 39 & (8,) & (7,) & 1.00 & NaN &  \\
-24 & 47 & (15,) & (14,) & 1.00 & NaN &  \\
-29 & 56 & (2, 7) & (3, 7) & 1.00 & NaN &  \\
+3 & 5 & (5,) & (4,) & 1.00 & NaN & Figure \ref{fig:unexpected89} \\
+12 & 22 & (1, 5) & (4, 5) & 1.00 & NaN & Figure \ref{fig:unexpected437} \\
+17 & 32 & (2, 5) & (3, 5) & 1.00 & NaN &  \\
+18 & 34 & (4, 7) & (5, 7) & 1.00 & NaN &  \\
+24 & 46 & (2, 7) & (3, 7) & 1.00 & NaN &  \\
+25 & 49 & (11,) & (10,) & 1.00 & NaN &  \\
+27 & 52 & (1, 7) & (6, 7) & 1.00 & NaN &  \\
 \bottomrule
 \end{tabular}
 \end{center}
 \subsection{Lemma 3.3}
 
 \par Lemma 3.3 can be measured by 2 scores: \textbf{jacard\_l33a} and \textbf{jacard\_l33b}.
-And there are 0 of 172 switch-forward birth-death transpositions found where these scores are not 1.
+And there are 0 of 190 switch-forward birth-death transpositions found where these scores are not 1.
 
 \subsection{Hypothesis}
 
 \par The Hypothesis can be measured by 2 scores: \textbf{jacard\_nn\_nodes} and \textbf{jacard\_nn\_edges}.
-And there are 12 of 1896 transpositions found where these scores are not 1.
+And there are 10 of 2016 transpositions found where these scores are not 1.
 \par We can see these situations in the table:
 \begin{center}\begin{tabular}{rrllrrl}
 \toprule
 case & complex & simplex 0 & simplex 1 & jacard\_nn\_nodes & jacard\_nn\_edges & Figure \\
 \midrule
-3 & 4 & (0, 1) & (1, 2) & 1.00 & 0.50 & Figure \ref{fig:unexpected69} \\
-3 & 5 & (1, 2) & (0, 1) & 1.00 & 0.50 &  \\
-5 & 8 & (1, 2) & (2, 4) & 1.00 & 0.00 & Figure \ref{fig:unexpected128} \\
-5 & 9 & (2, 4) & (1, 2) & 1.00 & 0.00 &  \\
-13 & 24 & (0, 1) & (1, 4) & 1.00 & 0.00 &  \\
-13 & 25 & (1, 4) & (0, 1) & 1.00 & 0.00 &  \\
-17 & 32 & (0, 2, 7) & (0, 2, 8) & 1.00 & 0.89 & Figure \ref{fig:unexpected681} \\
-17 & 33 & (0, 2, 8) & (0, 2, 7) & 1.00 & 0.89 &  \\
-19 & 36 & (3, 8) & (1, 9) & 1.00 & 0.00 &  \\
-19 & 37 & (1, 9) & (3, 8) & 1.00 & 0.00 &  \\
-24 & 46 & (4, 10) & (0, 4) & 1.00 & 0.80 & Figure \ref{fig:unexpected1298} \\
-24 & 47 & (0, 4) & (4, 10) & 1.00 & 0.80 &  \\
+5 & 8 & (0, 1) & (1, 2) & 1.00 & 0.50 & Figure \ref{fig:unexpected132} \\
+5 & 9 & (1, 2) & (0, 1) & 1.00 & 0.50 &  \\
+6 & 10 & (3, 5) & (0, 5) & 1.00 & 0.00 & Figure \ref{fig:unexpected167} \\
+6 & 11 & (0, 5) & (3, 5) & 1.00 & 0.00 &  \\
+18 & 34 & (0, 7) & (0, 5) & 1.00 & 0.50 &  \\
+18 & 35 & (0, 5) & (0, 7) & 1.00 & 0.50 &  \\
+25 & 48 & (5,) & (6,) & 1.00 & 0.91 & Figure \ref{fig:unexpected1261} \\
+25 & 49 & (6,) & (5,) & 1.00 & 0.91 &  \\
+26 & 50 & (1, 3) & (5, 13) & 1.00 & 0.67 & Figure \ref{fig:unexpected1396} \\
+26 & 51 & (5, 13) & (1, 3) & 1.00 & 0.67 &  \\
 \bottomrule
 \end{tabular}
 \end{center}
@@ -210,65 +216,65 @@ case & complex & simplex 0 & simplex 1 & jacard\_nn\_nodes & jacard\_nn\_edges &
 
 \begin{figure}[ht]
 \centering
-\includegraphics[width=\textwidth]{pics/transposition69.png}
-\caption{The birth-death Transposition of simplices (0, 1) and (1, 2) in complex 4}
-\label{fig:unexpected69}
+\includegraphics[width=\textwidth]{pics/transposition66.png}
+\caption{The birth-birth Transposition of simplices (4,) and (5,) in complex 4}
+\label{fig:unexpected66}
 \end{figure}
 
 \begin{figure}[ht]
 \centering
-\includegraphics[width=\textwidth]{pics/transposition128.png}
-\caption{The birth-death Transposition of simplices (1, 2) and (2, 4) in complex 8}
-\label{fig:unexpected128}
+\includegraphics[width=\textwidth]{pics/transposition89.png}
+\caption{The death-death Transposition of simplices (5,) and (4,) in complex 5}
+\label{fig:unexpected89}
 \end{figure}
 
 \begin{figure}[ht]
 \centering
-\includegraphics[width=\textwidth]{pics/transposition620.png}
-\caption{The death-death Transposition of simplices (6, 7) and (5, 6) in complex 30}
-\label{fig:unexpected620}
+\includegraphics[width=\textwidth]{pics/transposition132.png}
+\caption{The death-death Transposition of simplices (0, 1) and (1, 2) in complex 8}
+\label{fig:unexpected132}
 \end{figure}
 
 \begin{figure}[ht]
 \centering
-\includegraphics[width=\textwidth]{pics/transposition639.png}
-\caption{The birth-birth Transposition of simplices (5, 6) and (6, 7) in complex 31}
-\label{fig:unexpected639}
+\includegraphics[width=\textwidth]{pics/transposition167.png}
+\caption{The birth-birth Transposition of simplices (3, 5) and (0, 5) in complex 10}
+\label{fig:unexpected167}
 \end{figure}
 
 \begin{figure}[ht]
 \centering
-\includegraphics[width=\textwidth]{pics/transposition681.png}
-\caption{The death-death Transposition of simplices (0, 2, 7) and (0, 2, 8) in complex 32}
-\label{fig:unexpected681}
+\includegraphics[width=\textwidth]{pics/transposition437.png}
+\caption{The death-death Transposition of simplices (1, 5) and (4, 5) in complex 22}
+\label{fig:unexpected437}
 \end{figure}
 
 \begin{figure}[ht]
 \centering
-\includegraphics[width=\textwidth]{pics/transposition755.png}
-\caption{The death-death Transposition of simplices (5, 11) and (9, 11) in complex 34}
-\label{fig:unexpected755}
+\includegraphics[width=\textwidth]{pics/transposition468.png}
+\caption{The birth-birth Transposition of simplices (4, 5) and (1, 5) in complex 23}
+\label{fig:unexpected468}
 \end{figure}
 
 \begin{figure}[ht]
 \centering
-\includegraphics[width=\textwidth]{pics/transposition814.png}
-\caption{The birth-birth Transposition of simplices (9, 11) and (5, 11) in complex 35}
-\label{fig:unexpected814}
+\includegraphics[width=\textwidth]{pics/transposition703.png}
+\caption{The birth-birth Transposition of simplices (3, 5) and (2, 5) in complex 33}
+\label{fig:unexpected703}
 \end{figure}
 
 \begin{figure}[ht]
 \centering
-\includegraphics[width=\textwidth]{pics/transposition1280.png}
-\caption{The birth-birth Transposition of simplices (14,) and (15,) in complex 46}
-\label{fig:unexpected1280}
+\includegraphics[width=\textwidth]{pics/transposition1261.png}
+\caption{The birth-birth Transposition of simplices (5,) and (6,) in complex 48}
+\label{fig:unexpected1261}
 \end{figure}
 
 \begin{figure}[ht]
 \centering
-\includegraphics[width=\textwidth]{pics/transposition1298.png}
-\caption{The birth-birth Transposition of simplices (4, 10) and (0, 4) in complex 46}
-\label{fig:unexpected1298}
+\includegraphics[width=\textwidth]{pics/transposition1396.png}
+\caption{The death-death Transposition of simplices (1, 3) and (5, 13) in complex 50}
+\label{fig:unexpected1396}
 \end{figure}
 
 
