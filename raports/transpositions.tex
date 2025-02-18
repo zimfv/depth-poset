@@ -4,7 +4,7 @@
 \usepackage{hyperref}
 \usepackage{graphicx}
 \usepackage{booktabs}
-
+\usepackage{makecell}
 
 \begin{document}
 
@@ -97,20 +97,13 @@ case & n & dim &  &  \\
 \cline{1-5} \cline{2-5}
 14 & 8 & 2 & 26 & 27 \\
 \cline{1-5} \cline{2-5}
-15 & 8 & 2 & 28 & 29 \\
+15 & 12 & 2 & 28 & 29 \\
 \cline{1-5} \cline{2-5}
-16 & 8 & 2 & 30 & 31 \\
+16 & 12 & 2 & 30 & 31 \\
 \cline{1-5} \cline{2-5}
-\bottomrule
-\end{tabular}
-\begin{tabular}{lllrr}
-\toprule
-&  & complex & alpha & dual \\
-case & n & dim &  &  \\
-\midrule
-17 & 8 & 2 & 32 & 33 \\
+17 & 12 & 2 & 32 & 33 \\
 \cline{1-5} \cline{2-5}
-18 & 8 & 2 & 34 & 35 \\
+18 & 12 & 2 & 34 & 35 \\
 \cline{1-5} \cline{2-5}
 19 & 12 & 2 & 36 & 37 \\
 \cline{1-5} \cline{2-5}
@@ -124,104 +117,291 @@ case & n & dim &  &  \\
 \cline{1-5} \cline{2-5}
 24 & 12 & 2 & 46 & 47 \\
 \cline{1-5} \cline{2-5}
-25 & 16 & 2 & 48 & 49 \\
+25 & 12 & 2 & 48 & 49 \\
 \cline{1-5} \cline{2-5}
-26 & 16 & 2 & 50 & 51 \\
+26 & 12 & 2 & 50 & 51 \\
 \cline{1-5} \cline{2-5}
-27 & 8 & 3 & 52 & 53 \\
+27 & 16 & 2 & 52 & 53 \\
 \cline{1-5} \cline{2-5}
-28 & 8 & 3 & 54 & 55 \\
+28 & 16 & 2 & 54 & 55 \\
 \cline{1-5} \cline{2-5}
-29 & 8 & 3 & 56 & 57 \\
+29 & 16 & 2 & 56 & 57 \\
 \cline{1-5} \cline{2-5}
-30 & 8 & 3 & 58 & 59 \\
+30 & 16 & 2 & 58 & 59 \\
 \cline{1-5} \cline{2-5}
-31 & 8 & 3 & 60 & 61 \\
+31 & 16 & 2 & 60 & 61 \\
 \cline{1-5} \cline{2-5}
-32 & 8 & 3 & 62 & 63 \\
+32 & 16 & 2 & 62 & 63 \\
+\cline{1-5} \cline{2-5}
+\bottomrule
+\end{tabular}
+\begin{tabular}{lllrr}
+\toprule
+&  & complex & alpha & dual \\
+case & n & dim &  &  \\
+\midrule
+33 & 16 & 2 & 64 & 65 \\
+\cline{1-5} \cline{2-5}
+34 & 16 & 2 & 66 & 67 \\
+\cline{1-5} \cline{2-5}
+35 & 8 & 3 & 68 & 69 \\
+\cline{1-5} \cline{2-5}
+36 & 8 & 3 & 70 & 71 \\
+\cline{1-5} \cline{2-5}
+37 & 8 & 3 & 72 & 73 \\
+\cline{1-5} \cline{2-5}
+38 & 8 & 3 & 74 & 75 \\
+\cline{1-5} \cline{2-5}
+39 & 8 & 3 & 76 & 77 \\
+\cline{1-5} \cline{2-5}
+40 & 8 & 3 & 78 & 79 \\
+\cline{1-5} \cline{2-5}
+41 & 12 & 3 & 80 & 81 \\
+\cline{1-5} \cline{2-5}
+42 & 12 & 3 & 82 & 83 \\
+\cline{1-5} \cline{2-5}
+43 & 12 & 3 & 84 & 85 \\
+\cline{1-5} \cline{2-5}
+44 & 12 & 3 & 86 & 87 \\
+\cline{1-5} \cline{2-5}
+45 & 12 & 3 & 88 & 89 \\
+\cline{1-5} \cline{2-5}
+46 & 12 & 3 & 90 & 91 \\
+\cline{1-5} \cline{2-5}
+47 & 12 & 3 & 92 & 93 \\
+\cline{1-5} \cline{2-5}
+48 & 12 & 3 & 94 & 95 \\
+\cline{1-5} \cline{2-5}
+49 & 16 & 3 & 96 & 97 \\
+\cline{1-5} \cline{2-5}
+50 & 16 & 3 & 98 & 99 \\
+\cline{1-5} \cline{2-5}
+51 & 16 & 3 & 100 & 101 \\
+\cline{1-5} \cline{2-5}
+52 & 16 & 3 & 102 & 103 \\
+\cline{1-5} \cline{2-5}
+53 & 16 & 3 & 104 & 105 \\
+\cline{1-5} \cline{2-5}
+54 & 16 & 3 & 106 & 107 \\
+\cline{1-5} \cline{2-5}
+55 & 8 & 4 & 108 & 109 \\
+\cline{1-5} \cline{2-5}
+56 & 8 & 4 & 110 & 111 \\
+\cline{1-5} \cline{2-5}
+57 & 12 & 4 & 112 & 113 \\
+\cline{1-5} \cline{2-5}
+58 & 12 & 4 & 114 & 115 \\
+\cline{1-5} \cline{2-5}
+59 & 12 & 4 & 116 & 117 \\
+\cline{1-5} \cline{2-5}
+60 & 12 & 4 & 118 & 119 \\
+\cline{1-5} \cline{2-5}
+61 & 12 & 4 & 120 & 121 \\
+\cline{1-5} \cline{2-5}
+62 & 12 & 4 & 122 & 123 \\
+\cline{1-5} \cline{2-5}
+63 & 16 & 4 & 124 & 125 \\
+\cline{1-5} \cline{2-5}
+64 & 16 & 4 & 126 & 127 \\
 \cline{1-5} \cline{2-5}
 \bottomrule
 \end{tabular}
 
 \end{center}
 
+\par We can see the distribution of transposition types in each complex in the given table:
+\begin{center}
+\begin{tabular}{lrrrrrrrr}
+\toprule
+& \multicolumn{3}{r}{switch forward} & \multicolumn{2}{r}{switch backward} & \multicolumn{3}{r}{no switch} \\
+& \makecell{birth-\\birth} & \makecell{death-\\death} & \makecell{birth-\\death} & \makecell{birth-\\birth} & \makecell{death-\\death} & \makecell{birth-\\birth} & \makecell{death-\\death} & \makecell{birth-\\death} \\
+complex &  &  &  &  &  &  &  &  \\
+\midrule
+Total & 95 & 95 & 1776 & 96 & 96 & 1533 & 1533 & 4470 \\
+0 & 0 & 0 & 2 & 1 & 0 & 3 & 4 & 5 \\
+1 & 0 & 0 & 2 & 0 & 1 & 4 & 3 & 5 \\
+2 & 0 & 1 & 0 & 1 & 0 & 3 & 3 & 6 \\
+3 & 1 & 0 & 0 & 0 & 1 & 3 & 3 & 6 \\
+4 & 0 & 0 & 2 & 1 & 0 & 3 & 4 & 5 \\
+5 & 0 & 0 & 2 & 0 & 1 & 4 & 3 & 5 \\
+6 & 1 & 1 & 2 & 0 & 1 & 4 & 3 & 3 \\
+7 & 1 & 1 & 2 & 1 & 0 & 3 & 4 & 3 \\
+8 & 1 & 0 & 2 & 0 & 0 & 3 & 4 & 3 \\
+9 & 0 & 1 & 2 & 0 & 0 & 4 & 3 & 3 \\
+10 & 1 & 0 & 3 & 0 & 0 & 3 & 4 & 5 \\
+11 & 0 & 1 & 3 & 0 & 0 & 4 & 3 & 5 \\
+12 & 0 & 1 & 2 & 1 & 1 & 6 & 5 & 6 \\
+13 & 1 & 0 & 2 & 1 & 1 & 5 & 6 & 6 \\
+14 & 0 & 1 & 0 & 2 & 1 & 5 & 5 & 9 \\
+15 & 1 & 0 & 0 & 1 & 2 & 5 & 5 & 9 \\
+16 & 0 & 1 & 4 & 1 & 1 & 6 & 5 & 3 \\
+17 & 1 & 0 & 4 & 1 & 1 & 5 & 6 & 3 \\
+18 & 1 & 0 & 2 & 0 & 0 & 5 & 6 & 9 \\
+19 & 0 & 1 & 2 & 0 & 0 & 6 & 5 & 9 \\
+20 & 1 & 1 & 1 & 0 & 1 & 6 & 5 & 9 \\
+21 & 1 & 1 & 1 & 1 & 0 & 5 & 6 & 9 \\
+22 & 0 & 0 & 0 & 0 & 1 & 6 & 5 & 8 \\
+23 & 0 & 0 & 0 & 1 & 0 & 5 & 6 & 8 \\
+24 & 0 & 0 & 5 & 1 & 1 & 6 & 6 & 4 \\
+25 & 0 & 0 & 5 & 1 & 1 & 6 & 6 & 4 \\
+26 & 0 & 1 & 0 & 0 & 0 & 7 & 6 & 8 \\
+27 & 1 & 0 & 0 & 0 & 0 & 6 & 7 & 8 \\
+28 & 1 & 4 & 1 & 1 & 0 & 11 & 9 & 12 \\
+29 & 4 & 1 & 1 & 0 & 1 & 9 & 11 & 12 \\
+30 & 1 & 1 & 2 & 1 & 0 & 9 & 10 & 14 \\
+31 & 1 & 1 & 2 & 0 & 1 & 10 & 9 & 14 \\
+32 & 2 & 0 & 0 & 2 & 1 & 7 & 10 & 14 \\
+33 & 0 & 2 & 0 & 1 & 2 & 10 & 7 & 14 \\
+\bottomrule
+\end{tabular}
 
-\section{Unexpected Cases}
+\begin{tabular}{lrrrrrrrr}
+\toprule
+& \multicolumn{3}{r}{switch forward} & \multicolumn{2}{r}{switch backward} & \multicolumn{3}{r}{no switch} \\
+& \makecell{birth-\\birth} & \makecell{death-\\death} & \makecell{birth-\\death} & \makecell{birth-\\birth} & \makecell{death-\\death} & \makecell{birth-\\birth} & \makecell{death-\\death} & \makecell{birth-\\death} \\
+complex &  &  &  &  &  &  &  &  \\
+\midrule
+34 & 1 & 1 & 3 & 0 & 1 & 10 & 9 & 10 \\
+35 & 1 & 1 & 3 & 1 & 0 & 9 & 10 & 10 \\
+36 & 1 & 0 & 0 & 1 & 0 & 8 & 10 & 19 \\
+37 & 0 & 1 & 0 & 0 & 1 & 10 & 8 & 19 \\
+38 & 1 & 2 & 2 & 0 & 0 & 10 & 9 & 16 \\
+39 & 2 & 1 & 2 & 0 & 0 & 9 & 10 & 16 \\
+40 & 1 & 0 & 2 & 2 & 1 & 7 & 9 & 14 \\
+41 & 0 & 1 & 2 & 1 & 2 & 9 & 7 & 14 \\
+42 & 0 & 0 & 1 & 2 & 1 & 9 & 10 & 17 \\
+43 & 0 & 0 & 1 & 1 & 2 & 10 & 9 & 17 \\
+44 & 0 & 3 & 4 & 0 & 0 & 12 & 9 & 9 \\
+45 & 3 & 0 & 4 & 0 & 0 & 9 & 12 & 9 \\
+46 & 0 & 1 & 2 & 1 & 2 & 10 & 8 & 13 \\
+47 & 1 & 0 & 2 & 2 & 1 & 8 & 10 & 13 \\
+48 & 1 & 2 & 1 & 1 & 1 & 11 & 10 & 14 \\
+49 & 2 & 1 & 1 & 1 & 1 & 10 & 11 & 14 \\
+50 & 0 & 0 & 2 & 0 & 0 & 10 & 10 & 14 \\
+51 & 0 & 0 & 2 & 0 & 0 & 10 & 10 & 14 \\
+52 & 0 & 0 & 2 & 3 & 2 & 14 & 15 & 21 \\
+53 & 0 & 0 & 2 & 2 & 3 & 15 & 14 & 21 \\
+54 & 1 & 0 & 2 & 0 & 1 & 15 & 15 & 21 \\
+55 & 0 & 1 & 2 & 1 & 0 & 15 & 15 & 21 \\
+56 & 0 & 3 & 1 & 2 & 0 & 13 & 12 & 23 \\
+57 & 3 & 0 & 1 & 0 & 2 & 12 & 13 & 23 \\
+58 & 3 & 2 & 0 & 0 & 1 & 14 & 14 & 23 \\
+59 & 2 & 3 & 0 & 1 & 0 & 14 & 14 & 23 \\
+60 & 2 & 1 & 2 & 2 & 1 & 15 & 17 & 17 \\
+61 & 1 & 2 & 2 & 1 & 2 & 17 & 15 & 17 \\
+62 & 0 & 1 & 0 & 1 & 0 & 15 & 15 & 24 \\
+63 & 1 & 0 & 0 & 0 & 1 & 15 & 15 & 24 \\
+64 & 0 & 2 & 2 & 1 & 1 & 16 & 14 & 18 \\
+65 & 2 & 0 & 2 & 1 & 1 & 14 & 16 & 18 \\
+66 & 0 & 0 & 1 & 1 & 0 & 14 & 15 & 24 \\
+67 & 0 & 0 & 1 & 0 & 1 & 15 & 14 & 24 \\
+68 & 0 & 0 & 7 & 1 & 0 & 6 & 7 & 17 \\
+\bottomrule
+\end{tabular}
+
+\begin{tabular}{lrrrrrrrr}
+\toprule
+& \multicolumn{3}{r}{switch forward} & \multicolumn{2}{r}{switch backward} & \multicolumn{3}{r}{no switch} \\
+& \makecell{birth-\\birth} & \makecell{death-\\death} & \makecell{birth-\\death} & \makecell{birth-\\birth} & \makecell{death-\\death} & \makecell{birth-\\birth} & \makecell{death-\\death} & \makecell{birth-\\death} \\
+complex &  &  &  &  &  &  &  &  \\
+\midrule
+69 & 0 & 0 & 7 & 0 & 1 & 7 & 6 & 17 \\
+70 & 0 & 0 & 8 & 0 & 0 & 7 & 7 & 19 \\
+71 & 0 & 0 & 8 & 0 & 0 & 7 & 7 & 19 \\
+72 & 1 & 1 & 9 & 1 & 0 & 7 & 8 & 13 \\
+73 & 1 & 1 & 9 & 0 & 1 & 8 & 7 & 13 \\
+74 & 1 & 1 & 7 & 0 & 0 & 6 & 6 & 17 \\
+75 & 1 & 1 & 7 & 0 & 0 & 6 & 6 & 17 \\
+76 & 1 & 3 & 6 & 2 & 1 & 8 & 7 & 15 \\
+77 & 3 & 1 & 6 & 1 & 2 & 7 & 8 & 15 \\
+78 & 0 & 0 & 9 & 0 & 1 & 8 & 7 & 18 \\
+79 & 0 & 0 & 9 & 1 & 0 & 7 & 8 & 18 \\
+80 & 0 & 1 & 18 & 0 & 0 & 15 & 14 & 41 \\
+81 & 1 & 0 & 18 & 0 & 0 & 14 & 15 & 41 \\
+82 & 1 & 3 & 13 & 3 & 2 & 14 & 13 & 40 \\
+83 & 3 & 1 & 13 & 2 & 3 & 13 & 14 & 40 \\
+84 & 2 & 1 & 13 & 1 & 1 & 10 & 11 & 39 \\
+85 & 1 & 2 & 13 & 1 & 1 & 11 & 10 & 39 \\
+86 & 0 & 0 & 16 & 1 & 1 & 14 & 14 & 44 \\
+87 & 0 & 0 & 16 & 1 & 1 & 14 & 14 & 44 \\
+88 & 0 & 0 & 22 & 1 & 0 & 12 & 13 & 30 \\
+89 & 0 & 0 & 22 & 0 & 1 & 13 & 12 & 30 \\
+90 & 1 & 1 & 20 & 1 & 0 & 10 & 11 & 42 \\
+91 & 1 & 1 & 20 & 0 & 1 & 11 & 10 & 42 \\
+92 & 0 & 0 & 18 & 1 & 2 & 13 & 12 & 44 \\
+93 & 0 & 0 & 18 & 2 & 1 & 12 & 13 & 44 \\
+94 & 1 & 0 & 16 & 0 & 1 & 10 & 10 & 47 \\
+95 & 0 & 1 & 16 & 1 & 0 & 10 & 10 & 47 \\
+96 & 1 & 1 & 20 & 2 & 0 & 21 & 23 & 64 \\
+97 & 1 & 1 & 20 & 0 & 2 & 23 & 21 & 64 \\
+98 & 1 & 1 & 17 & 0 & 0 & 19 & 19 & 72 \\
+99 & 1 & 1 & 17 & 0 & 0 & 19 & 19 & 72 \\
+100 & 0 & 1 & 22 & 0 & 0 & 19 & 18 & 67 \\
+101 & 1 & 0 & 22 & 0 & 0 & 18 & 19 & 67 \\
+102 & 0 & 0 & 22 & 2 & 1 & 22 & 23 & 75 \\
+103 & 0 & 0 & 22 & 1 & 2 & 23 & 22 & 75 \\
+\bottomrule
+\end{tabular}
+
+\begin{tabular}{lrrrrrrrr}
+\toprule
+& \multicolumn{3}{r}{switch forward} & \multicolumn{2}{r}{switch backward} & \multicolumn{3}{r}{no switch} \\
+& \makecell{birth-\\birth} & \makecell{death-\\death} & \makecell{birth-\\death} & \makecell{birth-\\birth} & \makecell{death-\\death} & \makecell{birth-\\birth} & \makecell{death-\\death} & \makecell{birth-\\death} \\
+complex &  &  &  &  &  &  &  &  \\
+\midrule
+104 & 0 & 0 & 18 & 2 & 0 & 22 & 24 & 65 \\
+105 & 0 & 0 & 18 & 0 & 2 & 24 & 22 & 65 \\
+106 & 1 & 3 & 17 & 0 & 0 & 27 & 25 & 61 \\
+107 & 3 & 1 & 17 & 0 & 0 & 25 & 27 & 61 \\
+108 & 2 & 0 & 28 & 1 & 0 & 6 & 9 & 34 \\
+109 & 0 & 2 & 28 & 0 & 1 & 9 & 6 & 34 \\
+110 & 0 & 1 & 21 & 0 & 1 & 9 & 7 & 32 \\
+111 & 1 & 0 & 21 & 1 & 0 & 7 & 9 & 32 \\
+112 & 1 & 0 & 43 & 0 & 0 & 18 & 19 & 98 \\
+113 & 0 & 1 & 43 & 0 & 0 & 19 & 18 & 98 \\
+114 & 0 & 1 & 47 & 1 & 1 & 21 & 20 & 90 \\
+115 & 1 & 0 & 47 & 1 & 1 & 20 & 21 & 90 \\
+116 & 1 & 1 & 41 & 1 & 1 & 23 & 23 & 103 \\
+117 & 1 & 1 & 41 & 1 & 1 & 23 & 23 & 103 \\
+118 & 0 & 0 & 44 & 1 & 0 & 20 & 21 & 101 \\
+119 & 0 & 0 & 44 & 0 & 1 & 21 & 20 & 101 \\
+120 & 0 & 1 & 62 & 2 & 2 & 17 & 16 & 93 \\
+121 & 1 & 0 & 62 & 2 & 2 & 16 & 17 & 93 \\
+122 & 2 & 0 & 60 & 2 & 2 & 14 & 16 & 103 \\
+123 & 0 & 2 & 60 & 2 & 2 & 16 & 14 & 103 \\
+124 & 1 & 0 & 106 & 1 & 2 & 29 & 29 & 174 \\
+125 & 0 & 1 & 106 & 2 & 1 & 29 & 29 & 174 \\
+126 & 4 & 2 & 83 & 1 & 0 & 40 & 43 & 157 \\
+127 & 2 & 4 & 83 & 0 & 1 & 43 & 40 & 157 \\
+\bottomrule
+\end{tabular}
+
+\end{center}
+
+
+
+\section{Conclusions and Unexpected Cases}
 \subsection{Lemma 3.1}
 
 \par Lemma 3.1 can be measured by 2 scores: \textbf{jacard\_l31a} and \textbf{jacard\_l31b}.
-And there are 0 of 33 switch-forward birth-birth transpositions found where these scores are not 1.
+And there are 0 of 95 switch-forward birth-birth transpositions found where these scores are not 1.
 
 \subsection{Lemma 3.2}
 
 \par Lemma 3.2 can be measured by 2 scores: \textbf{jacard\_l32a} and \textbf{jacard\_l32b}.
-And there are 0 of 33 switch-forward death-death transpositions found where these scores are not 1.
+And there are 0 of 95 switch-forward death-death transpositions found where these scores are not 1.
 
 \subsection{Lemma 3.3}
 
 \par Lemma 3.3 can be measured by 2 scores: \textbf{jacard\_l33a} and \textbf{jacard\_l33b}.
-And there are 0 of 168 switch-forward birth-death transpositions found where these scores are not 1.
+And there are 0 of 1776 switch-forward birth-death transpositions found where these scores are not 1.
 
 \subsection{Hypothesis}
 
 \par The Hypothesis can be measured by 2 scores: \textbf{jacard\_nn\_nodes} and \textbf{jacard\_nn\_edges}.
-And there are 12 of 1984 transpositions found where these scores are not 1.
-\par We can see these situations in the table:
-\begin{center}\begin{tabular}{rrllrrl}
-\toprule
-case & complex & simplex 0 & simplex 1 & jacard\_nn\_nodes & jacard\_nn\_edges & Figure \\
-\midrule
-8 & 14 & (0, 2) & (2, 7) & 1.00 & 0.60 & Figure \ref{fig:unexpected242} \\
-8 & 15 & (2, 7) & (0, 2) & 1.00 & 0.60 &  \\
-9 & 16 & (3,) & (4,) & 1.00 & 0.00 & Figure \ref{fig:unexpected287} \\
-9 & 16 & (1, 3) & (3, 4) & 1.00 & 0.50 & Figure \ref{fig:unexpected297} \\
-9 & 17 & (3, 4) & (1, 3) & 1.00 & 0.50 &  \\
-9 & 17 & (4,) & (3,) & 1.00 & 0.00 &  \\
-20 & 38 & (8, 10) & (0, 6) & 1.00 & 0.67 & Figure \ref{fig:unexpected868} \\
-20 & 39 & (0, 6) & (8, 10) & 1.00 & 0.67 &  \\
-26 & 50 & (8, 10) & (0, 10) & 1.00 & 0.86 & Figure \ref{fig:unexpected1388} \\
-26 & 51 & (0, 10) & (8, 10) & 1.00 & 0.86 &  \\
-30 & 58 & (0, 1) & (1, 7) & 1.00 & 0.00 &  \\
-30 & 59 & (1, 7) & (0, 1) & 1.00 & 0.00 &  \\
-\bottomrule
-\end{tabular}
-\end{center}
+And there are 0 of 9822 transpositions found where these scores are not 1.
 
 
-\begin{figure}[ht]
-\centering
-\includegraphics[width=\textwidth]{pics/transposition242.png}
-\caption{The death-death Transposition of simplices (0, 2) and (2, 7) in complex 14}
-\label{fig:unexpected242}
-\end{figure}
-
-\begin{figure}[ht]
-\centering
-\includegraphics[width=\textwidth]{pics/transposition287.png}
-\caption{The birth-birth Transposition of simplices (3,) and (4,) in complex 16}
-\label{fig:unexpected287}
-\end{figure}
-
-\begin{figure}[ht]
-\centering
-\includegraphics[width=\textwidth]{pics/transposition297.png}
-\caption{The death-death Transposition of simplices (1, 3) and (3, 4) in complex 16}
-\label{fig:unexpected297}
-\end{figure}
-
-\begin{figure}[ht]
-\centering
-\includegraphics[width=\textwidth]{pics/transposition868.png}
-\caption{The birth-birth Transposition of simplices (8, 10) and (0, 6) in complex 38}
-\label{fig:unexpected868}
-\end{figure}
-
-\begin{figure}[ht]
-\centering
-\includegraphics[width=\textwidth]{pics/transposition1388.png}
-\caption{The birth-birth Transposition of simplices (8, 10) and (0, 10) in complex 50}
-\label{fig:unexpected1388}
-\end{figure}
 
 
 
