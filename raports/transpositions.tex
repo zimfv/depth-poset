@@ -380,6 +380,67 @@ complex &  &  &  &  &  &  &  &  \\
 
 
 
+\section{Scores}
+
+\par \textbf{jacard\_nodes\_filtration} -
+The Jacard index of node sets from 2 depth posets.
+The birth-death pairs are equal in terms of filtration values.
+
+
+\par \textbf{jacard\_nodes\_simplex} -
+The Jacard index of nodes from 2 depth posets.
+The birth-death pairs are equal in terms of simplices.
+
+
+\par \textbf{jacard\_edges\_filtration} -
+The Jacard index of edge sets from transitive reductions of 2 depth posets.
+The birth-death pairs are equal in terms of filtration values.
+
+
+\par \textbf{jacard\_edges\_simplex} -
+The Jacard index of edge sets from transitive reductions of 2 depth posets.
+The birth-death pairs are equal in terms of simplices.
+
+
+\par \textbf{jacard\_l31a} -
+Jacard Index of $\text{Succ}'(x, b)$ and $\{(a, y)\} \cup \text{Succ}'(a, b) \cup \{(s, t)\in \text{Succ}'(x, y) | f(t) < f(b)\}$
+
+
+\par \textbf{jacard\_l31b} -
+% Jacard Index of $\text{Succ}'(x, b)$ and $\{(s, t)\in \text{Succ}'(x, y) \oplus \text{Succ}'(a, b) | f(t) > f(b)\}$
+Jacard Index of $\text{Succ}'(x, b)$ and $\{(s, t)\in \text{Succ}'(x, y) \cup \text{Succ}'(a, b) | f(t) > f(b)\}$
+
+
+\par \textbf{jacard\_l32a} -
+Jacard Index of $\text{Succ}''(x, b)$ and $\{(a, y)\} \cup \text{Succ}''(a, b) \cup \{(s, t)\in \text{Succ}''(x, y) | f(a) < f(s) < f(x)\}$
+
+
+\par \textbf{jacard\_l32b} -
+% Jacard Index of $\text{Succ}''(a, y)$ and $\{(s, t)\in \text{Succ}''(x, y) \oplus \text{Succ}''(a, b) | f(s) < f(a)\}$
+Jacard Index of $\text{Succ}''(a, y)$ and $\{(s, t)\in \text{Succ}''(x, y) \cup \text{Succ}''(a, b) | f(s) < f(a)\}$
+
+
+\par \textbf{jacard\_l33a} -
+Jacard Index of $\text{Succ}(a, x)$ and $\text{Succ}(a, b)$
+
+
+\par \textbf{jacard\_l33b} -
+Jacard Index of $\text{Succ}(b, y)$ and $\text{Succ}(x, y)$
+
+
+\par \textbf{jacard\_nn\_nodes} -
+The Jacard index of subsets of nodes $(s, t)$ from 2 depth posets, s.t.
+$s, t \notin \nabla\partial\sigma_0 \cup \partial\nabla\sigma_0 \cup \nabla\partial\sigma_1 \cup \partial\nabla\sigma_1$,
+where $\sigma_0$ and $\sigma_1$ are transposing simplices.
+
+
+\par \textbf{jacard\_nn\_edges} -
+The Jacard index of subsets of edges $((s_0, t_0), (s_1, t_1))$ from 2 depth posets, s.t.
+$s_0, t_0, s_1, t_1 \notin \nabla\partial\sigma_0 \cup \partial\nabla\sigma_0 \cup \nabla\partial\sigma_1 \cup \partial\nabla\sigma_1$,
+where $\sigma_0$ and $\sigma_1$ are transposing simplices.
+
+
+
 \section{Conclusions and Unexpected Cases}
 \subsection{Lemma 3.1}
 
