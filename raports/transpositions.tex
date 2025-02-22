@@ -10,37 +10,48 @@
 
 
 \section{Problems}
+
 \par Write $\text{Succ}(s, t) = \text{Succ}'(s, t) = \text{Succ}''(s, t)$ for the succesors and $\text{Pred}(s, t) = \text{Pred}'(s, t) = \text{Pred}''(s, t)$ for the predecessors (ancessors) of the pair in $D$, $D'$, $D''$, respectively.
 
 \par Since $D = D' \cup D''$, we also have $\text{Succ}(s, t) = \text{Succ}'(s, t) \cup \text{Succ}''(s, t)$ and $\text{Pred}(s, t) = \text{Pred}'(s, t) \cup \text{Pred}''(s, t)$.
 
 \subsection{Lemma 3.1.}
 \par Suppose $(x, y)$ and $(a, b)$ are birth-death pairs of $f: X\to R$, $a, x$ are consecutive in the ordering of the cellls by $f$, and the transposition $a, x$ is a switch. Then
-$$
-\text{Succ}'(a, y) = \{(x, b)\} \cup \text{Succ}'(a, b) \cup \{(s, t)\in \text{Succ}'(x, y) | f(t)<f(b)\}
-$$
-$$
-%\text{Succ}'(x, b) = \{(s, t)\in \text{Succ}'(x, y) \oplus \text{Succ}'(a, b) | f(t) > f(b)\}
-\text{Succ}'(x, b) = \{(s, t)\in \text{Succ}'(x, y) \cup \text{Succ}'(a, b) | f(t) > f(b)\}
-$$
+\begin{itemize}
+\item[a] $
+W'_\text{after}[y, t] =
+\begin{cases}
+W'_\text{before}[y, t] + W'_\text{before}[b, t], \;\; \text{if}\; t\ne b \\
+W'_\text{before}[y, b] + 1, \;\; \text{otherwise}
+\end{cases}
+$
+\item[b] $W'_\text{after}[b, t] = W'_\text{before}[b, t]$
+\end{itemize}
 
-\subsection{Lemma 3.2.}
-\par Suppose $(a, b)$ and $(x, y)$ are birth-death pairs of $f:X\to R$, $y, b$ are consecutive in the ordering by $f$, and transposition of $y, b$ is a switch. Then
-$$
-\text{Succ}''(x, b) = \{(a, y)\} \cup \text{Succ}''(a, b) \cup \{(s, t)\in \text{Succ}''(x, y) | f(a) < f(s)\}
-$$
-$$
-%\text{Succ}''(a, y) = \{(s, t)\in \text{Succ}''(a, b) \oplus \text{Succ}''(x, y) | f(s) < f(a)\}
-\text{Succ}''(a, y) = \{(s, t)\in \text{Succ}''(a, b) \cup \text{Succ}''(x, y) | f(s) < f(a)\}
-$$
+These 2 formulas can be descripted in archaic way:
+\begin{itemize}
+\item[a] $(y, t)\in B'_\text{after}$ iff one of the sentences is true:
+\begin{itemize}
+\item $t\ne b$ and $(y, t)\in B'_\text{before}$ and $(b, t)\notin B'_\text{before}$
+\item $t\ne b$ and $(y, t)\notin B'_\text{before}$ and $(b, t)\in B'_\text{before}$
+\item $t = b$ and $(y, b)\notin B'_\text{before}$
+\end{itemize}
+\item[b] $(b, t)\in B'_\text{aftr}$ iff $(b, t)\in B'_\text{before}$
+\end{itemize}
 
-\subsection{Lemma 3.3.}
-\par Suppose $(a, b)$ and $(x, y)$ are birth-death pairs of $f$: $X\to R$, $b, x$ are consecutive in the ordering by $f$, and the transposition of $b, x$ is a switch. Then
-$$
-\text{Succ}(a, x) = \text{Succ}(a, b)
-\;\;\text{and}\;\;
-\text{Succ}(b, y) = \text{Succ}(x, y)
-$$
+And they have implications:
+
+\begin{itemize}
+\item[c] $
+\text{Succ}'_\text{after} =
+\begin{cases}
+\text{Succ}'_\text{before}(x, y) \cup \text{Succ}'_\text{before}(a, b) \cup \{(x, b)\}, \;\; \text{if}\; (a, b)\notin \text{Succ}'_\text{before}(x, y) \\
+\text{Succ}'_\text{before}(x, y) / (\{a, b\} \cup \{(s, t)\in \text{Succ}'_\text{before}(a, b):\; \kappa(t, a) = 0\})
+\end{cases}
+$
+\item[d] $\text{Succ}'_\text{after}(x, b) = \text{Succ}'_\text{before}(a, b)$
+\end{itemize}
+
 
 \subsection{Hypothesis 1}
 \par Suppose $a$ and $b$ are 2-simplices consecutive in the ordering by $f$. And there is another Morse function $f^*$:
@@ -54,7 +65,7 @@ f(a), \; \text{if} \; s = b
 $$
 Let's denote $DP_{f}^\text{min}$ the transitive reduction of the Depth Poset defined by the filtration $f$. And let's deonote $DP_{f}^\text{min}(s)$ the set of nodes in $DP_f(s)$ which are pairs containing cell $s$ and the set of edges with these nodes.
 
-\par \textbf{Hypothesis:} if the cell $s$ has no faces and cofaces with $a$ and $b$, then $DP_f^\text{min}(s) = DP_{f^*}^\text{min}(s)$.
+\par \textbf{Hypothesis:} if the cell $s$ has no faces and cofaces with $a$ and $b$, then $DP_f^\text{min}(s) = DP_{f^*}^\text{min}(s)$
 
 
 \section{Model and Experiments}
@@ -127,18 +138,8 @@ case & n & dim &  &  \\
 \toprule
 complex & dim & matrix & transpositions \\
 \midrule
-0 & 2 & $\begin{pmatrix}
-0 & 0 & 1 \\
-1 & 1 & 1 \\
-1 & 0 & 1
-\end{pmatrix}
-$ & 1 \\
-1 & 1 & $\begin{pmatrix}
-0 & 0 & 1 \\
-1 & 1 & 0 \\
-1 & 0 & 1
-\end{pmatrix}
-$ & 1 \\
+0 & 2 & $\begin{pmatrix}0 & 0 & 1 \\1 & 1 & 1 \\1 & 0 & 1\end{pmatrix}$ & 1 \\
+1 & 1 & $\begin{pmatrix}0 & 0 & 1 \\1 & 1 & 0 \\1 & 0 & 1\end{pmatrix}$ & 1 \\
 \bottomrule
 \end{tabular}
 
@@ -152,41 +153,41 @@ $ & 1 \\
 & \makecell{birth-\\birth} & \makecell{death-\\death} & \makecell{birth-\\death} & \makecell{birth-\\birth} & \makecell{death-\\death} & \makecell{birth-\\birth} & \makecell{death-\\death} & \makecell{birth-\\death} \\
 complex &  &  &  &  &  &  &  &  \\
 \midrule
-Total & 28 & 26 & 136 & 22 & 22 & 252 & 212 & 370 \\
+Total & 21 & 19 & 134 & 22 & 22 & 267 & 227 & 368 \\
 0 & 1 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
 1 & 1 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
-2 & 0 & 0 & 2 & 1 & 1 & 4 & 3 & 4 \\
-3 & 0 & 0 & 2 & 1 & 1 & 4 & 3 & 4 \\
-4 & 1 & 0 & 2 & 0 & 0 & 4 & 4 & 4 \\
-5 & 0 & 1 & 2 & 0 & 0 & 5 & 3 & 4 \\
-6 & 2 & 1 & 1 & 0 & 0 & 3 & 3 & 4 \\
-7 & 1 & 2 & 1 & 0 & 0 & 4 & 2 & 4 \\
-8 & 0 & 1 & 1 & 1 & 1 & 4 & 2 & 5 \\
-9 & 1 & 0 & 1 & 1 & 1 & 3 & 3 & 5 \\
-10 & 0 & 1 & 0 & 1 & 1 & 4 & 2 & 8 \\
-11 & 1 & 0 & 0 & 1 & 1 & 3 & 3 & 8 \\
-12 & 0 & 0 & 2 & 1 & 0 & 4 & 4 & 4 \\
-13 & 0 & 0 & 2 & 0 & 1 & 5 & 3 & 4 \\
-14 & 0 & 0 & 2 & 1 & 0 & 6 & 6 & 6 \\
-15 & 0 & 0 & 2 & 0 & 1 & 7 & 5 & 6 \\
-16 & 0 & 0 & 1 & 0 & 0 & 7 & 6 & 10 \\
-17 & 0 & 0 & 1 & 0 & 0 & 7 & 6 & 10 \\
-18 & 1 & 1 & 2 & 0 & 0 & 7 & 6 & 7 \\
-19 & 1 & 1 & 2 & 0 & 0 & 7 & 6 & 7 \\
-20 & 2 & 0 & 0 & 1 & 0 & 4 & 6 & 9 \\
-21 & 0 & 2 & 0 & 0 & 1 & 7 & 3 & 9 \\
-22 & 0 & 0 & 1 & 1 & 1 & 6 & 5 & 10 \\
-23 & 0 & 0 & 1 & 1 & 1 & 6 & 5 & 10 \\
-24 & 1 & 0 & 2 & 0 & 1 & 6 & 5 & 7 \\
-25 & 0 & 1 & 2 & 1 & 0 & 6 & 5 & 7 \\
-26 & 0 & 1 & 2 & 0 & 0 & 8 & 6 & 6 \\
-27 & 1 & 0 & 2 & 0 & 0 & 7 & 7 & 6 \\
-28 & 1 & 1 & 3 & 2 & 2 & 5 & 4 & 6 \\
-29 & 1 & 1 & 3 & 2 & 2 & 5 & 4 & 6 \\
-30 & 1 & 0 & 7 & 0 & 1 & 9 & 8 & 15 \\
-31 & 0 & 1 & 7 & 1 & 0 & 9 & 8 & 15 \\
-32 & 1 & 2 & 11 & 1 & 1 & 9 & 7 & 13 \\
-33 & 2 & 1 & 11 & 1 & 1 & 8 & 8 & 13 \\
+2 & 1 & 0 & 1 & 2 & 1 & 3 & 4 & 5 \\
+3 & 0 & 1 & 1 & 1 & 2 & 5 & 2 & 5 \\
+4 & 0 & 2 & 2 & 0 & 0 & 6 & 3 & 3 \\
+5 & 2 & 0 & 2 & 0 & 0 & 4 & 5 & 3 \\
+6 & 0 & 0 & 1 & 0 & 1 & 5 & 3 & 5 \\
+7 & 0 & 0 & 1 & 1 & 0 & 4 & 4 & 5 \\
+8 & 1 & 0 & 2 & 0 & 0 & 4 & 4 & 3 \\
+9 & 0 & 1 & 2 & 0 & 0 & 5 & 3 & 3 \\
+10 & 0 & 0 & 1 & 0 & 0 & 6 & 5 & 5 \\
+11 & 0 & 0 & 1 & 0 & 0 & 6 & 5 & 5 \\
+12 & 0 & 1 & 1 & 0 & 0 & 6 & 4 & 4 \\
+13 & 1 & 0 & 1 & 0 & 0 & 5 & 5 & 4 \\
+14 & 0 & 0 & 1 & 2 & 2 & 6 & 5 & 8 \\
+15 & 0 & 0 & 1 & 2 & 2 & 6 & 5 & 8 \\
+16 & 0 & 0 & 3 & 0 & 0 & 7 & 6 & 6 \\
+17 & 0 & 0 & 3 & 0 & 0 & 7 & 6 & 6 \\
+18 & 0 & 1 & 3 & 1 & 1 & 7 & 5 & 7 \\
+19 & 1 & 0 & 3 & 1 & 1 & 6 & 6 & 7 \\
+20 & 1 & 1 & 1 & 0 & 1 & 6 & 4 & 11 \\
+21 & 1 & 1 & 1 & 1 & 0 & 5 & 5 & 11 \\
+22 & 1 & 0 & 2 & 1 & 0 & 6 & 7 & 7 \\
+23 & 0 & 1 & 2 & 0 & 1 & 8 & 5 & 7 \\
+24 & 0 & 1 & 3 & 0 & 0 & 8 & 6 & 6 \\
+25 & 1 & 0 & 3 & 0 & 0 & 7 & 7 & 6 \\
+26 & 0 & 1 & 2 & 0 & 1 & 8 & 5 & 5 \\
+27 & 1 & 0 & 2 & 1 & 0 & 6 & 7 & 5 \\
+28 & 1 & 0 & 1 & 1 & 0 & 5 & 6 & 9 \\
+29 & 0 & 1 & 1 & 0 & 1 & 7 & 4 & 9 \\
+30 & 0 & 0 & 5 & 0 & 1 & 9 & 7 & 16 \\
+31 & 0 & 0 & 5 & 1 & 0 & 8 & 8 & 16 \\
+32 & 1 & 1 & 5 & 0 & 0 & 11 & 10 & 17 \\
+33 & 1 & 1 & 5 & 0 & 0 & 11 & 10 & 17 \\
 \bottomrule
 \end{tabular}
 
@@ -196,14 +197,14 @@ Total & 28 & 26 & 136 & 22 & 22 & 252 & 212 & 370 \\
 & \makecell{birth-\\birth} & \makecell{death-\\death} & \makecell{birth-\\death} & \makecell{birth-\\birth} & \makecell{death-\\death} & \makecell{birth-\\birth} & \makecell{death-\\death} & \makecell{birth-\\death} \\
 complex &  &  &  &  &  &  &  &  \\
 \midrule
-34 & 0 & 0 & 8 & 2 & 0 & 7 & 8 & 20 \\
-35 & 0 & 0 & 8 & 0 & 2 & 9 & 6 & 20 \\
-36 & 1 & 1 & 7 & 0 & 0 & 8 & 7 & 17 \\
-37 & 1 & 1 & 7 & 0 & 0 & 8 & 7 & 17 \\
-38 & 2 & 2 & 6 & 0 & 0 & 10 & 9 & 15 \\
-39 & 2 & 2 & 6 & 0 & 0 & 10 & 9 & 15 \\
-40 & 1 & 1 & 8 & 1 & 0 & 8 & 8 & 15 \\
-41 & 1 & 1 & 8 & 0 & 1 & 9 & 7 & 15 \\
+34 & 0 & 2 & 8 & 2 & 0 & 9 & 8 & 13 \\
+35 & 2 & 0 & 8 & 0 & 2 & 9 & 8 & 13 \\
+36 & 0 & 1 & 10 & 1 & 1 & 9 & 7 & 20 \\
+37 & 1 & 0 & 10 & 1 & 1 & 8 & 8 & 20 \\
+38 & 0 & 0 & 5 & 1 & 1 & 7 & 6 & 16 \\
+39 & 0 & 0 & 5 & 1 & 1 & 7 & 6 & 16 \\
+40 & 1 & 1 & 10 & 1 & 0 & 7 & 7 & 18 \\
+41 & 1 & 1 & 10 & 0 & 1 & 8 & 6 & 18 \\
 \bottomrule
 \end{tabular}
 
@@ -233,30 +234,20 @@ The Jacard index of edge sets from transitive reductions of 2 depth posets.
 The birth-death pairs are equal in terms of simplices.
 
 
-\par \textbf{jacard\_l31a} -
-Jacard Index of $\text{Succ}'(x, b)$ and $\{(a, y)\} \cup \text{Succ}'(a, b) \cup \{(s, t)\in \text{Succ}'(x, y) | f(t) < f(b)\}$
+\par \textbf{l31a} -
+Returns the portion of simplices t which are births or deaths in both depth posets such that
+$
+W'_\text{after}[y, t] =
+\begin{cases}
+W'_\text{before}[y, t] + W'_\text{before}[b, t], \;\; \text{if}\; t\ne b \\
+W'_\text{before}[y, b] + 1, \;\; \text{otherwise}
+\end{cases}
+$
 
 
-\par \textbf{jacard\_l31b} -
-% Jacard Index of $\text{Succ}'(x, b)$ and $\{(s, t)\in \text{Succ}'(x, y) \oplus \text{Succ}'(a, b) | f(t) > f(b)\}$
-Jacard Index of $\text{Succ}'(x, b)$ and $\{(s, t)\in \text{Succ}'(x, y) \cup \text{Succ}'(a, b) | f(t) > f(b)\}$
-
-
-\par \textbf{jacard\_l32a} -
-Jacard Index of $\text{Succ}''(x, b)$ and $\{(a, y)\} \cup \text{Succ}''(a, b) \cup \{(s, t)\in \text{Succ}''(x, y) | f(a) < f(s) < f(x)\}$
-
-
-\par \textbf{jacard\_l32b} -
-% Jacard Index of $\text{Succ}''(a, y)$ and $\{(s, t)\in \text{Succ}''(x, y) \oplus \text{Succ}''(a, b) | f(s) < f(a)\}$
-Jacard Index of $\text{Succ}''(a, y)$ and $\{(s, t)\in \text{Succ}''(x, y) \cup \text{Succ}''(a, b) | f(s) < f(a)\}$
-
-
-\par \textbf{jacard\_l33a} -
-Jacard Index of $\text{Succ}(a, x)$ and $\text{Succ}(a, b)$
-
-
-\par \textbf{jacard\_l33b} -
-Jacard Index of $\text{Succ}(b, y)$ and $\text{Succ}(x, y)$
+\par \textbf{l31b} -
+Returns the portion of simplices t which are births or deaths in both depth posets such that
+$W'_\text{after}[b, t] = W'_\text{before}[b, t]$
 
 
 \par \textbf{jacard\_nn\_nodes} -
@@ -273,33 +264,14 @@ where $\sigma_0$ and $\sigma_1$ are transposing simplices.
 
 
 \section{Conclusions and Unexpected Cases}
+
 \subsection{Lemma 3.1}
-
-\par Lemma 3.1 can be measured by 2 scores: \textbf{jacard\_l31a} and \textbf{jacard\_l31b}.
-And there are 1 of 28 switch-forward birth-birth transpositions found where these scores are not 1.
-\par We can see these situations in the table:
-\begin{center}\begin{tabular}{lrllrrl}
-\toprule
-case & complex & simplex 0 & simplex 1 & jacard\_l31a & jacard\_l31b & Figure \\
-\midrule
-& 0 & 1 & 2 & 0.50 & 0.00 & Figure \ref{fig:unexpected0} \\
-\bottomrule
-\end{tabular}
-\end{center}
-\subsection{Lemma 3.2}
-
-\par Lemma 3.2 can be measured by 2 scores: \textbf{jacard\_l32a} and \textbf{jacard\_l32b}.
-And there are 0 of 26 switch-forward death-death transpositions found where these scores are not 1.
-
-\subsection{Lemma 3.3}
-
-\par Lemma 3.3 can be measured by 2 scores: \textbf{jacard\_l33a} and \textbf{jacard\_l33b}.
-And there are 0 of 136 switch-forward birth-death transpositions found where these scores are not 1.
+\par Lemma 3.1 can be measured by 2 scores: \textbf{l31a}, \textbf{l31b}.
+And there are 0 of 21 switch forward birth-birth transpositions found where these scores are not 1.
 
 \subsection{Hypothesis}
-
-\par The Hypothesis can be measured by 2 scores: \textbf{jacard\_nn\_nodes} and \textbf{jacard\_nn\_edges}.
-And there are 2 of 1068 transpositions found where these scores are not 1.
+\par Hypothesis can be measured by 2 scores: \textbf{jacard\_nn\_nodes}, \textbf{jacard\_nn\_edges}.
+And there are 2 of 1080  transpositions found where these scores are not 1.
 \par We can see these situations in the table:
 \begin{center}\begin{tabular}{lrllrrl}
 \toprule
@@ -310,7 +282,6 @@ case & complex & simplex 0 & simplex 1 & jacard\_nn\_nodes & jacard\_nn\_edges &
 \bottomrule
 \end{tabular}
 \end{center}
-
 
 \begin{figure}[ht]
 \centering
