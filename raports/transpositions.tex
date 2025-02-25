@@ -43,7 +43,7 @@ And they have implications:
 
 \begin{itemize}
 \item[c] $
-\text{Succ}'_\text{after} =
+\text{Succ}'_\text{after}(a, y) =
 \begin{cases}
 \text{Succ}'_\text{before}(x, y) \cup \text{Succ}'_\text{before}(a, b) \cup \{(x, b)\}, \;\; \text{if}\; (a, b)\notin \text{Succ}'_\text{before}(x, y) \\
 \text{Succ}'_\text{before}(x, y) / (\{a, b\} \cup \{(s, t)\in \text{Succ}'_\text{before}(a, b):\; \kappa(t, a) = 0\})
@@ -153,41 +153,41 @@ complex & dim & matrix & transpositions \\
 & \makecell{birth-\\birth} & \makecell{death-\\death} & \makecell{birth-\\death} & \makecell{birth-\\birth} & \makecell{death-\\death} & \makecell{birth-\\birth} & \makecell{death-\\death} & \makecell{birth-\\death} \\
 complex &  &  &  &  &  &  &  &  \\
 \midrule
-Total & 21 & 19 & 134 & 22 & 22 & 267 & 227 & 368 \\
+Total & 26 & 24 & 128 & 15 & 15 & 263 & 223 & 400 \\
 0 & 1 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
 1 & 1 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
-2 & 1 & 0 & 1 & 2 & 1 & 3 & 4 & 5 \\
-3 & 0 & 1 & 1 & 1 & 2 & 5 & 2 & 5 \\
-4 & 0 & 2 & 2 & 0 & 0 & 6 & 3 & 3 \\
-5 & 2 & 0 & 2 & 0 & 0 & 4 & 5 & 3 \\
-6 & 0 & 0 & 1 & 0 & 1 & 5 & 3 & 5 \\
-7 & 0 & 0 & 1 & 1 & 0 & 4 & 4 & 5 \\
-8 & 1 & 0 & 2 & 0 & 0 & 4 & 4 & 3 \\
-9 & 0 & 1 & 2 & 0 & 0 & 5 & 3 & 3 \\
-10 & 0 & 0 & 1 & 0 & 0 & 6 & 5 & 5 \\
-11 & 0 & 0 & 1 & 0 & 0 & 6 & 5 & 5 \\
-12 & 0 & 1 & 1 & 0 & 0 & 6 & 4 & 4 \\
-13 & 1 & 0 & 1 & 0 & 0 & 5 & 5 & 4 \\
-14 & 0 & 0 & 1 & 2 & 2 & 6 & 5 & 8 \\
-15 & 0 & 0 & 1 & 2 & 2 & 6 & 5 & 8 \\
-16 & 0 & 0 & 3 & 0 & 0 & 7 & 6 & 6 \\
-17 & 0 & 0 & 3 & 0 & 0 & 7 & 6 & 6 \\
-18 & 0 & 1 & 3 & 1 & 1 & 7 & 5 & 7 \\
-19 & 1 & 0 & 3 & 1 & 1 & 6 & 6 & 7 \\
-20 & 1 & 1 & 1 & 0 & 1 & 6 & 4 & 11 \\
-21 & 1 & 1 & 1 & 1 & 0 & 5 & 5 & 11 \\
-22 & 1 & 0 & 2 & 1 & 0 & 6 & 7 & 7 \\
-23 & 0 & 1 & 2 & 0 & 1 & 8 & 5 & 7 \\
-24 & 0 & 1 & 3 & 0 & 0 & 8 & 6 & 6 \\
-25 & 1 & 0 & 3 & 0 & 0 & 7 & 7 & 6 \\
-26 & 0 & 1 & 2 & 0 & 1 & 8 & 5 & 5 \\
-27 & 1 & 0 & 2 & 1 & 0 & 6 & 7 & 5 \\
-28 & 1 & 0 & 1 & 1 & 0 & 5 & 6 & 9 \\
-29 & 0 & 1 & 1 & 0 & 1 & 7 & 4 & 9 \\
-30 & 0 & 0 & 5 & 0 & 1 & 9 & 7 & 16 \\
-31 & 0 & 0 & 5 & 1 & 0 & 8 & 8 & 16 \\
-32 & 1 & 1 & 5 & 0 & 0 & 11 & 10 & 17 \\
-33 & 1 & 1 & 5 & 0 & 0 & 11 & 10 & 17 \\
+2 & 1 & 1 & 2 & 0 & 0 & 4 & 3 & 5 \\
+3 & 1 & 1 & 2 & 0 & 0 & 4 & 3 & 5 \\
+4 & 0 & 0 & 1 & 0 & 0 & 5 & 4 & 5 \\
+5 & 0 & 0 & 1 & 0 & 0 & 5 & 4 & 5 \\
+6 & 0 & 1 & 1 & 0 & 0 & 6 & 4 & 4 \\
+7 & 1 & 0 & 1 & 0 & 0 & 5 & 5 & 4 \\
+8 & 0 & 0 & 0 & 0 & 0 & 5 & 4 & 5 \\
+9 & 0 & 0 & 0 & 0 & 0 & 5 & 4 & 5 \\
+10 & 0 & 0 & 1 & 0 & 2 & 7 & 4 & 3 \\
+11 & 0 & 0 & 1 & 2 & 0 & 5 & 6 & 3 \\
+12 & 2 & 2 & 1 & 0 & 0 & 3 & 2 & 5 \\
+13 & 2 & 2 & 1 & 0 & 0 & 3 & 2 & 5 \\
+14 & 0 & 0 & 3 & 3 & 0 & 6 & 8 & 3 \\
+15 & 0 & 0 & 3 & 0 & 3 & 9 & 5 & 3 \\
+16 & 0 & 0 & 2 & 3 & 1 & 4 & 5 & 8 \\
+17 & 0 & 0 & 2 & 1 & 3 & 6 & 3 & 8 \\
+18 & 1 & 0 & 1 & 0 & 0 & 6 & 6 & 9 \\
+19 & 0 & 1 & 1 & 0 & 0 & 7 & 5 & 9 \\
+20 & 1 & 1 & 2 & 0 & 0 & 7 & 6 & 7 \\
+21 & 1 & 1 & 2 & 0 & 0 & 7 & 6 & 7 \\
+22 & 0 & 0 & 2 & 0 & 0 & 7 & 6 & 9 \\
+23 & 0 & 0 & 2 & 0 & 0 & 7 & 6 & 9 \\
+24 & 0 & 0 & 2 & 1 & 0 & 6 & 6 & 9 \\
+25 & 0 & 0 & 2 & 0 & 1 & 7 & 5 & 9 \\
+26 & 1 & 0 & 1 & 0 & 0 & 7 & 7 & 9 \\
+27 & 0 & 1 & 1 & 0 & 0 & 8 & 6 & 9 \\
+28 & 1 & 1 & 0 & 0 & 0 & 9 & 8 & 5 \\
+29 & 1 & 1 & 0 & 0 & 0 & 9 & 8 & 5 \\
+30 & 2 & 2 & 9 & 0 & 0 & 8 & 7 & 15 \\
+31 & 2 & 2 & 9 & 0 & 0 & 8 & 7 & 15 \\
+32 & 0 & 0 & 6 & 1 & 0 & 10 & 10 & 19 \\
+33 & 0 & 0 & 6 & 0 & 1 & 11 & 9 & 19 \\
 \bottomrule
 \end{tabular}
 
@@ -197,14 +197,14 @@ Total & 21 & 19 & 134 & 22 & 22 & 267 & 227 & 368 \\
 & \makecell{birth-\\birth} & \makecell{death-\\death} & \makecell{birth-\\death} & \makecell{birth-\\birth} & \makecell{death-\\death} & \makecell{birth-\\birth} & \makecell{death-\\death} & \makecell{birth-\\death} \\
 complex &  &  &  &  &  &  &  &  \\
 \midrule
-34 & 0 & 2 & 8 & 2 & 0 & 9 & 8 & 13 \\
-35 & 2 & 0 & 8 & 0 & 2 & 9 & 8 & 13 \\
-36 & 0 & 1 & 10 & 1 & 1 & 9 & 7 & 20 \\
-37 & 1 & 0 & 10 & 1 & 1 & 8 & 8 & 20 \\
-38 & 0 & 0 & 5 & 1 & 1 & 7 & 6 & 16 \\
-39 & 0 & 0 & 5 & 1 & 1 & 7 & 6 & 16 \\
-40 & 1 & 1 & 10 & 1 & 0 & 7 & 7 & 18 \\
-41 & 1 & 1 & 10 & 0 & 1 & 8 & 6 & 18 \\
+34 & 1 & 1 & 8 & 1 & 1 & 7 & 6 & 19 \\
+35 & 1 & 1 & 8 & 1 & 1 & 7 & 6 & 19 \\
+36 & 1 & 2 & 6 & 1 & 1 & 5 & 3 & 25 \\
+37 & 2 & 1 & 6 & 1 & 1 & 4 & 4 & 25 \\
+38 & 1 & 0 & 8 & 0 & 0 & 9 & 9 & 19 \\
+39 & 0 & 1 & 8 & 0 & 0 & 10 & 8 & 19 \\
+40 & 0 & 1 & 8 & 0 & 0 & 8 & 6 & 17 \\
+41 & 1 & 0 & 8 & 0 & 0 & 7 & 7 & 17 \\
 \bottomrule
 \end{tabular}
 
@@ -250,6 +250,18 @@ Returns the portion of simplices t which are births or deaths in both depth pose
 $W'_\text{after}[b, t] = W'_\text{before}[b, t]$
 
 
+\par \textbf{l31c} -
+If $(a, b) \notin \text{Desc}'(x, y)$ will return the Jacard index of
+sets: $\text{Desc}'_\text{after}(a, y)$ and $\text{Desc}'_\text{before}(x, y) \cup \text{Desc}'_\text{before}(a, b) \cup \{(x, b)\}$.
+And will return the Jacard index of sets $\text{Desc}'_\text{after}(a, y)$ and
+$\text{Desc}'_\text{before}(x, y) / (\{a, b\} \cup \{(s, t)\in \text{Desc}'_\text{before}(a, b):\; \kappa(t, a) = 0\})$
+otherwise.
+
+
+\par \textbf{l31d} -
+The Jacard index of sets $\text{Desc}'_\text{after}(x, b)$ and $\text{Desc}'_\text{before}(a, b)$
+
+
 \par \textbf{jacard\_nn\_nodes} -
 The Jacard index of subsets of nodes $(s, t)$ from 2 depth posets, s.t.
 $s, t \notin \nabla\partial\sigma_0 \cup \partial\nabla\sigma_0 \cup \nabla\partial\sigma_1 \cup \partial\nabla\sigma_1$,
@@ -266,12 +278,12 @@ where $\sigma_0$ and $\sigma_1$ are transposing simplices.
 \section{Conclusions and Unexpected Cases}
 
 \subsection{Lemma 3.1}
-\par Lemma 3.1 can be measured by 2 scores: \textbf{l31a}, \textbf{l31b}.
-And there are 0 of 21 switch forward birth-birth transpositions found where these scores are not 1.
+\par Lemma 3.1 can be measured by 2 scores: \textbf{l31a}, \textbf{l31b}, \textbf{l31c}, \textbf{l31d}.
+And there are 0 of 26 switch forward birth-birth transpositions found where these scores are not 1.
 
 \subsection{Hypothesis}
 \par Hypothesis can be measured by 2 scores: \textbf{jacard\_nn\_nodes}, \textbf{jacard\_nn\_edges}.
-And there are 2 of 1080  transpositions found where these scores are not 1.
+And there are 2 of 1094  transpositions found where these scores are not 1.
 \par We can see these situations in the table:
 \begin{center}\begin{tabular}{lrllrrl}
 \toprule
