@@ -212,7 +212,7 @@ class ShallowPair:
 		if not isinstance(other, ShallowPair):
 			return NotImplemented
 		if self.source is not None and other.source is not None:
-			return self.source == other.source
+			return (self.source == other.source)
 		return (self.birth_index == other.birth_index) and (self.death_index == other.death_index)
 
 	def __hash__(self):
@@ -341,3 +341,102 @@ class DepthPoset(Poset):
 		Returns the dict labaling the Nodes
 		"""
 		return {node: str(node) for node in self.nodes}
+
+	def get_succesors(self, root, which='full', include=False):
+		"""
+		Returns the subposet of succesors of the root - nodes s.t. the edge (node, root) was given exactly in the algorithm
+
+		Parameters:
+		-----------
+		root : ShallowPair or tuple
+			The existing node in the DepthPoset
+			If this is not a Shallow, than the node with the same source or birth-death indices will be taken
+
+		include: bool
+			The root will be included into poset, if it's True.
+
+		which: str
+			Defines the algorithm where the relations was given:
+				0. 'col' : column reduction
+				1. 'row' : row reduction
+				2. 'full': both
+
+		Returns:
+		--------
+		subposet: Poset
+			The subposet of all nodes, higher than given.
+		"""
+		if type(which) != str:
+			which = {0: 'col', 1: 'row', 2: 'full'}[which]
+			
+		if isinstance(root, ShallowPair):
+			if not (root in self.nodes):
+				raise ValueError(f'The root node ({root.__repr__()}) is not in the depth poset')
+		else:
+			for node in self.nodes:
+				if ((node.birth_index, node.death_index) == root) or (node.source == root):
+					return self.get_succesors(root=node, which=which, include=include)
+			raise ValueError(f"{root.__repr__()} can't be represented as a node of the given depth poset")
+
+		birth_indices = [j for i, j in self._b1_set if (i == root.birth_index) and (which.lower() in ['full', 'row'])]
+		death_indices = [j for i, j in self._b0_set if (i == root.death_index) and (which.lower() in ['full', 'col'])]
+
+		if include:
+			birth_indices.append(root.birth_index)
+			death_indices.append(root.death_index)
+
+		node_condition = lambda node: (node.birth_index in birth_indices) or (node.death_index in death_indices)
+
+		subposet = self.subposet(node_condition=node_condition)
+		return subposet
+
+	def get_predecessors(self, root, which='full', include=False):
+		"""
+		Returns the subposet of predecessors of the root - nodes s.t. the edge (node, root) was given exactly in the algorithm
+
+		Parameters:
+		-----------
+		root : ShallowPair or tuple
+			The existing node in the DepthPoset
+			If this is not a Shallow, than the node with the same source or birth-death indices will be taken
+
+		include: bool
+			The root will be included into poset, if it's True.
+
+		which: str
+			Defines the algorithm where the relations was given:
+				0. 'col' : column reduction
+				1. 'row' : row reduction
+				2. 'full': both
+
+		Returns:
+		--------
+		subposet: Poset
+			The subposet of all nodes, higher than given.
+		"""
+		if type(which) != str:
+			which = {0: 'col', 1: 'row', 2: 'full'}[which]
+
+		if isinstance(root, ShallowPair):
+			if not (root in self.nodes):
+				raise ValueError(f'The root node ({root.__repr__()}) is not in the depth poset')
+		else:
+			for node in self.nodes:
+				if ((node.birth_index, node.death_index) == root) or (node.source == root):
+					return self.get_predecessors(root=node, which=which, include=include)
+			raise ValueError(f"{root.__repr__()} can't be represented as a node of the given depth poset")
+
+		# Что-то напутал и опять получаю succesors
+		birth_indices = [i for i, j in self._b1_set if (j == root.birth_index) and (which.lower() in ['full', 'row'])]
+		death_indices = [i for i, j in self._b0_set if (j == root.death_index) and (which.lower() in ['full', 'col'])]
+
+		if include:
+			birth_indices.append(root.birth_index)
+			death_indices.append(root.death_index)
+
+		node_condition = lambda node: (node.birth_index in birth_indices) or (node.death_index in death_indices)
+
+		subposet = self.subposet(node_condition=node_condition)
+		return subposet
+
+
