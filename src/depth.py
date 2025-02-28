@@ -234,6 +234,20 @@ class ShallowPair:
 		except Exception:
 			return self.__repr__()
 
+	def corresponds_to(self, birth_index=None, death_index=None, birth_value=None, death_value=None, dim=None, source=None):
+		"""
+		Returns True if all provided parameters match the object's attributes.
+		If all parameters are None, returns False.
+		"""
+		if all(param is None for param in (birth_index, death_index, birth_value, death_value, dim, source)):
+			return False
+
+		for attr, param in zip(("birth_index", "death_index", "birth_value", "death_value", "dim", "source"), 
+							   (birth_index, death_index, birth_value, death_value, dim, source)):
+			if param is not None and getattr(self, attr) != param:
+				return False
+		return True
+
 
 
 class DepthPoset(Poset):
@@ -303,6 +317,14 @@ class DepthPoset(Poset):
 			return {node: (node.birth_index, node.death_index) for node in self.nodes}
 		else:
 			return {node: (node.birth_value, node.death_value) for node in self.nodes}
+
+	def find_pair(self, birth_index=None, death_index=None, birth_value=None, death_value=None, dim=None, source=None):
+		"""
+		Returns the node coresponds to parameters.
+		"""
+		for node in self.nodes:
+			if node.corresponds_to(birth_index=birth_index, death_index=death_index, birth_value=birth_value, death_value=death_value, dim=None, source=None):
+				return node
 
 	def subposet_dim(self, dim: int):
 		"""
@@ -438,5 +460,3 @@ class DepthPoset(Poset):
 
 		subposet = self.subposet(node_condition=node_condition)
 		return subposet
-
-

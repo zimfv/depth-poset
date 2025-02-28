@@ -53,6 +53,19 @@ $
 \end{itemize}
 
 
+
+\subsection{Lemma 3.3}
+\par Suppose $(a,b)$ and $(x,y)$ are birth-death pairs of $f: X \to \mathbb{R}$, $b,x$ are consecutive in the ordering by $f$,
+and the transposition of $b,x$ is a switch. Then the successors of the two pairs are preserved, while the predecessors may change:
+\begin{itemize}
+\item[a] $\text{Succ}_\text{after}(a, x) = \text{Succ}_\text{before}(a, b)$
+\item[b] $\text{Succ}_\text{after}(b, y) = \text{Succ}_\text{before}(x, y)$
+\item[c] $\text{Pred}_\text{after}(a, x) = \{(s,t) \mid t \in \text{Col}_\text{before}(a,x) \} \cup \text{Pred}_\text{before}''(a,b)$
+\item[d] $\text{Pred}_\text{after}(b, y) = \{(s,t) \mid s \in \text{Row}_\text{before}(b,y) \} \cup \text{Pred}_\text{before}'(x,y)$
+\end{itemize}
+in which the left- and right-hand sides of the equations correspond to the states after and before the transposition, respectively.
+
+
 \subsection{Hypothesis 1}
 \par Suppose $a$ and $b$ are 2-simplices consecutive in the ordering by $f$. And there is another Morse function $f^*$:
 $$
@@ -153,41 +166,41 @@ complex & dim & matrix & transpositions \\
 & \makecell{birth-\\birth} & \makecell{death-\\death} & \makecell{birth-\\death} & \makecell{birth-\\birth} & \makecell{death-\\death} & \makecell{birth-\\birth} & \makecell{death-\\death} & \makecell{birth-\\death} \\
 complex &  &  &  &  &  &  &  &  \\
 \midrule
-Total & 36 & 34 & 138 & 28 & 28 & 244 & 204 & 396 \\
+Total & 28 & 26 & 150 & 19 & 19 & 257 & 217 & 354 \\
 0 & 1 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
 1 & 1 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
-2 & 0 & 1 & 2 & 2 & 1 & 3 & 2 & 5 \\
-3 & 1 & 0 & 2 & 1 & 2 & 3 & 2 & 5 \\
-4 & 0 & 0 & 1 & 0 & 0 & 6 & 5 & 4 \\
-5 & 0 & 0 & 1 & 0 & 0 & 6 & 5 & 4 \\
-6 & 0 & 1 & 2 & 1 & 1 & 4 & 2 & 5 \\
-7 & 1 & 0 & 2 & 1 & 1 & 3 & 3 & 5 \\
-8 & 2 & 1 & 2 & 0 & 0 & 5 & 5 & 3 \\
-9 & 1 & 2 & 2 & 0 & 0 & 6 & 4 & 3 \\
-10 & 1 & 1 & 2 & 0 & 0 & 5 & 4 & 4 \\
-11 & 1 & 1 & 2 & 0 & 0 & 5 & 4 & 4 \\
-12 & 0 & 0 & 2 & 2 & 1 & 4 & 4 & 4 \\
-13 & 0 & 0 & 2 & 1 & 2 & 5 & 3 & 4 \\
-14 & 2 & 0 & 1 & 1 & 0 & 6 & 8 & 5 \\
-15 & 0 & 2 & 1 & 0 & 1 & 9 & 5 & 5 \\
-16 & 0 & 2 & 0 & 0 & 0 & 7 & 4 & 11 \\
-17 & 2 & 0 & 0 & 0 & 0 & 5 & 6 & 11 \\
-18 & 2 & 0 & 2 & 0 & 0 & 6 & 7 & 8 \\
-19 & 0 & 2 & 2 & 0 & 0 & 8 & 5 & 8 \\
-20 & 2 & 1 & 0 & 0 & 0 & 6 & 6 & 9 \\
-21 & 1 & 2 & 0 & 0 & 0 & 7 & 5 & 9 \\
-22 & 1 & 0 & 1 & 2 & 2 & 5 & 5 & 9 \\
-23 & 0 & 1 & 1 & 2 & 2 & 6 & 4 & 9 \\
-24 & 4 & 1 & 1 & 0 & 0 & 4 & 6 & 8 \\
-25 & 1 & 4 & 1 & 0 & 0 & 7 & 3 & 8 \\
-26 & 0 & 0 & 1 & 0 & 0 & 7 & 6 & 9 \\
-27 & 0 & 0 & 1 & 0 & 0 & 7 & 6 & 9 \\
-28 & 2 & 1 & 1 & 1 & 1 & 4 & 4 & 8 \\
-29 & 1 & 2 & 1 & 1 & 1 & 5 & 3 & 8 \\
-30 & 1 & 0 & 8 & 0 & 2 & 9 & 7 & 16 \\
-31 & 0 & 1 & 8 & 2 & 0 & 8 & 8 & 16 \\
-32 & 0 & 2 & 9 & 1 & 0 & 8 & 6 & 18 \\
-33 & 2 & 0 & 9 & 0 & 1 & 7 & 7 & 18 \\
+2 & 2 & 0 & 0 & 0 & 0 & 3 & 4 & 7 \\
+3 & 0 & 2 & 0 & 0 & 0 & 5 & 2 & 7 \\
+4 & 0 & 1 & 0 & 0 & 1 & 5 & 2 & 5 \\
+5 & 1 & 0 & 0 & 1 & 0 & 3 & 4 & 5 \\
+6 & 1 & 0 & 2 & 1 & 0 & 3 & 4 & 3 \\
+7 & 0 & 1 & 2 & 0 & 1 & 5 & 2 & 3 \\
+8 & 0 & 0 & 1 & 0 & 0 & 5 & 4 & 5 \\
+9 & 0 & 0 & 1 & 0 & 0 & 5 & 4 & 5 \\
+10 & 1 & 0 & 1 & 0 & 0 & 4 & 4 & 5 \\
+11 & 0 & 1 & 1 & 0 & 0 & 5 & 3 & 5 \\
+12 & 1 & 1 & 2 & 0 & 1 & 5 & 3 & 3 \\
+13 & 1 & 1 & 2 & 1 & 0 & 4 & 4 & 3 \\
+14 & 0 & 0 & 3 & 1 & 1 & 7 & 6 & 6 \\
+15 & 0 & 0 & 3 & 1 & 1 & 7 & 6 & 6 \\
+16 & 0 & 0 & 2 & 1 & 1 & 6 & 5 & 9 \\
+17 & 0 & 0 & 2 & 1 & 1 & 6 & 5 & 9 \\
+18 & 0 & 0 & 1 & 0 & 0 & 7 & 6 & 9 \\
+19 & 0 & 0 & 1 & 0 & 0 & 7 & 6 & 9 \\
+20 & 0 & 1 & 1 & 0 & 0 & 7 & 5 & 8 \\
+21 & 1 & 0 & 1 & 0 & 0 & 6 & 6 & 8 \\
+22 & 0 & 1 & 1 & 0 & 0 & 9 & 7 & 5 \\
+23 & 1 & 0 & 1 & 0 & 0 & 8 & 8 & 5 \\
+24 & 2 & 2 & 2 & 1 & 0 & 6 & 6 & 5 \\
+25 & 2 & 2 & 2 & 0 & 1 & 7 & 5 & 5 \\
+26 & 1 & 2 & 0 & 1 & 0 & 6 & 5 & 10 \\
+27 & 2 & 1 & 0 & 0 & 1 & 6 & 5 & 10 \\
+28 & 1 & 0 & 1 & 2 & 1 & 4 & 5 & 9 \\
+29 & 0 & 1 & 1 & 1 & 2 & 6 & 3 & 9 \\
+30 & 0 & 0 & 7 & 1 & 1 & 10 & 9 & 17 \\
+31 & 0 & 0 & 7 & 1 & 1 & 10 & 9 & 17 \\
+32 & 1 & 2 & 10 & 0 & 0 & 8 & 6 & 16 \\
+33 & 2 & 1 & 10 & 0 & 0 & 7 & 7 & 16 \\
 \bottomrule
 \end{tabular}
 
@@ -197,14 +210,14 @@ Total & 36 & 34 & 138 & 28 & 28 & 244 & 204 & 396 \\
 & \makecell{birth-\\birth} & \makecell{death-\\death} & \makecell{birth-\\death} & \makecell{birth-\\birth} & \makecell{death-\\death} & \makecell{birth-\\birth} & \makecell{death-\\death} & \makecell{birth-\\death} \\
 complex &  &  &  &  &  &  &  &  \\
 \midrule
-34 & 0 & 1 & 8 & 1 & 1 & 8 & 6 & 17 \\
-35 & 1 & 0 & 8 & 1 & 1 & 7 & 7 & 17 \\
-36 & 0 & 0 & 5 & 3 & 1 & 6 & 7 & 16 \\
-37 & 0 & 0 & 5 & 1 & 3 & 8 & 5 & 16 \\
-38 & 1 & 2 & 8 & 1 & 1 & 8 & 6 & 20 \\
-39 & 2 & 1 & 8 & 1 & 1 & 7 & 7 & 20 \\
-40 & 1 & 1 & 13 & 1 & 1 & 7 & 6 & 19 \\
-41 & 1 & 1 & 13 & 1 & 1 & 7 & 6 & 19 \\
+34 & 1 & 0 & 12 & 0 & 2 & 7 & 5 & 13 \\
+35 & 0 & 1 & 12 & 2 & 0 & 6 & 6 & 13 \\
+36 & 2 & 1 & 11 & 1 & 0 & 9 & 10 & 14 \\
+37 & 1 & 2 & 11 & 0 & 1 & 11 & 8 & 14 \\
+38 & 1 & 0 & 10 & 0 & 0 & 7 & 7 & 13 \\
+39 & 0 & 1 & 10 & 0 & 0 & 8 & 6 & 13 \\
+40 & 0 & 1 & 8 & 0 & 2 & 10 & 6 & 15 \\
+41 & 1 & 0 & 8 & 2 & 0 & 7 & 9 & 15 \\
 \bottomrule
 \end{tabular}
 
@@ -287,15 +300,15 @@ where $\sigma_0$ and $\sigma_1$ are transposing simplices.
 
 \subsection{Lemma 3.1}
 \par Lemma 3.1 can be measured by 2 scores: \textbf{l31a}, \textbf{l31b}, \textbf{l31c}, \textbf{l31d}.
-And there are 0 of 36 switch forward birth-birth transpositions found where these scores are not 1.
+And there are 0 of 28 switch forward birth-birth transpositions found where these scores are not 1.
 
 \subsection{Lemma 3.3}
 \par Lemma 3.3 can be measured by 2 scores: \textbf{l33a}, \textbf{l33b}.
-And there are 0 of 138 switch forward birth-death transpositions found where these scores are not 1.
+And there are 0 of 150 switch forward birth-death transpositions found where these scores are not 1.
 
 \subsection{Hypothesis}
 \par Hypothesis can be measured by 2 scores: \textbf{jacard\_nn\_nodes}, \textbf{jacard\_nn\_edges}.
-And there are 2 of 1108  transpositions found where these scores are not 1.
+And there are 2 of 1070  transpositions found where these scores are not 1.
 \par We can see these situations in the table:
 \begin{center}\begin{tabular}{lrllrrl}
 \toprule
