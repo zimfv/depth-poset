@@ -12,9 +12,13 @@ import numpy as np
 
 from src.depth import DepthPoset
 
+from src.planar_geometry import calculate_triangle_areas, is_triangle_containing_point
+
 from matplotlib import pyplot as plt
 from matplotlib.colors import Normalize
 from matplotlib.cm import ScalarMappable
+
+
 
 
 
@@ -68,8 +72,6 @@ class SquareDensity(Density):
 			matrix[cond] += values[i]
 
 		return SquareDensity(x, y, matrix)
-
-
 
 	@classmethod
 	def from_depth_poset(self, dp: DepthPoset):
@@ -209,3 +211,110 @@ class SquareDensity(Density):
 			return np.nan
 
 		return (vals[squares != np.inf]*squares[squares != np.inf]).sum()
+
+
+class TriangulationDensity(Density):
+	def __init__(self, vertices, triangles, values, outer_value=0):
+		"""
+		Parameters:
+		-----------
+		vertices: np.array shape (n, 2) dtype float
+			The cords of n vertices on the plane
+
+		triangles: np.array shape (k, 3) dtype int
+			The vertex indices of k triangles
+
+		values: array length k
+			The density values in the triangle areas
+
+		outer_value: float
+			The density value out of triangles		
+		"""
+		self.vertices = np.array(vertices)
+		self.triangles = np.array(triangles, dtype=int)
+		self.values = np.array(values)
+		self.outer_value = outer_value
+
+		if self.triangles.max() + 1 > len(self.vertices):
+			raise ValueError(f'The triangles contain more vertices than given')
+
+	def __call__(self, x, y):
+		"""
+		"""
+		x = np.asarray(x)
+		y = np.asarray(y)
+		if x.shape != y.shape:
+			raise ValueError(f'x and y shoud be the same dimension, but: x.shape={x.shape}, y.shape={y.shape}')
+		original_shape = x.shape
+		x = x.reshape(-1)
+		y = y.reshape(-1)
+
+		triangles = self.vertices[self.triangles]
+		triangle_areas = calculate_triangle_areas(triangles)
+		triangles_contain_point = is_triangle_containing_point(triangles, x, y)
+
+		res = np.ones(triangles_contain_point.shape)*self.values*triangle_areas
+		res_area = np.ones(triangles_contain_point.shape)*triangle_areas
+
+		res[~triangles_contain_point] = np.nan
+		res_area[~triangles_contain_point] = 0
+
+		res = res/res_area.sum(axis=1).reshape([res.shape[0], 1])
+		res = np.nansum(res, axis=1)
+
+		res = res.reshape(original_shape)
+
+		return res
+
+	def __add__(self, other):
+		"""
+		"""
+		pass
+
+
+
+	def min(self):
+		"""
+		"""
+		return np.append(self.values, self.outer_value).min()
+
+	def max(self):
+		"""
+		"""
+		return np.append(self.values, self.outer_value).max()
+
+	def show(self, cmap='Blues', alpha=None, vmin=None, vmax=None, ax=None, ignore=0, **kwargs):
+		"""
+		"""
+		if ax is None:
+			ax = plt.gca()
+
+		cmap = plt.get_cmap(cmap)
+
+		if vmin is None:
+			vmin = self.min()
+		if vmax is None:
+			vmax = self.max()
+		if vmin == vmax:
+			if vmin == 0:
+				vmin, vmax = 0, 1
+			else:
+				vmin, vmax = np.sort([0, vmin])
+
+		for triangle, value in zip(self.triangles, self.values):
+			x, y = self.vertices[np.append(triangle, triangle[0])].transpose()
+			try:
+				if not ignore(value):
+					val = (value - vmin)/(vmax - vmin)
+					col = cmap(val, alpha=alpha)
+					ax.fill(x, y, color=col, **kwargs)
+			except TypeError:
+				if value != ignore:
+					val = (value - vmin)/(vmax - vmin)
+					col = cmap(val, alpha=alpha)
+					ax.fill(x, y, color=col, **kwargs)
+
+		# create and return mappable object
+		norm = Normalize(vmin=vmin, vmax=vmax)
+		sm = ScalarMappable(cmap=cmap, norm=norm)
+		return sm
