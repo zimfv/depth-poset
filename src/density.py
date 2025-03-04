@@ -7,13 +7,17 @@ So these classes also should contain integral method.
 Now there is only SquareDensity class is realised, but this gives an unstable metric.
 '''
 
-
+# base
 import numpy as np
 
+# poset
 from src.depth import DepthPoset
 
-from src.planar_geometry import calculate_triangle_areas, is_triangle_containing_point
+# geometry
+import triangle
+from src import planar_geometry
 
+# ploting
 from matplotlib import pyplot as plt
 from matplotlib.colors import Normalize
 from matplotlib.cm import ScalarMappable
@@ -250,8 +254,8 @@ class TriangulationDensity(Density):
 		y = y.reshape(-1)
 
 		triangles = self.vertices[self.triangles]
-		triangle_areas = calculate_triangle_areas(triangles)
-		triangles_contain_point = is_triangle_containing_point(triangles, x, y)
+		triangle_areas = planar_geometry.calculate_triangle_areas(triangles)
+		triangles_contain_point = planar_geometry.is_triangle_containing_point(triangles, x, y)
 
 		res = np.ones(triangles_contain_point.shape)*self.values*triangle_areas
 		res_area = np.ones(triangles_contain_point.shape)*triangle_areas
@@ -267,11 +271,52 @@ class TriangulationDensity(Density):
 		return res
 
 	def __add__(self, other):
+		# works for generic cases
 		"""
 		"""
-		pass
+		# get new points and segments
+		segments0 = np.concatenate([self.triangles[:, [0, 1]], self.triangles[:, [0, 2]], self.triangles[:, [1, 2]], ], axis=0)
+		segments0 = np.sort(segments0, axis=1)
+		segments0 = np.unique(segments0, axis=0)
+		segments1 = np.concatenate([other.triangles[:, [0, 1]], other.triangles[:, [0, 2]], other.triangles[:, [1, 2]], ], axis=0)
+		segments1 = np.sort(segments1, axis=1)
+		segments1 = np.unique(segments1, axis=0)
 
+		vertices = np.concatenate([self.vertices, other.vertices], axis=0)
+		segments = np.concatenate([segments0, segments1 + len(self.vertices)], axis=0)
 
+		new_vertices, new_segments = planar_geometry.get_uncrossed_segments(vertices, segments)
+
+		# compute constrained triangulation
+		triangulation = triangle.triangulate(dict(vertices=new_vertices, segments=new_segments))
+		new_triangles = triangulation['triangles']
+
+		# compute new values
+		new_centers = new_vertices[new_triangles].mean(axis=1)
+		new_values = self(new_centers[:, 0], new_centers[:, 1]) + other(new_centers[:, 0], new_centers[:, 1])
+		new_outer_value = self.outer_value + other.outer_value
+
+		return TriangulationDensity(vertices=new_vertices, triangles=new_triangles, values=new_values, outer_value=new_outer_value)
+
+	def __mul__(self, num):
+		"""
+		"""
+		return TriangulationDensity(vertices=self.vertices, triangles=self.triangles, values=self.values*num, outer_value=self.outer_value*num)
+
+	def __sub__(self, other):
+		"""
+		"""
+		return self + (other*-1)
+
+	def __abs__(self):
+		"""
+		"""
+		return TriangulationDensity(vertices=self.vertices, triangles=self.triangles, values=abs(self.values), outer_value=abs(self.outer_value))
+
+	def __pow__(self, num):
+		"""
+		"""
+		return TriangulationDensity(vertices=self.vertices, triangles=self.triangles, values=self.values**num, outer_value=self.outer_value**num)
 
 	def min(self):
 		"""
@@ -283,7 +328,7 @@ class TriangulationDensity(Density):
 		"""
 		return np.append(self.values, self.outer_value).max()
 
-	def show(self, cmap='Blues', alpha=None, vmin=None, vmax=None, ax=None, ignore=0, **kwargs):
+	def show(self, cmap='Blues', alpha=None, vmin=None, vmax=None, ax=None, ignore=None, **kwargs):
 		"""
 		"""
 		if ax is None:
@@ -313,8 +358,98 @@ class TriangulationDensity(Density):
 					val = (value - vmin)/(vmax - vmin)
 					col = cmap(val, alpha=alpha)
 					ax.fill(x, y, color=col, **kwargs)
+		
+		# background
+		try:
+			if not ignore(self.outer_value):
+				val = (self.outer_value - vmin)/(vmax - vmin)
+				col = cmap(val, alpha=alpha)
+				ax.set_facecolor(col)
+		except TypeError:
+			if self.outer_value != ignore:
+				val = (self.outer_value - vmin)/(vmax - vmin)
+				col = cmap(val, alpha=alpha)
+				ax.set_facecolor(col)
 
 		# create and return mappable object
 		norm = Normalize(vmin=vmin, vmax=vmax)
 		sm = ScalarMappable(cmap=cmap, norm=norm)
 		return sm
+
+	def get_subsquare(self, xmin=-np.inf, xmax=np.inf, ymin=-np.inf, ymax=np.inf, outer_value=None):
+		"""
+		Returns the TriangulationDensity in square given by limit constarints.
+
+		Parameters:
+		-----------
+		xmin: float
+			Left horizontal limit
+
+		xmax: float
+			Right horizontal limit
+
+		ymin: float
+			Down vertical limit
+
+		ymax: float
+			Up vertical limit
+
+		outer_value: float
+			The outer value for new complex
+			Same as self.outer_value by default
+
+		Returns:
+		--------
+		TriangulationDensity
+		"""
+		if outer_value is None:
+			outer_value = self.outer_value
+
+		# clarify limits
+		xmin = max(xmin, self.vertices[:, 0].min())
+		xmax = min(xmax, self.vertices[:, 0].max())
+		ymin = max(ymin, self.vertices[:, 1].min())
+		ymax = min(ymax, self.vertices[:, 1].max())
+
+		# add limit segments to points 
+		new_vertices = np.concatenate([self.vertices, [[xmin, ymin], [xmin, ymax], [xmax, ymax], [xmax, ymin]]], axis=0)
+		new_segments = np.concatenate([self.triangles[:, [0, 1]], 
+									   self.triangles[:, [0, 2]], 
+									   self.triangles[:, [1, 2]], 
+									   len(self.vertices) + np.array([[0, 1], [1, 2], [2, 3], [0, 3]])])
+		new_segments = np.sort(new_segments, axis=1)
+		new_segments = np.unique(new_segments, axis=0)
+		new_vertices, new_segments = planar_geometry.get_uncrossed_segments(new_vertices, new_segments)
+
+		# compute constrained triangulation
+		triangulation = triangle.triangulate(dict(vertices=new_vertices, segments=new_segments))
+		new_triangles = triangulation['triangles']
+
+		# remove triangles out of limits
+		new_centers = new_vertices[new_triangles].mean(axis=1)
+		new_triangles = new_triangles[(new_centers[:, 0] >= xmin)&(new_centers[:, 0] <= xmax)&(new_centers[:, 1] >= ymin)&(new_centers[:, 1] <= ymax)]
+
+		# compute new values
+		new_centers = new_vertices[new_triangles].mean(axis=1)
+		new_values = self(new_centers[:, 0], new_centers[:, 1])
+
+		return TriangulationDensity(vertices=new_vertices, triangles=new_triangles, values=new_values, outer_value=outer_value)
+
+	def integral(self, xmin=-np.inf, xmax=np.inf, ymin=-np.inf, ymax=np.inf):
+		"""
+		"""
+		if np.isin([xmin, xmax, ymin, ymax], [-np.inf, np.inf]).any():
+			if self.outer_value < 0:
+				return -np.inf
+			if self.outer_value > 0:
+				return +np.inf
+		
+		subsquare = self.get_subsquare(xmin=xmin, xmax=xmax, ymin=ymin, ymax=ymax, outer_value=0)
+		
+		triangles = subsquare.vertices[subsquare.triangles]
+		centers = triangles.mean(axis=1)
+		values = subsquare(centers[:, 0], centers[:, 1])
+		areas = planar_geometry.calculate_triangle_areas(triangles)
+
+		return (values*areas).sum()
+

@@ -1,3 +1,4 @@
+import itertools
 import numpy as np
 
 
@@ -237,4 +238,81 @@ def segments_intersect(a0, a1, b0, b1):
 
 	return c
 
+def get_uncrossed_segments(points, segments):
+    """
+    For given points and segments on plane returns new pack of points and segments,
+    such that there the crosses devide segments to new 4.
 
+    P.s.: This should work only for generic cases.
+    
+    Parameters:
+    -----------
+    points: np.array shape (n, 2)
+        Points coordinates
+
+    segments: np.array shape (k, 2) dtype=int
+        Indices of segments ends
+
+    Returns:
+    --------
+    new_points: np.array shape (new_n, 2)
+        Points coordinates
+
+    new_segments: np.array shape (new_k, 2) dtype=int
+        Indices of segments ends
+    """
+    # define pairs
+    segment_pairs = np.array(list(itertools.combinations(segments, 2)))
+    segment_pairs_ends = points[segment_pairs]
+
+    # find crossing segments, which crosses are not their ends
+    nontrivial_cross = segments_intersect(segment_pairs_ends[:, 0, 0], segment_pairs_ends[:, 0, 1], 
+                                          segment_pairs_ends[:, 1, 0], segment_pairs_ends[:, 1, 1])
+    nontrivial_cross = nontrivial_cross & (segment_pairs[:, 0, 0] != segment_pairs[:, 1, 0])
+    nontrivial_cross = nontrivial_cross & (segment_pairs[:, 0, 0] != segment_pairs[:, 1, 1])
+    nontrivial_cross = nontrivial_cross & (segment_pairs[:, 0, 1] != segment_pairs[:, 1, 0])
+    nontrivial_cross = nontrivial_cross & (segment_pairs[:, 0, 1] != segment_pairs[:, 1, 1])
+
+    # find new points - add crosses
+    crossing_segment_pairs = segment_pairs[nontrivial_cross]
+    points_a0 = points[crossing_segment_pairs[:, 0, 0]]
+    points_b0 = points[crossing_segment_pairs[:, 1, 0]]
+    points_b1 = points[crossing_segment_pairs[:, 1, 1]]
+    points_a1 = points[crossing_segment_pairs[:, 0, 1]]
+    
+    new_points = get_lines_intersections(points_a0, points_a1 - points_a0, points_b0, points_b1 - points_b0)
+    new_points = np.concatenate([points, new_points])
+
+    # define which new point indices devide old segments
+    changing_segments = {}
+    for edge in np.concatenate(crossing_segment_pairs):
+        changing_segments.update({tuple(np.sort(edge)): []})
+    for i, (edge0, edge1) in enumerate(crossing_segment_pairs):
+        changing_segments[tuple(np.sort(edge0))].append(i + len(points))
+        changing_segments[tuple(np.sort(edge1))].append(i + len(points))
+
+    def sort_by_distances(i0, i1, i_between=[]):
+        # sort list of indices s.t. the coresponding points are consistently located between points with indices i0 and i1
+        if len(i_between) == 0:
+            return [i0, i1]
+        i_min = i_between[0]
+        for i in i_between:
+            if np.linalg.norm(new_points[i0] - new_points[i]) < np.linalg.norm(new_points[i0] - new_points[i_min]):
+                i_min = i
+        return np.append(i0, sort_by_distances(i0=i_min, i1=i1, i_between=list(set(i_between) - {i_min})))
+
+    # reorder list of segment deviders
+    for i0, i1 in changing_segments.keys():
+        changing_segments[(i0, i1)] = sort_by_distances(i0, i1, i_between=changing_segments[(i0, i1)])
+
+    # find new segments
+    segments_to_remove = np.sort(list(changing_segments.keys()), axis=1)
+    segments_to_add = [np.transpose([value[:-1], value[1:]]) for value in changing_segments.values()]
+    segments_to_add = np.concatenate(segments_to_add)
+    segments_to_add = np.sort(segments_to_add, axis=1)
+    
+    new_segments = np.sort(segments, axis=1)
+    new_segments = new_segments[~np.any(np.all(new_segments[:, None] == segments_to_remove, axis=2), axis=1)]
+    new_segments = np.concatenate([new_segments, segments_to_add], axis=0)
+    
+    return new_points, new_segments
