@@ -238,81 +238,154 @@ def segments_intersect(a0, a1, b0, b1):
 
 	return c
 
-def get_uncrossed_segments(points, segments):
-    """
-    For given points and segments on plane returns new pack of points and segments,
-    such that there the crosses devide segments to new 4.
+def segment_contains_point(a0, a1, p, include_ends=False):
+	"""
+	Returns does the given segment contain the point
 
-    P.s.: This should work only for generic cases.
-    
-    Parameters:
-    -----------
-    points: np.array shape (n, 2)
-        Points coordinates
+	Parameters:
+	-----------
+	a0: np.array shape (..., 2)
+		The ends of the segments
 
-    segments: np.array shape (k, 2) dtype=int
-        Indices of segments ends
+	a1: np.array shape (..., 2)
+		The ends of the segments
 
-    Returns:
-    --------
-    new_points: np.array shape (new_n, 2)
-        Points coordinates
+	p: np.array shape (..., 2)
+		The cords of the points
 
-    new_segments: np.array shape (new_k, 2) dtype=int
-        Indices of segments ends
-    """
-    # define pairs
-    segment_pairs = np.array(list(itertools.combinations(segments, 2)))
-    segment_pairs_ends = points[segment_pairs]
+	include_ends: bool
+		Include segment ends if this is True
 
-    # find crossing segments, which crosses are not their ends
-    nontrivial_cross = segments_intersect(segment_pairs_ends[:, 0, 0], segment_pairs_ends[:, 0, 1], 
-                                          segment_pairs_ends[:, 1, 0], segment_pairs_ends[:, 1, 1])
-    nontrivial_cross = nontrivial_cross & (segment_pairs[:, 0, 0] != segment_pairs[:, 1, 0])
-    nontrivial_cross = nontrivial_cross & (segment_pairs[:, 0, 0] != segment_pairs[:, 1, 1])
-    nontrivial_cross = nontrivial_cross & (segment_pairs[:, 0, 1] != segment_pairs[:, 1, 0])
-    nontrivial_cross = nontrivial_cross & (segment_pairs[:, 0, 1] != segment_pairs[:, 1, 1])
+	Returns:
+	--------
+	res: np.array shape (..., ...) dtype bool
+	"""
+	a0 = np.asarray(a0)
+	a1 = np.asarray(a1)
+	p = np.asarray(p)
 
-    # find new points - add crosses
-    crossing_segment_pairs = segment_pairs[nontrivial_cross]
-    points_a0 = points[crossing_segment_pairs[:, 0, 0]]
-    points_b0 = points[crossing_segment_pairs[:, 1, 0]]
-    points_b1 = points[crossing_segment_pairs[:, 1, 1]]
-    points_a1 = points[crossing_segment_pairs[:, 0, 1]]
-    
-    new_points = get_lines_intersections(points_a0, points_a1 - points_a0, points_b0, points_b1 - points_b0)
-    new_points = np.concatenate([points, new_points])
+	if (a0.shape != a1.shape):
+		msg = f'The segment ends dimensions should be equal, but:\na0.shape={a0.shape}; a1.shape.shape={a1.shape.shape}'
+		raise ValueError(msg)
+	if (a0.shape[-1] != 2) or (p.shape[-1] != 2):
+		msg = f'The points and segment ends should be on 2-dimensional plane (i.e. the last dimension should be equal 2), but a0.shape={a0.shape}, a1.shape={a1.shape}, p.shape={p.shape}'
+		raise ValueError(msg)
+	a_shape = a0.shape
+	p_shape = p.shape
+	a0 = a0.reshape(-1, 2)
+	a1 = a1.reshape(-1, 2)
+	p = p.reshape(-1, 2)
 
-    # define which new point indices devide old segments
-    changing_segments = {}
-    for edge in np.concatenate(crossing_segment_pairs):
-        changing_segments.update({tuple(np.sort(edge)): []})
-    for i, (edge0, edge1) in enumerate(crossing_segment_pairs):
-        changing_segments[tuple(np.sort(edge0))].append(i + len(points))
-        changing_segments[tuple(np.sort(edge1))].append(i + len(points))
+	a_n = len(a0)
+	p_n = len(p)
 
-    def sort_by_distances(i0, i1, i_between=[]):
-        # sort list of indices s.t. the coresponding points are consistently located between points with indices i0 and i1
-        if len(i_between) == 0:
-            return [i0, i1]
-        i_min = i_between[0]
-        for i in i_between:
-            if np.linalg.norm(new_points[i0] - new_points[i]) < np.linalg.norm(new_points[i0] - new_points[i_min]):
-                i_min = i
-        return np.append(i0, sort_by_distances(i0=i_min, i1=i1, i_between=list(set(i_between) - {i_min})))
+	a0 = np.ones([a_n, p_n, 2])*a0.reshape([a_n, 1, 2])
+	a1 = np.ones([a_n, p_n, 2])*a1.reshape([a_n, 1, 2])
+	p = np.ones([a_n, p_n, 2])*p
 
-    # reorder list of segment deviders
-    for i0, i1 in changing_segments.keys():
-        changing_segments[(i0, i1)] = sort_by_distances(i0, i1, i_between=changing_segments[(i0, i1)])
+	# I suppose this is not the most accurate solution
+	res = (np.linalg.norm(a0 - p, axis=2) + np.linalg.norm(a1 - p, axis=2)) == np.linalg.norm(a0 - a1, axis=2) 
+	if not include_ends:
+		res = res & (a0 != p).any(axis=2) & (a1 != p).any(axis=2)
+	res = res.reshape(np.concatenate([a_shape[:-1], p_shape[:-1], ]).astype(int))
+	return res
 
-    # find new segments
-    segments_to_remove = np.sort(list(changing_segments.keys()), axis=1)
-    segments_to_add = [np.transpose([value[:-1], value[1:]]) for value in changing_segments.values()]
-    segments_to_add = np.concatenate(segments_to_add)
-    segments_to_add = np.sort(segments_to_add, axis=1)
-    
-    new_segments = np.sort(segments, axis=1)
-    new_segments = new_segments[~np.any(np.all(new_segments[:, None] == segments_to_remove, axis=2), axis=1)]
-    new_segments = np.concatenate([new_segments, segments_to_add], axis=0)
-    
-    return new_points, new_segments
+
+def get_uncrossed_segments(points, segments, decimals=12):
+	"""
+	For given points and segments on plane returns new pack of points and segments,
+	such that there the crosses devide segments to new 4.
+
+	P.s.: This should work only for generic cases.
+	
+	Parameters:
+	-----------
+	points: np.array shape (n, 2)
+		Points coordinates
+
+	segments: np.array shape (k, 2) dtype=int
+		Indices of segments ends
+
+	decimals: int
+		Number of decimal places to round to (default: 12). If decimals is negative, 
+		it specifies the number of positions to the left of the decimal point.
+
+	Returns:
+	--------
+	new_points: np.array shape (new_n, 2)
+		Points coordinates
+
+	new_segments: np.array shape (new_k, 2) dtype=int
+		Indices of segments ends
+	"""
+	# define pairs
+	segment_pairs = np.array(list(itertools.combinations(segments, 2)))
+	segment_pairs_ends = points[segment_pairs]
+
+	# find crossing segments, which crosses are not their ends
+	nontrivial_cross = segments_intersect(segment_pairs_ends[:, 0, 0], segment_pairs_ends[:, 0, 1], 
+										  segment_pairs_ends[:, 1, 0], segment_pairs_ends[:, 1, 1])
+	nontrivial_cross = nontrivial_cross & (segment_pairs[:, 0, 0] != segment_pairs[:, 1, 0])
+	nontrivial_cross = nontrivial_cross & (segment_pairs[:, 0, 0] != segment_pairs[:, 1, 1])
+	nontrivial_cross = nontrivial_cross & (segment_pairs[:, 0, 1] != segment_pairs[:, 1, 0])
+	nontrivial_cross = nontrivial_cross & (segment_pairs[:, 0, 1] != segment_pairs[:, 1, 1])
+
+	# find new points - add crosses
+	crossing_segment_pairs = segment_pairs[nontrivial_cross]
+	points_a0 = points[crossing_segment_pairs[:, 0, 0]]
+	points_b0 = points[crossing_segment_pairs[:, 1, 0]]
+	points_b1 = points[crossing_segment_pairs[:, 1, 1]]
+	points_a1 = points[crossing_segment_pairs[:, 0, 1]]
+	
+	new_points = get_lines_intersections(points_a0, points_a1 - points_a0, points_b0, points_b1 - points_b0)
+	new_points = np.concatenate([points, new_points])
+
+	# define which new point indices devide old segments
+	changing_segments = {}
+	for edge in np.concatenate(crossing_segment_pairs):
+		changing_segments.update({tuple(np.sort(edge)): []})
+	for i, (edge0, edge1) in enumerate(crossing_segment_pairs):
+		changing_segments[tuple(np.sort(edge0))].append(i + len(points))
+		changing_segments[tuple(np.sort(edge1))].append(i + len(points))
+
+	def sort_by_distances(i0, i1, i_between=[]):
+		# sort list of indices s.t. the coresponding points are consistently located between points with indices i0 and i1
+		if len(i_between) == 0:
+			return [i0, i1]
+		i_min = i_between[0]
+		for i in i_between:
+			if np.linalg.norm(new_points[i0] - new_points[i]) < np.linalg.norm(new_points[i0] - new_points[i_min]):
+				i_min = i
+		return np.append(i0, sort_by_distances(i0=i_min, i1=i1, i_between=list(set(i_between) - {i_min})))
+
+	# reorder list of segment dividers
+	for i0, i1 in changing_segments.keys():
+		changing_segments[(i0, i1)] = sort_by_distances(i0, i1, i_between=changing_segments[(i0, i1)])
+	
+	# find new segments
+	if len(changing_segments) == 0:
+		segments_to_remove = np.zeros([0, 2])
+		segments_to_add = np.zeros([0, 2])
+	else:
+		segments_to_remove = np.sort(list(changing_segments.keys()), axis=1)
+		segments_to_add = [np.transpose([value[:-1], value[1:]]) for value in changing_segments.values()]
+		segments_to_add = np.concatenate(segments_to_add)
+		segments_to_add = np.sort(segments_to_add, axis=1)
+
+	# filter and sort new segments
+	new_segments = np.sort(segments, axis=1)
+	new_segments = new_segments[~np.any(np.all(new_segments[:, None] == segments_to_remove, axis=2), axis=1)]
+	new_segments = np.concatenate([new_segments, segments_to_add], axis=0)
+	
+	# reindexing
+	new_points = new_points.round(decimals) # rounding
+	new_points_reindexed = np.unique(new_points, axis=0)
+	
+	reindex_dict = {i: np.where((new_points == new_points_reindexed[[i]]).all(axis=1))[0] for i in range(len(new_points_reindexed))}
+	new_segments_reindexed = np.empty(new_segments.shape, dtype=int)
+	for new_index in reindex_dict:
+		for old_index in reindex_dict[new_index]:
+			new_segments_reindexed[new_segments == old_index] = new_index
+
+	#return new_points, new_segments
+	return new_points_reindexed, new_segments_reindexed

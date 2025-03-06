@@ -14,7 +14,7 @@ import numpy as np
 from src.depth import DepthPoset
 
 # geometry
-import triangle
+import triangle as tr
 from src import planar_geometry
 
 # ploting
@@ -288,7 +288,8 @@ class TriangulationDensity(Density):
 		new_vertices, new_segments = planar_geometry.get_uncrossed_segments(vertices, segments)
 
 		# compute constrained triangulation
-		triangulation = triangle.triangulate(dict(vertices=new_vertices, segments=new_segments))
+		triangulation = tr.triangulate({'vertices': new_vertices, 'segments': new_segments}, 'p') # preserve
+		new_vertices = triangulation['vertices']
 		new_triangles = triangulation['triangles']
 
 		# compute new values
@@ -406,24 +407,33 @@ class TriangulationDensity(Density):
 			outer_value = self.outer_value
 
 		# clarify limits
-		xmin = max(xmin, self.vertices[:, 0].min())
-		xmax = min(xmax, self.vertices[:, 0].max())
-		ymin = max(ymin, self.vertices[:, 1].min())
-		ymax = min(ymax, self.vertices[:, 1].max())
+		if xmin == -np.inf:
+			xmin = self.vertices[:, 0].min()
+		if xmax == +np.inf:
+			xmax = self.vertices[:, 0].max()
+		if ymin == -np.inf:
+			ymin = self.vertices[:, 1].min()
+		if ymax == +np.inf:
+			ymax = self.vertices[:, 1].max()
 
 		# add limit segments to points 
-		new_vertices = np.concatenate([self.vertices, [[xmin, ymin], [xmin, ymax], [xmax, ymax], [xmax, ymin]]], axis=0)
-		new_segments = np.concatenate([self.triangles[:, [0, 1]], 
-									   self.triangles[:, [0, 2]], 
-									   self.triangles[:, [1, 2]], 
-									   len(self.vertices) + np.array([[0, 1], [1, 2], [2, 3], [0, 3]])])
-		new_segments = np.sort(new_segments, axis=1)
-		new_segments = np.unique(new_segments, axis=0)
-		new_vertices, new_segments = planar_geometry.get_uncrossed_segments(new_vertices, new_segments)
+		vertices = np.concatenate([self.vertices, [[xmin, ymin], [xmin, ymax], [xmax, ymax], [xmax, ymin]]], axis=0)
+		segments = np.concatenate([self.triangles[:, [0, 1]], 
+								   self.triangles[:, [0, 2]], 
+								   self.triangles[:, [1, 2]], 
+								   len(self.vertices) + np.array([[0, 1], [1, 2], [2, 3], [0, 3]])])
+		segments = np.sort(segments, axis=1)
+		segments = np.unique(segments, axis=0)
+		new_vertices, new_segments = planar_geometry.get_uncrossed_segments(vertices, segments)
+		#print('get_subsquare [427]: new_vertices, new_segments = planar_geometry.get_uncrossed_segments(vertices, segments)')
+		#print(f'new_vertices = {new_vertices.__repr__()}')
+		#print(f'new_segments = {new_segments.__repr__()}')
 
 		# compute constrained triangulation
-		triangulation = triangle.triangulate(dict(vertices=new_vertices, segments=new_segments))
+		triangulation = tr.triangulate({'vertices': new_vertices, 'segments': new_segments}, 'p') # preserve (same in __add__)
+		new_vertices = triangulation['vertices']
 		new_triangles = triangulation['triangles']
+
 
 		# remove triangles out of limits
 		new_centers = new_vertices[new_triangles].mean(axis=1)
