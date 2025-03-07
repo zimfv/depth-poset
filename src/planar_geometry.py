@@ -238,7 +238,7 @@ def segments_intersect(a0, a1, b0, b1):
 
 	return c
 
-def segment_contains_point(a0, a1, p, include_ends=False):
+def segment_contains_point(a0, a1, p, include_ends=False, decimals=12):
 	"""
 	Returns does the given segment contain the point
 
@@ -255,6 +255,10 @@ def segment_contains_point(a0, a1, p, include_ends=False):
 
 	include_ends: bool
 		Include segment ends if this is True
+
+	decimals: int
+		Number of decimal places to round to (default: 12). If decimals is negative, 
+		it specifies the number of positions to the left of the decimal point.
 
 	Returns:
 	--------
@@ -284,12 +288,11 @@ def segment_contains_point(a0, a1, p, include_ends=False):
 	p = np.ones([a_n, p_n, 2])*p
 
 	# I suppose this is not the most accurate solution
-	res = (np.linalg.norm(a0 - p, axis=2) + np.linalg.norm(a1 - p, axis=2)) == np.linalg.norm(a0 - a1, axis=2) 
+	res = np.round(np.linalg.norm(a0 - p, axis=2) + np.linalg.norm(a1 - p, axis=2), decimals) == np.round(np.linalg.norm(a0 - a1, axis=2), decimals) 
 	if not include_ends:
 		res = res & (a0 != p).any(axis=2) & (a1 != p).any(axis=2)
 	res = res.reshape(np.concatenate([a_shape[:-1], p_shape[:-1], ]).astype(int))
 	return res
-
 
 def get_uncrossed_segments(points, segments, decimals=12):
 	"""
@@ -339,10 +342,15 @@ def get_uncrossed_segments(points, segments, decimals=12):
 	
 	new_points = get_lines_intersections(points_a0, points_a1 - points_a0, points_b0, points_b1 - points_b0)
 	new_points = np.concatenate([points, new_points])
-
+	
+	if len(crossing_segment_pairs) == 0:
+		edges_in_crossing_segment_pairs = []
+	else:
+		edges_in_crossing_segment_pairs = np.concatenate(crossing_segment_pairs)
+	
 	# define which new point indices devide old segments
 	changing_segments = {}
-	for edge in np.concatenate(crossing_segment_pairs):
+	for edge in edges_in_crossing_segment_pairs:
 		changing_segments.update({tuple(np.sort(edge)): []})
 	for i, (edge0, edge1) in enumerate(crossing_segment_pairs):
 		changing_segments[tuple(np.sort(edge0))].append(i + len(points))
@@ -386,6 +394,10 @@ def get_uncrossed_segments(points, segments, decimals=12):
 	for new_index in reindex_dict:
 		for old_index in reindex_dict[new_index]:
 			new_segments_reindexed[new_segments == old_index] = new_index
+
+	# sort and make unique
+	#new_segments_reindexed = np.sort(new_segments_reindexed, axis=1)
+	#new_segments_reindexed = np.unique(new_segments_reindexed, axis=0)
 
 	#return new_points, new_segments
 	return new_points_reindexed, new_segments_reindexed

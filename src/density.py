@@ -25,7 +25,6 @@ from matplotlib.cm import ScalarMappable
 
 
 
-
 class Density:
 	pass
 
@@ -240,7 +239,9 @@ class TriangulationDensity(Density):
 		self.outer_value = outer_value
 
 		if self.triangles.max() + 1 > len(self.vertices):
-			raise ValueError(f'The triangles contain more vertices than given')
+			msg  =f'The triangles contain more vertices than given.\n'
+			msg += f'but triangles.max() = {self.triangles.max()} and vertices.shape={self.vertices.shape}'
+			raise ValueError(msg)
 
 	def __call__(self, x, y):
 		"""
@@ -265,6 +266,8 @@ class TriangulationDensity(Density):
 
 		res = res/res_area.sum(axis=1).reshape([res.shape[0], 1])
 		res = np.nansum(res, axis=1)
+
+		res[(~triangles_contain_point).all(axis=1)] = self.outer_value
 
 		res = res.reshape(original_shape)
 
@@ -318,6 +321,13 @@ class TriangulationDensity(Density):
 		"""
 		"""
 		return TriangulationDensity(vertices=self.vertices, triangles=self.triangles, values=self.values**num, outer_value=self.outer_value**num)
+
+	def __eq__(self, other):
+		"""
+		"""
+		centers = np.concatenate([self.vertices[self.triangles].mean(axis=0), other.vertices[other.triangles].mean(axis=0)])
+		return (self(centers[:, 0], centers[:, 1]) == other(centers[:, 0], centers[:, 1])).all() and (self.outer_value == other.outer_value)
+
 
 	def min(self):
 		"""
@@ -448,7 +458,7 @@ class TriangulationDensity(Density):
 	def integral(self, xmin=-np.inf, xmax=np.inf, ymin=-np.inf, ymax=np.inf):
 		"""
 		"""
-		if np.isin([xmin, xmax, ymin, ymax], [-np.inf, np.inf]).any():
+		if (abs(np.array([xmin, xmax, ymin, ymax])) == np.inf).any():
 			if self.outer_value < 0:
 				return -np.inf
 			if self.outer_value > 0:
