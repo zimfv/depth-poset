@@ -325,9 +325,21 @@ class TriangulationDensity(Density):
 	def __eq__(self, other):
 		"""
 		"""
-		centers = np.concatenate([self.vertices[self.triangles].mean(axis=0), other.vertices[other.triangles].mean(axis=0)])
-		return (self(centers[:, 0], centers[:, 1]) == other(centers[:, 0], centers[:, 1])).all() and (self.outer_value == other.outer_value)
+		# cehck vertices, centers of edges and centers of triangles
+		points = np.concatenate([self.vertices, 
+								 self.vertices[self.triangles[:, [0, 1]]].mean(axis=1), 
+								 self.vertices[self.triangles[:, [0, 2]]].mean(axis=1),  
+								 self.vertices[self.triangles[:, [1, 2]]].mean(axis=1), 
+								 self.vertices[self.triangles].mean(axis=1), 
+								 other.vertices, 
+								 other.vertices[other.triangles[:, [0, 1]]].mean(axis=1), 
+								 other.vertices[other.triangles[:, [0, 2]]].mean(axis=1), 
+								 other.vertices[other.triangles[:, [1, 2]]].mean(axis=1), 
+								 other.vertices[other.triangles].mean(axis=1), 
+								])
+		points = np.unique(points, axis=0)
 
+		return (self(points[:, 0], points[:, 1]) == other(points[:, 0], points[:, 1])).all() and (self.outer_value == other.outer_value)
 
 	def min(self):
 		"""
