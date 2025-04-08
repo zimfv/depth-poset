@@ -256,6 +256,21 @@ class DepthPoset(Poset):
 	@classmethod
 	def from_border_matrix(cls, border_matrix, dims, filter_values=None, sources=None):
 		"""
+		Parameters:
+		-----------
+		border_matrix: array size (N, N)
+			The value border_matrix[i, j] equals 1, if j-th cell is the border of i-th
+
+		dims: non-negative integer array length N
+			The dimensions of cells
+
+		filter_values: sorted float array length N, or None
+			The filtration values of the cells
+			The filtration values will be same is indexes if the argument is not be given
+
+		sources: array length N, or None
+			The source information about the cells
+			This will be None if the argument is not be given
 		"""
 		if filter_values is None:
 			filter_values = np.arange(len(border_matrix))
