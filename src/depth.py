@@ -2,6 +2,7 @@ import itertools
 import numpy as np
 import networkx as nx
 from src.poset import Poset
+from src.utils import iterate_cubical_cells
 
 from gudhi import SimplexTree
 
@@ -192,6 +193,62 @@ def get_ordered_border_matrix_from_simplex_tree(stree: SimplexTree):
 	matrix = np.zeros(shape, dtype=int)
 	matrix[col_indices, row_indices] = 1
 	return simplices, matrix
+
+
+def get_ordered_border_matrix_from_matrix_of_heights(heights, mode='simple'):
+	"""
+	Returns the border matrix of complex of square cells, given in the matrix
+
+	Parameters:
+	-----------
+	heights: np.ndarray
+		The matrix 
+
+	mode: str
+		...
+
+	Returns:
+	--------
+	sources: np.ndarray of tuples
+		The cells description: the indices of heights matrix coresponding the cell
+
+	matrix: 2-dimensional np.ndarray dtype bool
+		Border matrix
+        
+	dims: np.ndarray dtype int
+		The cells dimensions
+        
+	filter_values: np.ndarray dtype float
+		The filtration values
+	"""
+	heights = np.asarray(heights)
+	dim = heights.ndim
+
+	# define source cells
+	if mode.lower() == 'simple':
+		sources = np.array(list(iterate_cubical_cells(heights.shape, k=None, process=None)), dtype=object)
+	elif mode.lower() == 'torus':
+		pass
+		raise ValueError(f"Not yet realised mode: {mode.__repr__()}")
+	else:
+		raise ValueError(f"Unexpected mode: {mode.__repr__()}")
+
+	# define their dimension and filtration values
+	dims = np.array([dim - np.log(len(source))/np.log(2) for source in sources]).astype(int)
+	filter_values = np.array([min([heights[idx] for idx in source]) for source in sources])
+
+	# reorder
+	reorder = np.lexsort((dims, filter_values))
+	sources = sources[reorder]
+	dims = dims[reorder]
+	filter_values = filter_values[reorder]
+
+	# border matrix
+	matrix = np.zeros([len(sources), len(sources)], dtype=int)
+	for i, j in itertools.product(range(len(dims)), repeat=2):
+		matrix[i, j] = (dims[i] == dims[j] - 1) & (set(sources[i]) & set(sources[j]) == set(sources[j]))
+
+	return sources, matrix, dims, filter_values
 
 
 class ShallowPair:
