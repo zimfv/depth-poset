@@ -5,6 +5,8 @@ from matplotlib import pyplot as plt
 from matplotlib.colors import Normalize
 from matplotlib.cm import ScalarMappable
 
+from matplotlib import patheffects as path_effects
+
 
 def plot_simplex(simplex, points, color, ax=None, zorder=0, 
 				 pointwidth=1, marker='o', linewidth=2, linestyle='-', 
@@ -56,9 +58,16 @@ def plot_filtred_complex2d(stree: gh.SimplexTree, points, cmap='viridis', ax=Non
 					 hatch=None)
 	return sm
 
-def enumerate_points(points, color='black', ax=None):
+def enumerate_points(points, ax=None, fontdict=None, foreground='white', forewidth=0, **kwargs):
+	"""
+	"""
 	if ax is None:
 		ax = plt.gca()
 	for i, p in enumerate(points):
 		x, y = p*np.ones(2)
-		ax.text(x, y, i, color=color)
+		text = ax.text(x, y, i, fontdict=fontdict, **kwargs)
+		if not (foreground is None or forewidth is None):
+			text.set_path_effects([path_effects.Stroke(linewidth=forewidth, foreground=foreground), 
+						           path_effects.Normal()])
+	
+

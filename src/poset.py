@@ -130,7 +130,7 @@ class Poset:
 			if flag:
 				yield node
 
-	def hasse_layout(self, gap=1) -> dict:
+	def hasse_layout(self, gap=1, alignment_slope=0) -> dict:
 		"""
 		Returns the dict: keys are nodes and values are their positions.
 		The positions corresponds a Hasse diagram:
@@ -142,7 +142,18 @@ class Poset:
 		-----------
 		gap : float
 			The gap size between connected components
+		
+		alignment_slope : float
+			The slope of the layout line (tangent of the angle in radians) 
+			used to position nodes within the same level. A slope of 0 aligns 
+			nodes horizontally; a non-zero slope tilts the layout line accordingly.
 		"""
+		if alignment_slope != 0:
+			pos = self.hasse_layout(gap=gap, alignment_slope=0)
+			for key, (x, y) in pos.items():
+				pos[key] = (x, y + alignment_slope*x)
+			return pos
+
 		if self.number_connected_components() == 1:
 			graph = self.get_transitive_reduction()
 			levels = {}
