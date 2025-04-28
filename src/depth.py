@@ -188,7 +188,6 @@ def get_ordered_border_matrix_from_simplex_tree(stree: SimplexTree):
 			if j != -1:
 				col_indices.append(j)
 				row_indices.append(i)
-	data = np.ones(len(row_indices))
 	shape=[stree.num_simplices(), stree.num_simplices()]
 	matrix = np.zeros(shape, dtype=int)
 	matrix[col_indices, row_indices] = 1
