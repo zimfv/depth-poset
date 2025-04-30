@@ -41,6 +41,8 @@ def plot_simplex(simplex, points, color, ax=None, zorder=0,
 
 def plot_filtred_complex2d(stree: gh.SimplexTree, points, cmap='viridis', ax=None, vmin=None, vmax=None, zorder=0, 
 						   pointwidth=1, linewidth=2):
+	"""
+	"""
 	cmap = plt.get_cmap(cmap)
 
 	if vmin is None:
