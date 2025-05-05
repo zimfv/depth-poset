@@ -272,7 +272,9 @@ class ShallowPair:
 		return (self.birth_index == other.birth_index) and (self.death_index == other.death_index)
 
 	def __hash__(self):
-		return hash((self.birth_index, self.death_index))
+		if self.source is not None:
+			return hash(('source', self.source))
+		return hash(('birth-death index', self.birth_index, self.death_index))
 
 	def __str__(self):
 		# 

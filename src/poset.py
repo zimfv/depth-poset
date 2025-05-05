@@ -344,3 +344,13 @@ class Poset:
 				paths = nx.all_simple_paths(branching, source=root, target=leaf)
 				for path in paths:
 					yield [branching.nodes[i]['source'] for i in path]
+
+	def __eq__(self, other):
+		"""
+		Returns True, if all nodes and edges are similar
+		"""
+		if set(self.nodes) != set(other.nodes):
+			return False
+		if set(self.get_transitive_closure().edges) != set(other.get_transitive_closure().edges):
+			return False
+		return True
