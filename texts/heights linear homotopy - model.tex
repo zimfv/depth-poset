@@ -22,11 +22,26 @@ $$
 $$
 
 \subsection{Transpositions}
-\par In the Figure \ref{fig:homotopy} we can see the vertices height $h_t(v)$ during this homotopy. And the transpositions will happen, when these lines cross.
+\par In the Figure \ref{fig:homotopy} we can see the vertices height $h_t(v)$ during this homotopy. 
 \begin{figure}[h!]
     \centering
     \includegraphics[width=1.2\textwidth]{pics/heights linear homotopy - heights homotopy.png}
     \caption{Heights of Vertices during the Homotopy.}
     \label{fig:homotopy}
 \end{figure}
-\par ...
+\par When there is a cross of lines $h_t(i)$ and $h_t(j)$ ($t: h_t(i) = h_t(j)$) there is transposition of heights of vertices $i$ and $j$. This means that happens reordering in the filtration $f_t$. The order given by $f_{t - \varepsilon}$ changes to the order given by $f_{t + \varepsilon}$.
+\par Let's $h_t(i) < h_t(j)$. We can define 3 groups of simplices moved in the order:
+\begin{enumerate}
+    \item $A = \{\sigma: i \in \sigma, j\notin \sigma, \not\exists v\in \sigma: h(v) > h(j)\}$
+    \item $B = \{\sigma: i \notin \sigma, j\in \sigma, \not\exists v\in \sigma: h(v) > h(j)\}$
+    \item $C = \{\sigma: i \in \sigma, j\in \sigma, \not\exists v\in \sigma: h(v) > h(j)\}$
+\end{enumerate}
+
+In the order given by $f_{t - \varepsilon}$ the group $A$ stays on the first $\#A$ places, and in the order given by $f_{t + \varepsilon}$ the group $B$ stays on the first $\#B$ places.
+\par There are many paths of transpositions in the order, which brings us from the order $f_{t - \varepsilon}$ to the order $f_{t + \varepsilon}$ with the conctrain that $\sigma_0$ stays before $\sigma_1$ if $\sigma_0 \subset \sigma_1$. We difined 2 of them:
+\begin{itemize}
+    \item[Up directed] The first we move simplices of group $B$ to the first places, and then we move simplices to group $C$ to their places in $f_{t + \varepsilon}$.
+    % plot the example
+    \item[Down directed] The first we move simplices of group $C$ to the last places, and then we move simplices of group $A$ to their places in $f_{t + \varepsilon}$.
+    % plot the example
+\end{itemize}
