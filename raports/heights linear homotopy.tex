@@ -1,0 +1,44 @@
+\documentclass{article}
+\usepackage{amsfonts} 
+\usepackage{amsmath}
+\usepackage{hyperref}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{makecell}
+
+\begin{document}
+
+\section{Model}
+\subsection{Complex, Filtration and Homotopy}
+\par In this model we define the simplicial complex by the Delauney triangulation of $n = 10$ points uniformly distributed in $[0, 1]^d$ for $d = 2$.
+\par We defining the filtration on this complex, by assuming uniformly distributed in $[0, 1]$ height $h(f)$ for each vertex $v$. Then the filtration value of the simplex will be the maximum haight of its vertices.
+$$
+    f(\sigma) = \max_{v\in \sigma} h(v)
+$$
+\par We define 2 filtrations like this and study the linear homotopy between them. In the Figure \ref{fig:complex} we can see these 2 filtrations:
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=1.2\textwidth]{pics/heights linear homotopy - complex with filtrations.png}
+    \caption{2 filtrations on the defined complex.}
+    \label{fig:complex}
+\end{figure}
+
+\par Having these 2 filtrations we can define the homotopy between them by defining the linear homotopy between heights:
+$$
+    h_t(v) = h_0(v)\cdot(1 - t) + h_1(v)\cdot t
+$$
+$$
+    f_t(\sigma) = \max_{v\in \sigma} h_t(v)
+$$
+
+\subsection{Transpositions}
+\par In the Figure \ref{fig:homotopy} we can see the vertices height $h_t(v)$ during this homotopy. And the transpositions will happen, when these lines cross.
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=1.2\textwidth]{pics/heights linear homotopy - heights homotopy.png}
+    \caption{Heights of Vertices during the Homotopy.}
+    \label{fig:homotopy}
+\end{figure}
+\par ...
+
+\end{document}
