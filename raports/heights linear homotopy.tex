@@ -5,8 +5,14 @@
 \usepackage{graphicx}
 \usepackage{booktabs}
 \usepackage{makecell}
+\usepackage{multirow}
+%\usepackage{placeins}
 
 \begin{document}
+
+
+\tableofcontents
+\newpage
 
 \section{Model}
 \subsection{Complex, Filtration and Homotopy}
@@ -51,7 +57,502 @@ In the order given by $f_{t - \varepsilon}$ the group $A$ stays on the first $\#
 \par There are many paths of transpositions in the order, which brings us from the order $f_{t - \varepsilon}$ to the order $f_{t + \varepsilon}$ with the conctrain that $\sigma_0$ stays before $\sigma_1$ if $\sigma_0 \subset \sigma_1$. We difined 2 of them:
 \begin{itemize}
     \item[Up directed] The first we move simplices of group $B$ to the first places, and then we move simplices to group $C$ to their places in $f_{t + \varepsilon}$.
+    % plot the example
     \item[Down directed] The first we move simplices of group $C$ to the last places, and then we move simplices of group $A$ to their places in $f_{t + \varepsilon}$.
+    % plot the example
 \end{itemize}
+\newpage
+
+\section{General Statistics}
+\par In 2 paths generated 722 unique transpositions: 341 in only upper path, 341 in only down path and 40 in both paths.
+\par The distribution of the switch transposition types and dimensions is given in the table:
+\begin{center}
+\begin{tabular}{lrrrr}
+\toprule
+dim & 0 & 1 & 2 & undefined \\
+\midrule
+birth-birth & 1 & 1 & 0 & 0 \\
+birth-death & 0 & 12 & 0 & 0 \\
+death-death & 0 & 3 & 1 & 0 \\
+no switch & 43 & 192 & 53 & 416 \\
+\bottomrule
+\end{tabular}
+
+\end{center}
+
+\par And we can see more detailed table about how many simplex transpositions of each type lies in each reordering defined by the transposition of heights on vertices:
+\begin{center}
+\begin{tabular}{lllllrrrrrr}
+\toprule
+ &  &  &  & Type & \multicolumn{2}{r}{birth-birth} & birth-death & \multicolumn{2}{r}{death-death} & no switch \\
+ &  &  &  & Dim & 0 & 1 & 1 & 1 & 2 &  \\
+Time & Vertices & Value & Figure & Path &  &  &  &  &  &  \\
+\midrule
+\multirow[t]{2}{*}{0.044} & \multirow[t]{2}{*}{$\langle2, 3\rangle$} & \multirow[t]{2}{*}{0.491} & \multirow[t]{2}{*}{\ref{fig:transposition2and3}} & Up & 0 & 0 & 0 & 0 & 0 & 8 \\
+ &  &  &  & Down & 0 & 0 & 0 & 0 & 0 & 8 \\
+\cline{1-11} \cline{2-11} \cline{3-11} \cline{4-11}
+\multirow[t]{2}{*}{0.060} & \multirow[t]{2}{*}{$\langle0, 2\rangle$} & \multirow[t]{2}{*}{0.498} & \multirow[t]{2}{*}{\ref{fig:transposition0and2}} & Up & 0 & 0 & 2 & 1 & 0 & 6 \\
+ &  &  &  & Down & 0 & 0 & 2 & 1 & 0 & 6 \\
+\cline{1-11} \cline{2-11} \cline{3-11} \cline{4-11}
+\multirow[t]{2}{*}{0.126} & \multirow[t]{2}{*}{$\langle3, 5\rangle$} & \multirow[t]{2}{*}{0.450} & \multirow[t]{2}{*}{\ref{fig:transposition3and5}} & Up & 0 & 0 & 0 & 0 & 0 & 4 \\
+ &  &  &  & Down & 0 & 0 & 0 & 0 & 0 & 4 \\
+\cline{1-11} \cline{2-11} \cline{3-11} \cline{4-11}
+\multirow[t]{2}{*}{0.146} & \multirow[t]{2}{*}{$\langle0, 5\rangle$} & \multirow[t]{2}{*}{0.457} & \multirow[t]{2}{*}{\ref{fig:transposition0and5}} & Up & 0 & 0 & 0 & 0 & 0 & 2 \\
+ &  &  &  & Down & 0 & 0 & 0 & 0 & 0 & 2 \\
+\cline{1-11} \cline{2-11} \cline{3-11} \cline{4-11}
+\multirow[t]{2}{*}{0.193} & \multirow[t]{2}{*}{$\langle1, 2\rangle$} & \multirow[t]{2}{*}{0.555} & \multirow[t]{2}{*}{\ref{fig:transposition1and2}} & Up & 0 & 0 & 0 & 0 & 0 & 48 \\
+ &  &  &  & Down & 0 & 0 & 0 & 0 & 0 & 48 \\
+\cline{1-11} \cline{2-11} \cline{3-11} \cline{4-11}
+\multirow[t]{2}{*}{0.263} & \multirow[t]{2}{*}{$\langle3, 6\rangle$} & \multirow[t]{2}{*}{0.381} & \multirow[t]{2}{*}{\ref{fig:transposition3and6}} & Up & 0 & 0 & 2 & 0 & 1 & 10 \\
+ &  &  &  & Down & 0 & 1 & 2 & 0 & 0 & 10 \\
+\cline{1-11} \cline{2-11} \cline{3-11} \cline{4-11}
+\multirow[t]{2}{*}{0.286} & \multirow[t]{2}{*}{$\langle0, 6\rangle$} & \multirow[t]{2}{*}{0.390} & \multirow[t]{2}{*}{\ref{fig:transposition0and6}} & Up & 0 & 0 & 0 & 0 & 0 & 12 \\
+ &  &  &  & Down & 0 & 0 & 0 & 0 & 0 & 12 \\
+\cline{1-11} \cline{2-11} \cline{3-11} \cline{4-11}
+\multirow[t]{2}{*}{0.349} & \multirow[t]{2}{*}{$\langle3, 4\rangle$} & \multirow[t]{2}{*}{0.338} & \multirow[t]{2}{*}{\ref{fig:transposition3and4}} & Up & 0 & 0 & 0 & 0 & 0 & 4 \\
+ &  &  &  & Down & 0 & 0 & 0 & 0 & 0 & 4 \\
+\cline{1-11} \cline{2-11} \cline{3-11} \cline{4-11}
+\multirow[t]{2}{*}{0.373} & \multirow[t]{2}{*}{$\langle0, 4\rangle$} & \multirow[t]{2}{*}{0.348} & \multirow[t]{2}{*}{\ref{fig:transposition0and4}} & Up & 0 & 0 & 0 & 1 & 0 & 2 \\
+ &  &  &  & Down & 1 & 0 & 0 & 0 & 0 & 2 \\
+\cline{1-11} \cline{2-11} \cline{3-11} \cline{4-11}
+\multirow[t]{2}{*}{0.428} & \multirow[t]{2}{*}{$\langle2, 8\rangle$} & \multirow[t]{2}{*}{0.655} & \multirow[t]{2}{*}{\ref{fig:transposition2and8}} & Up & 0 & 0 & 0 & 0 & 0 & 36 \\
+ &  &  &  & Down & 0 & 0 & 0 & 0 & 0 & 36 \\
+\cline{1-11} \cline{2-11} \cline{3-11} \cline{4-11}
+\bottomrule
+\end{tabular}
+
+\begin{tabular}{lllllrrrrrr}
+\toprule
+ &  &  &  & Type & \multicolumn{2}{r}{birth-birth} & birth-death & \multicolumn{2}{r}{death-death} & no switch \\
+ &  &  &  & Dim & 0 & 1 & 1 & 1 & 2 &  \\
+Time & Vertices & Value & Figure & Path &  &  &  &  &  &  \\
+\midrule
+\multirow[t]{2}{*}{0.444} & \multirow[t]{2}{*}{$\langle1, 5\rangle$} & \multirow[t]{2}{*}{0.557} & \multirow[t]{2}{*}{\ref{fig:transposition1and5}} & Up & 0 & 0 & 0 & 0 & 0 & 16 \\
+ &  &  &  & Down & 0 & 0 & 0 & 0 & 0 & 16 \\
+\cline{1-11} \cline{2-11} \cline{3-11} \cline{4-11}
+\multirow[t]{2}{*}{0.451} & \multirow[t]{2}{*}{$\langle3, 7\rangle$} & \multirow[t]{2}{*}{0.286} & \multirow[t]{2}{*}{\ref{fig:transposition3and7}} & Up & 0 & 0 & 0 & 0 & 0 & 1 \\
+ &  &  &  & Down & 0 & 0 & 0 & 0 & 0 & 1 \\
+\cline{1-11} \cline{2-11} \cline{3-11} \cline{4-11}
+\multirow[t]{2}{*}{0.474} & \multirow[t]{2}{*}{$\langle0, 7\rangle$} & \multirow[t]{2}{*}{0.299} & \multirow[t]{2}{*}{\ref{fig:transposition0and7}} & Up & 0 & 0 & 0 & 0 & 0 & 2 \\
+ &  &  &  & Down & 0 & 0 & 0 & 0 & 0 & 2 \\
+\cline{1-11} \cline{2-11} \cline{3-11} \cline{4-11}
+\multirow[t]{2}{*}{0.523} & \multirow[t]{2}{*}{$\langle2, 9\rangle$} & \multirow[t]{2}{*}{0.696} & \multirow[t]{2}{*}{\ref{fig:transposition2and9}} & Up & 0 & 0 & 0 & 0 & 0 & 36 \\
+ &  &  &  & Down & 0 & 0 & 0 & 0 & 0 & 36 \\
+\cline{1-11} \cline{2-11} \cline{3-11} \cline{4-11}
+\multirow[t]{2}{*}{0.596} & \multirow[t]{2}{*}{$\langle8, 9\rangle$} & \multirow[t]{2}{*}{0.667} & \multirow[t]{2}{*}{\ref{fig:transposition8and9}} & Up & 0 & 0 & 0 & 0 & 0 & 24 \\
+ &  &  &  & Down & 0 & 0 & 0 & 0 & 0 & 24 \\
+\cline{1-11} \cline{2-11} \cline{3-11} \cline{4-11}
+\multirow[t]{2}{*}{0.677} & \multirow[t]{2}{*}{$\langle5, 9\rangle$} & \multirow[t]{2}{*}{0.636} & \multirow[t]{2}{*}{\ref{fig:transposition5and9}} & Up & 0 & 0 & 0 & 0 & 0 & 8 \\
+ &  &  &  & Down & 0 & 0 & 0 & 0 & 0 & 8 \\
+\cline{1-11} \cline{2-11} \cline{3-11} \cline{4-11}
+\multirow[t]{2}{*}{0.730} & \multirow[t]{2}{*}{$\langle1, 6\rangle$} & \multirow[t]{2}{*}{0.560} & \multirow[t]{2}{*}{\ref{fig:transposition1and6}} & Up & 0 & 0 & 0 & 0 & 0 & 48 \\
+ &  &  &  & Down & 0 & 0 & 0 & 0 & 0 & 48 \\
+\cline{1-11} \cline{2-11} \cline{3-11} \cline{4-11}
+\multirow[t]{2}{*}{0.802} & \multirow[t]{2}{*}{$\langle6, 9\rangle$} & \multirow[t]{2}{*}{0.587} & \multirow[t]{2}{*}{\ref{fig:transposition6and9}} & Up & 0 & 0 & 0 & 0 & 0 & 12 \\
+ &  &  &  & Down & 0 & 0 & 0 & 0 & 0 & 12 \\
+\cline{1-11} \cline{2-11} \cline{3-11} \cline{4-11}
+\multirow[t]{2}{*}{0.817} & \multirow[t]{2}{*}{$\langle5, 8\rangle$} & \multirow[t]{2}{*}{0.683} & \multirow[t]{2}{*}{\ref{fig:transposition5and8}} & Up & 0 & 0 & 0 & 0 & 0 & 16 \\
+ &  &  &  & Down & 0 & 0 & 0 & 0 & 0 & 16 \\
+\cline{1-11} \cline{2-11} \cline{3-11} \cline{4-11}
+\multirow[t]{2}{*}{0.870} & \multirow[t]{2}{*}{$\langle1, 9\rangle$} & \multirow[t]{2}{*}{0.561} & \multirow[t]{2}{*}{\ref{fig:transposition1and9}} & Up & 0 & 0 & 0 & 0 & 0 & 16 \\
+ &  &  &  & Down & 0 & 0 & 0 & 0 & 0 & 16 \\
+\cline{1-11} \cline{2-11} \cline{3-11} \cline{4-11}
+\multirow[t]{2}{*}{0.880} & \multirow[t]{2}{*}{$\langle4, 9\rangle$} & \multirow[t]{2}{*}{0.557} & \multirow[t]{2}{*}{\ref{fig:transposition4and9}} & Up & 0 & 0 & 0 & 0 & 0 & 3 \\
+ &  &  &  & Down & 0 & 0 & 0 & 0 & 0 & 3 \\
+\cline{1-11} \cline{2-11} \cline{3-11} \cline{4-11}
+\multirow[t]{2}{*}{0.890} & \multirow[t]{2}{*}{$\langle1, 4\rangle$} & \multirow[t]{2}{*}{0.561} & \multirow[t]{2}{*}{\ref{fig:transposition1and4}} & Up & 0 & 0 & 1 & 0 & 0 & 28 \\
+ &  &  &  & Down & 0 & 0 & 1 & 0 & 0 & 28 \\
+\cline{1-11} \cline{2-11} \cline{3-11} \cline{4-11}
+\multirow[t]{2}{*}{0.901} & \multirow[t]{2}{*}{$\langle7, 9\rangle$} & \multirow[t]{2}{*}{0.549} & \multirow[t]{2}{*}{\ref{fig:transposition7and9}} & Up & 0 & 0 & 0 & 0 & 0 & 2 \\
+ &  &  &  & Down & 0 & 0 & 0 & 0 & 0 & 2 \\
+\cline{1-11} \cline{2-11} \cline{3-11} \cline{4-11}
+\multirow[t]{2}{*}{0.923} & \multirow[t]{2}{*}{$\langle1, 7\rangle$} & \multirow[t]{2}{*}{0.562} & \multirow[t]{2}{*}{\ref{fig:transposition1and7}} & Up & 0 & 0 & 1 & 0 & 0 & 6 \\
+ &  &  &  & Down & 0 & 0 & 1 & 0 & 0 & 6 \\
+\cline{1-11} \cline{2-11} \cline{3-11} \cline{4-11}
+\multirow[t]{2}{*}{1.000} & \multirow[t]{2}{*}{$\langle4, 7\rangle$} & \multirow[t]{2}{*}{0.607} & \multirow[t]{2}{*}{\ref{fig:transposition4and7}} & Up & 0 & 0 & 0 & 0 & 0 & 22 \\
+ &  &  &  & Down & 0 & 0 & 0 & 0 & 0 & 22 \\
+\cline{1-11} \cline{2-11} \cline{3-11} \cline{4-11}
+\bottomrule
+\end{tabular}
+
+\end{center}
+\newpage 
+
+
+\section{Detalization of the process}
+\par Here we detalize the paths, how depth poset changed during the homotopy by different paths.
+\par In the figures we can see graphs, which edges coresponds the transpositions of simplices, and nodes are orders, coresponding one of 31 Depth Posets we got.
+%\subsection{Reordering by transposition of vertices 2 and 3}
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=1.2\textwidth]{pics/heights linear homotopy - transpositions 2-3.png}
+    \caption{Reordering by transposition of vertices 2 and 3}
+    \label{fig:transposition2and3}
+\end{figure}
+%\subsection{Reordering by transposition of vertices 0 and 2}
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=1.2\textwidth]{pics/heights linear homotopy - transpositions 0-2.png}
+    \caption{Reordering by transposition of vertices 0 and 2}
+    \label{fig:transposition0and2}
+\end{figure}
+%\subsection{Reordering by transposition of vertices 3 and 5}
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=1.2\textwidth]{pics/heights linear homotopy - transpositions 3-5.png}
+    \caption{Reordering by transposition of vertices 3 and 5}
+    \label{fig:transposition3and5}
+\end{figure}
+%\subsection{Reordering by transposition of vertices 0 and 5}
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=1.2\textwidth]{pics/heights linear homotopy - transpositions 0-5.png}
+    \caption{Reordering by transposition of vertices 0 and 5}
+    \label{fig:transposition0and5}
+\end{figure}
+%\subsection{Reordering by transposition of vertices 1 and 2}
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=1.2\textwidth]{pics/heights linear homotopy - transpositions 1-2.png}
+    \caption{Reordering by transposition of vertices 1 and 2}
+    \label{fig:transposition1and2}
+\end{figure}
+%\subsection{Reordering by transposition of vertices 3 and 6}
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=1.2\textwidth]{pics/heights linear homotopy - transpositions 3-6.png}
+    \caption{Reordering by transposition of vertices 3 and 6}
+    \label{fig:transposition3and6}
+\end{figure}
+%\subsection{Reordering by transposition of vertices 0 and 6}
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=1.2\textwidth]{pics/heights linear homotopy - transpositions 0-6.png}
+    \caption{Reordering by transposition of vertices 0 and 6}
+    \label{fig:transposition0and6}
+\end{figure}
+%\subsection{Reordering by transposition of vertices 3 and 4}
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=1.2\textwidth]{pics/heights linear homotopy - transpositions 3-4.png}
+    \caption{Reordering by transposition of vertices 3 and 4}
+    \label{fig:transposition3and4}
+\end{figure}
+%\subsection{Reordering by transposition of vertices 0 and 4}
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=1.2\textwidth]{pics/heights linear homotopy - transpositions 0-4.png}
+    \caption{Reordering by transposition of vertices 0 and 4}
+    \label{fig:transposition0and4}
+\end{figure}
+%\subsection{Reordering by transposition of vertices 2 and 8}
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=1.2\textwidth]{pics/heights linear homotopy - transpositions 2-8.png}
+    \caption{Reordering by transposition of vertices 2 and 8}
+    \label{fig:transposition2and8}
+\end{figure}
+%\subsection{Reordering by transposition of vertices 1 and 5}
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=1.2\textwidth]{pics/heights linear homotopy - transpositions 1-5.png}
+    \caption{Reordering by transposition of vertices 1 and 5}
+    \label{fig:transposition1and5}
+\end{figure}
+%\subsection{Reordering by transposition of vertices 3 and 7}
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=1.2\textwidth]{pics/heights linear homotopy - transpositions 3-7.png}
+    \caption{Reordering by transposition of vertices 3 and 7}
+    \label{fig:transposition3and7}
+\end{figure}
+%\subsection{Reordering by transposition of vertices 0 and 7}
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=1.2\textwidth]{pics/heights linear homotopy - transpositions 0-7.png}
+    \caption{Reordering by transposition of vertices 0 and 7}
+    \label{fig:transposition0and7}
+\end{figure}
+%\subsection{Reordering by transposition of vertices 2 and 9}
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=1.2\textwidth]{pics/heights linear homotopy - transpositions 2-9.png}
+    \caption{Reordering by transposition of vertices 2 and 9}
+    \label{fig:transposition2and9}
+\end{figure}
+%\subsection{Reordering by transposition of vertices 8 and 9}
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=1.2\textwidth]{pics/heights linear homotopy - transpositions 8-9.png}
+    \caption{Reordering by transposition of vertices 8 and 9}
+    \label{fig:transposition8and9}
+\end{figure}
+%\subsection{Reordering by transposition of vertices 5 and 9}
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=1.2\textwidth]{pics/heights linear homotopy - transpositions 5-9.png}
+    \caption{Reordering by transposition of vertices 5 and 9}
+    \label{fig:transposition5and9}
+\end{figure}
+%\subsection{Reordering by transposition of vertices 1 and 6}
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=1.2\textwidth]{pics/heights linear homotopy - transpositions 1-6.png}
+    \caption{Reordering by transposition of vertices 1 and 6}
+    \label{fig:transposition1and6}
+\end{figure}
+%\subsection{Reordering by transposition of vertices 6 and 9}
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=1.2\textwidth]{pics/heights linear homotopy - transpositions 6-9.png}
+    \caption{Reordering by transposition of vertices 6 and 9}
+    \label{fig:transposition6and9}
+\end{figure}
+%\subsection{Reordering by transposition of vertices 5 and 8}
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=1.2\textwidth]{pics/heights linear homotopy - transpositions 5-8.png}
+    \caption{Reordering by transposition of vertices 5 and 8}
+    \label{fig:transposition5and8}
+\end{figure}
+%\subsection{Reordering by transposition of vertices 1 and 9}
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=1.2\textwidth]{pics/heights linear homotopy - transpositions 1-9.png}
+    \caption{Reordering by transposition of vertices 1 and 9}
+    \label{fig:transposition1and9}
+\end{figure}
+%\subsection{Reordering by transposition of vertices 4 and 9}
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=1.2\textwidth]{pics/heights linear homotopy - transpositions 4-9.png}
+    \caption{Reordering by transposition of vertices 4 and 9}
+    \label{fig:transposition4and9}
+\end{figure}
+%\subsection{Reordering by transposition of vertices 1 and 4}
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=1.2\textwidth]{pics/heights linear homotopy - transpositions 1-4.png}
+    \caption{Reordering by transposition of vertices 1 and 4}
+    \label{fig:transposition1and4}
+\end{figure}
+%\subsection{Reordering by transposition of vertices 7 and 9}
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=1.2\textwidth]{pics/heights linear homotopy - transpositions 7-9.png}
+    \caption{Reordering by transposition of vertices 7 and 9}
+    \label{fig:transposition7and9}
+\end{figure}
+%\subsection{Reordering by transposition of vertices 1 and 7}
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=1.2\textwidth]{pics/heights linear homotopy - transpositions 1-7.png}
+    \caption{Reordering by transposition of vertices 1 and 7}
+    \label{fig:transposition1and7}
+\end{figure}
+%\subsection{Reordering by transposition of vertices 4 and 7}
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=1.2\textwidth]{pics/heights linear homotopy - transpositions 4-7.png}
+    \caption{Reordering by transposition of vertices 4 and 7}
+    \label{fig:transposition4and7}
+\end{figure}
+
+\newpage
+
+
+\section{Depth Posets}
+\par During the transposition we got 31 depth posets. In this section we list all of them. 
+\par The depth poset coresponding the first filtration we can see in Figure \ref{fig:dp0}, 
+and the depth poset coresponding the last filtration we can see in Figure \ref{fig:dp22}.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=1.2\textwidth]{pics/heights linear homotopy - dp0.png}
+    \caption{Depth Poset $DP_{0}$}
+    \label{fig:dp0}
+\end{figure}
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=1.2\textwidth]{pics/heights linear homotopy - dp1.png}
+    \caption{Depth Poset $DP_{1}$}
+    \label{fig:dp1}
+\end{figure}
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=1.2\textwidth]{pics/heights linear homotopy - dp2.png}
+    \caption{Depth Poset $DP_{2}$}
+    \label{fig:dp2}
+\end{figure}
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=1.2\textwidth]{pics/heights linear homotopy - dp3.png}
+    \caption{Depth Poset $DP_{3}$}
+    \label{fig:dp3}
+\end{figure}
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=1.2\textwidth]{pics/heights linear homotopy - dp4.png}
+    \caption{Depth Poset $DP_{4}$}
+    \label{fig:dp4}
+\end{figure}
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=1.2\textwidth]{pics/heights linear homotopy - dp5.png}
+    \caption{Depth Poset $DP_{5}$}
+    \label{fig:dp5}
+\end{figure}
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=1.2\textwidth]{pics/heights linear homotopy - dp6.png}
+    \caption{Depth Poset $DP_{6}$}
+    \label{fig:dp6}
+\end{figure}
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=1.2\textwidth]{pics/heights linear homotopy - dp7.png}
+    \caption{Depth Poset $DP_{7}$}
+    \label{fig:dp7}
+\end{figure}
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=1.2\textwidth]{pics/heights linear homotopy - dp8.png}
+    \caption{Depth Poset $DP_{8}$}
+    \label{fig:dp8}
+\end{figure}
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=1.2\textwidth]{pics/heights linear homotopy - dp9.png}
+    \caption{Depth Poset $DP_{9}$}
+    \label{fig:dp9}
+\end{figure}
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=1.2\textwidth]{pics/heights linear homotopy - dp10.png}
+    \caption{Depth Poset $DP_{10}$}
+    \label{fig:dp10}
+\end{figure}
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=1.2\textwidth]{pics/heights linear homotopy - dp11.png}
+    \caption{Depth Poset $DP_{11}$}
+    \label{fig:dp11}
+\end{figure}
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=1.2\textwidth]{pics/heights linear homotopy - dp12.png}
+    \caption{Depth Poset $DP_{12}$}
+    \label{fig:dp12}
+\end{figure}
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=1.2\textwidth]{pics/heights linear homotopy - dp13.png}
+    \caption{Depth Poset $DP_{13}$}
+    \label{fig:dp13}
+\end{figure}
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=1.2\textwidth]{pics/heights linear homotopy - dp14.png}
+    \caption{Depth Poset $DP_{14}$}
+    \label{fig:dp14}
+\end{figure}
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=1.2\textwidth]{pics/heights linear homotopy - dp15.png}
+    \caption{Depth Poset $DP_{15}$}
+    \label{fig:dp15}
+\end{figure}
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=1.2\textwidth]{pics/heights linear homotopy - dp16.png}
+    \caption{Depth Poset $DP_{16}$}
+    \label{fig:dp16}
+\end{figure}
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=1.2\textwidth]{pics/heights linear homotopy - dp17.png}
+    \caption{Depth Poset $DP_{17}$}
+    \label{fig:dp17}
+\end{figure}
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=1.2\textwidth]{pics/heights linear homotopy - dp18.png}
+    \caption{Depth Poset $DP_{18}$}
+    \label{fig:dp18}
+\end{figure}
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=1.2\textwidth]{pics/heights linear homotopy - dp19.png}
+    \caption{Depth Poset $DP_{19}$}
+    \label{fig:dp19}
+\end{figure}
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=1.2\textwidth]{pics/heights linear homotopy - dp20.png}
+    \caption{Depth Poset $DP_{20}$}
+    \label{fig:dp20}
+\end{figure}
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=1.2\textwidth]{pics/heights linear homotopy - dp21.png}
+    \caption{Depth Poset $DP_{21}$}
+    \label{fig:dp21}
+\end{figure}
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=1.2\textwidth]{pics/heights linear homotopy - dp22.png}
+    \caption{Depth Poset $DP_{22}$}
+    \label{fig:dp22}
+\end{figure}
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=1.2\textwidth]{pics/heights linear homotopy - dp23.png}
+    \caption{Depth Poset $DP_{23}$}
+    \label{fig:dp23}
+\end{figure}
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=1.2\textwidth]{pics/heights linear homotopy - dp24.png}
+    \caption{Depth Poset $DP_{24}$}
+    \label{fig:dp24}
+\end{figure}
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=1.2\textwidth]{pics/heights linear homotopy - dp25.png}
+    \caption{Depth Poset $DP_{25}$}
+    \label{fig:dp25}
+\end{figure}
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=1.2\textwidth]{pics/heights linear homotopy - dp26.png}
+    \caption{Depth Poset $DP_{26}$}
+    \label{fig:dp26}
+\end{figure}
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=1.2\textwidth]{pics/heights linear homotopy - dp27.png}
+    \caption{Depth Poset $DP_{27}$}
+    \label{fig:dp27}
+\end{figure}
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=1.2\textwidth]{pics/heights linear homotopy - dp28.png}
+    \caption{Depth Poset $DP_{28}$}
+    \label{fig:dp28}
+\end{figure}
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=1.2\textwidth]{pics/heights linear homotopy - dp29.png}
+    \caption{Depth Poset $DP_{29}$}
+    \label{fig:dp29}
+\end{figure}
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=1.2\textwidth]{pics/heights linear homotopy - dp30.png}
+    \caption{Depth Poset $DP_{30}$}
+    \label{fig:dp30}
+\end{figure}
+
+
 
 \end{document}

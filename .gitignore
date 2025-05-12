@@ -168,6 +168,7 @@ results
 # slurm and LaTeX logs
 *.out
 *.aux
+*.toc
 
 # technical pictures
 pics
