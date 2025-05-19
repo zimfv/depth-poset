@@ -16,7 +16,7 @@
 
 \section{Model}
 \subsection{Complex, Filtration and Homotopy}
-\par In this model we define the simplicial complex by the Delauney triangulation of $n = 24$ points uniformly distributed in $[0, 1]^d$ for $d = 2$.
+\par In this model we define the simplicial complex by the Delauney triangulation of $n = 24$ points such that $n - 2^d$ of them  are uniformly distributed in the cube $[0, 1]^d$ and rest $2^d$ are the corners of this cube for $d = 2$.
 \par We defining the filtration on this complex, by assuming uniformly distributed in $[0, 1]$ height $h(f)$ for each vertex $v$. Then the filtration value of the simplex will be the maximum haight of its vertices.
 $$
     f(\sigma) = \max_{v\in \sigma} h(v)
@@ -64,21 +64,23 @@ In the order given by $f_{t - \varepsilon}$ the group $A$ stays on the first $\#
 \newpage
 
 \section{General Statistics}
-\par In 2 paths generated 9245 unique transpositions: 4504 in only upper path, 4504 in only down path and 237 in both paths.
+\par In 2 paths generated 4755 unique transpositions: 4755 in only upper path, 0 in only down path and 0 in both paths.
 \par The distribution of the switch transposition types and dimensions is given in the table:
 \begin{center}
-\begin{tabular}{lrrrr}
+\begin{tabular}{lrrrrrrr}
 \toprule
-dim & 0 & 1 & 2 & undefined \\
+dim & \multicolumn{2}{r}{0} & \multicolumn{2}{r}{1} & \multicolumn{2}{r}{2} & undefined \\
+changing & no & yes & no & yes & no & yes & no \\
 \midrule
-birth-birth & 7 & 21 & 0 & 0 \\
-birth-death & 0 & 48 & 0 & 0 \\
-death-death & 0 & 14 & 23 & 0 \\
-no switch & 267 & 2483 & 1031 & 5351 \\
+birth-birth & 0 & 2 & 0 & 13 & 0 & 0 & 0 \\
+birth-death & 0 & 0 & 0 & 20 & 0 & 0 & 0 \\
+death-death & 0 & 0 & 0 & 4 & 0 & 10 & 0 \\
+no switch & 106 & 23 & 1151 & 39 & 583 & 22 & 2782 \\
 \bottomrule
 \end{tabular}
 
 \end{center}
+Here the dimension of a transposition can be undefined if we are transposing simplices of different dimensions.
 
 \par And we can see more detailed table about how many simplex transpositions of each type lies in each reordering defined by the transposition of heights on vertices:
 \begin{center}
@@ -88,35 +90,45 @@ no switch & 267 & 2483 & 1031 & 5351 \\
  &  &  &  & Dim & 0 & 1 & 1 & 1 & 2 &  \\
 Time & Vertices & Value & Figure & Path &  &  &  &  &  &  \\
 \midrule
-\multirow[t]{2}{*}{0.003} & \multirow[t]{2}{*}{$\langle20, 23\rangle$} & \multirow[t]{2}{*}{0.319} & \multirow[t]{2}{*}{\ref{fig:transposition20and23}} & Up & 1 & 0 & 0 & 0 & 0 & 0 \\
- &  &  &  & Down & 1 & 0 & 0 & 0 & 0 & 0 \\
+0.016 & $\langle4, 20\rangle$ & 0.108 & \ref{fig:transposition4and20} & Up & 0 & 0 & 0 & 0 & 0 & 4 \\
 \cline{1-11} \cline{2-11} \cline{3-11} \cline{4-11}
-\multirow[t]{2}{*}{0.014} & \multirow[t]{2}{*}{$\langle9, 17\rangle$} & \multirow[t]{2}{*}{0.542} & \multirow[t]{2}{*}{\ref{fig:transposition9and17}} & Up & 0 & 0 & 0 & 0 & 0 & 24 \\
- &  &  &  & Down & 0 & 0 & 0 & 0 & 0 & 24 \\
+0.025 & $\langle3, 5\rangle$ & 0.354 & \ref{fig:transposition3and5} & Up & 0 & 0 & 0 & 0 & 0 & 6 \\
 \cline{1-11} \cline{2-11} \cline{3-11} \cline{4-11}
-\multirow[t]{2}{*}{0.022} & \multirow[t]{2}{*}{$\langle5, 15\rangle$} & \multirow[t]{2}{*}{0.492} & \multirow[t]{2}{*}{\ref{fig:transposition5and15}} & Up & 0 & 0 & 0 & 0 & 0 & 16 \\
- &  &  &  & Down & 0 & 0 & 0 & 0 & 0 & 16 \\
+0.050 & $\langle7, 14\rangle$ & 0.760 & \ref{fig:transposition7and14} & Up & 0 & 0 & 0 & 0 & 0 & 121 \\
 \cline{1-11} \cline{2-11} \cline{3-11} \cline{4-11}
-\multirow[t]{2}{*}{0.025} & \multirow[t]{2}{*}{$\langle9, 18\rangle$} & \multirow[t]{2}{*}{0.536} & \multirow[t]{2}{*}{\ref{fig:transposition9and18}} & Up & 0 & 0 & 1 & 0 & 0 & 29 \\
- &  &  &  & Down & 0 & 0 & 1 & 0 & 0 & 29 \\
+0.093 & $\langle5, 13\rangle$ & 0.394 & \ref{fig:transposition5and13} & Up & 0 & 0 & 0 & 0 & 0 & 18 \\
 \cline{1-11} \cline{2-11} \cline{3-11} \cline{4-11}
-\multirow[t]{2}{*}{0.043} & \multirow[t]{2}{*}{$\langle10, 11\rangle$} & \multirow[t]{2}{*}{0.853} & \multirow[t]{2}{*}{\ref{fig:transposition10and11}} & Up & 0 & 0 & 0 & 0 & 2 & 100 \\
- &  &  &  & Down & 0 & 0 & 0 & 0 & 2 & 100 \\
+0.095 & $\langle3, 10\rangle$ & 0.354 & \ref{fig:transposition3and10} & Up & 0 & 0 & 0 & 0 & 0 & 2 \\
 \cline{1-11} \cline{2-11} \cline{3-11} \cline{4-11}
-\multirow[t]{2}{*}{0.067} & \multirow[t]{2}{*}{$\langle9, 15\rangle$} & \multirow[t]{2}{*}{0.514} & \multirow[t]{2}{*}{\ref{fig:transposition9and15}} & Up & 0 & 0 & 0 & 0 & 0 & 12 \\
- &  &  &  & Down & 0 & 0 & 0 & 0 & 0 & 12 \\
+0.098 & $\langle0, 19\rangle$ & 0.585 & \ref{fig:transposition0and19} & Up & 0 & 0 & 0 & 0 & 0 & 18 \\
 \cline{1-11} \cline{2-11} \cline{3-11} \cline{4-11}
-\multirow[t]{2}{*}{0.073} & \multirow[t]{2}{*}{$\langle11, 19\rangle$} & \multirow[t]{2}{*}{0.857} & \multirow[t]{2}{*}{\ref{fig:transposition11and19}} & Up & 0 & 0 & 0 & 0 & 0 & 99 \\
- &  &  &  & Down & 0 & 0 & 0 & 0 & 0 & 99 \\
-\cline{1-11} \cline{2-11} \cline{3-11} \cline{4-11}
-\multirow[t]{2}{*}{0.104} & \multirow[t]{2}{*}{$\langle4, 21\rangle$} & \multirow[t]{2}{*}{0.385} & \multirow[t]{2}{*}{\ref{fig:transposition4and21}} & Up & 0 & 0 & 0 & 0 & 0 & 12 \\
- &  &  &  & Down & 0 & 0 & 0 & 0 & 0 & 12 \\
-\cline{1-11} \cline{2-11} \cline{3-11} \cline{4-11}
-\multirow[t]{4}{*}{0.105} & \multirow[t]{2}{*}{$\langle1, 10\rangle$} & \multirow[t]{2}{*}{0.813} & \multirow[t]{2}{*}{\ref{fig:transposition1and10}} & Up & 0 & 0 & 0 & 0 & 0 & 30 \\
- &  &  &  & Down & 0 & 0 & 0 & 0 & 0 & 30 \\
+\multirow[t]{2}{*}{0.103} & $\langle2, 22\rangle$ & 0.684 & \ref{fig:transposition2and22} & Up & 0 & 0 & 0 & 0 & 0 & 42 \\
 \cline{2-11} \cline{3-11} \cline{4-11}
- & \multirow[t]{2}{*}{$\langle13, 14\rangle$} & \multirow[t]{2}{*}{0.638} & \multirow[t]{2}{*}{\ref{fig:transposition13and14}} & Up & 0 & 0 & 0 & 0 & 0 & 72 \\
- &  &  &  & Down & 0 & 0 & 0 & 0 & 0 & 72 \\
+ & $\langle7, 16\rangle$ & 0.721 & \ref{fig:transposition7and16} & Up & 0 & 0 & 0 & 0 & 2 & 72 \\
+\cline{1-11} \cline{2-11} \cline{3-11} \cline{4-11}
+0.116 & $\langle6, 14\rangle$ & 0.773 & \ref{fig:transposition6and14} & Up & 0 & 0 & 0 & 0 & 0 & 99 \\
+\cline{1-11} \cline{2-11} \cline{3-11} \cline{4-11}
+0.136 & $\langle2, 11\rangle$ & 0.677 & \ref{fig:transposition2and11} & Up & 0 & 0 & 1 & 0 & 0 & 42 \\
+\cline{1-11} \cline{2-11} \cline{3-11} \cline{4-11}
+0.137 & $\langle7, 22\rangle$ & 0.694 & \ref{fig:transposition7and22} & Up & 0 & 0 & 0 & 0 & 0 & 48 \\
+\cline{1-11} \cline{2-11} \cline{3-11} \cline{4-11}
+0.152 & $\langle5, 8\rangle$ & 0.429 & \ref{fig:transposition5and8} & Up & 0 & 0 & 1 & 0 & 0 & 34 \\
+\cline{1-11} \cline{2-11} \cline{3-11} \cline{4-11}
+0.154 & $\langle7, 11\rangle$ & 0.681 & \ref{fig:transposition7and11} & Up & 0 & 0 & 0 & 0 & 0 & 64 \\
+\cline{1-11} \cline{2-11} \cline{3-11} \cline{4-11}
+0.156 & $\langle1, 9\rangle$ & 0.802 & \ref{fig:transposition1and9} & Up & 0 & 1 & 1 & 0 & 0 & 28 \\
+\cline{1-11} \cline{2-11} \cline{3-11} \cline{4-11}
+0.167 & $\langle2, 7\rangle$ & 0.671 & \ref{fig:transposition2and7} & Up & 0 & 1 & 1 & 0 & 0 & 36 \\
+\cline{1-11} \cline{2-11} \cline{3-11} \cline{4-11}
+0.176 & $\langle9, 14\rangle$ & 0.785 & \ref{fig:transposition9and14} & Up & 0 & 0 & 0 & 0 & 0 & 33 \\
+\cline{1-11} \cline{2-11} \cline{3-11} \cline{4-11}
+0.186 & $\langle10, 13\rangle$ & 0.410 & \ref{fig:transposition10and13} & Up & 0 & 0 & 1 & 0 & 0 & 4 \\
+\cline{1-11} \cline{2-11} \cline{3-11} \cline{4-11}
+0.187 & $\langle6, 16\rangle$ & 0.726 & \ref{fig:transposition6and16} & Up & 0 & 0 & 0 & 0 & 0 & 81 \\
+\cline{1-11} \cline{2-11} \cline{3-11} \cline{4-11}
+0.188 & $\langle15, 18\rangle$ & 0.525 & \ref{fig:transposition15and18} & Up & 0 & 0 & 0 & 0 & 0 & 50 \\
+\cline{1-11} \cline{2-11} \cline{3-11} \cline{4-11}
+0.189 & $\langle1, 14\rangle$ & 0.788 & \ref{fig:transposition1and14} & Up & 0 & 0 & 0 & 0 & 0 & 110 \\
 \cline{1-11} \cline{2-11} \cline{3-11} \cline{4-11}
 \bottomrule
 \end{tabular}
@@ -127,59 +139,77 @@ Time & Vertices & Value & Figure & Path &  &  &  &  &  &  \\
  &  &  &  & Dim & 0 & 1 & 1 & 1 & 2 &  \\
 Time & Vertices & Value & Figure & Path &  &  &  &  &  &  \\
 \midrule
-\multirow[t]{2}{*}{0.107} & \multirow[t]{2}{*}{$\langle15, 18\rangle$} & \multirow[t]{2}{*}{0.534} & \multirow[t]{2}{*}{\ref{fig:transposition15and18}} & Up & 0 & 0 & 0 & 0 & 0 & 10 \\
- &  &  &  & Down & 0 & 0 & 0 & 0 & 0 & 10 \\
+0.198 & $\langle8, 10\rangle$ & 0.417 & \ref{fig:transposition8and10} & Up & 0 & 0 & 0 & 0 & 0 & 12 \\
 \cline{1-11} \cline{2-11} \cline{3-11} \cline{4-11}
-\multirow[t]{2}{*}{0.120} & \multirow[t]{2}{*}{$\langle4, 23\rangle$} & \multirow[t]{2}{*}{0.385} & \multirow[t]{2}{*}{\ref{fig:transposition4and23}} & Up & 0 & 0 & 1 & 0 & 0 & 4 \\
- &  &  &  & Down & 0 & 0 & 1 & 0 & 0 & 4 \\
+0.206 & $\langle6, 22\rangle$ & 0.714 & \ref{fig:transposition6and22} & Up & 0 & 0 & 0 & 0 & 0 & 54 \\
 \cline{1-11} \cline{2-11} \cline{3-11} \cline{4-11}
-\multirow[t]{2}{*}{0.124} & \multirow[t]{2}{*}{$\langle15, 17\rangle$} & \multirow[t]{2}{*}{0.543} & \multirow[t]{2}{*}{\ref{fig:transposition15and17}} & Up & 0 & 0 & 0 & 0 & 0 & 4 \\
- &  &  &  & Down & 0 & 0 & 0 & 0 & 0 & 4 \\
+0.212 & $\langle8, 13\rangle$ & 0.414 & \ref{fig:transposition8and13} & Up & 0 & 0 & 0 & 0 & 0 & 8 \\
 \cline{1-11} \cline{2-11} \cline{3-11} \cline{4-11}
-\multirow[t]{2}{*}{0.131} & \multirow[t]{2}{*}{$\langle6, 15\rangle$} & \multirow[t]{2}{*}{0.547} & \multirow[t]{2}{*}{\ref{fig:transposition6and15}} & Up & 0 & 0 & 0 & 0 & 0 & 12 \\
- &  &  &  & Down & 0 & 0 & 0 & 0 & 0 & 12 \\
+0.232 & $\langle6, 11\rangle$ & 0.696 & \ref{fig:transposition6and11} & Up & 0 & 0 & 0 & 0 & 0 & 72 \\
 \cline{1-11} \cline{2-11} \cline{3-11} \cline{4-11}
-\multirow[t]{2}{*}{0.133} & \multirow[t]{2}{*}{$\langle5, 9\rangle$} & \multirow[t]{2}{*}{0.478} & \multirow[t]{2}{*}{\ref{fig:transposition5and9}} & Up & 0 & 0 & 0 & 0 & 0 & 48 \\
- &  &  &  & Down & 0 & 0 & 0 & 0 & 0 & 48 \\
+0.242 & $\langle9, 16\rangle$ & 0.729 & \ref{fig:transposition9and16} & Up & 0 & 0 & 0 & 0 & 0 & 27 \\
 \cline{1-11} \cline{2-11} \cline{3-11} \cline{4-11}
-\multirow[t]{2}{*}{0.153} & \multirow[t]{2}{*}{$\langle6, 17\rangle$} & \multirow[t]{2}{*}{0.543} & \multirow[t]{2}{*}{\ref{fig:transposition6and17}} & Up & 0 & 0 & 0 & 0 & 0 & 6 \\
- &  &  &  & Down & 0 & 0 & 0 & 0 & 0 & 6 \\
+0.244 & $\langle20, 23\rangle$ & 0.209 & \ref{fig:transposition20and23} & Up & 0 & 0 & 0 & 0 & 0 & 4 \\
 \cline{1-11} \cline{2-11} \cline{3-11} \cline{4-11}
-\multirow[t]{2}{*}{0.162} & \multirow[t]{2}{*}{$\langle1, 19\rangle$} & \multirow[t]{2}{*}{0.796} & \multirow[t]{2}{*}{\ref{fig:transposition1and19}} & Up & 0 & 0 & 0 & 0 & 0 & 27 \\
- &  &  &  & Down & 0 & 0 & 0 & 0 & 0 & 27 \\
+0.247 & $\langle9, 22\rangle$ & 0.726 & \ref{fig:transposition9and22} & Up & 0 & 0 & 0 & 0 & 0 & 18 \\
 \cline{1-11} \cline{2-11} \cline{3-11} \cline{4-11}
-\multirow[t]{2}{*}{0.174} & \multirow[t]{2}{*}{$\langle2, 11\rangle$} & \multirow[t]{2}{*}{0.871} & \multirow[t]{2}{*}{\ref{fig:transposition2and11}} & Up & 0 & 0 & 0 & 0 & 0 & 88 \\
- &  &  &  & Down & 0 & 0 & 0 & 0 & 0 & 88 \\
+0.266 & $\langle16, 22\rangle$ & 0.731 & \ref{fig:transposition16and22} & Up & 0 & 0 & 0 & 0 & 0 & 54 \\
 \cline{1-11} \cline{2-11} \cline{3-11} \cline{4-11}
-\multirow[t]{2}{*}{0.183} & \multirow[t]{2}{*}{$\langle7, 9\rangle$} & \multirow[t]{2}{*}{0.452} & \multirow[t]{2}{*}{\ref{fig:transposition7and9}} & Up & 1 & 0 & 0 & 0 & 0 & 8 \\
- &  &  &  & Down & 0 & 0 & 0 & 1 & 0 & 8 \\
+0.273 & $\langle9, 11\rangle$ & 0.704 & \ref{fig:transposition9and11} & Up & 0 & 0 & 0 & 0 & 0 & 24 \\
 \cline{1-11} \cline{2-11} \cline{3-11} \cline{4-11}
-\multirow[t]{2}{*}{0.201} & \multirow[t]{2}{*}{$\langle21, 23\rangle$} & \multirow[t]{2}{*}{0.432} & \multirow[t]{2}{*}{\ref{fig:transposition21and23}} & Up & 0 & 0 & 0 & 0 & 0 & 12 \\
- &  &  &  & Down & 0 & 0 & 0 & 0 & 0 & 12 \\
+0.284 & $\langle18, 19\rangle$ & 0.522 & \ref{fig:transposition18and19} & Up & 0 & 0 & 1 & 0 & 0 & 14 \\
 \cline{1-11} \cline{2-11} \cline{3-11} \cline{4-11}
-\multirow[t]{2}{*}{0.211} & \multirow[t]{2}{*}{$\langle9, 23\rangle$} & \multirow[t]{2}{*}{0.437} & \multirow[t]{2}{*}{\ref{fig:transposition9and23}} & Up & 0 & 0 & 0 & 0 & 0 & 18 \\
- &  &  &  & Down & 0 & 0 & 0 & 0 & 0 & 18 \\
+0.300 & $\langle5, 15\rangle$ & 0.515 & \ref{fig:transposition5and15} & Up & 0 & 0 & 0 & 0 & 0 & 80 \\
 \cline{1-11} \cline{2-11} \cline{3-11} \cline{4-11}
-\multirow[t]{2}{*}{0.212} & \multirow[t]{2}{*}{$\langle9, 21\rangle$} & \multirow[t]{2}{*}{0.437} & \multirow[t]{2}{*}{\ref{fig:transposition9and21}} & Up & 0 & 0 & 2 & 1 & 0 & 6 \\
- &  &  &  & Down & 0 & 0 & 2 & 1 & 0 & 6 \\
+\multirow[t]{2}{*}{0.301} & $\langle1, 22\rangle$ & 0.741 & \ref{fig:transposition1and22} & Up & 0 & 0 & 0 & 0 & 0 & 60 \\
+\cline{2-11} \cline{3-11} \cline{4-11}
+ & $\langle5, 19\rangle$ & 0.516 & \ref{fig:transposition5and19} & Up & 0 & 0 & 0 & 0 & 0 & 24 \\
 \cline{1-11} \cline{2-11} \cline{3-11} \cline{4-11}
-\multirow[t]{2}{*}{0.213} & \multirow[t]{2}{*}{$\langle14, 15\rangle$} & \multirow[t]{2}{*}{0.588} & \multirow[t]{2}{*}{\ref{fig:transposition14and15}} & Up & 0 & 0 & 0 & 0 & 0 & 48 \\
- &  &  &  & Down & 0 & 0 & 0 & 0 & 0 & 48 \\
+0.303 & $\langle0, 7\rangle$ & 0.567 & \ref{fig:transposition0and7} & Up & 0 & 0 & 0 & 0 & 0 & 36 \\
 \cline{1-11} \cline{2-11} \cline{3-11} \cline{4-11}
-\multirow[t]{2}{*}{0.216} & \multirow[t]{2}{*}{$\langle6, 18\rangle$} & \multirow[t]{2}{*}{0.532} & \multirow[t]{2}{*}{\ref{fig:transposition6and18}} & Up & 0 & 0 & 0 & 0 & 0 & 15 \\
- &  &  &  & Down & 0 & 0 & 0 & 0 & 0 & 15 \\
+0.305 & $\langle15, 19\rangle$ & 0.514 & \ref{fig:transposition15and19} & Up & 0 & 0 & 0 & 0 & 0 & 30 \\
 \cline{1-11} \cline{2-11} \cline{3-11} \cline{4-11}
-\multirow[t]{2}{*}{0.217} & \multirow[t]{2}{*}{$\langle20, 22\rangle$} & \multirow[t]{2}{*}{0.255} & \multirow[t]{2}{*}{\ref{fig:transposition20and22}} & Up & 0 & 0 & 0 & 0 & 0 & 2 \\
- &  &  &  & Down & 0 & 0 & 0 & 0 & 0 & 2 \\
+0.310 & $\langle5, 18\rangle$ & 0.521 & \ref{fig:transposition5and18} & Up & 0 & 1 & 0 & 0 & 0 & 28 \\
 \cline{1-11} \cline{2-11} \cline{3-11} \cline{4-11}
-\multirow[t]{2}{*}{0.252} & \multirow[t]{2}{*}{$\langle7, 23\rangle$} & \multirow[t]{2}{*}{0.460} & \multirow[t]{2}{*}{\ref{fig:transposition7and23}} & Up & 0 & 0 & 0 & 0 & 0 & 10 \\
- &  &  &  & Down & 0 & 0 & 0 & 0 & 0 & 10 \\
+0.316 & $\langle2, 6\rangle$ & 0.640 & \ref{fig:transposition2and6} & Up & 0 & 0 & 0 & 0 & 0 & 63 \\
 \cline{1-11} \cline{2-11} \cline{3-11} \cline{4-11}
-\multirow[t]{2}{*}{0.258} & \multirow[t]{2}{*}{$\langle5, 23\rangle$} & \multirow[t]{2}{*}{0.464} & \multirow[t]{2}{*}{\ref{fig:transposition5and23}} & Up & 0 & 0 & 0 & 0 & 0 & 40 \\
- &  &  &  & Down & 0 & 0 & 0 & 0 & 0 & 40 \\
+0.318 & $\langle1, 16\rangle$ & 0.734 & \ref{fig:transposition1and16} & Up & 0 & 0 & 0 & 0 & 0 & 90 \\
 \cline{1-11} \cline{2-11} \cline{3-11} \cline{4-11}
-\multirow[t]{2}{*}{0.265} & \multirow[t]{2}{*}{$\langle7, 21\rangle$} & \multirow[t]{2}{*}{0.462} & \multirow[t]{2}{*}{\ref{fig:transposition7and21}} & Up & 0 & 0 & 0 & 0 & 0 & 10 \\
- &  &  &  & Down & 0 & 0 & 0 & 0 & 0 & 10 \\
+0.338 & $\langle10, 19\rangle$ & 0.503 & \ref{fig:transposition10and19} & Up & 0 & 0 & 0 & 0 & 0 & 9 \\
+\cline{1-11} \cline{2-11} \cline{3-11} \cline{4-11}
+0.341 & $\langle5, 7\rangle$ & 0.538 & \ref{fig:transposition5and7} & Up & 0 & 0 & 0 & 0 & 0 & 60 \\
+\cline{1-11} \cline{2-11} \cline{3-11} \cline{4-11}
+0.350 & $\langle10, 15\rangle$ & 0.510 & \ref{fig:transposition10and15} & Up & 0 & 1 & 0 & 0 & 0 & 34 \\
+\cline{1-11} \cline{2-11} \cline{3-11} \cline{4-11}
+0.353 & $\langle1, 11\rangle$ & 0.719 & \ref{fig:transposition1and11} & Up & 0 & 0 & 0 & 0 & 0 & 80 \\
+\cline{1-11} \cline{2-11} \cline{3-11} \cline{4-11}
+0.360 & $\langle2, 9\rangle$ & 0.631 & \ref{fig:transposition2and9} & Up & 0 & 0 & 0 & 0 & 0 & 21 \\
+\cline{1-11} \cline{2-11} \cline{3-11} \cline{4-11}
+0.363 & $\langle10, 18\rangle$ & 0.519 & \ref{fig:transposition10and18} & Up & 0 & 0 & 0 & 0 & 0 & 18 \\
+\cline{1-11} \cline{2-11} \cline{3-11} \cline{4-11}
+0.365 & $\langle7, 10\rangle$ & 0.520 & \ref{fig:transposition7and10} & Up & 0 & 0 & 0 & 0 & 0 & 36 \\
+\cline{1-11} \cline{2-11} \cline{3-11} \cline{4-11}
+0.366 & $\langle7, 18\rangle$ & 0.518 & \ref{fig:transposition7and18} & Up & 0 & 0 & 0 & 0 & 0 & 18 \\
+\cline{1-11} \cline{2-11} \cline{3-11} \cline{4-11}
+0.378 & $\langle0, 5\rangle$ & 0.560 & \ref{fig:transposition0and5} & Up & 0 & 0 & 0 & 0 & 0 & 60 \\
+\cline{1-11} \cline{2-11} \cline{3-11} \cline{4-11}
+0.381 & $\langle7, 15\rangle$ & 0.508 & \ref{fig:transposition7and15} & Up & 0 & 0 & 0 & 0 & 0 & 42 \\
+\cline{1-11} \cline{2-11} \cline{3-11} \cline{4-11}
+0.409 & $\langle5, 6\rangle$ & 0.578 & \ref{fig:transposition5and6} & Up & 0 & 0 & 0 & 0 & 0 & 90 \\
+\cline{1-11} \cline{2-11} \cline{3-11} \cline{4-11}
+0.417 & $\langle5, 9\rangle$ & 0.583 & \ref{fig:transposition5and9} & Up & 0 & 0 & 0 & 0 & 0 & 30 \\
+\cline{1-11} \cline{2-11} \cline{3-11} \cline{4-11}
+0.424 & $\langle0, 10\rangle$ & 0.556 & \ref{fig:transposition0and10} & Up & 0 & 0 & 2 & 0 & 1 & 34 \\
+\cline{1-11} \cline{2-11} \cline{3-11} \cline{4-11}
+0.426 & $\langle7, 19\rangle$ & 0.473 & \ref{fig:transposition7and19} & Up & 0 & 0 & 0 & 0 & 0 & 18 \\
+\cline{1-11} \cline{2-11} \cline{3-11} \cline{4-11}
+0.433 & $\langle6, 10\rangle$ & 0.562 & \ref{fig:transposition6and10} & Up & 0 & 0 & 0 & 0 & 0 & 72 \\
+\cline{1-11} \cline{2-11} \cline{3-11} \cline{4-11}
+0.439 & $\langle9, 10\rangle$ & 0.565 & \ref{fig:transposition9and10} & Up & 0 & 0 & 1 & 0 & 0 & 21 \\
+\cline{1-11} \cline{2-11} \cline{3-11} \cline{4-11}
+0.442 & $\langle20, 21\rangle$ & 0.298 & \ref{fig:transposition20and21} & Up & 0 & 0 & 0 & 0 & 0 & 2 \\
+\cline{1-11} \cline{2-11} \cline{3-11} \cline{4-11}
+0.445 & $\langle0, 6\rangle$ & 0.554 & \ref{fig:transposition0and6} & Up & 0 & 0 & 0 & 0 & 0 & 36 \\
 \cline{1-11} \cline{2-11} \cline{3-11} \cline{4-11}
 \bottomrule
 \end{tabular}
@@ -190,122 +220,77 @@ Time & Vertices & Value & Figure & Path &  &  &  &  &  &  \\
  &  &  &  & Dim & 0 & 1 & 1 & 1 & 2 &  \\
 Time & Vertices & Value & Figure & Path &  &  &  &  &  &  \\
 \midrule
-\multirow[t]{2}{*}{0.267} & \multirow[t]{2}{*}{$\langle5, 21\rangle$} & \multirow[t]{2}{*}{0.463} & \multirow[t]{2}{*}{\ref{fig:transposition5and21}} & Up & 0 & 1 & 2 & 0 & 1 & 32 \\
- &  &  &  & Down & 0 & 2 & 2 & 0 & 0 & 32 \\
+0.452 & $\langle7, 13\rangle$ & 0.453 & \ref{fig:transposition7and13} & Up & 0 & 0 & 0 & 0 & 0 & 12 \\
 \cline{1-11} \cline{2-11} \cline{3-11} \cline{4-11}
-\multirow[t]{2}{*}{0.269} & \multirow[t]{2}{*}{$\langle5, 7\rangle$} & \multirow[t]{2}{*}{0.462} & \multirow[t]{2}{*}{\ref{fig:transposition5and7}} & Up & 0 & 0 & 0 & 0 & 0 & 10 \\
- &  &  &  & Down & 0 & 0 & 0 & 0 & 0 & 10 \\
+0.453 & $\langle0, 9\rangle$ & 0.553 & \ref{fig:transposition0and9} & Up & 0 & 0 & 0 & 0 & 0 & 8 \\
 \cline{1-11} \cline{2-11} \cline{3-11} \cline{4-11}
-\multirow[t]{2}{*}{0.277} & \multirow[t]{2}{*}{$\langle8, 12\rangle$} & \multirow[t]{2}{*}{0.681} & \multirow[t]{2}{*}{\ref{fig:transposition8and12}} & Up & 0 & 0 & 0 & 0 & 0 & 45 \\
- &  &  &  & Down & 0 & 0 & 0 & 0 & 0 & 45 \\
+0.463 & $\langle2, 5\rangle$ & 0.610 & \ref{fig:transposition2and5} & Up & 0 & 0 & 0 & 0 & 0 & 70 \\
 \cline{1-11} \cline{2-11} \cline{3-11} \cline{4-11}
-\multirow[t]{2}{*}{0.280} & \multirow[t]{2}{*}{$\langle12, 13\rangle$} & \multirow[t]{2}{*}{0.680} & \multirow[t]{2}{*}{\ref{fig:transposition12and13}} & Up & 0 & 0 & 0 & 0 & 0 & 54 \\
- &  &  &  & Down & 0 & 0 & 0 & 0 & 0 & 54 \\
+0.469 & $\langle3, 8\rangle$ & 0.349 & \ref{fig:transposition3and8} & Up & 0 & 0 & 0 & 0 & 0 & 4 \\
 \cline{1-11} \cline{2-11} \cline{3-11} \cline{4-11}
-\multirow[t]{2}{*}{0.283} & \multirow[t]{2}{*}{$\langle8, 13\rangle$} & \multirow[t]{2}{*}{0.681} & \multirow[t]{2}{*}{\ref{fig:transposition8and13}} & Up & 0 & 0 & 0 & 0 & 0 & 30 \\
- &  &  &  & Down & 0 & 0 & 0 & 0 & 0 & 30 \\
+0.472 & $\langle4, 23\rangle$ & 0.190 & \ref{fig:transposition4and23} & Up & 0 & 0 & 0 & 0 & 0 & 2 \\
 \cline{1-11} \cline{2-11} \cline{3-11} \cline{4-11}
-\multirow[t]{2}{*}{0.291} & \multirow[t]{2}{*}{$\langle0, 13\rangle$} & \multirow[t]{2}{*}{0.683} & \multirow[t]{2}{*}{\ref{fig:transposition0and13}} & Up & 0 & 0 & 0 & 0 & 0 & 66 \\
- &  &  &  & Down & 0 & 0 & 0 & 0 & 0 & 66 \\
+0.474 & $\langle13, 19\rangle$ & 0.457 & \ref{fig:transposition13and19} & Up & 0 & 0 & 0 & 0 & 0 & 6 \\
 \cline{1-11} \cline{2-11} \cline{3-11} \cline{4-11}
-\multirow[t]{2}{*}{0.296} & \multirow[t]{2}{*}{$\langle0, 8\rangle$} & \multirow[t]{2}{*}{0.680} & \multirow[t]{2}{*}{\ref{fig:transposition0and8}} & Up & 0 & 1 & 1 & 0 & 1 & 50 \\
- &  &  &  & Down & 0 & 1 & 1 & 0 & 1 & 50 \\
+0.482 & $\langle6, 9\rangle$ & 0.529 & \ref{fig:transposition6and9} & Up & 0 & 0 & 0 & 0 & 0 & 18 \\
 \cline{1-11} \cline{2-11} \cline{3-11} \cline{4-11}
-\multirow[t]{2}{*}{0.302} & \multirow[t]{2}{*}{$\langle10, 13\rangle$} & \multirow[t]{2}{*}{0.686} & \multirow[t]{2}{*}{\ref{fig:transposition10and13}} & Up & 0 & 0 & 0 & 0 & 0 & 60 \\
- &  &  &  & Down & 0 & 0 & 0 & 0 & 0 & 60 \\
+0.487 & $\langle11, 16\rangle$ & 0.745 & \ref{fig:transposition11and16} & Up & 0 & 0 & 0 & 0 & 1 & 56 \\
 \cline{1-11} \cline{2-11} \cline{3-11} \cline{4-11}
-\multirow[t]{2}{*}{0.305} & \multirow[t]{2}{*}{$\langle4, 9\rangle$} & \multirow[t]{2}{*}{0.387} & \multirow[t]{2}{*}{\ref{fig:transposition4and9}} & Up & 0 & 0 & 0 & 0 & 0 & 4 \\
- &  &  &  & Down & 0 & 0 & 0 & 0 & 0 & 4 \\
+0.499 & $\langle2, 10\rangle$ & 0.602 & \ref{fig:transposition2and10} & Up & 0 & 0 & 0 & 0 & 0 & 63 \\
 \cline{1-11} \cline{2-11} \cline{3-11} \cline{4-11}
-\multirow[t]{2}{*}{0.306} & \multirow[t]{2}{*}{$\langle14, 17\rangle$} & \multirow[t]{2}{*}{0.544} & \multirow[t]{2}{*}{\ref{fig:transposition14and17}} & Up & 0 & 0 & 0 & 0 & 0 & 24 \\
- &  &  &  & Down & 0 & 0 & 0 & 0 & 0 & 24 \\
+0.501 & $\langle9, 18\rangle$ & 0.513 & \ref{fig:transposition9and18} & Up & 0 & 0 & 0 & 0 & 0 & 6 \\
 \cline{1-11} \cline{2-11} \cline{3-11} \cline{4-11}
-\multirow[t]{2}{*}{0.312} & \multirow[t]{2}{*}{$\langle8, 10\rangle$} & \multirow[t]{2}{*}{0.679} & \multirow[t]{2}{*}{\ref{fig:transposition8and10}} & Up & 0 & 0 & 0 & 0 & 1 & 76 \\
- &  &  &  & Down & 0 & 1 & 0 & 0 & 0 & 76 \\
+0.506 & $\langle6, 18\rangle$ & 0.513 & \ref{fig:transposition6and18} & Up & 0 & 0 & 0 & 0 & 0 & 27 \\
 \cline{1-11} \cline{2-11} \cline{3-11} \cline{4-11}
-\multirow[t]{2}{*}{0.319} & \multirow[t]{2}{*}{$\langle13, 19\rangle$} & \multirow[t]{2}{*}{0.690} & \multirow[t]{2}{*}{\ref{fig:transposition13and19}} & Up & 0 & 0 & 0 & 0 & 0 & 54 \\
- &  &  &  & Down & 0 & 0 & 0 & 0 & 0 & 54 \\
+0.523 & $\langle9, 15\rangle$ & 0.495 & \ref{fig:transposition9and15} & Up & 0 & 0 & 0 & 0 & 0 & 14 \\
 \cline{1-11} \cline{2-11} \cline{3-11} \cline{4-11}
-\multirow[t]{2}{*}{0.326} & \multirow[t]{2}{*}{$\langle0, 12\rangle$} & \multirow[t]{2}{*}{0.664} & \multirow[t]{2}{*}{\ref{fig:transposition0and12}} & Up & 0 & 0 & 0 & 0 & 0 & 72 \\
- &  &  &  & Down & 0 & 0 & 0 & 0 & 0 & 72 \\
+0.524 & $\langle12, 14\rangle$ & 0.854 & \ref{fig:transposition12and14} & Up & 0 & 0 & 0 & 0 & 0 & 121 \\
 \cline{1-11} \cline{2-11} \cline{3-11} \cline{4-11}
-\multirow[t]{2}{*}{0.336} & \multirow[t]{2}{*}{$\langle8, 19\rangle$} & \multirow[t]{2}{*}{0.678} & \multirow[t]{2}{*}{\ref{fig:transposition8and19}} & Up & 0 & 0 & 0 & 0 & 0 & 99 \\
- &  &  &  & Down & 0 & 0 & 0 & 0 & 0 & 99 \\
+0.526 & $\langle8, 20\rangle$ & 0.335 & \ref{fig:transposition8and20} & Up & 0 & 0 & 1 & 0 & 0 & 8 \\
 \cline{1-11} \cline{2-11} \cline{3-11} \cline{4-11}
-\multirow[t]{2}{*}{0.339} & \multirow[t]{2}{*}{$\langle14, 18\rangle$} & \multirow[t]{2}{*}{0.529} & \multirow[t]{2}{*}{\ref{fig:transposition14and18}} & Up & 0 & 1 & 0 & 0 & 0 & 61 \\
- &  &  &  & Down & 0 & 1 & 0 & 0 & 0 & 61 \\
+0.527 & $\langle1, 5\rangle$ & 0.647 & \ref{fig:transposition1and5} & Up & 0 & 0 & 0 & 0 & 0 & 100 \\
 \cline{1-11} \cline{2-11} \cline{3-11} \cline{4-11}
-\multirow[t]{2}{*}{0.340} & \multirow[t]{2}{*}{$\langle6, 23\rangle$} & \multirow[t]{2}{*}{0.510} & \multirow[t]{2}{*}{\ref{fig:transposition6and23}} & Up & 0 & 0 & 1 & 0 & 0 & 14 \\
- &  &  &  & Down & 0 & 0 & 1 & 0 & 0 & 14 \\
+0.535 & $\langle6, 15\rangle$ & 0.493 & \ref{fig:transposition6and15} & Up & 0 & 2 & 0 & 0 & 1 & 60 \\
 \cline{1-11} \cline{2-11} \cline{3-11} \cline{4-11}
-\multirow[t]{4}{*}{0.345} & \multirow[t]{2}{*}{$\langle0, 15\rangle$} & \multirow[t]{2}{*}{0.654} & \multirow[t]{2}{*}{\ref{fig:transposition0and15}} & Up & 0 & 0 & 1 & 0 & 0 & 32 \\
- &  &  &  & Down & 0 & 0 & 1 & 0 & 0 & 32 \\
-\cline{2-11} \cline{3-11} \cline{4-11}
- & \multirow[t]{2}{*}{$\langle10, 12\rangle$} & \multirow[t]{2}{*}{0.658} & \multirow[t]{2}{*}{\ref{fig:transposition10and12}} & Up & 0 & 0 & 0 & 0 & 0 & 63 \\
- &  &  &  & Down & 0 & 0 & 0 & 0 & 0 & 63 \\
+0.553 & $\langle9, 13\rangle$ & 0.470 & \ref{fig:transposition9and13} & Up & 0 & 0 & 0 & 0 & 0 & 4 \\
 \cline{1-11} \cline{2-11} \cline{3-11} \cline{4-11}
-\bottomrule
-\end{tabular}
-
-\begin{tabular}{lllllrrrrrr}
-\toprule
- &  &  &  & Type & \multicolumn{2}{r}{birth-birth} & birth-death & \multicolumn{2}{r}{death-death} & no switch \\
- &  &  &  & Dim & 0 & 1 & 1 & 1 & 2 &  \\
-Time & Vertices & Value & Figure & Path &  &  &  &  &  &  \\
-\midrule
-\multirow[t]{2}{*}{0.348} & \multirow[t]{2}{*}{$\langle10, 15\rangle$} & \multirow[t]{2}{*}{0.656} & \multirow[t]{2}{*}{\ref{fig:transposition10and15}} & Up & 0 & 1 & 0 & 0 & 0 & 32 \\
- &  &  &  & Down & 0 & 1 & 0 & 0 & 0 & 32 \\
+0.554 & $\langle1, 10\rangle$ & 0.636 & \ref{fig:transposition1and10} & Up & 0 & 2 & 0 & 0 & 0 & 89 \\
 \cline{1-11} \cline{2-11} \cline{3-11} \cline{4-11}
-\multirow[t]{2}{*}{0.349} & \multirow[t]{2}{*}{$\langle12, 15\rangle$} & \multirow[t]{2}{*}{0.657} & \multirow[t]{2}{*}{\ref{fig:transposition12and15}} & Up & 0 & 0 & 0 & 0 & 0 & 72 \\
- &  &  &  & Down & 0 & 0 & 0 & 0 & 0 & 72 \\
+0.556 & $\langle3, 20\rangle$ & 0.348 & \ref{fig:transposition3and20} & Up & 0 & 0 & 0 & 0 & 0 & 5 \\
 \cline{1-11} \cline{2-11} \cline{3-11} \cline{4-11}
-\multirow[t]{2}{*}{0.355} & \multirow[t]{2}{*}{$\langle1, 2\rangle$} & \multirow[t]{2}{*}{0.741} & \multirow[t]{2}{*}{\ref{fig:transposition1and2}} & Up & 0 & 1 & 2 & 0 & 0 & 26 \\
- &  &  &  & Down & 0 & 0 & 2 & 0 & 1 & 26 \\
+0.567 & $\langle6, 13\rangle$ & 0.472 & \ref{fig:transposition6and13} & Up & 0 & 1 & 2 & 0 & 0 & 10 \\
 \cline{1-11} \cline{2-11} \cline{3-11} \cline{4-11}
-\multirow[t]{2}{*}{0.358} & \multirow[t]{2}{*}{$\langle14, 23\rangle$} & \multirow[t]{2}{*}{0.520} & \multirow[t]{2}{*}{\ref{fig:transposition14and23}} & Up & 0 & 1 & 0 & 0 & 0 & 35 \\
- &  &  &  & Down & 0 & 1 & 0 & 0 & 0 & 35 \\
+0.577 & $\langle7, 20\rangle$ & 0.357 & \ref{fig:transposition7and20} & Up & 0 & 0 & 2 & 0 & 0 & 22 \\
 \cline{1-11} \cline{2-11} \cline{3-11} \cline{4-11}
-\multirow[t]{4}{*}{0.360} & \multirow[t]{2}{*}{$\langle15, 19\rangle$} & \multirow[t]{2}{*}{0.662} & \multirow[t]{2}{*}{\ref{fig:transposition15and19}} & Up & 0 & 0 & 0 & 0 & 0 & 72 \\
- &  &  &  & Down & 0 & 0 & 0 & 0 & 0 & 72 \\
-\cline{2-11} \cline{3-11} \cline{4-11}
- & \multirow[t]{2}{*}{$\langle6, 21\rangle$} & \multirow[t]{2}{*}{0.507} & \multirow[t]{2}{*}{\ref{fig:transposition6and21}} & Up & 0 & 0 & 0 & 0 & 0 & 24 \\
- &  &  &  & Down & 0 & 0 & 0 & 0 & 0 & 24 \\
+0.589 & $\langle3, 7\rangle$ & 0.348 & \ref{fig:transposition3and7} & Up & 0 & 0 & 0 & 0 & 0 & 3 \\
 \cline{1-11} \cline{2-11} \cline{3-11} \cline{4-11}
-\multirow[t]{2}{*}{0.372} & \multirow[t]{2}{*}{$\langle18, 23\rangle$} & \multirow[t]{2}{*}{0.528} & \multirow[t]{2}{*}{\ref{fig:transposition18and23}} & Up & 0 & 0 & 0 & 0 & 0 & 64 \\
- &  &  &  & Down & 0 & 0 & 0 & 0 & 0 & 64 \\
+0.595 & $\langle17, 23\rangle$ & 0.180 & \ref{fig:transposition17and23} & Up & 0 & 0 & 0 & 0 & 0 & 1 \\
 \cline{1-11} \cline{2-11} \cline{3-11} \cline{4-11}
-\multirow[t]{2}{*}{0.373} & \multirow[t]{2}{*}{$\langle14, 21\rangle$} & \multirow[t]{2}{*}{0.513} & \multirow[t]{2}{*}{\ref{fig:transposition14and21}} & Up & 0 & 0 & 0 & 0 & 0 & 48 \\
- &  &  &  & Down & 0 & 0 & 0 & 0 & 0 & 48 \\
+0.603 & $\langle8, 21\rangle$ & 0.316 & \ref{fig:transposition8and21} & Up & 0 & 0 & 0 & 0 & 0 & 2 \\
 \cline{1-11} \cline{2-11} \cline{3-11} \cline{4-11}
-\multirow[t]{2}{*}{0.380} & \multirow[t]{2}{*}{$\langle0, 10\rangle$} & \multirow[t]{2}{*}{0.636} & \multirow[t]{2}{*}{\ref{fig:transposition0and10}} & Up & 0 & 0 & 0 & 0 & 0 & 30 \\
- &  &  &  & Down & 0 & 0 & 0 & 0 & 0 & 30 \\
+0.628 & $\langle7, 21\rangle$ & 0.318 & \ref{fig:transposition7and21} & Up & 0 & 0 & 0 & 0 & 0 & 2 \\
 \cline{1-11} \cline{2-11} \cline{3-11} \cline{4-11}
-\multirow[t]{2}{*}{0.386} & \multirow[t]{2}{*}{$\langle8, 15\rangle$} & \multirow[t]{2}{*}{0.675} & \multirow[t]{2}{*}{\ref{fig:transposition8and15}} & Up & 0 & 0 & 0 & 0 & 2 & 82 \\
- &  &  &  & Down & 0 & 0 & 0 & 0 & 2 & 82 \\
+0.634 & $\langle9, 19\rangle$ & 0.402 & \ref{fig:transposition9and19} & Up & 0 & 0 & 0 & 0 & 0 & 4 \\
 \cline{1-11} \cline{2-11} \cline{3-11} \cline{4-11}
-\multirow[t]{2}{*}{0.387} & \multirow[t]{2}{*}{$\langle12, 19\rangle$} & \multirow[t]{2}{*}{0.643} & \multirow[t]{2}{*}{\ref{fig:transposition12and19}} & Up & 0 & 0 & 0 & 0 & 1 & 80 \\
- &  &  &  & Down & 0 & 0 & 0 & 0 & 1 & 80 \\
+0.635 & $\langle12, 22\rangle$ & 0.837 & \ref{fig:transposition12and22} & Up & 0 & 0 & 0 & 0 & 0 & 66 \\
 \cline{1-11} \cline{2-11} \cline{3-11} \cline{4-11}
-\multirow[t]{2}{*}{0.397} & \multirow[t]{2}{*}{$\langle3, 20\rangle$} & \multirow[t]{2}{*}{0.200} & \multirow[t]{2}{*}{\ref{fig:transposition3and20}} & Up & 0 & 0 & 0 & 0 & 0 & 1 \\
- &  &  &  & Down & 0 & 0 & 0 & 0 & 0 & 1 \\
+0.640 & $\langle13, 15\rangle$ & 0.484 & \ref{fig:transposition13and15} & Up & 0 & 0 & 0 & 0 & 0 & 46 \\
 \cline{1-11} \cline{2-11} \cline{3-11} \cline{4-11}
-\multirow[t]{2}{*}{0.400} & \multirow[t]{2}{*}{$\langle2, 13\rangle$} & \multirow[t]{2}{*}{0.709} & \multirow[t]{2}{*}{\ref{fig:transposition2and13}} & Up & 0 & 0 & 2 & 0 & 2 & 26 \\
- &  &  &  & Down & 0 & 2 & 2 & 0 & 0 & 26 \\
+0.645 & $\langle7, 8\rangle$ & 0.305 & \ref{fig:transposition7and8} & Up & 0 & 0 & 0 & 1 & 0 & 2 \\
 \cline{1-11} \cline{2-11} \cline{3-11} \cline{4-11}
-\multirow[t]{2}{*}{0.401} & \multirow[t]{2}{*}{$\langle17, 23\rangle$} & \multirow[t]{2}{*}{0.545} & \multirow[t]{2}{*}{\ref{fig:transposition17and23}} & Up & 0 & 0 & 0 & 0 & 0 & 16 \\
- &  &  &  & Down & 0 & 0 & 0 & 0 & 0 & 16 \\
+0.649 & $\langle9, 20\rangle$ & 0.390 & \ref{fig:transposition9and20} & Up & 0 & 0 & 0 & 0 & 0 & 8 \\
 \cline{1-11} \cline{2-11} \cline{3-11} \cline{4-11}
-\multirow[t]{4}{*}{0.404} & \multirow[t]{2}{*}{$\langle18, 21\rangle$} & \multirow[t]{2}{*}{0.528} & \multirow[t]{2}{*}{\ref{fig:transposition18and21}} & Up & 0 & 0 & 0 & 0 & 0 & 54 \\
- &  &  &  & Down & 0 & 0 & 0 & 0 & 0 & 54 \\
-\cline{2-11} \cline{3-11} \cline{4-11}
- & \multirow[t]{2}{*}{$\langle6, 14\rangle$} & \multirow[t]{2}{*}{0.499} & \multirow[t]{2}{*}{\ref{fig:transposition6and14}} & Up & 0 & 1 & 1 & 0 & 0 & 16 \\
- &  &  &  & Down & 0 & 1 & 1 & 0 & 0 & 16 \\
+0.658 & $\langle19, 20\rangle$ & 0.394 & \ref{fig:transposition19and20} & Up & 0 & 0 & 0 & 0 & 0 & 32 \\
 \cline{1-11} \cline{2-11} \cline{3-11} \cline{4-11}
-\multirow[t]{2}{*}{0.422} & \multirow[t]{2}{*}{$\langle2, 15\rangle$} & \multirow[t]{2}{*}{0.694} & \multirow[t]{2}{*}{\ref{fig:transposition2and15}} & Up & 0 & 0 & 0 & 0 & 0 & 33 \\
- &  &  &  & Down & 0 & 0 & 0 & 0 & 0 & 33 \\
+0.674 & $\langle6, 20\rangle$ & 0.401 & \ref{fig:transposition6and20} & Up & 0 & 0 & 2 & 0 & 1 & 22 \\
 \cline{1-11} \cline{2-11} \cline{3-11} \cline{4-11}
-\multirow[t]{2}{*}{0.436} & \multirow[t]{2}{*}{$\langle1, 13\rangle$} & \multirow[t]{2}{*}{0.718} & \multirow[t]{2}{*}{\ref{fig:transposition1and13}} & Up & 0 & 0 & 0 & 0 & 0 & 45 \\
- &  &  &  & Down & 0 & 0 & 0 & 0 & 0 & 45 \\
+0.700 & $\langle3, 9\rangle$ & 0.347 & \ref{fig:transposition3and9} & Up & 1 & 0 & 0 & 0 & 0 & 0 \\
+\cline{1-11} \cline{2-11} \cline{3-11} \cline{4-11}
+0.712 & $\langle6, 19\rangle$ & 0.375 & \ref{fig:transposition6and19} & Up & 0 & 0 & 0 & 0 & 0 & 8 \\
+\cline{1-11} \cline{2-11} \cline{3-11} \cline{4-11}
+0.721 & $\langle9, 21\rangle$ & 0.329 & \ref{fig:transposition9and21} & Up & 0 & 0 & 0 & 0 & 0 & 2 \\
+\cline{1-11} \cline{2-11} \cline{3-11} \cline{4-11}
+0.722 & $\langle5, 16\rangle$ & 0.760 & \ref{fig:transposition5and16} & Up & 0 & 0 & 0 & 0 & 0 & 60 \\
 \cline{1-11} \cline{2-11} \cline{3-11} \cline{4-11}
 \bottomrule
 \end{tabular}
@@ -316,59 +301,77 @@ Time & Vertices & Value & Figure & Path &  &  &  &  &  &  \\
  &  &  &  & Dim & 0 & 1 & 1 & 1 & 2 &  \\
 Time & Vertices & Value & Figure & Path &  &  &  &  &  &  \\
 \midrule
-\multirow[t]{2}{*}{0.437} & \multirow[t]{2}{*}{$\langle7, 14\rangle$} & \multirow[t]{2}{*}{0.484} & \multirow[t]{2}{*}{\ref{fig:transposition7and14}} & Up & 0 & 0 & 1 & 0 & 0 & 10 \\
- &  &  &  & Down & 0 & 0 & 1 & 0 & 0 & 10 \\
+0.734 & $\langle4, 7\rangle$ & 0.237 & \ref{fig:transposition4and7} & Up & 0 & 0 & 0 & 0 & 0 & 3 \\
 \cline{1-11} \cline{2-11} \cline{3-11} \cline{4-11}
-\multirow[t]{2}{*}{0.441} & \multirow[t]{2}{*}{$\langle17, 21\rangle$} & \multirow[t]{2}{*}{0.545} & \multirow[t]{2}{*}{\ref{fig:transposition17and21}} & Up & 0 & 0 & 0 & 0 & 0 & 20 \\
- &  &  &  & Down & 0 & 0 & 0 & 0 & 0 & 20 \\
+0.756 & $\langle3, 6\rangle$ & 0.346 & \ref{fig:transposition3and6} & Up & 0 & 0 & 0 & 0 & 0 & 2 \\
 \cline{1-11} \cline{2-11} \cline{3-11} \cline{4-11}
-\multirow[t]{2}{*}{0.453} & \multirow[t]{2}{*}{$\langle2, 8\rangle$} & \multirow[t]{2}{*}{0.671} & \multirow[t]{2}{*}{\ref{fig:transposition2and8}} & Up & 0 & 0 & 0 & 0 & 0 & 24 \\
- &  &  &  & Down & 0 & 0 & 0 & 0 & 0 & 24 \\
+0.760 & $\langle10, 16\rangle$ & 0.763 & \ref{fig:transposition10and16} & Up & 0 & 0 & 0 & 0 & 0 & 72 \\
 \cline{1-11} \cline{2-11} \cline{3-11} \cline{4-11}
-\multirow[t]{2}{*}{0.459} & \multirow[t]{2}{*}{$\langle1, 15\rangle$} & \multirow[t]{2}{*}{0.712} & \multirow[t]{2}{*}{\ref{fig:transposition1and15}} & Up & 0 & 0 & 0 & 0 & 0 & 55 \\
- &  &  &  & Down & 0 & 0 & 0 & 0 & 0 & 55 \\
+0.761 & $\langle13, 18\rangle$ & 0.504 & \ref{fig:transposition13and18} & Up & 0 & 0 & 0 & 0 & 0 & 18 \\
 \cline{1-11} \cline{2-11} \cline{3-11} \cline{4-11}
-\multirow[t]{2}{*}{0.463} & \multirow[t]{2}{*}{$\langle9, 22\rangle$} & \multirow[t]{2}{*}{0.302} & \multirow[t]{2}{*}{\ref{fig:transposition9and22}} & Up & 0 & 0 & 0 & 0 & 0 & 2 \\
- &  &  &  & Down & 0 & 0 & 0 & 0 & 0 & 2 \\
+0.762 & $\langle7, 17\rangle$ & 0.216 & \ref{fig:transposition7and17} & Up & 0 & 0 & 0 & 0 & 0 & 1 \\
 \cline{1-11} \cline{2-11} \cline{3-11} \cline{4-11}
-\multirow[t]{2}{*}{0.464} & \multirow[t]{2}{*}{$\langle10, 23\rangle$} & \multirow[t]{2}{*}{0.581} & \multirow[t]{2}{*}{\ref{fig:transposition10and23}} & Up & 0 & 0 & 0 & 0 & 0 & 40 \\
- &  &  &  & Down & 0 & 0 & 0 & 0 & 0 & 40 \\
+0.767 & $\langle1, 2\rangle$ & 0.547 & \ref{fig:transposition1and2} & Up & 0 & 0 & 0 & 0 & 0 & 49 \\
 \cline{1-11} \cline{2-11} \cline{3-11} \cline{4-11}
-\multirow[t]{4}{*}{0.469} & \multirow[t]{2}{*}{$\langle0, 19\rangle$} & \multirow[t]{2}{*}{0.587} & \multirow[t]{2}{*}{\ref{fig:transposition0and19}} & Up & 0 & 0 & 0 & 0 & 0 & 54 \\
- &  &  &  & Down & 0 & 0 & 0 & 0 & 0 & 54 \\
+0.773 & $\langle6, 21\rangle$ & 0.335 & \ref{fig:transposition6and21} & Up & 0 & 0 & 0 & 1 & 0 & 2 \\
+\cline{1-11} \cline{2-11} \cline{3-11} \cline{4-11}
+0.795 & $\langle8, 9\rangle$ & 0.268 & \ref{fig:transposition8and9} & Up & 0 & 0 & 0 & 0 & 0 & 3 \\
+\cline{1-11} \cline{2-11} \cline{3-11} \cline{4-11}
+\multirow[t]{2}{*}{0.800} & $\langle3, 19\rangle$ & 0.346 & \ref{fig:transposition3and19} & Up & 1 & 0 & 0 & 0 & 0 & 4 \\
 \cline{2-11} \cline{3-11} \cline{4-11}
- & \multirow[t]{2}{*}{$\langle6, 7\rangle$} & \multirow[t]{2}{*}{0.488} & \multirow[t]{2}{*}{\ref{fig:transposition6and7}} & Up & 0 & 0 & 0 & 0 & 0 & 12 \\
- &  &  &  & Down & 0 & 0 & 0 & 0 & 0 & 12 \\
+ & $\langle5, 11\rangle$ & 0.806 & \ref{fig:transposition5and11} & Up & 0 & 0 & 0 & 0 & 0 & 110 \\
 \cline{1-11} \cline{2-11} \cline{3-11} \cline{4-11}
-\multirow[t]{2}{*}{0.472} & \multirow[t]{2}{*}{$\langle19, 23\rangle$} & \multirow[t]{2}{*}{0.586} & \multirow[t]{2}{*}{\ref{fig:transposition19and23}} & Up & 0 & 0 & 0 & 0 & 0 & 72 \\
- &  &  &  & Down & 0 & 0 & 0 & 0 & 0 & 72 \\
+0.808 & $\langle5, 12\rangle$ & 0.810 & \ref{fig:transposition5and12} & Up & 0 & 0 & 0 & 0 & 0 & 110 \\
 \cline{1-11} \cline{2-11} \cline{3-11} \cline{4-11}
-\multirow[t]{2}{*}{0.473} & \multirow[t]{2}{*}{$\langle0, 23\rangle$} & \multirow[t]{2}{*}{0.586} & \multirow[t]{2}{*}{\ref{fig:transposition0and23}} & Up & 0 & 0 & 0 & 0 & 0 & 48 \\
- &  &  &  & Down & 0 & 0 & 0 & 0 & 0 & 48 \\
+0.814 & $\langle4, 9\rangle$ & 0.252 & \ref{fig:transposition4and9} & Up & 0 & 0 & 0 & 0 & 0 & 3 \\
 \cline{1-11} \cline{2-11} \cline{3-11} \cline{4-11}
-\multirow[t]{2}{*}{0.486} & \multirow[t]{2}{*}{$\langle10, 21\rangle$} & \multirow[t]{2}{*}{0.567} & \multirow[t]{2}{*}{\ref{fig:transposition10and21}} & Up & 0 & 0 & 0 & 0 & 0 & 50 \\
- &  &  &  & Down & 0 & 0 & 0 & 0 & 0 & 50 \\
+\multirow[t]{2}{*}{0.817} & $\langle11, 12\rangle$ & 0.809 & \ref{fig:transposition11and12} & Up & 0 & 0 & 0 & 0 & 0 & 121 \\
+\cline{2-11} \cline{3-11} \cline{4-11}
+ & $\langle19, 21\rangle$ & 0.340 & \ref{fig:transposition19and21} & Up & 0 & 0 & 0 & 0 & 0 & 9 \\
 \cline{1-11} \cline{2-11} \cline{3-11} \cline{4-11}
-\multirow[t]{2}{*}{0.494} & \multirow[t]{2}{*}{$\langle19, 21\rangle$} & \multirow[t]{2}{*}{0.571} & \multirow[t]{2}{*}{\ref{fig:transposition19and21}} & Up & 0 & 0 & 0 & 0 & 0 & 90 \\
- &  &  &  & Down & 0 & 0 & 0 & 0 & 0 & 90 \\
+0.823 & $\langle15, 20\rangle$ & 0.467 & \ref{fig:transposition15and20} & Up & 0 & 0 & 0 & 0 & 1 & 62 \\
 \cline{1-11} \cline{2-11} \cline{3-11} \cline{4-11}
-\multirow[t]{2}{*}{0.498} & \multirow[t]{2}{*}{$\langle0, 21\rangle$} & \multirow[t]{2}{*}{0.572} & \multirow[t]{2}{*}{\ref{fig:transposition0and21}} & Up & 0 & 0 & 0 & 0 & 0 & 60 \\
- &  &  &  & Down & 0 & 0 & 0 & 0 & 0 & 60 \\
+\multirow[t]{2}{*}{0.832} & $\langle0, 1\rangle$ & 0.520 & \ref{fig:transposition0and1} & Up & 0 & 0 & 2 & 0 & 0 & 30 \\
+\cline{2-11} \cline{3-11} \cline{4-11}
+ & $\langle10, 12\rangle$ & 0.807 & \ref{fig:transposition10and12} & Up & 0 & 0 & 0 & 0 & 2 & 124 \\
 \cline{1-11} \cline{2-11} \cline{3-11} \cline{4-11}
-\multirow[t]{2}{*}{0.503} & \multirow[t]{2}{*}{$\langle13, 15\rangle$} & \multirow[t]{2}{*}{0.734} & \multirow[t]{2}{*}{\ref{fig:transposition13and15}} & Up & 0 & 0 & 0 & 0 & 0 & 99 \\
- &  &  &  & Down & 0 & 0 & 0 & 0 & 0 & 99 \\
+0.835 & $\langle7, 23\rangle$ & 0.160 & \ref{fig:transposition7and23} & Up & 0 & 0 & 0 & 0 & 0 & 1 \\
 \cline{1-11} \cline{2-11} \cline{3-11} \cline{4-11}
-\multirow[t]{2}{*}{0.504} & \multirow[t]{2}{*}{$\langle12, 23\rangle$} & \multirow[t]{2}{*}{0.603} & \multirow[t]{2}{*}{\ref{fig:transposition12and23}} & Up & 0 & 0 & 0 & 0 & 0 & 72 \\
- &  &  &  & Down & 0 & 0 & 0 & 0 & 0 & 72 \\
+0.838 & $\langle9, 17\rangle$ & 0.232 & \ref{fig:transposition9and17} & Up & 0 & 0 & 0 & 0 & 0 & 1 \\
 \cline{1-11} \cline{2-11} \cline{3-11} \cline{4-11}
-\multirow[t]{2}{*}{0.519} & \multirow[t]{2}{*}{$\langle10, 17\rangle$} & \multirow[t]{2}{*}{0.546} & \multirow[t]{2}{*}{\ref{fig:transposition10and17}} & Up & 0 & 0 & 0 & 0 & 0 & 8 \\
- &  &  &  & Down & 0 & 0 & 0 & 0 & 0 & 8 \\
+\multirow[t]{2}{*}{0.839} & $\langle1, 13\rangle$ & 0.517 & \ref{fig:transposition1and13} & Up & 0 & 0 & 0 & 0 & 0 & 36 \\
+\cline{2-11} \cline{3-11} \cline{4-11}
+ & $\langle4, 8\rangle$ & 0.256 & \ref{fig:transposition4and8} & Up & 0 & 0 & 0 & 1 & 0 & 8 \\
 \cline{1-11} \cline{2-11} \cline{3-11} \cline{4-11}
-\multirow[t]{2}{*}{0.529} & \multirow[t]{2}{*}{$\langle2, 23\rangle$} & \multirow[t]{2}{*}{0.618} & \multirow[t]{2}{*}{\ref{fig:transposition2and23}} & Up & 0 & 0 & 0 & 0 & 0 & 24 \\
- &  &  &  & Down & 0 & 0 & 0 & 0 & 0 & 24 \\
+0.844 & $\langle10, 11\rangle$ & 0.814 & \ref{fig:transposition10and11} & Up & 0 & 0 & 0 & 0 & 0 & 165 \\
 \cline{1-11} \cline{2-11} \cline{3-11} \cline{4-11}
-\multirow[t]{2}{*}{0.530} & \multirow[t]{2}{*}{$\langle17, 19\rangle$} & \multirow[t]{2}{*}{0.546} & \multirow[t]{2}{*}{\ref{fig:transposition17and19}} & Up & 0 & 0 & 0 & 0 & 0 & 27 \\
- &  &  &  & Down & 0 & 0 & 0 & 0 & 0 & 27 \\
+0.848 & $\langle0, 13\rangle$ & 0.518 & \ref{fig:transposition0and13} & Up & 0 & 1 & 1 & 0 & 1 & 22 \\
+\cline{1-11} \cline{2-11} \cline{3-11} \cline{4-11}
+0.862 & $\langle3, 21\rangle$ & 0.345 & \ref{fig:transposition3and21} & Up & 0 & 0 & 0 & 0 & 0 & 6 \\
+\cline{1-11} \cline{2-11} \cline{3-11} \cline{4-11}
+\multirow[t]{3}{*}{0.880} & $\langle1, 18\rangle$ & 0.499 & \ref{fig:transposition1and18} & Up & 0 & 0 & 0 & 0 & 0 & 18 \\
+\cline{2-11} \cline{3-11} \cline{4-11}
+ & $\langle2, 13\rangle$ & 0.523 & \ref{fig:transposition2and13} & Up & 0 & 0 & 0 & 0 & 0 & 56 \\
+\cline{2-11} \cline{3-11} \cline{4-11}
+ & $\langle4, 6\rangle$ & 0.264 & \ref{fig:transposition4and6} & Up & 0 & 0 & 0 & 0 & 0 & 3 \\
+\cline{1-11} \cline{2-11} \cline{3-11} \cline{4-11}
+0.888 & $\langle1, 20\rangle$ & 0.496 & \ref{fig:transposition1and20} & Up & 0 & 0 & 0 & 0 & 0 & 78 \\
+\cline{1-11} \cline{2-11} \cline{3-11} \cline{4-11}
+0.892 & $\langle8, 17\rangle$ & 0.243 & \ref{fig:transposition8and17} & Up & 0 & 0 & 0 & 0 & 0 & 2 \\
+\cline{1-11} \cline{2-11} \cline{3-11} \cline{4-11}
+0.894 & $\langle18, 20\rangle$ & 0.499 & \ref{fig:transposition18and20} & Up & 0 & 0 & 0 & 0 & 0 & 39 \\
+\cline{1-11} \cline{2-11} \cline{3-11} \cline{4-11}
+0.906 & $\langle6, 17\rangle$ & 0.246 & \ref{fig:transposition6and17} & Up & 0 & 0 & 0 & 0 & 0 & 2 \\
+\cline{1-11} \cline{2-11} \cline{3-11} \cline{4-11}
+0.921 & $\langle6, 8\rangle$ & 0.236 & \ref{fig:transposition6and8} & Up & 0 & 0 & 0 & 0 & 0 & 2 \\
+\cline{1-11} \cline{2-11} \cline{3-11} \cline{4-11}
+0.922 & $\langle0, 20\rangle$ & 0.512 & \ref{fig:transposition0and20} & Up & 0 & 0 & 0 & 0 & 0 & 39 \\
+\cline{1-11} \cline{2-11} \cline{3-11} \cline{4-11}
+0.927 & $\langle2, 20\rangle$ & 0.514 & \ref{fig:transposition2and20} & Up & 0 & 0 & 0 & 0 & 0 & 91 \\
+\cline{1-11} \cline{2-11} \cline{3-11} \cline{4-11}
+0.934 & $\langle9, 23\rangle$ & 0.151 & \ref{fig:transposition9and23} & Up & 0 & 0 & 0 & 0 & 0 & 1 \\
+\cline{1-11} \cline{2-11} \cline{3-11} \cline{4-11}
+0.949 & $\langle0, 2\rangle$ & 0.509 & \ref{fig:transposition0and2} & Up & 0 & 3 & 1 & 0 & 0 & 17 \\
 \cline{1-11} \cline{2-11} \cline{3-11} \cline{4-11}
 \bottomrule
 \end{tabular}
@@ -379,218 +382,11 @@ Time & Vertices & Value & Figure & Path &  &  &  &  &  &  \\
  &  &  &  & Dim & 0 & 1 & 1 & 1 & 2 &  \\
 Time & Vertices & Value & Figure & Path &  &  &  &  &  &  \\
 \midrule
-\multirow[t]{2}{*}{0.538} & \multirow[t]{2}{*}{$\langle12, 21\rangle$} & \multirow[t]{2}{*}{0.592} & \multirow[t]{2}{*}{\ref{fig:transposition12and21}} & Up & 0 & 0 & 0 & 0 & 2 & 76 \\
- &  &  &  & Down & 0 & 0 & 0 & 0 & 2 & 76 \\
+0.984 & $\langle4, 19\rangle$ & 0.283 & \ref{fig:transposition4and19} & Up & 0 & 0 & 0 & 1 & 0 & 8 \\
 \cline{1-11} \cline{2-11} \cline{3-11} \cline{4-11}
-\multirow[t]{2}{*}{0.546} & \multirow[t]{2}{*}{$\langle0, 17\rangle$} & \multirow[t]{2}{*}{0.546} & \multirow[t]{2}{*}{\ref{fig:transposition0and17}} & Up & 0 & 0 & 0 & 0 & 0 & 18 \\
- &  &  &  & Down & 0 & 0 & 0 & 0 & 0 & 18 \\
+0.989 & $\langle13, 20\rangle$ & 0.541 & \ref{fig:transposition13and20} & Up & 0 & 0 & 0 & 0 & 0 & 104 \\
 \cline{1-11} \cline{2-11} \cline{3-11} \cline{4-11}
-\multirow[t]{2}{*}{0.552} & \multirow[t]{2}{*}{$\langle10, 18\rangle$} & \multirow[t]{2}{*}{0.524} & \multirow[t]{2}{*}{\ref{fig:transposition10and18}} & Up & 0 & 0 & 0 & 0 & 0 & 24 \\
- &  &  &  & Down & 0 & 0 & 0 & 0 & 0 & 24 \\
-\cline{1-11} \cline{2-11} \cline{3-11} \cline{4-11}
-\multirow[t]{2}{*}{0.554} & \multirow[t]{2}{*}{$\langle2, 21\rangle$} & \multirow[t]{2}{*}{0.599} & \multirow[t]{2}{*}{\ref{fig:transposition2and21}} & Up & 0 & 0 & 0 & 0 & 0 & 39 \\
- &  &  &  & Down & 0 & 0 & 0 & 0 & 0 & 39 \\
-\cline{1-11} \cline{2-11} \cline{3-11} \cline{4-11}
-\multirow[t]{2}{*}{0.555} & \multirow[t]{2}{*}{$\langle5, 14\rangle$} & \multirow[t]{2}{*}{0.429} & \multirow[t]{2}{*}{\ref{fig:transposition5and14}} & Up & 0 & 0 & 1 & 1 & 0 & 18 \\
- &  &  &  & Down & 0 & 0 & 1 & 1 & 0 & 18 \\
-\cline{1-11} \cline{2-11} \cline{3-11} \cline{4-11}
-\multirow[t]{2}{*}{0.557} & \multirow[t]{2}{*}{$\langle3, 9\rangle$} & \multirow[t]{2}{*}{0.252} & \multirow[t]{2}{*}{\ref{fig:transposition3and9}} & Up & 1 & 0 & 0 & 0 & 0 & 0 \\
- &  &  &  & Down & 1 & 0 & 0 & 0 & 0 & 0 \\
-\cline{1-11} \cline{2-11} \cline{3-11} \cline{4-11}
-\multirow[t]{2}{*}{0.563} & \multirow[t]{2}{*}{$\langle18, 19\rangle$} & \multirow[t]{2}{*}{0.524} & \multirow[t]{2}{*}{\ref{fig:transposition18and19}} & Up & 0 & 0 & 0 & 0 & 0 & 54 \\
- &  &  &  & Down & 0 & 0 & 0 & 0 & 0 & 54 \\
-\cline{1-11} \cline{2-11} \cline{3-11} \cline{4-11}
-\multirow[t]{2}{*}{0.586} & \multirow[t]{2}{*}{$\langle7, 10\rangle$} & \multirow[t]{2}{*}{0.502} & \multirow[t]{2}{*}{\ref{fig:transposition7and10}} & Up & 0 & 0 & 0 & 0 & 0 & 16 \\
- &  &  &  & Down & 0 & 0 & 0 & 0 & 0 & 16 \\
-\cline{1-11} \cline{2-11} \cline{3-11} \cline{4-11}
-\multirow[t]{2}{*}{0.589} & \multirow[t]{2}{*}{$\langle0, 18\rangle$} & \multirow[t]{2}{*}{0.523} & \multirow[t]{2}{*}{\ref{fig:transposition0and18}} & Up & 0 & 0 & 0 & 0 & 0 & 36 \\
- &  &  &  & Down & 0 & 0 & 0 & 0 & 0 & 36 \\
-\cline{1-11} \cline{2-11} \cline{3-11} \cline{4-11}
-\multirow[t]{2}{*}{0.590} & \multirow[t]{2}{*}{$\langle2, 12\rangle$} & \multirow[t]{2}{*}{0.574} & \multirow[t]{2}{*}{\ref{fig:transposition2and12}} & Up & 0 & 0 & 0 & 0 & 0 & 18 \\
- &  &  &  & Down & 0 & 0 & 0 & 0 & 0 & 18 \\
-\cline{1-11} \cline{2-11} \cline{3-11} \cline{4-11}
-\multirow[t]{2}{*}{0.593} & \multirow[t]{2}{*}{$\langle7, 19\rangle$} & \multirow[t]{2}{*}{0.503} & \multirow[t]{2}{*}{\ref{fig:transposition7and19}} & Up & 0 & 0 & 0 & 0 & 0 & 36 \\
- &  &  &  & Down & 0 & 0 & 0 & 0 & 0 & 36 \\
-\cline{1-11} \cline{2-11} \cline{3-11} \cline{4-11}
-\multirow[t]{2}{*}{0.608} & \multirow[t]{2}{*}{$\langle8, 23\rangle$} & \multirow[t]{2}{*}{0.663} & \multirow[t]{2}{*}{\ref{fig:transposition8and23}} & Up & 0 & 0 & 0 & 0 & 0 & 64 \\
- &  &  &  & Down & 0 & 0 & 0 & 0 & 0 & 64 \\
-\cline{1-11} \cline{2-11} \cline{3-11} \cline{4-11}
-\multirow[t]{2}{*}{0.616} & \multirow[t]{2}{*}{$\langle1, 23\rangle$} & \multirow[t]{2}{*}{0.667} & \multirow[t]{2}{*}{\ref{fig:transposition1and23}} & Up & 0 & 0 & 0 & 0 & 0 & 40 \\
- &  &  &  & Down & 0 & 0 & 0 & 0 & 0 & 40 \\
-\cline{1-11} \cline{2-11} \cline{3-11} \cline{4-11}
-\multirow[t]{2}{*}{0.620} & \multirow[t]{2}{*}{$\langle0, 7\rangle$} & \multirow[t]{2}{*}{0.507} & \multirow[t]{2}{*}{\ref{fig:transposition0and7}} & Up & 0 & 0 & 0 & 0 & 0 & 24 \\
- &  &  &  & Down & 0 & 0 & 0 & 0 & 0 & 24 \\
-\cline{1-11} \cline{2-11} \cline{3-11} \cline{4-11}
-\multirow[t]{2}{*}{0.628} & \multirow[t]{2}{*}{$\langle2, 17\rangle$} & \multirow[t]{2}{*}{0.547} & \multirow[t]{2}{*}{\ref{fig:transposition2and17}} & Up & 0 & 0 & 2 & 0 & 0 & 7 \\
- &  &  &  & Down & 0 & 0 & 2 & 0 & 0 & 7 \\
-\cline{1-11} \cline{2-11} \cline{3-11} \cline{4-11}
-\multirow[t]{2}{*}{0.637} & \multirow[t]{2}{*}{$\langle1, 8\rangle$} & \multirow[t]{2}{*}{0.661} & \multirow[t]{2}{*}{\ref{fig:transposition1and8}} & Up & 0 & 0 & 0 & 0 & 0 & 40 \\
- &  &  &  & Down & 0 & 0 & 0 & 0 & 0 & 40 \\
-\cline{1-11} \cline{2-11} \cline{3-11} \cline{4-11}
-\multirow[t]{2}{*}{0.638} & \multirow[t]{2}{*}{$\langle4, 14\rangle$} & \multirow[t]{2}{*}{0.390} & \multirow[t]{2}{*}{\ref{fig:transposition4and14}} & Up & 0 & 0 & 0 & 3 & 0 & 6 \\
- &  &  &  & Down & 0 & 0 & 0 & 3 & 0 & 6 \\
-\cline{1-11} \cline{2-11} \cline{3-11} \cline{4-11}
-\multirow[t]{2}{*}{0.662} & \multirow[t]{2}{*}{$\langle6, 10\rangle$} & \multirow[t]{2}{*}{0.453} & \multirow[t]{2}{*}{\ref{fig:transposition6and10}} & Up & 0 & 0 & 0 & 0 & 0 & 8 \\
- &  &  &  & Down & 0 & 0 & 0 & 0 & 0 & 8 \\
-\cline{1-11} \cline{2-11} \cline{3-11} \cline{4-11}
-\bottomrule
-\end{tabular}
-
-\begin{tabular}{lllllrrrrrr}
-\toprule
- &  &  &  & Type & \multicolumn{2}{r}{birth-birth} & birth-death & \multicolumn{2}{r}{death-death} & no switch \\
- &  &  &  & Dim & 0 & 1 & 1 & 1 & 2 &  \\
-Time & Vertices & Value & Figure & Path &  &  &  &  &  &  \\
-\midrule
-\multirow[t]{2}{*}{0.663} & \multirow[t]{2}{*}{$\langle2, 18\rangle$} & \multirow[t]{2}{*}{0.522} & \multirow[t]{2}{*}{\ref{fig:transposition2and18}} & Up & 0 & 0 & 0 & 0 & 0 & 12 \\
- &  &  &  & Down & 0 & 0 & 0 & 0 & 0 & 12 \\
-\cline{1-11} \cline{2-11} \cline{3-11} \cline{4-11}
-\multirow[t]{2}{*}{0.667} & \multirow[t]{2}{*}{$\langle1, 21\rangle$} & \multirow[t]{2}{*}{0.653} & \multirow[t]{2}{*}{\ref{fig:transposition1and21}} & Up & 0 & 0 & 0 & 0 & 0 & 65 \\
- &  &  &  & Down & 0 & 0 & 0 & 0 & 0 & 65 \\
-\cline{1-11} \cline{2-11} \cline{3-11} \cline{4-11}
-\multirow[t]{4}{*}{0.668} & \multirow[t]{2}{*}{$\langle12, 17\rangle$} & \multirow[t]{2}{*}{0.547} & \multirow[t]{2}{*}{\ref{fig:transposition12and17}} & Up & 0 & 0 & 0 & 0 & 0 & 24 \\
- &  &  &  & Down & 0 & 0 & 0 & 0 & 0 & 24 \\
-\cline{2-11} \cline{3-11} \cline{4-11}
- & \multirow[t]{2}{*}{$\langle6, 19\rangle$} & \multirow[t]{2}{*}{0.452} & \multirow[t]{2}{*}{\ref{fig:transposition6and19}} & Up & 0 & 1 & 0 & 0 & 0 & 38 \\
- &  &  &  & Down & 0 & 0 & 0 & 0 & 1 & 38 \\
-\cline{1-11} \cline{2-11} \cline{3-11} \cline{4-11}
-\multirow[t]{2}{*}{0.674} & \multirow[t]{2}{*}{$\langle2, 7\rangle$} & \multirow[t]{2}{*}{0.513} & \multirow[t]{2}{*}{\ref{fig:transposition2and7}} & Up & 0 & 0 & 0 & 0 & 0 & 8 \\
- &  &  &  & Down & 0 & 0 & 0 & 0 & 0 & 8 \\
-\cline{1-11} \cline{2-11} \cline{3-11} \cline{4-11}
-\multirow[t]{2}{*}{0.680} & \multirow[t]{2}{*}{$\langle8, 21\rangle$} & \multirow[t]{2}{*}{0.659} & \multirow[t]{2}{*}{\ref{fig:transposition8and21}} & Up & 0 & 0 & 0 & 0 & 0 & 104 \\
- &  &  &  & Down & 0 & 0 & 0 & 0 & 0 & 104 \\
-\cline{1-11} \cline{2-11} \cline{3-11} \cline{4-11}
-\multirow[t]{2}{*}{0.720} & \multirow[t]{2}{*}{$\langle14, 22\rangle$} & \multirow[t]{2}{*}{0.352} & \multirow[t]{2}{*}{\ref{fig:transposition14and22}} & Up & 0 & 0 & 0 & 0 & 0 & 9 \\
- &  &  &  & Down & 0 & 0 & 0 & 0 & 0 & 9 \\
-\cline{1-11} \cline{2-11} \cline{3-11} \cline{4-11}
-\multirow[t]{2}{*}{0.729} & \multirow[t]{2}{*}{$\langle7, 18\rangle$} & \multirow[t]{2}{*}{0.520} & \multirow[t]{2}{*}{\ref{fig:transposition7and18}} & Up & 0 & 0 & 1 & 0 & 0 & 20 \\
- &  &  &  & Down & 0 & 0 & 1 & 0 & 0 & 20 \\
-\cline{1-11} \cline{2-11} \cline{3-11} \cline{4-11}
-\multirow[t]{2}{*}{0.733} & \multirow[t]{2}{*}{$\langle5, 10\rangle$} & \multirow[t]{2}{*}{0.407} & \multirow[t]{2}{*}{\ref{fig:transposition5and10}} & Up & 0 & 0 & 0 & 0 & 0 & 10 \\
- &  &  &  & Down & 0 & 0 & 0 & 0 & 0 & 10 \\
-\cline{1-11} \cline{2-11} \cline{3-11} \cline{4-11}
-\multirow[t]{2}{*}{0.734} & \multirow[t]{2}{*}{$\langle5, 19\rangle$} & \multirow[t]{2}{*}{0.407} & \multirow[t]{2}{*}{\ref{fig:transposition5and19}} & Up & 0 & 0 & 0 & 0 & 0 & 30 \\
- &  &  &  & Down & 0 & 0 & 0 & 0 & 0 & 30 \\
-\cline{1-11} \cline{2-11} \cline{3-11} \cline{4-11}
-\multirow[t]{2}{*}{0.742} & \multirow[t]{2}{*}{$\langle7, 12\rangle$} & \multirow[t]{2}{*}{0.522} & \multirow[t]{2}{*}{\ref{fig:transposition7and12}} & Up & 0 & 0 & 1 & 0 & 1 & 28 \\
- &  &  &  & Down & 0 & 1 & 1 & 0 & 0 & 28 \\
-\cline{1-11} \cline{2-11} \cline{3-11} \cline{4-11}
-\multirow[t]{6}{*}{0.747} & \multirow[t]{2}{*}{$\langle0, 6\rangle$} & \multirow[t]{2}{*}{0.439} & \multirow[t]{2}{*}{\ref{fig:transposition0and6}} & Up & 0 & 0 & 0 & 0 & 0 & 48 \\
- &  &  &  & Down & 0 & 0 & 0 & 0 & 0 & 48 \\
-\cline{2-11} \cline{3-11} \cline{4-11}
- & \multirow[t]{2}{*}{$\langle10, 19\rangle$} & \multirow[t]{2}{*}{0.399} & \multirow[t]{2}{*}{\ref{fig:transposition10and19}} & Up & 0 & 0 & 0 & 0 & 0 & 12 \\
- &  &  &  & Down & 0 & 0 & 0 & 0 & 0 & 12 \\
-\cline{2-11} \cline{3-11} \cline{4-11}
- & \multirow[t]{2}{*}{$\langle12, 18\rangle$} & \multirow[t]{2}{*}{0.520} & \multirow[t]{2}{*}{\ref{fig:transposition12and18}} & Up & 0 & 0 & 1 & 0 & 0 & 10 \\
- &  &  &  & Down & 0 & 0 & 1 & 0 & 0 & 10 \\
-\cline{1-11} \cline{2-11} \cline{3-11} \cline{4-11}
-\multirow[t]{2}{*}{0.758} & \multirow[t]{2}{*}{$\langle4, 19\rangle$} & \multirow[t]{2}{*}{0.391} & \multirow[t]{2}{*}{\ref{fig:transposition4and19}} & Up & 0 & 0 & 1 & 0 & 0 & 18 \\
- &  &  &  & Down & 0 & 0 & 1 & 0 & 0 & 18 \\
-\cline{1-11} \cline{2-11} \cline{3-11} \cline{4-11}
-\multirow[t]{2}{*}{0.759} & \multirow[t]{2}{*}{$\langle4, 10\rangle$} & \multirow[t]{2}{*}{0.391} & \multirow[t]{2}{*}{\ref{fig:transposition4and10}} & Up & 0 & 0 & 0 & 1 & 0 & 8 \\
- &  &  &  & Down & 1 & 0 & 0 & 0 & 0 & 8 \\
-\cline{1-11} \cline{2-11} \cline{3-11} \cline{4-11}
-\multirow[t]{2}{*}{0.779} & \multirow[t]{2}{*}{$\langle3, 14\rangle$} & \multirow[t]{2}{*}{0.324} & \multirow[t]{2}{*}{\ref{fig:transposition3and14}} & Up & 0 & 0 & 0 & 0 & 0 & 3 \\
- &  &  &  & Down & 0 & 0 & 0 & 0 & 0 & 3 \\
-\cline{1-11} \cline{2-11} \cline{3-11} \cline{4-11}
-\multirow[t]{2}{*}{0.789} & \multirow[t]{2}{*}{$\langle2, 6\rangle$} & \multirow[t]{2}{*}{0.431} & \multirow[t]{2}{*}{\ref{fig:transposition2and6}} & Up & 0 & 0 & 0 & 0 & 0 & 16 \\
- &  &  &  & Down & 0 & 0 & 0 & 0 & 0 & 16 \\
-\cline{1-11} \cline{2-11} \cline{3-11} \cline{4-11}
-\bottomrule
-\end{tabular}
-
-\begin{tabular}{lllllrrrrrr}
-\toprule
- &  &  &  & Type & \multicolumn{2}{r}{birth-birth} & birth-death & \multicolumn{2}{r}{death-death} & no switch \\
- &  &  &  & Dim & 0 & 1 & 1 & 1 & 2 &  \\
-Time & Vertices & Value & Figure & Path &  &  &  &  &  &  \\
-\midrule
-\multirow[t]{2}{*}{0.794} & \multirow[t]{2}{*}{$\langle19, 22\rangle$} & \multirow[t]{2}{*}{0.366} & \multirow[t]{2}{*}{\ref{fig:transposition19and22}} & Up & 0 & 0 & 0 & 0 & 0 & 12 \\
- &  &  &  & Down & 0 & 0 & 0 & 0 & 0 & 12 \\
-\cline{1-11} \cline{2-11} \cline{3-11} \cline{4-11}
-\multirow[t]{2}{*}{0.796} & \multirow[t]{2}{*}{$\langle10, 22\rangle$} & \multirow[t]{2}{*}{0.367} & \multirow[t]{2}{*}{\ref{fig:transposition10and22}} & Up & 0 & 0 & 0 & 0 & 0 & 3 \\
- &  &  &  & Down & 0 & 0 & 0 & 0 & 0 & 3 \\
-\cline{1-11} \cline{2-11} \cline{3-11} \cline{4-11}
-\multirow[t]{2}{*}{0.825} & \multirow[t]{2}{*}{$\langle0, 5\rangle$} & \multirow[t]{2}{*}{0.397} & \multirow[t]{2}{*}{\ref{fig:transposition0and5}} & Up & 0 & 1 & 1 & 0 & 0 & 24 \\
- &  &  &  & Down & 0 & 1 & 1 & 0 & 0 & 24 \\
-\cline{1-11} \cline{2-11} \cline{3-11} \cline{4-11}
-\multirow[t]{2}{*}{0.832} & \multirow[t]{2}{*}{$\langle3, 19\rangle$} & \multirow[t]{2}{*}{0.341} & \multirow[t]{2}{*}{\ref{fig:transposition3and19}} & Up & 0 & 0 & 0 & 0 & 0 & 4 \\
- &  &  &  & Down & 0 & 0 & 0 & 0 & 0 & 4 \\
-\cline{1-11} \cline{2-11} \cline{3-11} \cline{4-11}
-\multirow[t]{2}{*}{0.834} & \multirow[t]{2}{*}{$\langle0, 4\rangle$} & \multirow[t]{2}{*}{0.392} & \multirow[t]{2}{*}{\ref{fig:transposition0and4}} & Up & 0 & 0 & 0 & 0 & 0 & 18 \\
- &  &  &  & Down & 0 & 0 & 0 & 0 & 0 & 18 \\
-\cline{1-11} \cline{2-11} \cline{3-11} \cline{4-11}
-\multirow[t]{2}{*}{0.835} & \multirow[t]{2}{*}{$\langle3, 10\rangle$} & \multirow[t]{2}{*}{0.342} & \multirow[t]{2}{*}{\ref{fig:transposition3and10}} & Up & 0 & 0 & 0 & 0 & 0 & 1 \\
- &  &  &  & Down & 0 & 0 & 0 & 0 & 0 & 1 \\
-\cline{1-11} \cline{2-11} \cline{3-11} \cline{4-11}
-\multirow[t]{2}{*}{0.840} & \multirow[t]{2}{*}{$\langle2, 5\rangle$} & \multirow[t]{2}{*}{0.395} & \multirow[t]{2}{*}{\ref{fig:transposition2and5}} & Up & 0 & 0 & 0 & 0 & 0 & 16 \\
- &  &  &  & Down & 0 & 0 & 0 & 0 & 0 & 16 \\
-\cline{1-11} \cline{2-11} \cline{3-11} \cline{4-11}
-\multirow[t]{2}{*}{0.844} & \multirow[t]{2}{*}{$\langle2, 4\rangle$} & \multirow[t]{2}{*}{0.392} & \multirow[t]{2}{*}{\ref{fig:transposition2and4}} & Up & 0 & 0 & 0 & 0 & 0 & 12 \\
- &  &  &  & Down & 0 & 0 & 0 & 0 & 0 & 12 \\
-\cline{1-11} \cline{2-11} \cline{3-11} \cline{4-11}
-\multirow[t]{2}{*}{0.858} & \multirow[t]{2}{*}{$\langle0, 22\rangle$} & \multirow[t]{2}{*}{0.379} & \multirow[t]{2}{*}{\ref{fig:transposition0and22}} & Up & 0 & 0 & 1 & 0 & 0 & 8 \\
- &  &  &  & Down & 0 & 0 & 1 & 0 & 0 & 8 \\
-\cline{1-11} \cline{2-11} \cline{3-11} \cline{4-11}
-\multirow[t]{2}{*}{0.860} & \multirow[t]{2}{*}{$\langle16, 20\rangle$} & \multirow[t]{2}{*}{0.061} & \multirow[t]{2}{*}{\ref{fig:transposition16and20}} & Up & 0 & 0 & 0 & 0 & 0 & 1 \\
- &  &  &  & Down & 0 & 0 & 0 & 0 & 0 & 1 \\
-\cline{1-11} \cline{2-11} \cline{3-11} \cline{4-11}
-\multirow[t]{2}{*}{0.862} & \multirow[t]{2}{*}{$\langle2, 22\rangle$} & \multirow[t]{2}{*}{0.379} & \multirow[t]{2}{*}{\ref{fig:transposition2and22}} & Up & 0 & 0 & 0 & 1 & 0 & 4 \\
- &  &  &  & Down & 1 & 0 & 0 & 0 & 0 & 4 \\
-\cline{1-11} \cline{2-11} \cline{3-11} \cline{4-11}
-\multirow[t]{2}{*}{0.864} & \multirow[t]{2}{*}{$\langle4, 5\rangle$} & \multirow[t]{2}{*}{0.392} & \multirow[t]{2}{*}{\ref{fig:transposition4and5}} & Up & 0 & 0 & 0 & 0 & 0 & 48 \\
- &  &  &  & Down & 0 & 0 & 0 & 0 & 0 & 48 \\
-\cline{1-11} \cline{2-11} \cline{3-11} \cline{4-11}
-\multirow[t]{2}{*}{0.876} & \multirow[t]{2}{*}{$\langle0, 2\rangle$} & \multirow[t]{2}{*}{0.369} & \multirow[t]{2}{*}{\ref{fig:transposition0and2}} & Up & 0 & 0 & 0 & 0 & 0 & 3 \\
- &  &  &  & Down & 0 & 0 & 0 & 0 & 0 & 3 \\
-\cline{1-11} \cline{2-11} \cline{3-11} \cline{4-11}
-\multirow[t]{2}{*}{0.889} & \multirow[t]{2}{*}{$\langle2, 3\rangle$} & \multirow[t]{2}{*}{0.360} & \multirow[t]{2}{*}{\ref{fig:transposition2and3}} & Up & 0 & 0 & 0 & 0 & 0 & 1 \\
- &  &  &  & Down & 0 & 0 & 0 & 0 & 0 & 1 \\
-\cline{1-11} \cline{2-11} \cline{3-11} \cline{4-11}
-\multirow[t]{2}{*}{0.892} & \multirow[t]{2}{*}{$\langle0, 3\rangle$} & \multirow[t]{2}{*}{0.361} & \multirow[t]{2}{*}{\ref{fig:transposition0and3}} & Up & 1 & 0 & 0 & 0 & 0 & 2 \\
- &  &  &  & Down & 0 & 0 & 0 & 1 & 0 & 2 \\
-\cline{1-11} \cline{2-11} \cline{3-11} \cline{4-11}
-\multirow[t]{2}{*}{0.903} & \multirow[t]{2}{*}{$\langle5, 22\rangle$} & \multirow[t]{2}{*}{0.387} & \multirow[t]{2}{*}{\ref{fig:transposition5and22}} & Up & 0 & 0 & 0 & 0 & 0 & 26 \\
- &  &  &  & Down & 0 & 0 & 0 & 0 & 0 & 26 \\
-\cline{1-11} \cline{2-11} \cline{3-11} \cline{4-11}
-\multirow[t]{2}{*}{0.906} & \multirow[t]{2}{*}{$\langle13, 23\rangle$} & \multirow[t]{2}{*}{0.832} & \multirow[t]{2}{*}{\ref{fig:transposition13and23}} & Up & 0 & 0 & 0 & 0 & 0 & 72 \\
- &  &  &  & Down & 0 & 0 & 0 & 0 & 0 & 72 \\
-\cline{1-11} \cline{2-11} \cline{3-11} \cline{4-11}
-\multirow[t]{2}{*}{0.911} & \multirow[t]{2}{*}{$\langle9, 16\rangle$} & \multirow[t]{2}{*}{0.063} & \multirow[t]{2}{*}{\ref{fig:transposition9and16}} & Up & 1 & 0 & 0 & 0 & 0 & 0 \\
- &  &  &  & Down & 1 & 0 & 0 & 0 & 0 & 0 \\
-\cline{1-11} \cline{2-11} \cline{3-11} \cline{4-11}
-\bottomrule
-\end{tabular}
-
-\begin{tabular}{lllllrrrrrr}
-\toprule
- &  &  &  & Type & \multicolumn{2}{r}{birth-birth} & birth-death & \multicolumn{2}{r}{death-death} & no switch \\
- &  &  &  & Dim & 0 & 1 & 1 & 1 & 2 &  \\
-Time & Vertices & Value & Figure & Path &  &  &  &  &  &  \\
-\midrule
-\multirow[t]{2}{*}{0.930} & \multirow[t]{2}{*}{$\langle4, 22\rangle$} & \multirow[t]{2}{*}{0.393} & \multirow[t]{2}{*}{\ref{fig:transposition4and22}} & Up & 0 & 0 & 0 & 0 & 0 & 36 \\
- &  &  &  & Down & 0 & 0 & 0 & 0 & 0 & 36 \\
-\cline{1-11} \cline{2-11} \cline{3-11} \cline{4-11}
-\multirow[t]{2}{*}{0.955} & \multirow[t]{2}{*}{$\langle3, 5\rangle$} & \multirow[t]{2}{*}{0.381} & \multirow[t]{2}{*}{\ref{fig:transposition3and5}} & Up & 0 & 0 & 0 & 0 & 0 & 12 \\
- &  &  &  & Down & 0 & 0 & 0 & 0 & 0 & 12 \\
-\cline{1-11} \cline{2-11} \cline{3-11} \cline{4-11}
-\multirow[t]{2}{*}{0.961} & \multirow[t]{2}{*}{$\langle7, 17\rangle$} & \multirow[t]{2}{*}{0.549} & \multirow[t]{2}{*}{\ref{fig:transposition7and17}} & Up & 0 & 0 & 0 & 0 & 0 & 36 \\
- &  &  &  & Down & 0 & 0 & 0 & 0 & 0 & 36 \\
-\cline{1-11} \cline{2-11} \cline{3-11} \cline{4-11}
-\multirow[t]{2}{*}{0.967} & \multirow[t]{2}{*}{$\langle6, 22\rangle$} & \multirow[t]{2}{*}{0.400} & \multirow[t]{2}{*}{\ref{fig:transposition6and22}} & Up & 0 & 0 & 0 & 0 & 0 & 48 \\
- &  &  &  & Down & 0 & 0 & 0 & 0 & 0 & 48 \\
-\cline{1-11} \cline{2-11} \cline{3-11} \cline{4-11}
-\multirow[t]{2}{*}{0.987} & \multirow[t]{2}{*}{$\langle9, 20\rangle$} & \multirow[t]{2}{*}{0.023} & \multirow[t]{2}{*}{\ref{fig:transposition9and20}} & Up & 0 & 0 & 0 & 0 & 0 & 1 \\
- &  &  &  & Down & 0 & 0 & 0 & 0 & 0 & 1 \\
-\cline{1-11} \cline{2-11} \cline{3-11} \cline{4-11}
-\multirow[t]{2}{*}{0.992} & \multirow[t]{2}{*}{$\langle3, 4\rangle$} & \multirow[t]{2}{*}{0.393} & \multirow[t]{2}{*}{\ref{fig:transposition3and4}} & Up & 0 & 0 & 0 & 0 & 0 & 24 \\
- &  &  &  & Down & 0 & 0 & 0 & 0 & 0 & 24 \\
-\cline{1-11} \cline{2-11} \cline{3-11} \cline{4-11}
-\multirow[t]{2}{*}{0.997} & \multirow[t]{2}{*}{$\langle3, 6\rangle$} & \multirow[t]{2}{*}{0.395} & \multirow[t]{2}{*}{\ref{fig:transposition3and6}} & Up & 0 & 0 & 0 & 0 & 0 & 32 \\
- &  &  &  & Down & 0 & 0 & 0 & 0 & 0 & 32 \\
-\cline{1-11} \cline{2-11} \cline{3-11} \cline{4-11}
-\multirow[t]{2}{*}{0.999} & \multirow[t]{2}{*}{$\langle11, 15\rangle$} & \multirow[t]{2}{*}{0.985} & \multirow[t]{2}{*}{\ref{fig:transposition11and15}} & Up & 0 & 0 & 0 & 0 & 0 & 121 \\
- &  &  &  & Down & 0 & 0 & 0 & 0 & 0 & 121 \\
+0.995 & $\langle1, 15\rangle$ & 0.452 & \ref{fig:transposition1and15} & Up & 0 & 0 & 0 & 0 & 0 & 30 \\
 \cline{1-11} \cline{2-11} \cline{3-11} \cline{4-11}
 \bottomrule
 \end{tabular}
@@ -601,62 +397,69 @@ Time & Vertices & Value & Figure & Path &  &  &  &  &  &  \\
 
 \section{present the details}
 \par Here we detalize the paths, how depth poset changed during the homotopy by different paths.
-\par In the figures we can see graphs, which edges coresponds the transpositions of simplices, and nodes are orders, coresponding one of 240 Depth Posets we got.
-%\subsection{Reordering by transposition of vertices 20 and 23}
+\par In the figures we can see graphs, which edges coresponds the transpositions of simplices, and nodes are orders, coresponding one of 134 Depth Posets we got.
+%\subsection{Reordering by transposition of vertices 1 and 9}
 \begin{figure}[htbp]
     \centering
-    \includegraphics[width=1.2\textwidth]{pics/heights linear homotopy - transpositions 20-23.png}
-    \caption{Reordering by transposition of vertices 20 and 23}
-    \label{fig:transposition20and23}
+    \includegraphics[width=1.2\textwidth]{pics/heights linear homotopy - transpositions 1-9.png}
+    \caption{Reordering by transposition of vertices 1 and 9}
+    \label{fig:transposition1and9}
 \end{figure}
-%\subsection{Reordering by transposition of vertices 4 and 23}
+%\subsection{Reordering by transposition of vertices 10 and 13}
 \begin{figure}[htbp]
     \centering
-    \includegraphics[width=1.2\textwidth]{pics/heights linear homotopy - transpositions 4-23.png}
-    \caption{Reordering by transposition of vertices 4 and 23}
-    \label{fig:transposition4and23}
+    \includegraphics[width=1.2\textwidth]{pics/heights linear homotopy - transpositions 10-13.png}
+    \caption{Reordering by transposition of vertices 10 and 13}
+    \label{fig:transposition10and13}
 \end{figure}
-%\subsection{Reordering by transposition of vertices 7 and 9}
+%\subsection{Reordering by transposition of vertices 18 and 19}
 \begin{figure}[htbp]
     \centering
-    \includegraphics[width=1.2\textwidth]{pics/heights linear homotopy - transpositions 7-9.png}
-    \caption{Reordering by transposition of vertices 7 and 9}
-    \label{fig:transposition7and9}
+    \includegraphics[width=1.2\textwidth]{pics/heights linear homotopy - transpositions 18-19.png}
+    \caption{Reordering by transposition of vertices 18 and 19}
+    \label{fig:transposition18and19}
 \end{figure}
-%\subsection{Reordering by transposition of vertices 9 and 21}
+%\subsection{Reordering by transposition of vertices 0 and 10}
 \begin{figure}[htbp]
     \centering
-    \includegraphics[width=1.2\textwidth]{pics/heights linear homotopy - transpositions 9-21.png}
-    \caption{Reordering by transposition of vertices 9 and 21}
-    \label{fig:transposition9and21}
+    \includegraphics[width=1.2\textwidth]{pics/heights linear homotopy - transpositions 0-10.png}
+    \caption{Reordering by transposition of vertices 0 and 10}
+    \label{fig:transposition0and10}
 \end{figure}
-%\subsection{Reordering by transposition of vertices 5 and 21}
+%\subsection{Reordering by transposition of vertices 8 and 20}
 \begin{figure}[htbp]
     \centering
-    \includegraphics[width=1.2\textwidth]{pics/heights linear homotopy - transpositions 5-21.png}
-    \caption{Reordering by transposition of vertices 5 and 21}
-    \label{fig:transposition5and21}
+    \includegraphics[width=1.2\textwidth]{pics/heights linear homotopy - transpositions 8-20.png}
+    \caption{Reordering by transposition of vertices 8 and 20}
+    \label{fig:transposition8and20}
 \end{figure}
-%\subsection{Reordering by transposition of vertices 1 and 2}
+%\subsection{Reordering by transposition of vertices 6 and 13}
 \begin{figure}[htbp]
     \centering
-    \includegraphics[width=1.2\textwidth]{pics/heights linear homotopy - transpositions 1-2.png}
-    \caption{Reordering by transposition of vertices 1 and 2}
-    \label{fig:transposition1and2}
+    \includegraphics[width=1.2\textwidth]{pics/heights linear homotopy - transpositions 6-13.png}
+    \caption{Reordering by transposition of vertices 6 and 13}
+    \label{fig:transposition6and13}
 \end{figure}
-%\subsection{Reordering by transposition of vertices 2 and 13}
+%\subsection{Reordering by transposition of vertices 7 and 20}
 \begin{figure}[htbp]
     \centering
-    \includegraphics[width=1.2\textwidth]{pics/heights linear homotopy - transpositions 2-13.png}
-    \caption{Reordering by transposition of vertices 2 and 13}
-    \label{fig:transposition2and13}
+    \includegraphics[width=1.2\textwidth]{pics/heights linear homotopy - transpositions 7-20.png}
+    \caption{Reordering by transposition of vertices 7 and 20}
+    \label{fig:transposition7and20}
 \end{figure}
-%\subsection{Reordering by transposition of vertices 6 and 14}
+%\subsection{Reordering by transposition of vertices 7 and 8}
 \begin{figure}[htbp]
     \centering
-    \includegraphics[width=1.2\textwidth]{pics/heights linear homotopy - transpositions 6-14.png}
-    \caption{Reordering by transposition of vertices 6 and 14}
-    \label{fig:transposition6and14}
+    \includegraphics[width=1.2\textwidth]{pics/heights linear homotopy - transpositions 7-8.png}
+    \caption{Reordering by transposition of vertices 7 and 8}
+    \label{fig:transposition7and8}
+\end{figure}
+%\subsection{Reordering by transposition of vertices 6 and 20}
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=1.2\textwidth]{pics/heights linear homotopy - transpositions 6-20.png}
+    \caption{Reordering by transposition of vertices 6 and 20}
+    \label{fig:transposition6and20}
 \end{figure}
 %\subsection{Reordering by transposition of vertices 3 and 9}
 \begin{figure}[htbp]
@@ -665,63 +468,246 @@ Time & Vertices & Value & Figure & Path &  &  &  &  &  &  \\
     \caption{Reordering by transposition of vertices 3 and 9}
     \label{fig:transposition3and9}
 \end{figure}
-%\subsection{Reordering by transposition of vertices 2 and 17}
+%\subsection{Reordering by transposition of vertices 6 and 21}
 \begin{figure}[htbp]
     \centering
-    \includegraphics[width=1.2\textwidth]{pics/heights linear homotopy - transpositions 2-17.png}
-    \caption{Reordering by transposition of vertices 2 and 17}
-    \label{fig:transposition2and17}
+    \includegraphics[width=1.2\textwidth]{pics/heights linear homotopy - transpositions 6-21.png}
+    \caption{Reordering by transposition of vertices 6 and 21}
+    \label{fig:transposition6and21}
 \end{figure}
-%\subsection{Reordering by transposition of vertices 4 and 14}
+%\subsection{Reordering by transposition of vertices 3 and 19}
 \begin{figure}[htbp]
     \centering
-    \includegraphics[width=1.2\textwidth]{pics/heights linear homotopy - transpositions 4-14.png}
-    \caption{Reordering by transposition of vertices 4 and 14}
-    \label{fig:transposition4and14}
+    \includegraphics[width=1.2\textwidth]{pics/heights linear homotopy - transpositions 3-19.png}
+    \caption{Reordering by transposition of vertices 3 and 19}
+    \label{fig:transposition3and19}
 \end{figure}
-%\subsection{Reordering by transposition of vertices 4 and 10}
+%\subsection{Reordering by transposition of vertices 4 and 8}
 \begin{figure}[htbp]
     \centering
-    \includegraphics[width=1.2\textwidth]{pics/heights linear homotopy - transpositions 4-10.png}
-    \caption{Reordering by transposition of vertices 4 and 10}
-    \label{fig:transposition4and10}
+    \includegraphics[width=1.2\textwidth]{pics/heights linear homotopy - transpositions 4-8.png}
+    \caption{Reordering by transposition of vertices 4 and 8}
+    \label{fig:transposition4and8}
 \end{figure}
-%\subsection{Reordering by transposition of vertices 0 and 22}
+%\subsection{Reordering by transposition of vertices 0 and 13}
 \begin{figure}[htbp]
     \centering
-    \includegraphics[width=1.2\textwidth]{pics/heights linear homotopy - transpositions 0-22.png}
-    \caption{Reordering by transposition of vertices 0 and 22}
-    \label{fig:transposition0and22}
+    \includegraphics[width=1.2\textwidth]{pics/heights linear homotopy - transpositions 0-13.png}
+    \caption{Reordering by transposition of vertices 0 and 13}
+    \label{fig:transposition0and13}
 \end{figure}
-%\subsection{Reordering by transposition of vertices 2 and 22}
+%\subsection{Reordering by transposition of vertices 0 and 2}
 \begin{figure}[htbp]
     \centering
-    \includegraphics[width=1.2\textwidth]{pics/heights linear homotopy - transpositions 2-22.png}
-    \caption{Reordering by transposition of vertices 2 and 22}
-    \label{fig:transposition2and22}
+    \includegraphics[width=1.2\textwidth]{pics/heights linear homotopy - transpositions 0-2.png}
+    \caption{Reordering by transposition of vertices 0 and 2}
+    \label{fig:transposition0and2}
 \end{figure}
-%\subsection{Reordering by transposition of vertices 0 and 3}
+%\subsection{Reordering by transposition of vertices 4 and 19}
 \begin{figure}[htbp]
     \centering
-    \includegraphics[width=1.2\textwidth]{pics/heights linear homotopy - transpositions 0-3.png}
-    \caption{Reordering by transposition of vertices 0 and 3}
-    \label{fig:transposition0and3}
-\end{figure}
-%\subsection{Reordering by transposition of vertices 9 and 16}
-\begin{figure}[htbp]
-    \centering
-    \includegraphics[width=1.2\textwidth]{pics/heights linear homotopy - transpositions 9-16.png}
-    \caption{Reordering by transposition of vertices 9 and 16}
-    \label{fig:transposition9and16}
+    \includegraphics[width=1.2\textwidth]{pics/heights linear homotopy - transpositions 4-19.png}
+    \caption{Reordering by transposition of vertices 4 and 19}
+    \label{fig:transposition4and19}
 \end{figure}
 
 \newpage
 
 
 \section{Depth Posets}
-\par During the transposition we got 240 depth posets. In this section we listed few of them. 
+\par During the transposition we got 134 depth posets. In this section we listed few of them. 
 \par The depth poset coresponding the first filtration we can see in Figure \ref{fig:dp0}, 
-and the depth poset coresponding the last filtration we can see in Figure \ref{fig:dp161}.
+and the depth poset coresponding the last filtration we can see in Figure \ref{fig:dp133}.
+
+\par We use abbroviations for the scores:
+\begin{center}
+\begin{tabular}{ll}
+\toprule
+ & Abbroviation \\
+Score &  \\
+\midrule
+number of components & C \\
+number of nodes & Nod \\
+number of edges in closure & EdC \\
+number of edges in reduction & EdR \\
+number of maximal nodes & MaxNod \\
+number of minimal nodes & MinNod \\
+height & H \\
+width & W \\
+cycles dimension & CD \\
+minimum maximal chain & MMC \\
+avarage maximal chain & AMC \\
+\bottomrule
+\end{tabular}
+
+\end{center}
+
+\par In the table below we can see the statistics about depth poset scores.
+\begin{center}
+\begin{tabular}{llrrrrrrrrrrr}
+\toprule
+ & Figure & C & Nod & EdC & EdR & MaxNod & MinNod & H & W & CD & MMC & AMC \\
+\midrule
+$DP_{0}$ & \ref{fig:dp0} & 32 & 65 & 45 & 33 & 32 & 55 & 3 & 55 & 0 & 1 & 1.69 \\
+$DP_{1}$ &  & 31 & 65 & 46 & 34 & 31 & 55 & 3 & 55 & 0 & 1 & 1.71 \\
+$DP_{2}$ &  & 31 & 65 & 49 & 34 & 31 & 55 & 4 & 55 & 0 & 1 & 1.75 \\
+$DP_{3}$ &  & 31 & 65 & 47 & 34 & 31 & 55 & 3 & 55 & 0 & 1 & 1.73 \\
+$DP_{4}$ &  & 31 & 65 & 48 & 34 & 31 & 55 & 4 & 55 & 0 & 1 & 1.73 \\
+$DP_{5}$ &  & 31 & 65 & 46 & 34 & 31 & 56 & 3 & 56 & 0 & 1 & 1.73 \\
+$DP_{6}$ &  & 30 & 65 & 50 & 35 & 30 & 56 & 3 & 56 & 0 & 1 & 1.77 \\
+$DP_{7}$ &  & 30 & 65 & 50 & 35 & 30 & 56 & 3 & 56 & 0 & 1 & 1.77 \\
+$DP_{8}$ &  & 30 & 65 & 52 & 35 & 30 & 55 & 4 & 55 & 0 & 1 & 1.76 \\
+$DP_{9}$ &  & 30 & 65 & 51 & 36 & 30 & 55 & 3 & 56 & 1 & 1 & 1.79 \\
+$DP_{10}$ &  & 30 & 65 & 50 & 35 & 30 & 56 & 3 & 56 & 0 & 1 & 1.77 \\
+$DP_{11}$ &  & 29 & 65 & 51 & 36 & 30 & 55 & 3 & 55 & 0 & 1 & 1.79 \\
+$DP_{12}$ &  & 29 & 65 & 51 & 36 & 29 & 55 & 3 & 55 & 0 & 1 & 1.80 \\
+$DP_{13}$ &  & 29 & 65 & 54 & 36 & 29 & 54 & 3 & 54 & 0 & 1 & 1.85 \\
+$DP_{14}$ & \ref{fig:dp14} & 29 & 65 & 55 & 36 & 29 & 53 & 3 & 53 & 0 & 1 & 1.85 \\
+$DP_{15}$ &  & 29 & 65 & 52 & 36 & 29 & 54 & 3 & 54 & 0 & 1 & 1.81 \\
+$DP_{16}$ & \ref{fig:dp16} & 29 & 65 & 54 & 36 & 29 & 54 & 3 & 54 & 0 & 1 & 1.85 \\
+$DP_{17}$ &  & 29 & 65 & 53 & 36 & 29 & 54 & 3 & 54 & 0 & 1 & 1.83 \\
+$DP_{18}$ &  & 29 & 65 & 51 & 36 & 29 & 55 & 3 & 55 & 0 & 1 & 1.80 \\
+$DP_{19}$ &  & 28 & 65 & 52 & 37 & 28 & 54 & 3 & 54 & 0 & 1 & 1.83 \\
+\bottomrule
+\end{tabular}
+
+\begin{tabular}{llrrrrrrrrrrr}
+\toprule
+ & Figure & C & Nod & EdC & EdR & MaxNod & MinNod & H & W & CD & MMC & AMC \\
+\midrule
+$DP_{20}$ &  & 30 & 65 & 52 & 35 & 30 & 53 & 3 & 53 & 0 & 1 & 1.79 \\
+$DP_{21}$ &  & 30 & 65 & 52 & 35 & 30 & 53 & 3 & 53 & 0 & 1 & 1.79 \\
+$DP_{22}$ &  & 30 & 65 & 50 & 35 & 31 & 53 & 3 & 53 & 0 & 1 & 1.78 \\
+$DP_{23}$ &  & 31 & 65 & 49 & 34 & 31 & 54 & 3 & 54 & 0 & 1 & 1.76 \\
+$DP_{24}$ &  & 28 & 65 & 56 & 37 & 28 & 52 & 3 & 52 & 0 & 1 & 1.88 \\
+$DP_{25}$ &  & 29 & 65 & 55 & 36 & 29 & 53 & 3 & 53 & 0 & 1 & 1.85 \\
+$DP_{26}$ &  & 29 & 65 & 54 & 36 & 29 & 53 & 3 & 53 & 0 & 1 & 1.83 \\
+$DP_{27}$ &  & 31 & 65 & 50 & 34 & 31 & 53 & 3 & 53 & 0 & 1 & 1.75 \\
+$DP_{28}$ &  & 30 & 65 & 51 & 35 & 30 & 53 & 3 & 53 & 0 & 1 & 1.77 \\
+$DP_{29}$ &  & 30 & 65 & 51 & 35 & 30 & 52 & 3 & 52 & 0 & 1 & 1.79 \\
+$DP_{30}$ &  & 30 & 65 & 44 & 35 & 31 & 53 & 3 & 53 & 0 & 1 & 1.69 \\
+$DP_{31}$ &  & 30 & 65 & 45 & 36 & 31 & 53 & 3 & 53 & 1 & 1 & 1.69 \\
+$DP_{32}$ &  & 30 & 65 & 46 & 37 & 31 & 53 & 3 & 53 & 2 & 1 & 1.70 \\
+$DP_{33}$ &  & 29 & 65 & 45 & 36 & 30 & 53 & 3 & 53 & 0 & 1 & 1.70 \\
+$DP_{34}$ & \ref{fig:dp34} & 28 & 65 & 54 & 37 & 29 & 53 & 3 & 53 & 0 & 1 & 1.81 \\
+$DP_{35}$ &  & 29 & 65 & 53 & 36 & 30 & 53 & 3 & 53 & 0 & 1 & 1.80 \\
+$DP_{36}$ &  & 27 & 65 & 56 & 38 & 28 & 53 & 3 & 53 & 0 & 1 & 1.83 \\
+$DP_{37}$ &  & 29 & 65 & 53 & 36 & 30 & 53 & 3 & 53 & 0 & 1 & 1.80 \\
+$DP_{38}$ &  & 28 & 65 & 54 & 37 & 29 & 53 & 3 & 53 & 0 & 1 & 1.81 \\
+$DP_{39}$ &  & 28 & 65 & 54 & 37 & 28 & 53 & 3 & 53 & 0 & 1 & 1.81 \\
+$DP_{40}$ &  & 27 & 65 & 55 & 38 & 28 & 53 & 3 & 53 & 0 & 1 & 1.81 \\
+$DP_{41}$ &  & 28 & 65 & 55 & 37 & 28 & 52 & 3 & 52 & 0 & 1 & 1.83 \\
+$DP_{42}$ &  & 28 & 65 & 55 & 37 & 28 & 52 & 3 & 52 & 0 & 1 & 1.83 \\
+$DP_{43}$ &  & 29 & 65 & 54 & 36 & 29 & 52 & 3 & 52 & 0 & 1 & 1.81 \\
+$DP_{44}$ &  & 29 & 65 & 56 & 36 & 29 & 51 & 3 & 51 & 0 & 1 & 1.82 \\
+$DP_{45}$ &  & 29 & 65 & 56 & 36 & 29 & 51 & 3 & 51 & 0 & 1 & 1.82 \\
+$DP_{46}$ &  & 29 & 65 & 55 & 36 & 29 & 52 & 3 & 52 & 0 & 1 & 1.83 \\
+$DP_{47}$ &  & 27 & 65 & 56 & 38 & 27 & 51 & 3 & 51 & 0 & 1 & 1.86 \\
+$DP_{48}$ &  & 30 & 65 & 52 & 35 & 30 & 52 & 3 & 52 & 0 & 1 & 1.79 \\
+$DP_{49}$ &  & 30 & 65 & 52 & 35 & 30 & 52 & 3 & 52 & 0 & 1 & 1.79 \\
+$DP_{50}$ &  & 29 & 65 & 53 & 36 & 29 & 51 & 3 & 51 & 0 & 1 & 1.82 \\
+$DP_{51}$ &  & 29 & 65 & 53 & 36 & 29 & 51 & 3 & 51 & 0 & 1 & 1.82 \\
+$DP_{52}$ &  & 28 & 65 & 54 & 37 & 28 & 50 & 3 & 50 & 0 & 1 & 1.86 \\
+$DP_{53}$ &  & 28 & 65 & 54 & 37 & 28 & 50 & 3 & 50 & 0 & 1 & 1.86 \\
+$DP_{54}$ &  & 27 & 65 & 55 & 38 & 27 & 50 & 3 & 50 & 0 & 1 & 1.88 \\
+$DP_{55}$ &  & 27 & 65 & 56 & 38 & 27 & 49 & 3 & 49 & 0 & 1 & 1.90 \\
+$DP_{56}$ &  & 27 & 65 & 58 & 38 & 27 & 49 & 3 & 49 & 0 & 1 & 1.94 \\
+$DP_{57}$ &  & 28 & 65 & 54 & 37 & 28 & 49 & 3 & 49 & 0 & 1 & 1.88 \\
+$DP_{58}$ &  & 27 & 65 & 57 & 38 & 27 & 49 & 3 & 49 & 0 & 1 & 1.92 \\
+$DP_{59}$ &  & 27 & 65 & 58 & 38 & 27 & 49 & 3 & 49 & 0 & 1 & 1.94 \\
+$DP_{60}$ &  & 28 & 65 & 54 & 37 & 28 & 49 & 3 & 49 & 0 & 1 & 1.88 \\
+$DP_{61}$ &  & 28 & 65 & 54 & 37 & 28 & 49 & 3 & 49 & 0 & 1 & 1.88 \\
+\bottomrule
+\end{tabular}
+
+\begin{tabular}{llrrrrrrrrrrr}
+\toprule
+ & Figure & C & Nod & EdC & EdR & MaxNod & MinNod & H & W & CD & MMC & AMC \\
+\midrule
+$DP_{62}$ &  & 27 & 65 & 57 & 38 & 27 & 49 & 3 & 49 & 0 & 1 & 1.92 \\
+$DP_{63}$ &  & 27 & 65 & 57 & 38 & 27 & 49 & 3 & 49 & 0 & 1 & 1.92 \\
+$DP_{64}$ &  & 28 & 65 & 54 & 37 & 28 & 49 & 3 & 49 & 0 & 1 & 1.88 \\
+$DP_{65}$ &  & 27 & 65 & 54 & 38 & 27 & 50 & 3 & 50 & 0 & 1 & 1.88 \\
+$DP_{66}$ &  & 27 & 65 & 55 & 38 & 27 & 49 & 3 & 49 & 0 & 1 & 1.90 \\
+$DP_{67}$ &  & 28 & 65 & 53 & 37 & 28 & 51 & 3 & 51 & 0 & 1 & 1.84 \\
+$DP_{68}$ &  & 27 & 65 & 54 & 38 & 27 & 50 & 3 & 50 & 0 & 1 & 1.88 \\
+$DP_{69}$ &  & 26 & 65 & 55 & 39 & 26 & 49 & 3 & 49 & 0 & 1 & 1.92 \\
+$DP_{70}$ &  & 27 & 65 & 54 & 38 & 27 & 50 & 3 & 50 & 0 & 1 & 1.88 \\
+$DP_{71}$ &  & 28 & 65 & 53 & 37 & 28 & 51 & 3 & 51 & 0 & 1 & 1.84 \\
+$DP_{72}$ &  & 27 & 65 & 54 & 38 & 27 & 50 & 3 & 50 & 0 & 1 & 1.88 \\
+$DP_{73}$ &  & 27 & 65 & 54 & 38 & 27 & 50 & 3 & 50 & 0 & 1 & 1.88 \\
+$DP_{74}$ &  & 28 & 65 & 53 & 37 & 28 & 51 & 3 & 51 & 0 & 1 & 1.84 \\
+$DP_{75}$ &  & 28 & 65 & 53 & 37 & 28 & 51 & 3 & 51 & 0 & 1 & 1.84 \\
+$DP_{76}$ &  & 27 & 65 & 54 & 38 & 27 & 50 & 3 & 50 & 0 & 1 & 1.88 \\
+$DP_{77}$ &  & 28 & 65 & 53 & 37 & 28 & 51 & 3 & 51 & 0 & 1 & 1.84 \\
+$DP_{78}$ &  & 29 & 65 & 52 & 36 & 29 & 51 & 3 & 51 & 0 & 1 & 1.82 \\
+$DP_{79}$ &  & 30 & 65 & 51 & 35 & 30 & 52 & 3 & 52 & 0 & 1 & 1.79 \\
+$DP_{80}$ &  & 29 & 65 & 52 & 36 & 30 & 51 & 3 & 52 & 0 & 1 & 1.81 \\
+$DP_{81}$ &  & 29 & 65 & 53 & 36 & 29 & 51 & 3 & 51 & 0 & 1 & 1.82 \\
+$DP_{82}$ &  & 30 & 65 & 52 & 35 & 30 & 51 & 3 & 51 & 0 & 1 & 1.80 \\
+$DP_{83}$ &  & 29 & 65 & 53 & 36 & 29 & 50 & 3 & 50 & 0 & 1 & 1.84 \\
+$DP_{84}$ &  & 29 & 65 & 53 & 36 & 29 & 50 & 3 & 50 & 0 & 1 & 1.84 \\
+$DP_{85}$ &  & 29 & 65 & 53 & 36 & 29 & 50 & 3 & 50 & 0 & 1 & 1.84 \\
+$DP_{86}$ &  & 28 & 65 & 54 & 37 & 28 & 49 & 3 & 49 & 0 & 1 & 1.88 \\
+$DP_{87}$ & \ref{fig:dp87} & 28 & 65 & 54 & 37 & 28 & 49 & 3 & 49 & 0 & 1 & 1.88 \\
+$DP_{88}$ &  & 26 & 65 & 56 & 39 & 26 & 49 & 3 & 49 & 0 & 1 & 1.92 \\
+$DP_{89}$ &  & 26 & 65 & 56 & 39 & 26 & 49 & 3 & 49 & 0 & 1 & 1.92 \\
+$DP_{90}$ &  & 26 & 65 & 56 & 39 & 26 & 49 & 3 & 49 & 0 & 1 & 1.92 \\
+$DP_{91}$ &  & 25 & 65 & 58 & 40 & 25 & 49 & 3 & 49 & 0 & 1 & 1.94 \\
+$DP_{92}$ & \ref{fig:dp92} & 24 & 65 & 59 & 41 & 24 & 48 & 3 & 48 & 0 & 1 & 1.98 \\
+$DP_{93}$ &  & 24 & 65 & 59 & 41 & 24 & 48 & 3 & 48 & 0 & 1 & 1.98 \\
+$DP_{94}$ &  & 24 & 65 & 59 & 41 & 24 & 48 & 3 & 48 & 0 & 1 & 1.98 \\
+$DP_{95}$ &  & 24 & 65 & 58 & 41 & 24 & 49 & 3 & 49 & 0 & 1 & 1.96 \\
+$DP_{96}$ & \ref{fig:dp96} & 25 & 65 & 57 & 40 & 25 & 49 & 3 & 49 & 0 & 1 & 1.94 \\
+$DP_{97}$ &  & 24 & 65 & 61 & 41 & 24 & 49 & 3 & 49 & 0 & 1 & 2.00 \\
+$DP_{98}$ &  & 24 & 65 & 58 & 41 & 25 & 49 & 3 & 49 & 0 & 1 & 1.94 \\
+$DP_{99}$ &  & 24 & 65 & 59 & 42 & 25 & 49 & 3 & 49 & 1 & 1 & 1.94 \\
+$DP_{100}$ &  & 24 & 65 & 61 & 41 & 24 & 49 & 3 & 49 & 0 & 1 & 2.00 \\
+$DP_{101}$ &  & 24 & 65 & 62 & 41 & 24 & 49 & 3 & 49 & 0 & 1 & 2.02 \\
+$DP_{102}$ &  & 24 & 65 & 67 & 41 & 24 & 49 & 3 & 49 & 0 & 1 & 2.10 \\
+$DP_{103}$ &  & 24 & 65 & 66 & 41 & 24 & 49 & 3 & 49 & 0 & 1 & 2.08 \\
+\bottomrule
+\end{tabular}
+
+\begin{tabular}{llrrrrrrrrrrr}
+\toprule
+ & Figure & C & Nod & EdC & EdR & MaxNod & MinNod & H & W & CD & MMC & AMC \\
+\midrule
+$DP_{104}$ &  & 24 & 65 & 63 & 41 & 24 & 49 & 3 & 49 & 0 & 1 & 2.04 \\
+$DP_{105}$ &  & 24 & 65 & 62 & 41 & 24 & 49 & 3 & 49 & 0 & 1 & 2.02 \\
+$DP_{106}$ &  & 24 & 65 & 62 & 41 & 24 & 49 & 3 & 49 & 0 & 1 & 2.02 \\
+$DP_{107}$ &  & 24 & 65 & 65 & 41 & 24 & 49 & 3 & 49 & 0 & 1 & 2.06 \\
+$DP_{108}$ &  & 24 & 65 & 63 & 41 & 24 & 49 & 3 & 49 & 0 & 1 & 2.04 \\
+$DP_{109}$ &  & 25 & 65 & 60 & 40 & 25 & 49 & 3 & 49 & 0 & 1 & 2.00 \\
+$DP_{110}$ &  & 24 & 65 & 62 & 41 & 24 & 49 & 3 & 49 & 0 & 1 & 2.02 \\
+$DP_{111}$ &  & 23 & 65 & 63 & 42 & 23 & 48 & 3 & 48 & 0 & 1 & 2.06 \\
+$DP_{112}$ &  & 23 & 65 & 65 & 44 & 24 & 49 & 3 & 49 & 2 & 1 & 2.04 \\
+$DP_{113}$ &  & 23 & 65 & 65 & 44 & 24 & 49 & 3 & 49 & 2 & 1 & 2.04 \\
+$DP_{114}$ &  & 23 & 65 & 65 & 44 & 24 & 49 & 3 & 49 & 2 & 1 & 2.04 \\
+$DP_{115}$ &  & 23 & 65 & 66 & 44 & 24 & 49 & 3 & 49 & 2 & 1 & 2.06 \\
+$DP_{116}$ &  & 23 & 65 & 67 & 45 & 24 & 49 & 3 & 49 & 3 & 1 & 2.06 \\
+$DP_{117}$ &  & 23 & 65 & 70 & 42 & 24 & 49 & 3 & 49 & 0 & 1 & 2.16 \\
+$DP_{118}$ &  & 22 & 65 & 71 & 43 & 23 & 49 & 3 & 49 & 0 & 1 & 2.18 \\
+$DP_{119}$ &  & 21 & 65 & 72 & 44 & 22 & 49 & 3 & 49 & 0 & 1 & 2.20 \\
+$DP_{120}$ &  & 23 & 65 & 70 & 42 & 24 & 49 & 3 & 49 & 0 & 1 & 2.16 \\
+$DP_{121}$ & \ref{fig:dp121} & 21 & 65 & 73 & 44 & 22 & 48 & 3 & 48 & 0 & 1 & 2.22 \\
+$DP_{122}$ &  & 21 & 65 & 74 & 44 & 22 & 48 & 3 & 48 & 0 & 1 & 2.24 \\
+$DP_{123}$ &  & 21 & 65 & 74 & 44 & 22 & 48 & 3 & 48 & 0 & 1 & 2.24 \\
+$DP_{124}$ &  & 21 & 65 & 73 & 44 & 22 & 49 & 3 & 49 & 0 & 1 & 2.22 \\
+$DP_{125}$ &  & 20 & 65 & 77 & 45 & 21 & 49 & 3 & 49 & 0 & 1 & 2.27 \\
+$DP_{126}$ &  & 20 & 65 & 68 & 45 & 21 & 50 & 3 & 50 & 0 & 1 & 2.14 \\
+$DP_{127}$ &  & 20 & 65 & 69 & 45 & 21 & 49 & 3 & 49 & 0 & 1 & 2.14 \\
+$DP_{128}$ & \ref{fig:dp128} & 20 & 65 & 70 & 45 & 21 & 49 & 3 & 49 & 0 & 1 & 2.16 \\
+$DP_{129}$ & \ref{fig:dp129} & 20 & 65 & 77 & 45 & 21 & 49 & 3 & 49 & 0 & 1 & 2.27 \\
+$DP_{130}$ &  & 19 & 65 & 78 & 46 & 20 & 48 & 3 & 48 & 0 & 1 & 2.31 \\
+$DP_{131}$ & \ref{fig:dp131} & 20 & 65 & 84 & 47 & 20 & 50 & 3 & 50 & 2 & 1 & 2.40 \\
+$DP_{132}$ &  & 20 & 65 & 82 & 47 & 20 & 50 & 3 & 50 & 2 & 1 & 2.36 \\
+$DP_{133}$ & \ref{fig:dp133} & 19 & 65 & 83 & 48 & 20 & 50 & 3 & 50 & 2 & 1 & 2.35 \\
+\bottomrule
+\end{tabular}
+
+\end{center}
+
 
 \begin{figure}[h]
     \centering
@@ -731,9 +717,27 @@ and the depth poset coresponding the last filtration we can see in Figure \ref{f
 \end{figure}
 \begin{figure}[h]
     \centering
-    \includegraphics[width=1.2\textwidth]{pics/heights linear homotopy - dp161.png}
-    \caption{Depth Poset $DP_{161}$}
-    \label{fig:dp161}
+    \includegraphics[width=1.2\textwidth]{pics/heights linear homotopy - dp133.png}
+    \caption{Depth Poset $DP_{133}$}
+    \label{fig:dp133}
+\end{figure}
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=1.2\textwidth]{pics/heights linear homotopy - dp92.png}
+    \caption{Depth Poset $DP_{92}$}
+    \label{fig:dp92}
+\end{figure}
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=1.2\textwidth]{pics/heights linear homotopy - dp14.png}
+    \caption{Depth Poset $DP_{14}$}
+    \label{fig:dp14}
+\end{figure}
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=1.2\textwidth]{pics/heights linear homotopy - dp121.png}
+    \caption{Depth Poset $DP_{121}$}
+    \label{fig:dp121}
 \end{figure}
 \begin{figure}[h]
     \centering
@@ -743,57 +747,39 @@ and the depth poset coresponding the last filtration we can see in Figure \ref{f
 \end{figure}
 \begin{figure}[h]
     \centering
-    \includegraphics[width=1.2\textwidth]{pics/heights linear homotopy - dp95.png}
-    \caption{Depth Poset $DP_{95}$}
-    \label{fig:dp95}
+    \includegraphics[width=1.2\textwidth]{pics/heights linear homotopy - dp128.png}
+    \caption{Depth Poset $DP_{128}$}
+    \label{fig:dp128}
 \end{figure}
 \begin{figure}[h]
     \centering
-    \includegraphics[width=1.2\textwidth]{pics/heights linear homotopy - dp171.png}
-    \caption{Depth Poset $DP_{171}$}
-    \label{fig:dp171}
+    \includegraphics[width=1.2\textwidth]{pics/heights linear homotopy - dp131.png}
+    \caption{Depth Poset $DP_{131}$}
+    \label{fig:dp131}
 \end{figure}
 \begin{figure}[h]
     \centering
-    \includegraphics[width=1.2\textwidth]{pics/heights linear homotopy - dp25.png}
-    \caption{Depth Poset $DP_{25}$}
-    \label{fig:dp25}
+    \includegraphics[width=1.2\textwidth]{pics/heights linear homotopy - dp16.png}
+    \caption{Depth Poset $DP_{16}$}
+    \label{fig:dp16}
 \end{figure}
 \begin{figure}[h]
     \centering
-    \includegraphics[width=1.2\textwidth]{pics/heights linear homotopy - dp169.png}
-    \caption{Depth Poset $DP_{169}$}
-    \label{fig:dp169}
+    \includegraphics[width=1.2\textwidth]{pics/heights linear homotopy - dp87.png}
+    \caption{Depth Poset $DP_{87}$}
+    \label{fig:dp87}
 \end{figure}
 \begin{figure}[h]
     \centering
-    \includegraphics[width=1.2\textwidth]{pics/heights linear homotopy - dp35.png}
-    \caption{Depth Poset $DP_{35}$}
-    \label{fig:dp35}
+    \includegraphics[width=1.2\textwidth]{pics/heights linear homotopy - dp129.png}
+    \caption{Depth Poset $DP_{129}$}
+    \label{fig:dp129}
 \end{figure}
 \begin{figure}[h]
     \centering
-    \includegraphics[width=1.2\textwidth]{pics/heights linear homotopy - dp239.png}
-    \caption{Depth Poset $DP_{239}$}
-    \label{fig:dp239}
-\end{figure}
-\begin{figure}[h]
-    \centering
-    \includegraphics[width=1.2\textwidth]{pics/heights linear homotopy - dp114.png}
-    \caption{Depth Poset $DP_{114}$}
-    \label{fig:dp114}
-\end{figure}
-\begin{figure}[h]
-    \centering
-    \includegraphics[width=1.2\textwidth]{pics/heights linear homotopy - dp143.png}
-    \caption{Depth Poset $DP_{143}$}
-    \label{fig:dp143}
-\end{figure}
-\begin{figure}[h]
-    \centering
-    \includegraphics[width=1.2\textwidth]{pics/heights linear homotopy - dp216.png}
-    \caption{Depth Poset $DP_{216}$}
-    \label{fig:dp216}
+    \includegraphics[width=1.2\textwidth]{pics/heights linear homotopy - dp34.png}
+    \caption{Depth Poset $DP_{34}$}
+    \label{fig:dp34}
 \end{figure}
 
 
