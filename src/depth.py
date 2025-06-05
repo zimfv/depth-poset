@@ -6,8 +6,11 @@ from src.utils import iterate_cubical_cells
 
 from gudhi import SimplexTree
 
+import os
+import pickle as pkl
 
-def reduct_column_bottom_to_top(delta, stop_condition=None):
+
+def reduct_column_bottom_to_top(delta, stop_condition=None, log_path=None):
 	"""
 	Returns the result of algorithm 1: Bottom to Top Column Reduction
 	from the article The Poset of Cancellations in a Filtered Complex
@@ -32,12 +35,24 @@ def reduct_column_bottom_to_top(delta, stop_condition=None):
 
 	delta0 : np.array shape (n, n) of ones and zeros
 		Modified border matrix, the intermediary delta for the condition, if it's not None
+
+	log_path: str or None
+		The folder where the intermediate results will be solved.
+		This will not solved the intermediate results, if it's None
 	"""
-	delta0 = np.array(delta)
+	delta0 = np.array(delta, dtype=int)
 	b0 = []
 	i = 0
 	alpha = {}
 	while (delta0 != 0).any():
+		# log the intermediate result
+		if log_path is not None:
+			if not os.path.exists(log_path):
+				os.makedirs(log_path)
+			with open(os.path.join(log_path, f'{i}.pkl'), 'wb') as file:
+				pkl.dump({'iter': i, 'delta': delta, 'b0': b0, 'alpha': alpha}, file)
+
+
 		if stop_condition is not None:
 			if stop_condition(alpha, b0, delta0):
 				return alpha, b0, delta0
@@ -48,7 +63,14 @@ def reduct_column_bottom_to_top(delta, stop_condition=None):
 		alpha.update({i: (s, t)})
 		# while there exists y > t such that delta0[s, y] = 1
 
+		j = 0
 		while (delta0[s, t+1:] != 0).any():
+			# log the intermediate result
+			if log_path is not None:
+				if not os.path.exists(log_path):
+					os.makedirs(log_path)
+				with open(os.path.join(log_path, f'{i}-{j}.pkl'), 'wb') as file:
+					pkl.dump({'iter': i, 'delta': delta, 'b0': b0, 'alpha': alpha}, file)
 			# add column t to column y in delta0; append (t, y) to b0
 			y = t + 1 + int(np.where(delta0[s, t+1:] != 0)[0][0])
 			b0.append((t, y))
@@ -56,6 +78,7 @@ def reduct_column_bottom_to_top(delta, stop_condition=None):
 				if stop_condition(alpha, b0, delta0):
 					return alpha, b0, delta0
 			delta0[:, y] = (delta0[:, t] + delta0[:, y])%2
+			j += 1
 
 		if stop_condition is not None:
 			if stop_condition(alpha, b0, delta0):
@@ -72,7 +95,7 @@ def reduct_column_bottom_to_top(delta, stop_condition=None):
 	return alpha, b0
 
 
-def reduct_row_left_to_right(delta, stop_condition=None):
+def reduct_row_left_to_right(delta, stop_condition=None, log_path=None):
 	"""
 	Returns the result of algorithm 2: Left to Right Row Reduction
 	from the article The Poset of Cancellations in a Filtered Complex
@@ -97,12 +120,23 @@ def reduct_row_left_to_right(delta, stop_condition=None):
 
 	delta1 : np.array shape (n, n) of ones and zeros
 		Modified border matrix, the intermediary delta for the condition, if it's not None
+
+	log_path: str or None
+		The folder where the intermediate results will be solved.
+		This will not solved the intermediate results, if it's None
 	"""
-	delta1 = np.array(delta)
+	delta1 = np.array(delta, dtype=int)
 	b1 = []
 	j = 0
 	omega = {}
 	while (delta1 != 0).any():
+		# log the intermediate result
+		if log_path is not None:
+			if not os.path.exists(log_path):
+				os.makedirs(log_path)
+			with open(os.path.join(log_path, f'{j}.pkl'), 'wb') as file:
+				pkl.dump({'iter': j, 'delta': delta, 'b1': b1, 'omega': omega}, file)
+			
 		if stop_condition is not None:
 			if stop_condition(omega, b1, delta1):
 				return omega, b1, delta1
@@ -312,7 +346,7 @@ class DepthPoset(Poset):
 	"""
 	"""
 	@classmethod
-	def from_border_matrix(cls, border_matrix, dims, filter_values=None, sources=None):
+	def from_border_matrix(cls, border_matrix, dims, filter_values=None, sources=None, log_path=None):
 		"""
 		Parameters:
 		-----------
@@ -329,14 +363,18 @@ class DepthPoset(Poset):
 		sources: array length N, or None
 			The source information about the cells
 			This will be None if the argument is not be given
+
+		log_path: str or None
+			The folder where the intermediate results will be solved.
+			This will not solved the intermediate results, if it's None
 		"""
 		if filter_values is None:
 			filter_values = np.arange(len(border_matrix))
 		#if sources is None:
 		#	sources = [None for i in range(len(border_matrix))]
 
-		alpha, b0 = reduct_column_bottom_to_top(border_matrix)
-		omega, b1 = reduct_row_left_to_right(border_matrix)
+		alpha, b0 = reduct_column_bottom_to_top(border_matrix, log_path=None if log_path is None else os.path.join(log_path, 'reduct_column_bottom_to_top'))
+		omega, b1 = reduct_row_left_to_right(border_matrix, log_path=None if log_path is None else os.path.join(log_path, 'reduct_row_left_to_right'))
 		bd, r = get_shallow_pairs_relations_from_reductions(alpha, b0, omega, b1)
 
 		nodes = [ShallowPair(birth_index=bdi[0], death_index=bdi[1], birth_value=filter_values[bdi[0]], death_value=filter_values[bdi[1]], 
