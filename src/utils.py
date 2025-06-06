@@ -66,3 +66,35 @@ def iterate_cubical_cells(shape, k=None, process=None):
                 element = process(element)    
             element = tuple([tuple([int(i) for i in e]) for e in element])
             yield element
+
+
+def array_to_tuple(arr, dtype=int):
+    """
+    Recursively converts a nested NumPy array into a nested tuple, casting elements to a given type.
+
+    parameters:
+    -----------
+    arr: (np.ndarray or any nested iterable)
+        The input array or nested structure to convert.
+    
+    dtype (type, optional)
+        The desired data type for the elements. Defaults to int.
+
+    Returns:
+    --------
+    tuple
+        A nested tuple with all elements converted to the specified type.
+    """
+    if isinstance(arr, np.ndarray):
+        return tuple(array_to_tuple(sub) for sub in arr)
+    else:
+        return dtype(arr)
+    
+
+def jacard_index(set0: set, set1: set) -> float:
+    """
+    Returns the Jacard Index of 2 sets.
+    """
+    if len(set0 | set1) == 0:
+        return 1.0
+    return len(set0 & set1) / len(set0 | set1)
