@@ -1,3 +1,5 @@
+import warnings
+
 import numpy as np
 import gudhi as gh
 
@@ -259,12 +261,11 @@ class Transposition:
         try:
             return self.switch
         except AttributeError:
-            
+            if self.index1 - self.index0 != 1:
+                warnings.warn('self.index1 - self.index0 != 1')
             if self.index1 - self.index0 != 1 or self.get_transposition_type() not in ['birth-birth', 'death-death', 'birth-death']:
-                print('self.index1 - self.index0 != 1')
                 self.switch = 'undefined'
                 return self.switch
-            
             
             delta = self.get_classifying_matrix(reduce_matrix=True)
             match self.type, delta:

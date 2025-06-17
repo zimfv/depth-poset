@@ -98,3 +98,44 @@ def jacard_index(set0: set, set1: set) -> float:
     if len(set0 | set1) == 0:
         return 1.0
     return len(set0 & set1) / len(set0 | set1)
+
+
+def get_cross_parameters(y0, y1, t0=0, t1=1, filter_outside=True):
+    """
+    Returns the matrix of cross parameters between two arrays.
+
+    Parameters:
+    -----------
+    y0, y1: arrays of the same length N
+        The y0[i] and y1[i] are the points of line i at moments t0 and t1
+    
+    t0, t1: floats
+        The moments of fixing the points
+    
+    filter_outside: bool
+        If True, filter out the values outside the range [t0, t1]
+
+    Returns:
+    --------
+    cross_parameters: the matrix shape (N, N)
+        The moments when lines cross
+    """
+    y0 = np.asarray(y0)
+    y1 = np.asarray(y1)
+    if y0.shape != y1.shape:
+        raise ValueError("Arrays must have the same length.")
+    if y0.ndim != 1:
+        raise ValueError("Arrays must be 1D.")
+    
+    yi0 = y0.reshape(-1, 1)
+    yi1 = y1.reshape(-1, 1)
+    yj0 = y0.reshape(1, -1)
+    yj1 = y1.reshape(1, -1)
+
+    cross_parameters = (t1 - t0)*(yj0 - yi0)/(yi1 - yi0 - yj1 + yj0) + t0
+
+
+    if filter_outside:
+        cross_parameters[cross_parameters < min(t0, t1)] = np.nan
+        cross_parameters[cross_parameters > max(t0, t1)] = np.nan
+    return cross_parameters
