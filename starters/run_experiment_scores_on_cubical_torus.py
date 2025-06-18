@@ -15,11 +15,17 @@ import itertools
 
 # define params
 repeat_params = [
-    {'dim': 1, 'ns': list(itertools.chain.from_iterable([list(range(3, 12, 1)), list(range(12, 36, 4)), list(range(36, 61, 8))])), 'repeat': 10}, 
-    {'dim': 2, 'ns': list(itertools.chain.from_iterable([list(range(3, 12, 1)), list(range(12, 36, 4)), list(range(36, 61, 8))])), 'repeat': 10}, 
+    {'dim': 1, 'ns': list(itertools.chain.from_iterable([list(range(3, 12, 1)), 
+                                                         list(range(12, 36, 4)), 
+                                                         #list(range(36, 61, 8))
+                                                        ])), 'repeat': 10}, 
+    {'dim': 2, 'ns': list(itertools.chain.from_iterable([list(range(3, 12, 1)), 
+                                                         list(range(12, 36, 4)), 
+                                                         #list(range(36, 61, 8))
+                                                        ])), 'repeat': 10}, 
 ]
-dims = itertools.chain.from_iterable([[params_dict['dim'] for _ in range(len(params_dict['ns'])*params_dict['repeat'])] for params_dict in repeat_params])
-ns = itertools.chain.from_iterable([[n for n, _ in itertools.product(params_dict['ns'], range(params_dict['repeat']))] for params_dict in repeat_params])
+dims = list(itertools.chain.from_iterable([[params_dict['dim'] for _ in range(len(params_dict['ns'])*params_dict['repeat'])] for params_dict in repeat_params]))
+ns = list(itertools.chain.from_iterable([[n for n, _ in itertools.product(params_dict['ns'], range(params_dict['repeat']))] for params_dict in repeat_params]))
 
 params_txt = '\n'.join([f'{dim} {n}' for dim, n in zip(dims, ns)]) + '\n'
 
