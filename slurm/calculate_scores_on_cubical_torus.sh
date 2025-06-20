@@ -4,7 +4,7 @@
 #SBATCH --job-name=depth_stats_of_random_cubical_torus
 #SBATCH --output=logs/scores_on_cubical_torus/output_%j.log
 #
-#SBATCH --time=48:00:00
+#SBATCH --time=96:00:00
 #SBATCH --mem=8G
 
 param_file="params/scores_on_cubical_torus.txt"

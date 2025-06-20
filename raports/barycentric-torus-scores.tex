@@ -1,0 +1,127 @@
+\documentclass{article}
+\usepackage{amsfonts} 
+\usepackage{amsmath}
+\usepackage{hyperref}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{makecell}
+\usepackage{multirow}
+%\usepackage{placeins}
+
+\begin{document}
+
+
+\section{Model}
+\par The $d$ dimensional torus $\mathbb{T}^d$ can be defined as $\left(\mathbb{R}/n\mathbb{Z}\right)^d$ for some natural $n$. And we can represent this as a cell-complex with cubical $d$-dimensional cells $\left(\mathbb{Z}/n\mathbb{Z}\right)^d + [0, 1]^d$ and all their $k$-faces for $k=0, ..., d$.
+\par We randomly assume the filtration value for each $k$-face uniformly distributed in $[k, k+1]$. This filtration on segmented torus will corespond some real filtration $f\mathbb{T}^d\to\mathbb{R}$, s.t. the $d$-dimensional cells will corespond the local maximums, vertices will corespond the local minimums and other $k$-faces will be saddles.
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.6\textwidth]{pics/torus scores/2d-example.png}
+    \caption{The example of the filtration $f:\mathbb{T}^2\to\mathbb{R}$, s.t. there are local minimums in the vertices, saddles in the middle of edges, and the local maximums in the centers of square cells.}
+    \label{fig:example2d}
+\end{figure}
+
+\section{Scores}
+\subsection{Poset Scores}
+\begin{itemize}
+\item \textbf{number\_of\_nodes }: Returns the number of nodes in the poset.
+\item \textbf{number\_of\_relations }: Returns the number of relations in the transitive reduction.
+\item \textbf{number\_of\_components }: Returns the number of connetcted components in the poset
+\item \textbf{cycles\_dimension }: Returns the dimension of space of cycles in reduction.
+\item \textbf{number\_of\_minimal\_nodes }: Returns the number of minimal nodes.
+\item \textbf{number\_of\_maximal\_nodes }: Returns the number of maximal nodes.
+\item \textbf{height }: Returns the poset height - the length of the longest chain.
+\item \textbf{width }: Returns the poset width - the length of the longest antichain (subset, s.t. all elements are pairwise incomparable).
+    The algorithm is based on Dilworth's theorem and it's proof via Kőnig's theorem:
+    \href{https://en.wikipedia.org/wiki/Dilworth%27s_theorem}{link}
+\item \textbf{minimum\_maximal\_chain }: Returns the minimum size of maximal chains in the poset.
+\item \textbf{avarage\_maximal\_chain }: Returns the avarage size of maximal chains in the poset.
+\end{itemize}
+
+\subsection{Node Scores}
+\begin{itemize}
+\item \textbf{ancestors\_number}: Returns the number of nodes higher than given
+\item \textbf{ancestors\_height}: Returns the size of maximum chain of subposet of nodes higher or equal than given
+\item \textbf{ancestors\_width}: Returns the size of maximum chain of subposet of nodes higher or equal than given
+\item \textbf{ancestors\_cycles\_dimension}: Returns the the dimension of space of cycles in reduction of subposet of nodes higher or equal than given
+\item \textbf{successors\_number}: Returns the number of nodes higher than given
+\item \textbf{successors\_height}: Returns the size of maximum chain of subposet of nodes lower or equal than given
+\item \textbf{successors\_width}: Returns the size of maximum chain of subposet of nodes lower or equal than given
+\item \textbf{successors\_cycles\_dimension}: Returns the the dimension of space of cycles in reduction of subposet of nodes lower or equal than given
+\end{itemize}
+
+\section{Experiments and Results}
+\par There are 312 experiments done. In the Figure \ref{fig:cases_distribution} we can see how cases are distributed by size and dimension.
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=\textwidth]{pics/torus scores/cases.png}
+  \caption{Size/dimension distribution of experiments}
+  \label{fig:cases_distribution}
+\end{figure}
+
+\subsection{Depth Poset Features}
+\par In the Figure \ref{fig:scores_poset_mean} we can see the avarage poset scores values for each number of points $n$ in the depth poset.
+\begin{figure}[ht]
+  \vspace{-96pt}
+  \centering
+  \hspace*{-0.19\textwidth}
+  \resizebox{1.38\textwidth}{!}{\includegraphics[width=\textwidth]{pics/torus scores/mean poset scores.png}}
+  \caption{Depth Poset: Mean poset scores}
+  \label{fig:scores_poset_mean}
+\end{figure}
+
+\par In the Figure \ref{fig:scores_node_mean} we can see the avarage mean node scores values in poset for each number of points $n$ in the depth poset.
+\begin{figure}[ht]
+  \vspace{-96pt}
+  \centering
+  \hspace*{-0.19\textwidth}
+  \resizebox{1.38\textwidth}{!}{\includegraphics[width=\textwidth]{pics/torus scores/mean node scores.png}}
+  \caption{Depth Poset: Mean node scores}
+  \label{fig:scores_node_mean}
+\end{figure}
+
+\subsection{Column Reduction Poset Features}
+\par In the Figure \ref{fig:scores_poset_mean_crp} we can see the avarage poset scores values for each number of points $n$ in the column reduction poset.
+\begin{figure}[ht]
+  \vspace{-96pt}
+  \centering
+  \hspace*{-0.19\textwidth}
+  \resizebox{1.38\textwidth}{!}{\includegraphics[width=\textwidth]{pics/torus scores/mean poset scores - column reduction.png}}
+  \caption{Column Reduction Poset: Mean poset scores}
+  \label{fig:scores_poset_mean_crp}
+\end{figure}
+
+\par In the Figure \ref{fig:scores_node_mean_crp} we can see the avarage mean node scores values in poset for each $n$ in the column reduction poset.
+\begin{figure}[ht]
+  \vspace{-96pt}
+  \centering
+  \hspace*{-0.19\textwidth}
+  \resizebox{1.38\textwidth}{!}{\includegraphics[width=\textwidth]{pics/torus scores/mean node scores - column reduction.png}}
+  \caption{Column Reduction Poset: Mean node scores}
+  \label{fig:scores_node_mean_crp}
+\end{figure}
+
+\subsection{Row Reduction Poset Features}
+\par In the Figure \ref{fig:scores_poset_mean_rrp} we can see the avarage poset scores values for each number of points $n$ in the row reduction poset.
+\begin{figure}[ht]
+  \vspace{-96pt}
+  \centering
+  \hspace*{-0.19\textwidth}
+  \resizebox{1.38\textwidth}{!}{\includegraphics[width=\textwidth]{pics/torus scores/mean poset scores - row reduction.png}}
+  \caption{Row Reduction Poset: Mean poset scores}
+  \label{fig:scores_poset_mean_rrp}
+\end{figure}
+
+\par In the Figure \ref{fig:scores_node_mean_rrp} we can see the avarage mean node scores values in poset for each number of points $n$ in the row reduction poset.
+\begin{figure}[ht]
+  \vspace{-96pt}
+  \centering
+  \hspace*{-0.19\textwidth}
+  \resizebox{1.38\textwidth}{!}{\includegraphics[width=\textwidth]{pics/torus scores/mean node scores - row reduction.png}}
+  \caption{Row Reduction Poset: Mean node scores}
+  \label{fig:scores_node_mean_rrp}
+\end{figure}
+
+
+
+\end{document}
