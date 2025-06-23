@@ -66,6 +66,7 @@ def collect_transpositions_during_homotopy(ctc0: CubicalTorusComplex, ctc1: Cubi
         msg = f'The Cubical Torus Complexes should have the same shape, but ctc0.shape={ctc0.shape} and ctc1.shape={ctc1.shape}.'
         raise ValueError(msg)
     shape = ctc0.shape
+    print(f'Collecting the transpositions during linear homotopy between 2 Cubical Torus Complexes shape {shape}.')
 
     with Timer() as timer:
         fvals0 = ctc0.filtration_values
@@ -130,7 +131,7 @@ def collect_transpositions_during_homotopy(ctc0: CubicalTorusComplex, ctc1: Cubi
         tqdm.pandas(desc="Calculating Border Matrices")
         df_transpositions['border matrix'] = df_transpositions['complex'].progress_apply(lambda x: x.get_border_matrix(sort_with_filtration=True))
 
-        print(f'The complexes and the orders dborder matrices during homotopy have been found in {timer.elapsed():.4f} seconds.')
+        print(f'The ordered border matrices during homotopy have been found in {timer.elapsed():.4f} seconds.')
         timer.checkpoint()
 
         tqdm.pandas(desc="Calculating Depth Posets")
