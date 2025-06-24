@@ -19,9 +19,9 @@ import pickle as pkl
 
 # execution_parameters
 run_slurm = False
-run_native = False
+run_native = True
 
-max_cases_per_size = None
+max_cases_per_size = 1
 
 
 
@@ -57,7 +57,10 @@ df_pairs = df_pairs.drop(columns='path')
 df_pairs['index0'] = df_pairs['input0'].apply(lambda s: os.path.splitext(os.path.basename(s))[0])
 df_pairs['index1'] = df_pairs['input1'].apply(lambda s: os.path.splitext(os.path.basename(s))[0])
 df_pairs['result'] = df_pairs.apply(lambda row: f'{row["index0"]} and {row["index1"]}.pkl', axis=1)
-files_exist = os.listdir('results/transpositions-during-linear-homotopy-between-barycentric-cubical-toruses')
+try:
+    files_exist = os.listdir('results/transpositions-during-linear-homotopy-between-barycentric-cubical-toruses')
+except FileNotFoundError:
+    files_exist = []
 df_pairs = df_pairs[~df_pairs['result'].isin(files_exist)]
 df_pairs = df_pairs.drop(columns=['index0', 'index1', 'result'])
 

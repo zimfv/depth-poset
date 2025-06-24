@@ -8,9 +8,7 @@ project_root = script_dir.parent
 sys.path.append(str(project_root))
 
 # main imports
-import itertools
 import inspect
-import time
 import os
 
 import argparse
@@ -24,14 +22,13 @@ from src.complexes import CubicalTorusComplex
 from src.utils import get_cross_parameters
 from src.transpositions import Transposition
 
-#from src.depth import DepthPoset
-#from src import poset_scores, node_scores
-
-#from datetime import datetime
-
-
 from src.profiling import Timer
 from tqdm import tqdm
+
+
+# define the similarity scores
+from src import depth_poset_similarity_scores
+similarity_scores = [obj for name, obj in inspect.getmembers(depth_poset_similarity_scores, inspect.isfunction) if inspect.getmodule(obj) == depth_poset_similarity_scores]
 
 
 def read_torus_from_file(path: str) -> CubicalTorusComplex:
@@ -59,7 +56,7 @@ def get_flat_add(dim, shape):
     return int(np.sum([math.comb(len(shape), i) for i in range(dim)])*np.prod(shape))
 
 
-def collect_transpositions_during_homotopy(ctc0: CubicalTorusComplex, ctc1: CubicalTorusComplex) -> pd.DataFrame:
+def collect_transpositions_during_homotopy(ctc0: CubicalTorusComplex, ctc1: CubicalTorusComplex, similarity_scores: list=[]) -> pd.DataFrame:
     """
     """
     if ctc0.shape != ctc1.shape:
@@ -157,6 +154,14 @@ def collect_transpositions_during_homotopy(ctc0: CubicalTorusComplex, ctc1: Cubi
         df_transpositions = df_transpositions.drop(columns=['dim'] + list(np.concatenate([[f'id{i}_flat', f'id{i}_volume', f'id{i}_order', f'cell{i}'] for i in range(2)])))
         df_transpositions = pd.concat([pd.DataFrame(df_transpositions['transposition'].apply(lambda tr: tr.to_dict()).to_list(), index=df_transpositions.index), df_transpositions], axis=1)
 
+        # calculate the similarity scores
+        for score in similarity_scores:
+            score_vals = [score(dp0, dp1) for dp0, dp1 in zip(df_transpositions['dp'].values[:-1], df_transpositions['dp'].values[1:])]
+            score_vals = np.append(None, score_vals)
+            df_transpositions[score.__name__] = score_vals
+            print(f'The similarity score {score.__name__} values for transpositions during homotopy have been found in {timer.elapsed():.4f} seconds.')
+            timer.checkpoint()
+
     print(f'Everything is found in found in {timer.get_duration():.4f} seconds.')
     print(f'\ndf_transpositions.shape = {df_transpositions.shape}')
     return df_transpositions
@@ -178,7 +183,7 @@ def main():
     complex_index1 = os.path.splitext(os.path.basename(args.path1))[0]
 
     # get dataframe of transpositions
-    df_transpositions = collect_transpositions_during_homotopy(ctc0, ctc1)
+    df_transpositions = collect_transpositions_during_homotopy(ctc0, ctc1, similarity_scores=similarity_scores)
     # add data about complex parameters
     df_transpositions.insert(0, 'complex_index0', complex_index0)
     df_transpositions.insert(1, 'complex_index1', complex_index1)
