@@ -4,16 +4,21 @@
 #SBATCH --job-name=transpositions_during_homotopies_between_cubical_toruses
 #SBATCH --output=logs/transpositions_during_homotopies_between_cubical_toruses/output_%j.log
 #
-#SBATCH --time=96:00:00
+#SBATCH --time=48:00:00
 #SBATCH --mem=8G
 
-param_file="params/scores_on_cubical_torus.txt"
+echo "SLURM_ARRAY_TASK_ID = '$SLURM_ARRAY_TASK_ID'"
 
-IFS= read -r param << (sed -n "${SLURM_ARRAY_TASK_ID}p" "$param_file")
+param_file="params/transpositions_during_homotopies_between_cubical_toruses.txt"
+line=$(sed -n "${SLURM_ARRAY_TASK_ID}p" "$param_file")
+echo "LINE: $line"
 
-eval set -- $param
-path0="$1"
-path1="$2"
+eval "set -- $line"
+path0=$1
+path1=$2
+echo "PARAMS:"
+echo "path0=$path0"
+echo "path1=$path1"
 
 source venv/bin/activate
 

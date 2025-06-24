@@ -173,6 +173,8 @@ def main():
     parser.add_argument("path0", help="Path to the first Cubical Torus Complex")
     parser.add_argument("path1", help="Path to the second Cubical Torus Complex")
     args = parser.parse_args()
+    
+    print(f'The input files are:\npath0="{args.path0}"\npath1="{args.path1}"\n')
 
     # get complexes
     ctc0 = read_torus_from_file(args.path0)

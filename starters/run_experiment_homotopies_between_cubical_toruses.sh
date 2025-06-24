@@ -1,0 +1,3 @@
+source venv/bin/activate
+python starters/run_experiment_homotopies_between_cubical_toruses.py 
+deactivate

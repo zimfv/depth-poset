@@ -21,8 +21,7 @@ import pickle as pkl
 run_slurm = True
 run_native = False
 
-max_cases_per_size = 20
-
+max_cases_per_size = 24
 
 
 # define file paths
