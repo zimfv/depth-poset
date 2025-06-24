@@ -19,9 +19,9 @@ import pickle as pkl
 
 # execution_parameters
 run_slurm = False
-run_native = True
+run_native = False
 
-max_cases_per_size = 1
+max_cases_per_size = None
 
 
 
@@ -74,7 +74,7 @@ if max_cases_per_size is not None:
 print(f'\nThe distribution of {len(df_pairs)} pairs to calculate homotopies:')
 print(df_pairs.groupby(['dim', 'n'])['input0'].count().reset_index().pivot_table(columns='n', index='dim', values='input0').fillna(0).astype(int))
 
-params_txt = '\n'.join([f'{path0} {path1}' for path0, path1 in df_pairs[['input0', 'input1']].values]) + '\n'
+params_txt = '\n'.join([f'"{path0.strip('"')}" "{path1.strip('"')}"' for path0, path1 in df_pairs[['input0', 'input1']].values]) + '\n'
 
 # save params to file
 if not os.path.exists('params'):
