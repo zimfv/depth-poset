@@ -2,6 +2,7 @@ import warnings
 
 import numpy as np
 import gudhi as gh
+from scipy.sparse import csr_matrix
 
 from src import depth
 from src.utils_lefschetz import get_dims_from_border_matrix
@@ -31,7 +32,7 @@ class Transposition:
         dp : depth.DepthPoset, optional
             An optional DepthPoset object associated with the elements.
         """
-        self.border_matrix = np.array(border_matrix)
+        self.border_matrix = csr_matrix(np.array(border_matrix, dtype=int))
         if self.border_matrix.ndim != 2:
             raise ValueError('border_matrix should be a square matrix (integer or boolean entries) representing border relations.')
         if self.border_matrix.shape[0] != self.border_matrix.shape[1]:
@@ -91,6 +92,10 @@ class Transposition:
         """
         return f'<{self.cell0}, {self.cell1}>'
         
+    def get_border_matrix(self):
+        # returns dense border matrix
+        return self.border_matrix.toarray()
+
     def get_transposition_type(self):
         """
         Returns the transposition type of the transposition.
@@ -218,11 +223,11 @@ class Transposition:
                                                   len({(a, x), (x, a), (b, y), (y, b)} & set(b0)) > 0
         
         if self.type == 'birth-birth':
-            alpha, b0, delta = depth.reduct_column_bottom_to_top(self.border_matrix, stop_condition)
+            alpha, b0, delta = depth.reduct_column_bottom_to_top(self.get_border_matrix(), stop_condition)
         elif self.type == 'death-death':
-            omega, b1, delta = depth.reduct_row_left_to_right(self.border_matrix, stop_condition)
+            omega, b1, delta = depth.reduct_row_left_to_right(self.get_border_matrix(), stop_condition)
         elif self.type == 'birth-death':
-            alpha, b0, delta = depth.reduct_column_bottom_to_top(self.border_matrix, stop_condition)
+            alpha, b0, delta = depth.reduct_column_bottom_to_top(self.get_border_matrix(), stop_condition)
             omega, b1, delta = depth.reduct_row_left_to_right(delta, stop_condition)
         else:
             msg = f"The transposition {self} have type {self.type}, but should have one of three: 'birth-birth', 'death-death' or 'birth-death'."
