@@ -18,10 +18,11 @@ import pandas as pd
 import pickle as pkl
 
 # execution_parameters
-run_slurm = True
-run_native = False
+run_slurm = False
+run_native = True
 
-max_cases_per_size = 24
+max_cases_per_size = 1
+max_number_of_cells = 2048
 
 
 # define file paths
@@ -69,6 +70,10 @@ if max_cases_per_size is not None:
         if len(df_pairs[i]) > max_cases_per_size:
             df_pairs[i] = df_pairs[i].loc[np.random.choice(df_pairs[i].index.values, max_cases_per_size, replace=False)]
     df_pairs = pd.concat(df_pairs)
+
+if max_number_of_cells is not None:
+    df_pairs = df_pairs[(2*df_pairs['n'])**df_pairs['dim'] <= max_number_of_cells]
+
 
 print(f'\nThe distribution of {len(df_pairs)} pairs to calculate homotopies:')
 print(df_pairs.groupby(['dim', 'n'])['input0'].count().reset_index().pivot_table(columns='n', index='dim', values='input0').fillna(0).astype(int))

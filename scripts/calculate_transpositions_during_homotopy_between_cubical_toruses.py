@@ -15,15 +15,17 @@ import argparse
 
 import math
 import pickle as pkl
+
 import numpy as np
 import pandas as pd
+from scipy.sparse import csr_matrix
 
 from src.complexes import CubicalTorusComplex
 from src.utils import get_cross_parameters
 from src.transpositions import Transposition
 
 from src.profiling import Timer
-from tqdm import tqdm
+#from tqdm import tqdm
 
 
 # define the similarity scores
@@ -56,7 +58,7 @@ def get_flat_add(dim, shape):
     return int(np.sum([math.comb(len(shape), i) for i in range(dim)])*np.prod(shape))
 
 
-def collect_transpositions_during_homotopy(ctc0: CubicalTorusComplex, ctc1: CubicalTorusComplex, similarity_scores: list=[]) -> pd.DataFrame:
+def collect_transpositions_during_homotopy(ctc0: CubicalTorusComplex, ctc1: CubicalTorusComplex) -> pd.DataFrame:
     """
     """
     if ctc0.shape != ctc1.shape:
@@ -66,106 +68,76 @@ def collect_transpositions_during_homotopy(ctc0: CubicalTorusComplex, ctc1: Cubi
     print(f'Collecting the transpositions during linear homotopy between 2 Cubical Torus Complexes shape {shape}.')
 
     with Timer() as timer:
-        fvals0 = ctc0.filtration_values
-        fvals1 = ctc1.filtration_values
-        cross_parameters = [get_cross_parameters(m0.flatten(), m1.flatten()) for m0, m1 in zip(fvals0, fvals1)]
-        eps = np.concatenate([m.flatten() for m in cross_parameters] + [[0, 1]])
-        eps = np.unique(eps[~np.isnan(eps)])
-        eps = 0.8*(eps[1:] - eps[:-1]).min()
+        cells0, dims0, fvals0 = ctc0.get_order(sort_with_filtration=False, return_filtration=True, return_dims=True)
+        cells1, dims1, fvals1 = ctc1.get_order(sort_with_filtration=False, return_filtration=True, return_dims=True)
+        assert list(dims0) == list(dims1)
+        assert list(cells0) == list(cells1) 
+        cells, dims = cells0, dims0
+        del cells0, cells1, dims0, dims1
 
-        cross_parameters_id_flat = [np.unique(np.sort(np.argwhere(~np.isnan(i)), axis=1), axis=0) for i in cross_parameters]
+        # find the cross_parameters (times) and coresponding filtration values
+        cross_parameters = get_cross_parameters(fvals0, fvals1, filter_outside=True)
+        cross_parameters[np.tril_indices_from(cross_parameters)] = np.nan
+        cross_values = (1 - cross_parameters)*fvals0 + cross_parameters*fvals1
 
-        df_transpositions = pd.DataFrame()
-        df_transpositions['id0_flat'] = np.concatenate(cross_parameters_id_flat)[:, 0]
-        df_transpositions['id1_flat'] = np.concatenate(cross_parameters_id_flat)[:, 1]
-        df_transpositions['dim'] = np.concatenate([d*np.ones(len(i), dtype=int) for d, i in enumerate(cross_parameters_id_flat)])
-        df_transpositions['shape'] = df_transpositions['dim'].apply(lambda x: math.comb(len(shape), x))
-        df_transpositions['shape'] = df_transpositions['shape'].apply(lambda x: (x, ) + shape)
-        df_transpositions['id0_volume'] = df_transpositions.apply(lambda row: np.unravel_index(row['id0_flat'], row['shape']), axis=1)
-        df_transpositions['id1_volume'] = df_transpositions.apply(lambda row: np.unravel_index(row['id1_flat'], row['shape']), axis=1)
-
-        df_transpositions['time'] = df_transpositions.apply(lambda row: cross_parameters[row['dim']][row['id0_flat'], row['id1_flat']], axis=1)
-
-        print(f'The time values and coresponding indices of transpositions have been found in {timer.elapsed():.4f} seconds.')
+        # find the indices of non-filtered cells and sort them by time 
+        transposition_indices = np.argwhere(~np.isnan(cross_parameters))
+        transposition_times = cross_parameters[transposition_indices[:, 0], transposition_indices[:, 1]]
+        transposition_indices = transposition_indices[np.argsort(transposition_times)]
+        
+        print(f'The indices of the transposing cells have been found and sorted in {timer.elapsed():.4f} seconds.')
+        print(f'There will be {len(transposition_indices)} transpositions.')
         timer.checkpoint()
 
-        df_transpositions['id0_flat'] = df_transpositions.apply(lambda row: row['id0_flat'] + get_flat_add(row['dim'], shape), axis=1)
-        df_transpositions['id1_flat'] = df_transpositions.apply(lambda row: row['id1_flat'] + get_flat_add(row['dim'], shape), axis=1)
+        # define the initial order, dims and border matrix
+        current_order, current_dims = ctc0.get_order(sort_with_filtration=True, return_filtration=False, return_dims=True)
+        current_border_matrix = csr_matrix(ctc0.get_border_matrix(sort_with_filtration=True, dtype=int))
 
-        order = ctc0.get_order(sort_with_filtration=False)
-        df_transpositions['cell0'] = df_transpositions['id0_flat'].apply(lambda i: order[i])
-        df_transpositions['cell1'] = df_transpositions['id1_flat'].apply(lambda i: order[i])
+        # consecutively define the transpositions
+        df = []
+        for i0, i1 in transposition_indices:
+            df.append(
+                {
+                    'time': cross_parameters[i0, i1], 
+                    'value': cross_values[i0, i1], 
+                    'transposition': Transposition(border_matrix=current_border_matrix, 
+                                                   index0=current_order.index(cells[i0]), 
+                                                   index1=current_order.index(cells[i1]), 
+                                                   order=current_order, dims=current_dims)
+                }
+            )
+            df[-1]['transposition'].to_dict()
+            # update the order, dims and border matrix
+            current_order = df[-1]['transposition'].next_order()
+            current_dims = df[-1]['transposition'].next_dims()
+            current_border_matrix = df[-1]['transposition'].next_border_matrix()
+        print(f'{len(df)} transpositions were found in {timer.elapsed():.4f} seconds.')
+    
+    assert list(df[-1]['transposition'].next_order()) == list(ctc1.get_order(sort_with_filtration=True, return_filtration=False, return_dims=False))
+    df = pd.DataFrame(df)
+    print(f'So the total duration of seeking transpositions info was {timer.duration:.4f} seconds.')
+    return df
 
-        print(f'The cells have been defined in {timer.elapsed():.4f} seconds.')
+
+def calculate_similarity_scores_for_transpositions_depth_posets(transpositions: pd.Series, similarity_scores: list=[]) -> pd.DataFrame:
+    """
+    Calculates the similarity scores for the given Series of the consecutive transpositions.
+    """
+    with Timer() as timer:
+        # define the depth posets list
+        dps = transpositions.apply(lambda tr: tr.dp).values
+        dps = np.append(dps, transpositions.iloc[-1].next_depth_poset())
+        print(f'The depth posets to check scores have been found in {timer.elapsed():.4f} seconds.')
         timer.checkpoint()
 
-        tqdm.pandas(desc="Geting Complexes")
-        df_transpositions['complex'] = df_transpositions.progress_apply(lambda row: CubicalTorusComplex(shape).assign_filtration([m0*(1 - (row['time'] - eps)) + m1*(row['time'] - eps) for m0, m1 in zip(fvals0, fvals1)]), axis=1)
-        tqdm.pandas(desc="Calculating Orders")
-        df_transpositions['order&dims'] = df_transpositions['complex'].progress_apply(lambda x: x.get_order(sort_with_filtration=True, return_filtration=False, return_dims=True))
-        df_transpositions['order'] = df_transpositions['order&dims'].apply(lambda x: x[0])
-        df_transpositions['dims'] = df_transpositions['order&dims'].apply(lambda x: x[1])
-        df_transpositions = df_transpositions.drop(columns='order&dims')
-
-        print(f'The complexes and the orders during homotopy have been found in {timer.elapsed():.4f} seconds.')
-        timer.checkpoint()
-
-        df_transpositions['id0_order'] = df_transpositions.apply(lambda row: row['order'].index(row['cell0']), axis=1)
-        df_transpositions['id1_order'] = df_transpositions.apply(lambda row: row['order'].index(row['cell1']), axis=1)
-
-
-        to_reverse = df_transpositions['id1_order'] - df_transpositions['id0_order'] == -1
-        i0_vals = df_transpositions.loc[to_reverse, 'id0_order']
-        i1_vals = df_transpositions.loc[to_reverse, 'id1_order']
-        df_transpositions.loc[to_reverse, 'id0_order'] = i1_vals
-        df_transpositions.loc[to_reverse, 'id1_order'] = i0_vals
-
-        assert (df_transpositions['id1_order'] - df_transpositions['id0_order'] == 1).all()
-
-        print(f'The orders during homotopy have been found in {timer.elapsed():.4f} seconds.')
-        timer.checkpoint()
-
-        tqdm.pandas(desc="Calculating Border Matrices")
-        df_transpositions['border matrix'] = df_transpositions['complex'].progress_apply(lambda x: x.get_border_matrix(sort_with_filtration=True))
-
-        print(f'The ordered border matrices during homotopy have been found in {timer.elapsed():.4f} seconds.')
-        timer.checkpoint()
-
-        tqdm.pandas(desc="Calculating Depth Posets")
-        df_transpositions['dp'] = df_transpositions['complex'].progress_apply(lambda x: x.get_depth_poset(sort_with_filtration=True))
-
-        print(f'The depth posets during homotopy have been found in {timer.elapsed():.4f} seconds.')
-        timer.checkpoint()
-
-        tqdm.pandas(desc="Compile Transpositions")
-        df_transpositions['transposition'] = df_transpositions.progress_apply(
-            lambda row: 
-                Transposition(border_matrix=row['border matrix'], 
-                              index0=row['id0_order'], 
-                              index1=row['id1_order'], 
-                              order=row['order'], 
-                              dims=row['dims'], 
-                              dp=row['dp']),
-            axis=1
-        )
-        print(f'The transpositions themselves during homotopy have been found in {timer.elapsed():.4f} seconds.')
-        timer.checkpoint()
-
-        df_transpositions = df_transpositions.drop(columns=['dim'] + list(np.concatenate([[f'id{i}_flat', f'id{i}_volume', f'id{i}_order', f'cell{i}'] for i in range(2)])))
-        df_transpositions = pd.concat([pd.DataFrame(df_transpositions['transposition'].apply(lambda tr: tr.to_dict()).to_list(), index=df_transpositions.index), df_transpositions], axis=1)
-
-        # calculate the similarity scores
+        df = pd.DataFrame({}, index=transpositions.index)
         for score in similarity_scores:
-            score_vals = [score(dp0, dp1) for dp0, dp1 in zip(df_transpositions['dp'].values[:-1], df_transpositions['dp'].values[1:])]
-            score_vals = np.append(None, score_vals)
-            df_transpositions[score.__name__] = score_vals
-            print(f'The similarity score {score.__name__} values for transpositions during homotopy have been found in {timer.elapsed():.4f} seconds.')
+            df[score.__name__] = np.vectorize(score)(dps[:-1], dps[1:])
+            print(f'The similarity score {score.__name__} have been found in {timer.elapsed():.4f} seconds.')
             timer.checkpoint()
-
-    print(f'Everything is found in found in {timer.get_duration():.4f} seconds.')
-    print(f'\ndf_transpositions.shape = {df_transpositions.shape}')
-    return df_transpositions
-
+    print(f'So all scores for {len(df)} transpositions have been found in {timer.duration:.4f} seconds.')
+    return df
+    
 
 def main():
     # parse arguments
@@ -184,14 +156,16 @@ def main():
     complex_index0 = os.path.splitext(os.path.basename(args.path0))[0]
     complex_index1 = os.path.splitext(os.path.basename(args.path1))[0]
 
-    # get dataframe of transpositions
-    df_transpositions = collect_transpositions_during_homotopy(ctc0, ctc1, similarity_scores=similarity_scores)
-    # add data about complex parameters
-    df_transpositions.insert(0, 'complex_index0', complex_index0)
-    df_transpositions.insert(1, 'complex_index1', complex_index1)
-    df_transpositions.insert(2, 'complex_dim', ctc0.dim)
-    df_transpositions.insert(3, 'complex_shape', [ctc0.shape]*len(df_transpositions))
-    
+    # collect transpositions
+    df = collect_transpositions_during_homotopy(ctc0, ctc1)
+    # calculate similarity scores and merge the dataframes
+    df = df.join(calculate_similarity_scores_for_transpositions_depth_posets(df['transposition'], similarity_scores))
+    # insert some complex data
+    #df.insert(0, 'complex_index0', complex_index0)
+    #df.insert(1, 'complex_index1', complex_index1)
+    #df.insert(2, 'complex_dim', ctc0.dim)
+    #df.insert(3, 'complex_shape', [ctc0.shape]*len(df))
+
 	# create the directory if not exist and save file
     path = f"results/transpositions-during-linear-homotopy-between-barycentric-cubical-toruses/{complex_index0} and {complex_index1}.pkl"
     directory = os.path.dirname(path)
@@ -199,9 +173,22 @@ def main():
         os.makedirs(directory)
 
 	# save to file
-    df_transpositions.to_pickle(path)
+    #df.to_pickle(path)
+    with open(path, 'wb') as file:
+        pkl.dump(
+            {
+                'complex_index0': complex_index0, 
+                'complex_index1': complex_index1, 
+                'complex_dim': ctc0.dim, 
+                'complex_shape': ctc0.shape, 
+                'transpositions': df
+            }, file
+        )
     print(f"The result is saved to path:\n{path}")
 
+    # show the size of the result
+    size = os.path.getsize(path)
+    print(f'The size of the result file is: {size} bytes.')
 
 
 if __name__ == "__main__":

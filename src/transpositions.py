@@ -32,7 +32,7 @@ class Transposition:
         dp : depth.DepthPoset, optional
             An optional DepthPoset object associated with the elements.
         """
-        self.border_matrix = csr_matrix(np.array(border_matrix, dtype=int))
+        self.border_matrix = csr_matrix(border_matrix, dtype=int)
         if self.border_matrix.ndim != 2:
             raise ValueError('border_matrix should be a square matrix (integer or boolean entries) representing border relations.')
         if self.border_matrix.shape[0] != self.border_matrix.shape[1]:
@@ -61,7 +61,7 @@ class Transposition:
         self.dp = dp
         if self.dp is None:
             # so I skip the filtration values. We dont need this for transpositions
-            self.dp = depth.DepthPoset.from_border_matrix(border_matrix=self.border_matrix, dims=self.dims, sources=self.dims)
+            self.dp = depth.DepthPoset.from_border_matrix(border_matrix=self.get_border_matrix(), dims=self.dims, sources=self.order)
 
 
     @classmethod
@@ -295,7 +295,6 @@ class Transposition:
                     self.switch = "no switch"
             return self.switch
 
-
     def to_dict(self) -> dict:
         """
         Returns a dictionary representation of the transposition.
@@ -340,4 +339,35 @@ class Transposition:
             'switch': self.get_switch_type(), 
         }
             
-            
+    def next_order(self):
+        # returns the order after the transposition
+        new_order = list(self.order)
+        new_order[self.index0], new_order[self.index1] = new_order[self.index1], new_order[self.index0]
+        return new_order
+    
+    def next_dims(self):
+        # returns the order after the transposition
+        new_dims = list(self.dims)
+        new_dims[self.index0], new_dims[self.index1] = new_dims[self.index1], new_dims[self.index0]
+        return new_dims
+
+    def next_border_matrix(self, dense=False):
+        # returns the border matrix the transposition (the matrix will be sparse if dense is False)
+        bm_new = self.border_matrix.copy()
+        bm_new[[self.index0, self.index1]] = bm_new[[self.index1, self.index0]]
+        bm_new[:, [self.index0, self.index1]] = bm_new[:, [self.index1, self.index0]]
+        if dense:
+            bm_new = bm_new.toarray()
+        return bm_new
+    
+    def next_depth_poset(self):
+        # 
+        new_dims = self.next_dims()
+        new_order = self.next_order()
+        new_border_matrix = self.next_border_matrix(dense=True)
+        new_depth_poset = depth.DepthPoset.from_border_matrix(border_matrix=new_border_matrix, dims=new_dims, sources=new_order)
+        return new_depth_poset
+    
+
+
+        
