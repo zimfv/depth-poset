@@ -18,10 +18,10 @@ import pandas as pd
 import pickle as pkl
 
 # execution_parameters
-run_slurm = False
-run_native = True
+run_slurm = True
+run_native = False
 
-max_cases_per_size = 1
+max_cases_per_size = 32
 max_number_of_cells = 2048
 
 
