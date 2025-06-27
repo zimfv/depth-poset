@@ -15,22 +15,11 @@ import itertools
 
 # define params
 repeat_params = [
-    {'dim': 1, 'ns': list(itertools.chain.from_iterable([#list(range(3, 12, 1)), 
-                                                         #list(range(12, 36, 4)), 
-                                                         list(range(36, 61, 8))
-                                                        ])), 'repeat': 10}, 
-    {'dim': 2, 'ns': list(itertools.chain.from_iterable([#list(range(3, 12, 1)), 
-                                                         #list(range(12, 36, 4)), 
-                                                         list(range(36, 61, 8))
-                                                        ])), 'repeat': 10}, 
-    {'dim': 3, 'ns': list(itertools.chain.from_iterable([list(range(3, 12, 1)), 
-                                                         list(range(12, 36, 4)), 
-                                                         list(range(36, 61, 8))
-                                                        ])), 'repeat': 10}, 
-    {'dim': 4, 'ns': list(itertools.chain.from_iterable([list(range(3, 12, 1)), 
-                                                         list(range(12, 36, 4)), 
-                                                         list(range(36, 61, 8))
-                                                        ])), 'repeat': 10}, 
+    {'dim': 1, 'ns': [40, 56, 64, 68, 72, 76, 80], 'repeat': 10}, # fill spaces longer than 4, max n-value is 80
+    {'dim': 2, 'ns': [32, 36, 40, 44, 48, 52], 'repeat': 10}, # max n-value is 52, coresponds N~10000
+    {'dim': 3, 'ns': [6], 'repeat': 7}, # fill space (calculated just 3 for n=6 before)
+    {'dim': 3, 'ns': [7, 8, 9, 10, 11], 'repeat': 10}, # max n-value is 11, coresponds N~10000
+    {'dim': 4, 'ns': [3, 4, 5], 'repeat': 10}, # max n-value is 5, coresponds N~10000
 ]
 dims = list(itertools.chain.from_iterable([[params_dict['dim'] for _ in range(len(params_dict['ns'])*params_dict['repeat'])] for params_dict in repeat_params]))
 ns = list(itertools.chain.from_iterable([[n for n, _ in itertools.product(params_dict['ns'], range(params_dict['repeat']))] for params_dict in repeat_params]))
