@@ -156,20 +156,15 @@ def main():
     complex_index0 = os.path.splitext(os.path.basename(args.path0))[0]
     complex_index1 = os.path.splitext(os.path.basename(args.path1))[0]
 
-    with Timer() as timer:
-        # collect transpositions
-        df = collect_transpositions_during_homotopy(ctc0, ctc1)
-        
-        # get an array of depth posets
-        #dps = df['transposition'].apply(lambda tr: tr.dp).values
-        #dps = np.append(dps, df['transposition'].iloc[-1].next_depth_poset())
-        
-        # calculate similarity scores and merge the dataframes
-        df = df.join(calculate_similarity_scores_for_transpositions_depth_posets(df['transposition'], similarity_scores))
-        
-        # reduce the transpositions columns, saving only the data about type, and other...
-        df = df.join(df['transposition'].apply(lambda tr: tr.to_dict()).apply(pd.Series))
-        df = df.drop(columns=['transposition'])
+    # collect transpositions
+    df = collect_transpositions_during_homotopy(ctc0, ctc1)
+    # calculate similarity scores and merge the dataframes
+    df = df.join(calculate_similarity_scores_for_transpositions_depth_posets(df['transposition'], similarity_scores))
+    # insert some complex data
+    #df.insert(0, 'complex_index0', complex_index0)
+    #df.insert(1, 'complex_index1', complex_index1)
+    #df.insert(2, 'complex_dim', ctc0.dim)
+    #df.insert(3, 'complex_shape', [ctc0.shape]*len(df))
 
 	# create the directory if not exist and save file
     path = f"results/transpositions-during-linear-homotopy-between-barycentric-cubical-toruses/{complex_index0} and {complex_index1}.pkl"
@@ -186,9 +181,7 @@ def main():
                 'complex_index1': complex_index1, 
                 'complex_dim': ctc0.dim, 
                 'complex_shape': ctc0.shape, 
-                'calculation time': timer.duration,
-                'transpositions': df, 
-                #'depth posets': dps,
+                'transpositions': df
             }, file
         )
     print(f"The result is saved to path:\n{path}")
