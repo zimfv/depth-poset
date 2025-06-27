@@ -18,12 +18,13 @@ import pandas as pd
 import pickle as pkl
 
 # execution_parameters
-run_slurm = False
-run_native = True
+run_slurm = True
+run_native = False
 
-max_cases_per_size = 2
-max_number_of_cells = 512
+max_cases_per_size = None
+max_number_of_cells = None
 
+both_directions = False
 
 # define file paths
 directory = "results/scores-on-barycentric-cubical-toruses"
@@ -46,7 +47,10 @@ print(f'Torus Sizes/Dimensions Distribution:')
 print(df_cases.map(len).reset_index(drop=False).pivot_table(columns='n', index='dim', values='path').fillna(0).astype(int))
 
 # define the pairs of cases
-df_pairs = df_cases.map(lambda l: [(i0, i1) for i0, i1 in itertools.product(l, repeat=2) if i0 != i1])
+if both_directions:
+    df_pairs = df_cases.map(lambda l: [(i0, i1) for i0, i1 in itertools.product(l, repeat=2) if i0 != i1])
+else:
+    df_pairs = df_cases.map(lambda l: [(i0, i1) for i0, i1 in itertools.combinations(l, 2)])
 df_pairs = df_pairs.explode('path', ignore_index=False).reset_index(drop=False)
 df_pairs = df_pairs[~pd.isna(df_pairs['path'])]
 df_pairs['input0'] = df_pairs['path'].apply(lambda x: x[0])

@@ -4,7 +4,7 @@
 #SBATCH --job-name=transpositions_during_homotopies_between_cubical_toruses
 #SBATCH --output=logs/transpositions_during_homotopies_between_cubical_toruses/output_%j.log
 #
-#SBATCH --time=48:00:00
+#SBATCH --time=72:00:00
 #SBATCH --mem=8G
 
 echo "SLURM_ARRAY_TASK_ID = '$SLURM_ARRAY_TASK_ID'"
