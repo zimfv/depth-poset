@@ -1,0 +1,33 @@
+\par There could be 3 types of cell in the terms of birth-death pairs:
+\begin{itemize}
+    \item \textbf{Births} - The cells which are births of some cycles
+    \item \textbf{Deaths} - The cells which are deaths of some cycles
+    \item \textbf{Unpaired} - The cells which are not birth or deaths of any cycle
+\end{itemize}
+
+\par So we have defined 5 types of transpositions:
+\begin{itemize}
+    \item \textbf{Birth-Birth} - The switch transpositions of 2 brith cells
+    \item \textbf{Birth-Death} - The switch transpositions of brith and death cells
+    \item \textbf{Death-Death} - The switch transpositions of 2 death cells
+    \item \textbf{Undefined} - The transpositions where at least 1 cell is unpaired
+    \item \textbf{No switch} - No switch transposition, where all cells are paired
+\end{itemize}
+
+\par In the Figure \ref{fig:switch-full} we can see the mean count of transpositions of each type for barycentric cubical tori of different dimensions $d$ and size $n$.
+We can see that no switch transpositions are majority of cases. So we also can look at Figure \ref{fig:switch-without-noswitch} to get how other types are distributed.
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=1.3\textwidth]{pics/torus-transpositions/switch-types.png}
+    \caption{The mean value of number of transpositions of each type.}
+    \label{fig:switch-full}
+\end{figure}
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=1.3\textwidth]{pics/torus-transpositions/switch-types (without no switch).png}
+    \caption{The mean value of number of transpositions of each type (without no switch transpositions).}
+    \label{fig:switch-without-noswitch}
+\end{figure}
+
