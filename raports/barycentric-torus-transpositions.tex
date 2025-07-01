@@ -3,10 +3,10 @@
 \usepackage{amsmath}
 \usepackage{hyperref}
 \usepackage{graphicx}
+\usepackage{subcaption}
 \usepackage{booktabs}
 \usepackage{makecell}
 \usepackage{multirow}
-\usepackage{subcaption}
 %\usepackage{placeins}
 
 \begin{document}
@@ -61,15 +61,17 @@ $$
 We can see that no switch transpositions are majority of cases. So we also can look at Figure \ref{fig:switch-without-noswitch} to get how other types are distributed.
 
 \begin{figure}[h!]
+    \hspace*{-3cm}
     \centering
-    \includegraphics[width=1.3\textwidth]{pics/torus-transpositions/switch-types.png}
+    \includegraphics[width=1.5\textwidth]{pics/torus-transpositions/switch-types.png}
     \caption{The mean value of number of transpositions of each type.}
     \label{fig:switch-full}
 \end{figure}
 
 \begin{figure}[h!]
+    \hspace*{-3cm}
     \centering
-    \includegraphics[width=1.3\textwidth]{pics/torus-transpositions/switch-types (without no switch).png}
+    \includegraphics[width=1.5\textwidth]{pics/torus-transpositions/switch-types (without no switch).png}
     \caption{The mean value of number of transpositions of each type (without no switch transpositions).}
     \label{fig:switch-without-noswitch}
 \end{figure}
@@ -77,122 +79,108 @@ We can see that no switch transpositions are majority of cases. So we also can l
 
 
 \section{Similarity Scores}
-\subsection{birth\_relation\_cell\_similarity}
-\par \textbf{birth\_relation\_cell\_similarity} - The Jacard index of arcs (edges) in the birth relation (given by row left to right reduction algorithm).
-    Consider 2 birth-death pairs are similar if they corespond the similar cells.
-\par We can see the values of this score for different dimensions $d$ and size $n$ in Figure \ref{fig:birth-relation-cell-similarity}
 
+\par We have 10 scores to measure the similarity of 2 depth posets: 
+\begin{itemize}
+\item \textbf{birth\_relation\_cell\_similarity} - The Jacard index of arcs (edges) in the birth relation (given by row left to right reduction algorithm).
+    Consider 2 birth-death pairs are similar if they corespond the similar cells.
+We can see the values of this score applying to depth posets before and after transpositions of different types for barycentric cubical tori dimension $d$ and size $n$ in Figure \ref{fig:birth-relation-cell-similarity}
+\item \textbf{birth\_relation\_index\_similarity} - The Jacard index of arcs (edges) in the birth relation (given by row left to right reduction algorithm).
+    Consider 2 birth-death pairs are similar if ther indices in the filtration pairs are similar.
+We can see the values of this score applying to depth posets before and after transpositions of different types for barycentric cubical tori dimension $d$ and size $n$ in Figure \ref{fig:birth-relation-index-similarity}
+\item \textbf{death\_relation\_cell\_similarity} - The Jacard index of arcs (edges) in the death relation (given by column bottom to top reduction algorithm).
+    Consider 2 birth-death pairs are similar if they corespond the similar cells.
+We can see the values of this score applying to depth posets before and after transpositions of different types for barycentric cubical tori dimension $d$ and size $n$ in Figure \ref{fig:death-relation-cell-similarity}
+\item \textbf{death\_relation\_index\_similarity} - The Jacard index of arcs (edges) in the death relation (given by column bottom to top reduction algorithm).
+    Consider 2 birth-death pairs are similar if ther indices in the filtration pairs are similar.
+We can see the values of this score applying to depth posets before and after transpositions of different types for barycentric cubical tori dimension $d$ and size $n$ in Figure \ref{fig:death-relation-index-similarity}
+\item \textbf{poset\_arc\_cell\_similarity} - The Jacard index of arcs (edges) in the Depth Poset.
+    Consider 2 birth-death pairs are similar if they corespond the similar cells.
+We can see the values of this score applying to depth posets before and after transpositions of different types for barycentric cubical tori dimension $d$ and size $n$ in Figure \ref{fig:poset-arc-cell-similarity}
+\item \textbf{poset\_arc\_index\_similarity} - The Jacard index of arcs (edges) in the Depth Poset.
+    Consider 2 birth-death pairs are similar if ther indices in the filtration pairs are similar.
+We can see the values of this score applying to depth posets before and after transpositions of different types for barycentric cubical tori dimension $d$ and size $n$ in Figure \ref{fig:poset-arc-index-similarity}
+\item \textbf{poset\_node\_cell\_similarity} - The Jacard index of nodes (elements) in the Depth Poset.
+    Consider 2 birth-death pairs are similar if they corespond the similar cells.
+We can see the values of this score applying to depth posets before and after transpositions of different types for barycentric cubical tori dimension $d$ and size $n$ in Figure \ref{fig:poset-node-cell-similarity}
+\item \textbf{poset\_node\_index\_similarity} - The Jacard index of nodes (elements) in the Depth Poset.
+    Consider 2 birth-death pairs are similar if ther indices in the filtration pairs are similar.
+We can see the values of this score applying to depth posets before and after transpositions of different types for barycentric cubical tori dimension $d$ and size $n$ in Figure \ref{fig:poset-node-index-similarity}
+\item \textbf{relation\_cell\_similarity} - The Jacard index of arcs (edges) in the relation (given by reduction algorithms).
+    Consider 2 birth-death pairs are similar if they corespond the similar cells.
+We can see the values of this score applying to depth posets before and after transpositions of different types for barycentric cubical tori dimension $d$ and size $n$ in Figure \ref{fig:relation-cell-similarity}
+\item \textbf{relation\_index\_similarity} - The Jacard index of arcs (edges) in the relation (given by reduction algorithms).
+    Consider 2 birth-death pairs are similar if ther indices in the filtration pairs are similar.
+We can see the values of this score applying to depth posets before and after transpositions of different types for barycentric cubical tori dimension $d$ and size $n$ in Figure \ref{fig:relation-index-similarity}
+\end{itemize}
+%\par We used these scores to measure the similarity of depth poset before and after the transpositions, and we can see the result in coresponding Figures.
 \begin{figure}[h!]
+    \hspace*{-3cm}
     \centering
-    \includegraphics[width=1.3\textwidth]{pics/torus-transpositions/similaritites/score=birth-relation-cell-similarity.png}
+    \includegraphics[width=1.5\textwidth]{pics/torus-transpositions/similaritites/score=birth-relation-cell-similarity.png}
     \caption{birth\_relation\_cell\_similarity values}
     \label{fig:birth-relation-cell-similarity}
 \end{figure}
-
-\subsection{birth\_relation\_index\_similarity}
-\par \textbf{birth\_relation\_index\_similarity} - The Jacard index of arcs (edges) in the birth relation (given by row left to right reduction algorithm).
-    Consider 2 birth-death pairs are similar if ther indices in the filtration pairs are similar.
-\par We can see the values of this score for different dimensions $d$ and size $n$ in Figure \ref{fig:birth-relation-index-similarity}
-
 \begin{figure}[h!]
+    \hspace*{-3cm}
     \centering
-    \includegraphics[width=1.3\textwidth]{pics/torus-transpositions/similaritites/score=birth-relation-index-similarity.png}
+    \includegraphics[width=1.5\textwidth]{pics/torus-transpositions/similaritites/score=birth-relation-index-similarity.png}
     \caption{birth\_relation\_index\_similarity values}
     \label{fig:birth-relation-index-similarity}
 \end{figure}
-
-\subsection{death\_relation\_cell\_similarity}
-\par \textbf{death\_relation\_cell\_similarity} - The Jacard index of arcs (edges) in the death relation (given by column bottom to top reduction algorithm).
-    Consider 2 birth-death pairs are similar if they corespond the similar cells.
-\par We can see the values of this score for different dimensions $d$ and size $n$ in Figure \ref{fig:death-relation-cell-similarity}
-
 \begin{figure}[h!]
+    \hspace*{-3cm}
     \centering
-    \includegraphics[width=1.3\textwidth]{pics/torus-transpositions/similaritites/score=death-relation-cell-similarity.png}
+    \includegraphics[width=1.5\textwidth]{pics/torus-transpositions/similaritites/score=death-relation-cell-similarity.png}
     \caption{death\_relation\_cell\_similarity values}
     \label{fig:death-relation-cell-similarity}
 \end{figure}
-
-\subsection{death\_relation\_index\_similarity}
-\par \textbf{death\_relation\_index\_similarity} - The Jacard index of arcs (edges) in the death relation (given by column bottom to top reduction algorithm).
-    Consider 2 birth-death pairs are similar if ther indices in the filtration pairs are similar.
-\par We can see the values of this score for different dimensions $d$ and size $n$ in Figure \ref{fig:death-relation-index-similarity}
-
 \begin{figure}[h!]
+    \hspace*{-3cm}
     \centering
-    \includegraphics[width=1.3\textwidth]{pics/torus-transpositions/similaritites/score=death-relation-index-similarity.png}
+    \includegraphics[width=1.5\textwidth]{pics/torus-transpositions/similaritites/score=death-relation-index-similarity.png}
     \caption{death\_relation\_index\_similarity values}
     \label{fig:death-relation-index-similarity}
 \end{figure}
-
-\subsection{poset\_arc\_cell\_similarity}
-\par \textbf{poset\_arc\_cell\_similarity} - The Jacard index of arcs (edges) in the Depth Poset.
-    Consider 2 birth-death pairs are similar if they corespond the similar cells.
-\par We can see the values of this score for different dimensions $d$ and size $n$ in Figure \ref{fig:poset-arc-cell-similarity}
-
 \begin{figure}[h!]
+    \hspace*{-3cm}
     \centering
-    \includegraphics[width=1.3\textwidth]{pics/torus-transpositions/similaritites/score=poset-arc-cell-similarity.png}
+    \includegraphics[width=1.5\textwidth]{pics/torus-transpositions/similaritites/score=poset-arc-cell-similarity.png}
     \caption{poset\_arc\_cell\_similarity values}
     \label{fig:poset-arc-cell-similarity}
 \end{figure}
-
-\subsection{poset\_arc\_index\_similarity}
-\par \textbf{poset\_arc\_index\_similarity} - The Jacard index of arcs (edges) in the Depth Poset.
-    Consider 2 birth-death pairs are similar if ther indices in the filtration pairs are similar.
-\par We can see the values of this score for different dimensions $d$ and size $n$ in Figure \ref{fig:poset-arc-index-similarity}
-
 \begin{figure}[h!]
+    \hspace*{-3cm}
     \centering
-    \includegraphics[width=1.3\textwidth]{pics/torus-transpositions/similaritites/score=poset-arc-index-similarity.png}
+    \includegraphics[width=1.5\textwidth]{pics/torus-transpositions/similaritites/score=poset-arc-index-similarity.png}
     \caption{poset\_arc\_index\_similarity values}
     \label{fig:poset-arc-index-similarity}
 \end{figure}
-
-\subsection{poset\_node\_cell\_similarity}
-\par \textbf{poset\_node\_cell\_similarity} - The Jacard index of nodes (elements) in the Depth Poset.
-    Consider 2 birth-death pairs are similar if they corespond the similar cells.
-\par We can see the values of this score for different dimensions $d$ and size $n$ in Figure \ref{fig:poset-node-cell-similarity}
-
 \begin{figure}[h!]
+    \hspace*{-3cm}
     \centering
-    \includegraphics[width=1.3\textwidth]{pics/torus-transpositions/similaritites/score=poset-node-cell-similarity.png}
+    \includegraphics[width=1.5\textwidth]{pics/torus-transpositions/similaritites/score=poset-node-cell-similarity.png}
     \caption{poset\_node\_cell\_similarity values}
     \label{fig:poset-node-cell-similarity}
 \end{figure}
-
-\subsection{poset\_node\_index\_similarity}
-\par \textbf{poset\_node\_index\_similarity} - The Jacard index of nodes (elements) in the Depth Poset.
-    Consider 2 birth-death pairs are similar if ther indices in the filtration pairs are similar.
-\par We can see the values of this score for different dimensions $d$ and size $n$ in Figure \ref{fig:poset-node-index-similarity}
-
 \begin{figure}[h!]
+    \hspace*{-3cm}
     \centering
-    \includegraphics[width=1.3\textwidth]{pics/torus-transpositions/similaritites/score=poset-node-index-similarity.png}
+    \includegraphics[width=1.5\textwidth]{pics/torus-transpositions/similaritites/score=poset-node-index-similarity.png}
     \caption{poset\_node\_index\_similarity values}
     \label{fig:poset-node-index-similarity}
 \end{figure}
-
-\subsection{relation\_cell\_similarity}
-\par \textbf{relation\_cell\_similarity} - The Jacard index of arcs (edges) in the relation (given by reduction algorithms).
-    Consider 2 birth-death pairs are similar if they corespond the similar cells.
-\par We can see the values of this score for different dimensions $d$ and size $n$ in Figure \ref{fig:relation-cell-similarity}
-
 \begin{figure}[h!]
+    \hspace*{-3cm}
     \centering
-    \includegraphics[width=1.3\textwidth]{pics/torus-transpositions/similaritites/score=relation-cell-similarity.png}
+    \includegraphics[width=1.5\textwidth]{pics/torus-transpositions/similaritites/score=relation-cell-similarity.png}
     \caption{relation\_cell\_similarity values}
     \label{fig:relation-cell-similarity}
 \end{figure}
-
-\subsection{relation\_index\_similarity}
-\par \textbf{relation\_index\_similarity} - The Jacard index of arcs (edges) in the relation (given by reduction algorithms).
-    Consider 2 birth-death pairs are similar if ther indices in the filtration pairs are similar.
-\par We can see the values of this score for different dimensions $d$ and size $n$ in Figure \ref{fig:relation-index-similarity}
-
 \begin{figure}[h!]
+    \hspace*{-3cm}
     \centering
-    \includegraphics[width=1.3\textwidth]{pics/torus-transpositions/similaritites/score=relation-index-similarity.png}
+    \includegraphics[width=1.5\textwidth]{pics/torus-transpositions/similaritites/score=relation-index-similarity.png}
     \caption{relation\_index\_similarity values}
     \label{fig:relation-index-similarity}
 \end{figure}

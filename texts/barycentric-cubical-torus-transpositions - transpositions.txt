@@ -18,15 +18,17 @@
 We can see that no switch transpositions are majority of cases. So we also can look at Figure \ref{fig:switch-without-noswitch} to get how other types are distributed.
 
 \begin{figure}[h!]
+    \hspace*{-3cm}
     \centering
-    \includegraphics[width=1.3\textwidth]{pics/torus-transpositions/switch-types.png}
+    \includegraphics[width=1.5\textwidth]{pics/torus-transpositions/switch-types.png}
     \caption{The mean value of number of transpositions of each type.}
     \label{fig:switch-full}
 \end{figure}
 
 \begin{figure}[h!]
+    \hspace*{-3cm}
     \centering
-    \includegraphics[width=1.3\textwidth]{pics/torus-transpositions/switch-types (without no switch).png}
+    \includegraphics[width=1.5\textwidth]{pics/torus-transpositions/switch-types (without no switch).png}
     \caption{The mean value of number of transpositions of each type (without no switch transpositions).}
     \label{fig:switch-without-noswitch}
 \end{figure}
