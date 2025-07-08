@@ -29,12 +29,22 @@ from tqdm import tqdm
 
 
 # select poset scores to check
-poset_scores_to_check = [obj for name, obj in inspect.getmembers(poset_scores, inspect.isfunction) if obj.__module__ == poset_scores.__name__]
-
+#poset_scores_to_check = [obj for name, obj in inspect.getmembers(poset_scores, inspect.isfunction) if obj.__module__ == poset_scores.__name__]
+poset_scores_to_check = [poset_scores.number_of_nodes, 
+                         poset_scores.number_of_relations, 
+                         poset_scores.number_of_components, 
+                         poset_scores.number_of_minimal_nodes, 
+                         poset_scores.number_of_maximal_nodes, 
+                         poset_scores.number_of_edges_in_reduction, 
+                         poset_scores.number_of_edges_in_closure,  
+                         poset_scores.height, 
+                         poset_scores.width, 
+                         ]
 
 # select nodes number and nodes scores to check
 number_nodes_to_check = 16
-node_scores_to_check = [obj for name, obj in inspect.getmembers(node_scores, inspect.isfunction) if obj.__module__ == node_scores.__name__]
+#node_scores_to_check = [obj for name, obj in inspect.getmembers(node_scores, inspect.isfunction) if obj.__module__ == node_scores.__name__]
+node_scores_to_check = []
 
 def calculate_result_for_random_barycentric_fitration_on_cubical_torus(n, dim):
     # calculate the dictionary of values and scores for case of torus dimension dim builded from n^dim cubes.
