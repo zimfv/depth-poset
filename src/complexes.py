@@ -1,5 +1,6 @@
 import itertools
 import numpy as np
+import math
 
 from matplotlib import pyplot as plt
 from matplotlib.colors import Normalize
@@ -7,6 +8,8 @@ from matplotlib.cm import ScalarMappable
 from scipy.interpolate import griddata
 
 from src import depth, utils
+
+from functools import total_ordering
 
 
 class CubicalTorusComplex():
@@ -42,7 +45,21 @@ class CubicalTorusComplex():
     
     def assign_random_barycentric_filtration(self, levels=None):
         """
+        Assign random filtration values to the complex using barycentric filtration.
 
+        Parameters:
+        -----------
+        levels: list of floats, optional
+            The filtration levels for the complex. If None, the default levels are used, which are
+            np.arange(self.dim + 2). The filtration values will be randomly assigned between these levels
+            for each vector set.
+            If levels are provided, they should be of length self.dim + 2.
+            The filtration values will be randomly assigned between these levels for each vector set.
+        
+        Returns:
+        --------
+        self: CubicalTorusComplex
+            The complex with assigned filtration values.
         """
         if levels is None:
             levels = np.arange(self.dim + 2)
@@ -52,6 +69,12 @@ class CubicalTorusComplex():
     
     def assign_height_filtration(self, filtration_values):
         """
+        Assign the filtration values of cubical simplex using height filtration.
+
+        Parameters:
+        -----------
+        filtration_values: np.array of shape self.shape
+            The filtration values in the vertices
         """
         filtration_values = np.asarray(filtration_values)
         if filtration_values.shape != self.shape:
@@ -60,6 +83,14 @@ class CubicalTorusComplex():
     
     def draw_strong(self, cmap='jet', vmin=None, vmax=None, ax=None, all_borders=True, zorder=0):
         """
+        Draw the strong filtration of the complex.
+        
+        Parameters:
+        -----------
+        cmap: str, optional
+            The colormap to use for the filtration values. Default is 'jet'.
+        vmin: float, optional
+            The minimum value for the colormap. If None, the minimum value of the filtration values     
         """
         if self.dim != 2:
             return
@@ -104,6 +135,27 @@ class CubicalTorusComplex():
     
     def draw_gradiental(self, cmap='jet', vmin=None, vmax=None, ax=None, method='cubic', n=300):
         """
+        Draw the gradiental filtration of the complex.
+        
+        Parameters:
+        -----------
+        cmap: str, optional
+            The colormap to use for the filtration values. Default is 'jet'.
+        vmin: float, optional
+            The minimum value for the colormap. If None, the minimum value of the filtration values
+        vmax: float, optional
+            The maximum value for the colormap. If None, the maximum value of the filtration values
+        ax: matplotlib.axes.Axes, optional
+            The axes to draw the filtration on. If None, the current axes will be used.
+        method: str, optional
+            The method to use for interpolation. Default is 'cubic'.
+        n: int, optional
+            The number of points to use for interpolation in each direction. Default is 300.
+        
+        Returns:
+        --------
+        sm: matplotlib.cm.ScalarMappable
+            The scalar mappable object for the colormap.
         """
         if self.dim != 2:
             return
@@ -150,6 +202,27 @@ class CubicalTorusComplex():
 
     def get_order(self, sort_with_filtration=True, map=utils.array_to_tuple, return_filtration=False, return_dims=False):
         """
+        Get the order of the cells in the complex.
+
+        Parameters:
+        -----------
+        sort_with_filtration: bool, optional
+            If True, the order will be sorted by the filtration values. Default is True.
+        map: function, optional
+            A function to map the cells to a tuple. Default is utils.array_to_tuple.
+        return_filtration: bool, optional
+            If True, the filtration values will be returned. Default is False.
+        return_dims: bool, optional
+            If True, the dimensions of the cells will be returned. Default is False.
+
+        Returns:
+        --------
+        order: list of tuples
+            The order of the cells in the complex, where each cell is represented as a tuple.
+        dims: np.array, optional
+            The dimensions of the cells in the complex, if return_dims is True.
+        filtration_values: np.array, optional
+            The filtration values of the cells in the complex, if return_filtration is True.
         """
         order = []
         
@@ -173,8 +246,6 @@ class CubicalTorusComplex():
             values = values[indices]
             order = list(np.array(order, dtype=object)[indices])
         
-
-
         if (not return_filtration) and (not return_dims):
             return order
         result = [order]
@@ -184,9 +255,23 @@ class CubicalTorusComplex():
             result.append(values)
         return tuple(result)
 
-
     def get_border_matrix(self, sort_with_filtration=True, dtype=int):
         """
+        Get the border matrix of the complex.
+
+        Parameters:
+        -----------
+        sort_with_filtration: bool, optional
+            If True, the order will be sorted by the filtration values. Default is True.
+        
+        dtype: data-type, optional
+            The data type of the border matrix. Default is int.
+        self.essential_cells_dims
+        Returns:
+        --------
+        border_matrix: np.array
+            The border matrix of the complex, where the (i, j)-th entry is
+            1 if the i-th cell is a face of the j-th cell, and 0 otherwise.
         """
         # Очень неэффективное решение, но должно работать!
         # This works incorrectly if self.shape contains n <= 2
@@ -200,6 +285,17 @@ class CubicalTorusComplex():
 
     def get_depth_poset(self, sort_with_filtration=True) -> depth.DepthPoset:
         """
+        Get the depth poset of the complex.
+
+        Parameters:
+        -----------
+        sort_with_filtration: bool, optional
+            If True, the order will be sorted by the filtration values. Default is True.
+        
+        Returns:
+        --------
+        dp: depth.DepthPoset
+            The depth poset of the complex, where the cells are ordered by their filtration values.
         """
         order, dims, fvals = self.get_order(sort_with_filtration=sort_with_filtration, return_dims=True, return_filtration=True)
         if not sort_with_filtration:
@@ -208,5 +304,220 @@ class CubicalTorusComplex():
         dp = depth.DepthPoset.from_border_matrix(border_matrix=bm, dims=dims, filter_values=fvals, sources=order)
         return dp
 
+    
+@total_ordering
+class EssentialCell:
+    """
+    Represents an essential cell in a cubical torus complex.
+    """
+    def __init__(self, dim, conds):
+        self.dim = int(dim)
+        self.conds = np.array(conds, dtype=bool)
+    
+    def __repr__(self):
+        code = ''.join(self.conds.astype(int).astype(str))
+        return f'EssentialCell(dim={self.dim}, conds={code})'
+
+    def __str__(self):
+        if self.dim == -1:
+            return '$\\emptyset$'
+        code = ''.join(self.conds.astype(int).astype(str))
+        return f'$\\mathfrak{{E}}^{{{self.dim}}}_{{{code}}}$'
+
+    def __hash__(self):
+        return hash((self.dim, tuple(self.conds)))
+
+    def __eq__(self, other):
+        if isinstance(other, EssentialCell):
+            return (self.dim == other.dim) and (self.conds == other.conds).all()
+        if isinstance(other, tuple):
+            return False
+    
+    def __lt__(self, other):
+        if isinstance(other, EssentialCell):
+            if self.dim < other.dim:
+                return True
+            if self.dim > other.dim:
+                return False
+            return tuple(self.conds) < tuple(other.conds)
+        if isinstance(other, tuple):
+            other_dim = round(np.log(len(other))/np.log(2))
+            if other_dim < self.dim:
+                return False
+            if other_dim > self.dim:
+                return True
+            return False
+    
+    def has_border(self, cell, dim=None):
+        """
+        Check if the essential cell has a border with the given cell.
+
+        Parameters:
+        -----------
+        cell: set
+            The cell to check for a border with.
+
+        Returns:
+        --------
+        bool
+            True if the essential cell has a border with the given cell, False otherwise.
+        """
+        if dim is None:
+            dim = int(round(np.log(len(cell))/np.log(2)))
+        if self.dim != dim + 1:
+            return False
+        return (np.array(list(cell))[:, self.conds] == 0).all()
         
 
+class CubicalTorusComplexExtended(CubicalTorusComplex):
+    """
+    The Cubical Torus Complex with added essential cells and filtration values.
+    """
+    def __init__(self, shape, dim=None, vector_sets=None):
+        super().__init__(shape, dim, vector_sets)
+
+        self.essential_cells = [EssentialCell(-1, np.zeros(self.dim, dtype=bool))]
+        for k in range(1, self.dim + 1):
+            for cond_indices in itertools.combinations(np.arange(self.dim), k):
+                conds = np.zeros(self.dim, dtype=bool)
+                conds[list(cond_indices)] = True
+                self.essential_cells.append(EssentialCell(k + 1, conds))
+
+    def assign_filtration(self, filtration_values, essential_filtration_values=None):
+        """
+        """
+        super().assign_filtration(filtration_values)
+
+        if essential_filtration_values is None:
+            min_val = min([m.min() for m in self.filtration_values])
+            max_val = max([m.min() for m in self.filtration_values])
+            self.essential_filtration_values = max_val*np.ones(len(self.essential_cells))
+            self.essential_filtration_values[0] = min_val
+        else:
+            self.essential_filtration_values = np.array(essential_filtration_values, dtype=float)
+            if len(self.essential_filtration_values) != len(self.essential_cells):
+                raise ValueError(f'The essential filtration values should have length 2^{self.dim} = {len(self.essential_cells)}')
+        return self
+            
+    def assign_random_barycentric_filtration(self, essential_filtration_values=None, levels=None):
+        """
+        Assign random filtration values to the complex using barycentric filtration.
+
+        Parameters:
+        -----------
+        essential_filtration_values: list of floats, optional
+            The filtration values for the essential cells. 
+            If None, the default values are used, which are minimum and maximum levels.
+
+        levels: list of floats, optional
+            The filtration levels for the complex. If None, the default levels are used, which are
+            np.arange(self.dim + 2). The filtration values will be randomly assigned between these levels
+            for each vector set.
+            If levels are provided, they should be of length self.dim + 2.
+            The filtration values will be randomly assigned between these levels for each vector set.
+        
+        Returns:
+        --------
+        self: CubicalTorusComplexExtended
+            The complex with assigned filtration values.
+        """
+        if levels is None:
+            levels = np.arange(self.dim + 2)
+        
+        if essential_filtration_values is None:
+            min_val = min(levels)
+            max_val = max(levels)
+            essential_filtration_values = [min_val] + [max_val]*(len(self.essential_cells) - 1)
+        elif len(essential_filtration_values) != len(self.essential_cells):
+            raise ValueError(f'The essential filtration values should have length 2^{self.dim} = {len(self.essential_cells)}')
+
+        super().assign_random_barycentric_filtration(levels=levels)
+        self.assign_filtration(self.filtration_values, essential_filtration_values=essential_filtration_values)
+        return self
+
+    def get_order(self, sort_with_filtration=True, map=utils.array_to_tuple, return_filtration=False, return_dims=False):
+        """
+        Get the order of the cells in the complex.
+
+        Parameters:
+        -----------
+        sort_with_filtration: bool, optional
+            If True, the order will be sorted by the filtration values. Default is True.
+        map: function, optional
+            A function to map the cells to a tuple. Default is utils.array_to_tuple.
+        return_filtration: bool, optional
+            If True, the filtration values will be returned. Default is False.
+        return_dims: bool, optional
+            If True, the dimensions of the cells will be returned. Default is False.
+
+        Returns:
+        --------
+        order: list of tuples
+            The order of the cells in the complex, where each cell is represented as a tuple.
+        dims: np.array, optional
+            The dimensions of the cells in the complex, if return_dims is True.
+        filtration_values: np.array, optional
+            The filtration values of the cells in the complex, if return_filtration is True.
+        """
+        order, dims, values = super().get_order(sort_with_filtration=False, map=map, return_filtration=True, return_dims=True)
+        order = np.concatenate([np.array(order, dtype=object), self.essential_cells])
+        dims = np.concatenate([dims, np.array([cell.dim for cell in self.essential_cells])])
+        filtration_values = np.concatenate([values, self.essential_filtration_values])
+
+        if sort_with_filtration:
+            indices = np.lexsort((dims, filtration_values))
+            dims = dims[indices]
+            filtration_values = filtration_values[indices]
+            order = list(np.array(order, dtype=object)[indices])
+        
+        if (not return_filtration) and (not return_dims):
+            return order
+        result = [order]
+        if return_dims:
+            result.append(dims)
+        if return_filtration:
+            result.append(filtration_values)
+        return tuple(result)
+    
+    def get_border_matrix(self, sort_with_filtration=True, dtype=int):
+
+        """
+        Get the border matrix of the complex.
+
+        Parameters:
+        -----------
+        sort_with_filtration: bool, optional
+            If True, the order will be sorted by the filtration values. Default is True.
+        
+        dtype: data-type, optional
+            The data type of the border matrix. Default is int.
+        self.essential_cells_dims
+        Returns:
+        --------
+        border_matrix: np.array
+            The border matrix of the complex, where the (i, j)-th entry is
+            1 if the i-th cell is a face of the j-th cell, and 0 otherwise.
+        """
+        # Очень неэффективное решение, но должно работать!
+        # This works incorrectly if self.shape contains n <= 2
+        order, dims = self.get_order(map = lambda s: s if isinstance(s, EssentialCell) else set(utils.array_to_tuple(s)), 
+                                     return_dims=True, sort_with_filtration=sort_with_filtration)
+        order = np.array(order, dtype=object)
+        def f(s0, s1):
+            if isinstance(s0, EssentialCell) and isinstance(s1, EssentialCell):
+                return False
+            elif isinstance(s0, EssentialCell):
+                return s0.has_border(s1) or s0.dim in [-1, self.dim + 1]
+            elif isinstance(s1, EssentialCell):
+                return s1.has_border(s0) or s1.dim in [-1, self.dim + 1]
+            else:
+                return (s0 & s1) == s0
+        matrix = np.vectorize(f)(order.reshape(-1, 1), order.reshape(1, -1)) & (dims.reshape(-1, 1) - dims.reshape(1, -1) == -1)
+        matrix = matrix.astype(dtype)
+
+        return matrix
+
+    def get_just_torus(self):
+        """
+        """
+        return CubicalTorusComplex(self.shape).assign_filtration(self.filtration_values)
