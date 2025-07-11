@@ -1,0 +1,11 @@
+dim,1,1,1,2,2,2,3,3,3
+object,full,column reduction,row reduction,full,column reduction,row reduction,full,column reduction,row reduction
+ancestors_cycles_dimension,False,False,False,False,False,False,False,False,False
+ancestors_height,False,False,False,False,False,False,False,False,False
+ancestors_number,False,False,False,False,False,False,False,False,False
+ancestors_width,False,False,False,False,False,False,False,False,False
+incomparable_number,False,False,False,False,False,False,False,False,False
+successors_cycles_dimension,False,False,False,False,False,False,False,False,False
+successors_height,False,False,False,False,False,False,False,False,False
+successors_number,False,False,False,False,False,False,False,False,False
+successors_width,False,False,False,False,False,False,False,False,False

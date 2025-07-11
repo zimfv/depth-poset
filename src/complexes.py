@@ -306,35 +306,36 @@ class CubicalTorusComplex():
 
     
 @total_ordering
-class EssentialCell:
+class AuxiliaryCell:
     """
-    Represents an essential cell in a cubical torus complex.
+    Represents an auxiliary cell, added to kill an essential cycle in a cubical torus complex.
     """
-    def __init__(self, dim, conds):
+    def __init__(self, dim, conds, label='\\Omega'):
         self.dim = int(dim)
         self.conds = np.array(conds, dtype=bool)
+        self.label = label
     
     def __repr__(self):
         code = ''.join(self.conds.astype(int).astype(str))
-        return f'EssentialCell(dim={self.dim}, conds={code})'
+        return f'AuxiliaryCell(dim={self.dim}, conds={code})'
 
     def __str__(self):
         if self.dim == -1:
             return '$\\emptyset$'
         code = ''.join(self.conds.astype(int).astype(str))
-        return f'$\\mathfrak{{E}}^{{{self.dim}}}_{{{code}}}$'
+        return f'${self.label}^{{{self.dim}}}_{{{code}}}$'
 
     def __hash__(self):
         return hash((self.dim, tuple(self.conds)))
 
     def __eq__(self, other):
-        if isinstance(other, EssentialCell):
+        if isinstance(other, AuxiliaryCell):
             return (self.dim == other.dim) and (self.conds == other.conds).all()
         if isinstance(other, tuple):
             return False
     
     def __lt__(self, other):
-        if isinstance(other, EssentialCell):
+        if isinstance(other, AuxiliaryCell):
             if self.dim < other.dim:
                 return True
             if self.dim > other.dim:
@@ -371,42 +372,53 @@ class EssentialCell:
 
 class CubicalTorusComplexExtended(CubicalTorusComplex):
     """
-    The Cubical Torus Complex with added essential cells and filtration values.
+    The Cubical Torus Complex with added auxiliary cells killing essential cycles
     """
     def __init__(self, shape, dim=None, vector_sets=None):
         super().__init__(shape, dim, vector_sets)
 
-        self.essential_cells = [EssentialCell(-1, np.zeros(self.dim, dtype=bool))]
+        self.auxiliary_cells = [AuxiliaryCell(-1, np.zeros(self.dim, dtype=bool))]
         for k in range(1, self.dim + 1):
             for cond_indices in itertools.combinations(np.arange(self.dim), k):
                 conds = np.zeros(self.dim, dtype=bool)
                 conds[list(cond_indices)] = True
-                self.essential_cells.append(EssentialCell(k + 1, conds))
+                self.auxiliary_cells.append(AuxiliaryCell(k + 1, conds))
 
-    def assign_filtration(self, filtration_values, essential_filtration_values=None):
+    def assign_filtration(self, filtration_values, auxiliary_filtration_values=None):
         """
+        Assign the filtration values of cubical simplex
+
+        Parameters:
+        -----------
+        filtration_values: list of self.dim + 1 np.arrays each i-th should have shape (comb(self.dim, i), self.chape)
+            The i-th matrix coresponds the filtration values of i-skeleton of the Complex. 
+            The orientation of the cells is defined by self.vector_sets
+        
+        auxiliary_filtration_values: list of floats, optional
+            The filtration values for the auxiliary cells. 
+            If None, the default values are used, which are minimum and maximum of other filtration values
         """
         super().assign_filtration(filtration_values)
 
-        if essential_filtration_values is None:
+        if auxiliary_filtration_values is None:
             min_val = min([m.min() for m in self.filtration_values])
             max_val = max([m.min() for m in self.filtration_values])
-            self.essential_filtration_values = max_val*np.ones(len(self.essential_cells))
-            self.essential_filtration_values[0] = min_val
+            self.auxiliary_filtration_values = max_val*np.ones(len(self.auxiliary_cells))
+            self.auxiliary_filtration_values[0] = min_val
         else:
-            self.essential_filtration_values = np.array(essential_filtration_values, dtype=float)
-            if len(self.essential_filtration_values) != len(self.essential_cells):
-                raise ValueError(f'The essential filtration values should have length 2^{self.dim} = {len(self.essential_cells)}')
+            self.auxiliary_filtration_values = np.array(auxiliary_filtration_values, dtype=float)
+            if len(self.auxiliary_filtration_values) != len(self.auxiliary_cells):
+                raise ValueError(f'The auxiliary filtration values should have length {len(self.auxiliary_cells)}')
         return self
             
-    def assign_random_barycentric_filtration(self, essential_filtration_values=None, levels=None):
+    def assign_random_barycentric_filtration(self, auxiliary_filtration_values=None, levels=None):
         """
         Assign random filtration values to the complex using barycentric filtration.
 
         Parameters:
         -----------
-        essential_filtration_values: list of floats, optional
-            The filtration values for the essential cells. 
+        auxiliary_filtration_values: list of floats, optional
+            The filtration values for the auxiliary cells. 
             If None, the default values are used, which are minimum and maximum levels.
 
         levels: list of floats, optional
@@ -424,15 +436,13 @@ class CubicalTorusComplexExtended(CubicalTorusComplex):
         if levels is None:
             levels = np.arange(self.dim + 2)
         
-        if essential_filtration_values is None:
+        if auxiliary_filtration_values is None:
             min_val = min(levels)
             max_val = max(levels)
-            essential_filtration_values = [min_val] + [max_val]*(len(self.essential_cells) - 1)
-        elif len(essential_filtration_values) != len(self.essential_cells):
-            raise ValueError(f'The essential filtration values should have length 2^{self.dim} = {len(self.essential_cells)}')
+            auxiliary_filtration_values = [min_val] + [max_val]*(len(self.auxiliary_cells) - 1)
 
         super().assign_random_barycentric_filtration(levels=levels)
-        self.assign_filtration(self.filtration_values, essential_filtration_values=essential_filtration_values)
+        self.assign_filtration(self.filtration_values, auxiliary_filtration_values=auxiliary_filtration_values)
         return self
 
     def get_order(self, sort_with_filtration=True, map=utils.array_to_tuple, return_filtration=False, return_dims=False):
@@ -460,9 +470,9 @@ class CubicalTorusComplexExtended(CubicalTorusComplex):
             The filtration values of the cells in the complex, if return_filtration is True.
         """
         order, dims, values = super().get_order(sort_with_filtration=False, map=map, return_filtration=True, return_dims=True)
-        order = np.concatenate([np.array(order, dtype=object), self.essential_cells])
-        dims = np.concatenate([dims, np.array([cell.dim for cell in self.essential_cells])])
-        filtration_values = np.concatenate([values, self.essential_filtration_values])
+        order = np.concatenate([np.array(order, dtype=object), self.auxiliary_cells])
+        dims = np.concatenate([dims, np.array([cell.dim for cell in self.auxiliary_cells])])
+        filtration_values = np.concatenate([values, self.auxiliary_filtration_values])
 
         if sort_with_filtration:
             indices = np.lexsort((dims, filtration_values))
@@ -500,15 +510,15 @@ class CubicalTorusComplexExtended(CubicalTorusComplex):
         """
         # Очень неэффективное решение, но должно работать!
         # This works incorrectly if self.shape contains n <= 2
-        order, dims = self.get_order(map = lambda s: s if isinstance(s, EssentialCell) else set(utils.array_to_tuple(s)), 
+        order, dims = self.get_order(map = lambda s: s if isinstance(s, AuxiliaryCell) else set(utils.array_to_tuple(s)), 
                                      return_dims=True, sort_with_filtration=sort_with_filtration)
         order = np.array(order, dtype=object)
         def f(s0, s1):
-            if isinstance(s0, EssentialCell) and isinstance(s1, EssentialCell):
+            if isinstance(s0, AuxiliaryCell) and isinstance(s1, AuxiliaryCell):
                 return False
-            elif isinstance(s0, EssentialCell):
+            elif isinstance(s0, AuxiliaryCell):
                 return s0.has_border(s1) or s0.dim in [-1, self.dim + 1]
-            elif isinstance(s1, EssentialCell):
+            elif isinstance(s1, AuxiliaryCell):
                 return s1.has_border(s0) or s1.dim in [-1, self.dim + 1]
             else:
                 return (s0 & s1) == s0
@@ -519,5 +529,6 @@ class CubicalTorusComplexExtended(CubicalTorusComplex):
 
     def get_just_torus(self):
         """
+        Returns the complex without auxiliary cells.
         """
         return CubicalTorusComplex(self.shape).assign_filtration(self.filtration_values)

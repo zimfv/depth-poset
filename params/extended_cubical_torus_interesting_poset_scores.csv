@@ -1,0 +1,14 @@
+dim,1,1,1,2,2,2,3,3,3
+object,full,column reduction,row reduction,full,column reduction,row reduction,full,column reduction,row reduction
+avarage_maximal_chain,False,False,False,False,False,False,False,False,False
+cycles_dimension,True,False,False,True,False,False,True,False,False
+height,True,False,False,True,False,False,True,False,False
+minimum_maximal_chain,False,False,False,False,False,False,False,False,False
+number_of_components,False,False,False,True,True,True,False,False,False
+number_of_edges_in_closure,False,False,False,False,False,False,False,False,False
+number_of_edges_in_reduction,False,False,False,False,False,False,False,False,False
+number_of_maximal_nodes,False,False,False,True,True,True,False,False,False
+number_of_minimal_nodes,False,False,False,True,True,True,False,False,False
+number_of_nodes,True,False,False,True,False,False,True,False,False
+number_of_relations,True,False,False,True,False,False,True,False,False
+width,False,False,False,False,False,False,False,False,False
