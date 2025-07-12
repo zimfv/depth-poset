@@ -15,9 +15,9 @@ import itertools
 
 # define params
 repeat_params = [
-    {'dim': 1, 'ns': list(range(3, 6, 1)), 'repeat': 3},
-    {'dim': 2, 'ns': list(range(3, 6, 1)), 'repeat': 3},
-    {'dim': 3, 'ns': list(range(3, 6, 1)), 'repeat': 3},
+    {'dim': 1, 'ns': list(range( 3, 12, 1)) + list(range(12, 80, 4)), 'repeat': 10},
+    {'dim': 2, 'ns': list(range( 3, 12, 1)) + list(range(12, 61, 4)), 'repeat': 10},
+    {'dim': 3, 'ns': list(range( 3, 13, 1)), 'repeat': 10},
 ]
 dims = list(itertools.chain.from_iterable([[params_dict['dim'] for _ in range(len(params_dict['ns'])*params_dict['repeat'])] for params_dict in repeat_params]))
 ns = list(itertools.chain.from_iterable([[n for n, _ in itertools.product(params_dict['ns'], range(params_dict['repeat']))] for params_dict in repeat_params]))
