@@ -1,0 +1,3 @@
+\par The $d$-dimensional torus model will contain $2^d$ essential cycles. So we will add some auxiliary cells to kill them:
+The first we will add $-1$-dimensional cell with the filtration value 0 which border will be all vertices. After this the cell which id birth of the first connected component will be paired with new auxiliary cell as the death of empty set. 
+And then for each dimendion $k\in\{2, ..., d\}$ we will add $C_d^k$ $k$-dimensional cells, which border will be all $(k-1)$ dimensial cells, satisfyed the $(d - k)$ constraints like $x_i = 0$. These auxiliary cells will be paired with previusly unpaired cells as deaths of essential cycles.

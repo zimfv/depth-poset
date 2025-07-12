@@ -37,10 +37,12 @@ df_node_scores_to_check = pd.read_csv('params/extended_cubical_torus_interesting
 
 
 def get_object_name(key):
-    for name in np.unique(df_poset_scores_to_check.columns.get_level_values(1)):
-         if name.find(key) == 0:
-              return name
-    return 'full'
+    if key.find('row reduction') == 0:
+        return 'row reduction'
+    elif key.find('column reduction') == 0:
+        return 'column reduction'
+    else:
+        return 'full'
 
 
 def calculate_result_for_random_barycentric_fitration_on_cubical_torus(n, dim):
@@ -127,7 +129,7 @@ def calculate_result_for_random_barycentric_fitration_on_cubical_torus(n, dim):
                         node_scores_values_i.update({score.__name__: score_value})
 
                         i_iter += 1
-                        print(f"Node scores {i_iter}/{n_iters}: Calculated the score {score.__name__} for the object {key} in {timer2.elapsed():.4f} seconds.")
+                        print(f"Node scores {i_iter}/{n_iters}: Calculated the score {score.__name__} for the object {key} and node {inode} in {timer2.elapsed():.4f} seconds.")
                         timer2.checkpoint()
                     node_scores_values.append(node_scores_values_i)
         result.update({'node scores': node_scores_values})
