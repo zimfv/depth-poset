@@ -9,7 +9,7 @@
 
 echo "SLURM_ARRAY_TASK_ID = '$SLURM_ARRAY_TASK_ID'"
 
-param_file="params/scores_on_cubical_torus.txt"
+param_file="params/scores_on_extended_cubical_torus.txt"
 param=$(sed -n "${SLURM_ARRAY_TASK_ID}p" $param_file)
 
 dim=$(echo $param | cut -d ' ' -f 1)

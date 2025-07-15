@@ -43,20 +43,27 @@ And then for each dimendion $k\in\{2, ..., d\}$ we will add $C_d^k$ $k$-dimensio
 \begin{center}
 \begin{tabular}{llllll}
 \toprule
-dim & 1 & \multicolumn{3}{r}{2} & 3 \\
-reduction & full & full & row reduction & column reduction & full \\
+dim & \multicolumn{3}{r}{2} & 3 & 1 \\
+reduction & full & row reduction & column reduction & full & full \\
 \midrule
-cycles\_dimension & Fig. \ref{fig:cyclesdimension-full1} & Fig. \ref{fig:cyclesdimension-full2} &  &  & Fig. \ref{fig:cyclesdimension-full3} \\
-height & Fig. \ref{fig:height-full1} & Fig. \ref{fig:height-full2} &  &  & Fig. \ref{fig:height-full3} \\
-number\_of\_nodes & Fig. \ref{fig:numberofnodes-full1} & Fig. \ref{fig:numberofnodes-full2} &  &  & Fig. \ref{fig:numberofnodes-full3} \\
-number\_of\_relations & Fig. \ref{fig:numberofrelations-full1} & Fig. \ref{fig:numberofrelations-full2} &  &  & Fig. \ref{fig:numberofrelations-full3} \\
-number\_of\_components &  & Fig. \ref{fig:numberofcomponents-full2} & Fig. \ref{fig:numberofcomponents-rowreduction2} & Fig. \ref{fig:numberofcomponents-columnreduction2} &  \\
-number\_of\_maximal\_nodes &  & Fig. \ref{fig:numberofmaximalnodes-full2} & Fig. \ref{fig:numberofmaximalnodes-rowreduction2} & Fig. \ref{fig:numberofmaximalnodes-columnreduction2} &  \\
-number\_of\_minimal\_nodes &  & Fig. \ref{fig:numberofminimalnodes-full2} & Fig. \ref{fig:numberofminimalnodes-rowreduction2} & Fig. \ref{fig:numberofminimalnodes-columnreduction2} &  \\
+cycles\_dimension & Fig. \ref{fig:cyclesdimension-full2} &  &  & Fig. \ref{fig:cyclesdimension-full3} & Fig. \ref{fig:cyclesdimension-full1} \\
+height & Fig. \ref{fig:height-full2} &  &  & Fig. \ref{fig:height-full3} & Fig. \ref{fig:height-full1} \\
+number\_of\_components & Fig. \ref{fig:numberofcomponents-full2} & Fig. \ref{fig:numberofcomponents-rowreduction2} & Fig. \ref{fig:numberofcomponents-columnreduction2} &  &  \\
+number\_of\_maximal\_nodes & Fig. \ref{fig:numberofmaximalnodes-full2} & Fig. \ref{fig:numberofmaximalnodes-rowreduction2} & Fig. \ref{fig:numberofmaximalnodes-columnreduction2} &  &  \\
+number\_of\_minimal\_nodes & Fig. \ref{fig:numberofminimalnodes-full2} & Fig. \ref{fig:numberofminimalnodes-rowreduction2} & Fig. \ref{fig:numberofminimalnodes-columnreduction2} &  &  \\
+number\_of\_nodes & Fig. \ref{fig:numberofnodes-full2} &  &  & Fig. \ref{fig:numberofnodes-full3} & Fig. \ref{fig:numberofnodes-full1} \\
+number\_of\_relations & Fig. \ref{fig:numberofrelations-full2} &  &  & Fig. \ref{fig:numberofrelations-full3} & Fig. \ref{fig:numberofrelations-full1} \\
 \bottomrule
 \end{tabular}
 
 \end{center}
+    \begin{figure}[h!]
+        \centering
+        \hspace*{-0.24\textwidth}
+        \includegraphics[width=1.4\textwidth]{pics/extended torus scores/score=cycles-dimension, dim=2, object=full.png}
+        \caption{Score cycles\_dimension values for the full poset of $\mathbb{T}_n^{2}$.}
+        \label{fig:cyclesdimension-full2}
+    \end{figure}
     \begin{figure}[h!]
         \centering
         \hspace*{-0.24\textwidth}
@@ -74,9 +81,9 @@ number\_of\_minimal\_nodes &  & Fig. \ref{fig:numberofminimalnodes-full2} & Fig.
     \begin{figure}[h!]
         \centering
         \hspace*{-0.24\textwidth}
-        \includegraphics[width=1.4\textwidth]{pics/extended torus scores/score=cycles-dimension, dim=2, object=full.png}
-        \caption{Score cycles\_dimension values for the full poset of $\mathbb{T}_n^{2}$.}
-        \label{fig:cyclesdimension-full2}
+        \includegraphics[width=1.4\textwidth]{pics/extended torus scores/score=height, dim=2, object=full.png}
+        \caption{Score height values for the full poset of $\mathbb{T}_n^{2}$.}
+        \label{fig:height-full2}
     \end{figure}
     \begin{figure}[h!]
         \centering
@@ -95,16 +102,9 @@ number\_of\_minimal\_nodes &  & Fig. \ref{fig:numberofminimalnodes-full2} & Fig.
     \begin{figure}[h!]
         \centering
         \hspace*{-0.24\textwidth}
-        \includegraphics[width=1.4\textwidth]{pics/extended torus scores/score=height, dim=2, object=full.png}
-        \caption{Score height values for the full poset of $\mathbb{T}_n^{2}$.}
-        \label{fig:height-full2}
-    \end{figure}
-    \begin{figure}[h!]
-        \centering
-        \hspace*{-0.24\textwidth}
-        \includegraphics[width=1.4\textwidth]{pics/extended torus scores/score=number-of-components, dim=2, object=full.png}
-        \caption{Score number\_of\_components values for the full poset of $\mathbb{T}_n^{2}$.}
-        \label{fig:numberofcomponents-full2}
+        \includegraphics[width=1.4\textwidth]{pics/extended torus scores/score=number-of-components, dim=2, object=row reduction.png}
+        \caption{Score number\_of\_components values for the row reduction poset of $\mathbb{T}_n^{2}$.}
+        \label{fig:numberofcomponents-rowreduction2}
     \end{figure}
     \begin{figure}[h!]
         \centering
@@ -116,9 +116,16 @@ number\_of\_minimal\_nodes &  & Fig. \ref{fig:numberofminimalnodes-full2} & Fig.
     \begin{figure}[h!]
         \centering
         \hspace*{-0.24\textwidth}
-        \includegraphics[width=1.4\textwidth]{pics/extended torus scores/score=number-of-components, dim=2, object=row reduction.png}
-        \caption{Score number\_of\_components values for the row reduction poset of $\mathbb{T}_n^{2}$.}
-        \label{fig:numberofcomponents-rowreduction2}
+        \includegraphics[width=1.4\textwidth]{pics/extended torus scores/score=number-of-components, dim=2, object=full.png}
+        \caption{Score number\_of\_components values for the full poset of $\mathbb{T}_n^{2}$.}
+        \label{fig:numberofcomponents-full2}
+    \end{figure}
+    \begin{figure}[h!]
+        \centering
+        \hspace*{-0.24\textwidth}
+        \includegraphics[width=1.4\textwidth]{pics/extended torus scores/score=number-of-maximal-nodes, dim=2, object=row reduction.png}
+        \caption{Score number\_of\_maximal\_nodes values for the row reduction poset of $\mathbb{T}_n^{2}$.}
+        \label{fig:numberofmaximalnodes-rowreduction2}
     \end{figure}
     \begin{figure}[h!]
         \centering
@@ -137,9 +144,9 @@ number\_of\_minimal\_nodes &  & Fig. \ref{fig:numberofminimalnodes-full2} & Fig.
     \begin{figure}[h!]
         \centering
         \hspace*{-0.24\textwidth}
-        \includegraphics[width=1.4\textwidth]{pics/extended torus scores/score=number-of-maximal-nodes, dim=2, object=row reduction.png}
-        \caption{Score number\_of\_maximal\_nodes values for the row reduction poset of $\mathbb{T}_n^{2}$.}
-        \label{fig:numberofmaximalnodes-rowreduction2}
+        \includegraphics[width=1.4\textwidth]{pics/extended torus scores/score=number-of-minimal-nodes, dim=2, object=row reduction.png}
+        \caption{Score number\_of\_minimal\_nodes values for the row reduction poset of $\mathbb{T}_n^{2}$.}
+        \label{fig:numberofminimalnodes-rowreduction2}
     \end{figure}
     \begin{figure}[h!]
         \centering
@@ -158,16 +165,9 @@ number\_of\_minimal\_nodes &  & Fig. \ref{fig:numberofminimalnodes-full2} & Fig.
     \begin{figure}[h!]
         \centering
         \hspace*{-0.24\textwidth}
-        \includegraphics[width=1.4\textwidth]{pics/extended torus scores/score=number-of-minimal-nodes, dim=2, object=row reduction.png}
-        \caption{Score number\_of\_minimal\_nodes values for the row reduction poset of $\mathbb{T}_n^{2}$.}
-        \label{fig:numberofminimalnodes-rowreduction2}
-    \end{figure}
-    \begin{figure}[h!]
-        \centering
-        \hspace*{-0.24\textwidth}
-        \includegraphics[width=1.4\textwidth]{pics/extended torus scores/score=number-of-nodes, dim=3, object=full.png}
-        \caption{Score number\_of\_nodes values for the full poset of $\mathbb{T}_n^{3}$.}
-        \label{fig:numberofnodes-full3}
+        \includegraphics[width=1.4\textwidth]{pics/extended torus scores/score=number-of-nodes, dim=1, object=full.png}
+        \caption{Score number\_of\_nodes values for the full poset of $\mathbb{T}_n^{1}$.}
+        \label{fig:numberofnodes-full1}
     \end{figure}
     \begin{figure}[h!]
         \centering
@@ -179,9 +179,16 @@ number\_of\_minimal\_nodes &  & Fig. \ref{fig:numberofminimalnodes-full2} & Fig.
     \begin{figure}[h!]
         \centering
         \hspace*{-0.24\textwidth}
-        \includegraphics[width=1.4\textwidth]{pics/extended torus scores/score=number-of-nodes, dim=1, object=full.png}
-        \caption{Score number\_of\_nodes values for the full poset of $\mathbb{T}_n^{1}$.}
-        \label{fig:numberofnodes-full1}
+        \includegraphics[width=1.4\textwidth]{pics/extended torus scores/score=number-of-nodes, dim=3, object=full.png}
+        \caption{Score number\_of\_nodes values for the full poset of $\mathbb{T}_n^{3}$.}
+        \label{fig:numberofnodes-full3}
+    \end{figure}
+    \begin{figure}[h!]
+        \centering
+        \hspace*{-0.24\textwidth}
+        \includegraphics[width=1.4\textwidth]{pics/extended torus scores/score=number-of-relations, dim=3, object=full.png}
+        \caption{Score number\_of\_relations values for the full poset of $\mathbb{T}_n^{3}$.}
+        \label{fig:numberofrelations-full3}
     \end{figure}
     \begin{figure}[h!]
         \centering
@@ -196,13 +203,6 @@ number\_of\_minimal\_nodes &  & Fig. \ref{fig:numberofminimalnodes-full2} & Fig.
         \includegraphics[width=1.4\textwidth]{pics/extended torus scores/score=number-of-relations, dim=1, object=full.png}
         \caption{Score number\_of\_relations values for the full poset of $\mathbb{T}_n^{1}$.}
         \label{fig:numberofrelations-full1}
-    \end{figure}
-    \begin{figure}[h!]
-        \centering
-        \hspace*{-0.24\textwidth}
-        \includegraphics[width=1.4\textwidth]{pics/extended torus scores/score=number-of-relations, dim=3, object=full.png}
-        \caption{Score number\_of\_relations values for the full poset of $\mathbb{T}_n^{3}$.}
-        \label{fig:numberofrelations-full3}
     \end{figure}
 
 

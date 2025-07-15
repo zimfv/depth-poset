@@ -15,9 +15,9 @@ import itertools
 
 # define params
 repeat_params = [
-    {'dim': 1, 'ns': list(range( 3, 12, 1)) + list(range(12, 80, 4)), 'repeat': 10},
-    {'dim': 2, 'ns': list(range( 3, 12, 1)) + list(range(12, 61, 4)), 'repeat': 10},
-    {'dim': 3, 'ns': list(range( 3, 13, 1)), 'repeat': 10},
+    {'dim': 1, 'ns': list(range(12, 16, 1)) + list(range(16, 101, 4)), 'repeat': 10},
+    {'dim': 2, 'ns': list(range(12, 16, 1)) + list(range(16, 81, 4)), 'repeat': 10},
+    {'dim': 3, 'ns': [6, 8] + list(range(12, 17, 1)), 'repeat': 10},
 ]
 dims = list(itertools.chain.from_iterable([[params_dict['dim'] for _ in range(len(params_dict['ns'])*params_dict['repeat'])] for params_dict in repeat_params]))
 ns = list(itertools.chain.from_iterable([[n for n, _ in itertools.product(params_dict['ns'], range(params_dict['repeat']))] for params_dict in repeat_params]))
@@ -36,7 +36,7 @@ if not os.path.exists('logs/scores_on_extended_cubical_torus'):
 
 # Submit the SLURM array job and capture output
 result = subprocess.run(
-    ['sbatch', f'--array=0-{len(ns) - 1}', 'slurm/calculate_scores_on_extended_cubical_torus.sh'],
+    ['sbatch', f'--array=1-{len(ns)}', 'slurm/calculate_scores_on_extended_cubical_torus.sh'],
     capture_output=True,
     text=True
 )
