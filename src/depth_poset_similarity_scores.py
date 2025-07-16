@@ -20,22 +20,40 @@ def poset_node_index_similarity(dp0: DepthPoset, dp1: DepthPoset) -> float:
     set1 = set([(node.birth_index, node.death_index) for node in dp1.nodes])
     return jacard_index(set0, set1)
 
-def poset_arc_cell_similarity(dp0: DepthPoset, dp1: DepthPoset) -> float:
+def poset_closure_arcs_cell_similarity(dp0: DepthPoset, dp1: DepthPoset) -> float:
     """
-    The Jacard index of arcs (edges) in the Depth Poset.
+    The Jacard index of arcs (edges) in the transitive closure of the Depth Posets.
     Consider 2 birth-death pairs are similar if they corespond the similar cells.
     """
     set0 = set([(node0.source, node1.source) for node0, node1 in dp0.get_transitive_closure().edges])
     set1 = set([(node0.source, node1.source) for node0, node1 in dp1.get_transitive_closure().edges])
     return jacard_index(set0, set1)
 
-def poset_arc_index_similarity(dp0: DepthPoset, dp1: DepthPoset) -> float:
+def poset_closure_arcs_index_similarity(dp0: DepthPoset, dp1: DepthPoset) -> float:
     """
-    The Jacard index of arcs (edges) in the Depth Poset.
+    The Jacard index of arcs (edges) in the transitive closure of the Depth Posets.
     Consider 2 birth-death pairs are similar if ther indices in the filtration pairs are similar.
     """
     set0 = set([(node0.birth_index, node0.death_index, node1.birth_index, node1.death_index) for node0, node1 in dp0.get_transitive_closure().edges])
     set1 = set([(node0.birth_index, node0.death_index, node1.birth_index, node1.death_index) for node0, node1 in dp1.get_transitive_closure().edges])
+    return jacard_index(set0, set1)
+
+def poset_reduction_arcs_cell_similarity(dp0: DepthPoset, dp1: DepthPoset) -> float:
+    """
+    The Jacard index of arcs (edges) in the transitive reduction of the Depth Posets.
+    Consider 2 birth-death pairs are similar if they corespond the similar cells.
+    """
+    set0 = set([(node0.source, node1.source) for node0, node1 in dp0.get_transitive_reduction().edges])
+    set1 = set([(node0.source, node1.source) for node0, node1 in dp1.get_transitive_reduction().edges])
+    return jacard_index(set0, set1)
+
+def poset_reduction_arcs_index_similarity(dp0: DepthPoset, dp1: DepthPoset) -> float:
+    """
+    The Jacard index of arcs (edges) in the transitive reduction of the Depth Posets.
+    Consider 2 birth-death pairs are similar if ther indices in the filtration pairs are similar.
+    """
+    set0 = set([(node0.birth_index, node0.death_index, node1.birth_index, node1.death_index) for node0, node1 in dp0.get_transitive_reduction().edges])
+    set1 = set([(node0.birth_index, node0.death_index, node1.birth_index, node1.death_index) for node0, node1 in dp1.get_transitive_reduction().edges])
     return jacard_index(set0, set1)
 
 def birth_relation_cell_similarity(dp0: DepthPoset, dp1: DepthPoset) -> float:

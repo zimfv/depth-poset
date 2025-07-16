@@ -17,14 +17,25 @@ import numpy as np
 import pandas as pd
 import pickle as pkl
 
-# execution_parameters
+# execution parameters
 run_slurm = False
 run_native = True
 
-max_cases_per_size = 2
-max_number_of_cells = 6
+# How many pairs we should calculate
+max_cases_per_size = None
 
+# we will calculate both homotopies A->B and B->A if True
 both_directions = False
+
+# dict, keys are dimensions, values are maximal sizes of the complexes
+# There will no be constrains, if it's None
+dim_max_sizes = {
+    2: 6
+}
+if dim_max_sizes is None:
+    dim_size_cond = lambda row: True
+else:
+    dim_size_cond = lambda row: np.any([(row['dim'] == key) and (row['n'] <= value) for key, value in dim_max_sizes.items()])
 
 # define file paths
 directory = "results/scores-on-barycentric-cubical-toruses-extended"
@@ -41,6 +52,7 @@ for path in paths:
 
 df_cases = pd.DataFrame(df_cases)
 df_cases = df_cases[['dim', 'n', 'path']]
+df_cases = df_cases[df_cases.apply(dim_size_cond, axis=1)]
 df_cases = df_cases.groupby(['dim', 'n']).agg(list)
 
 print(f'Torus Sizes/Dimensions Distribution:')
@@ -62,7 +74,7 @@ df_pairs['index0'] = df_pairs['input0'].apply(lambda s: os.path.splitext(os.path
 df_pairs['index1'] = df_pairs['input1'].apply(lambda s: os.path.splitext(os.path.basename(s))[0])
 df_pairs['result'] = df_pairs.apply(lambda row: f'{row["index0"]} and {row["index1"]}.pkl', axis=1)
 try:
-    files_exist = os.listdir('results/transpositions-during-linear-homotopy-between-barycentric-cubical-toruses')
+    files_exist = os.listdir('results/transpositions-during-linear-homotopy-between-extended-barycentric-cubical-toruses')
 except FileNotFoundError:
     files_exist = []
 df_pairs = df_pairs[~df_pairs['result'].isin(files_exist)]
@@ -74,9 +86,6 @@ if max_cases_per_size is not None:
         if len(df_pairs[i]) > max_cases_per_size:
             df_pairs[i] = df_pairs[i].loc[np.random.choice(df_pairs[i].index.values, max_cases_per_size, replace=False)]
     df_pairs = pd.concat(df_pairs)
-
-if max_number_of_cells is not None:
-    df_pairs = df_pairs[(2*df_pairs['n'])**df_pairs['dim'] <= max_number_of_cells]
 
 # sort by the number of cells
 number_of_cells = (2 * df_pairs['n']) ** df_pairs['dim']
@@ -90,7 +99,7 @@ params_txt = '\n'.join([f'"{path0}" "{path1}"' for path0, path1 in df_pairs[['in
 # save params to file
 if not os.path.exists('params'):
     os.makedirs('params')
-with open('params/transpositions_during_homotopies_between_cubical_toruses.txt', 'w') as file:
+with open('params/transpositions_during_homotopies_between_extended_cubical_toruses.txt', 'w') as file:
     file.write(params_txt)
 
 # create logs directory if not exists

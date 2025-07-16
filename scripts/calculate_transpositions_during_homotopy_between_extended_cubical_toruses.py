@@ -35,8 +35,8 @@ from src import depth_poset_similarity_scores
 similarity_scores = [
     depth_poset_similarity_scores.birth_relation_cell_similarity, 
     depth_poset_similarity_scores.death_relation_cell_similarity, 
-    depth_poset_similarity_scores.poset_arc_cell_similarity,
-    
+    depth_poset_similarity_scores.poset_closure_arcs_cell_similarity, 
+    depth_poset_similarity_scores.poset_reduction_arcs_cell_similarity,    
 ]
 
 def read_torus_from_file(path: str) -> CubicalTorusComplex:
