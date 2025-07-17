@@ -30,7 +30,8 @@ both_directions = False
 # dict, keys are dimensions, values are maximal sizes of the complexes
 # There will no be constrains, if it's None
 dim_max_sizes = {
-    1: 10
+    1: 6,
+    2: 6,
 }
 if dim_max_sizes is None:
     dim_size_cond = lambda row: True

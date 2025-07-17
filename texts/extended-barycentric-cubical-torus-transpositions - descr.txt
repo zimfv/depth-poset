@@ -1,0 +1,27 @@
+\par The first we just calculated several Extended Barycentric Cubical Tori. The distribution of calculated toruses we can see in the Figure \ref{fig:cases_distribution}.
+\begin{figure}[htbp]
+    \centering
+    \begin{subfigure}[t]{0.45\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{pics/extended torus scores/cases.png}
+        \caption{Barycentric Cubical Tori}
+        \label{fig:cases_distribution}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[t]{0.45\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{pics/torus-transpositions-extended/distribution.png}
+        \caption{Calculated pairs}
+        \label{fig:pairs_distribution}
+    \end{subfigure}
+    \caption{Size/dimension distribution}
+    \label{fig:distribution}
+\end{figure}
+
+\par Then for each pair of filtrations with similar dimension and $n$ $f_0, f_1:\mathbb{T}^d_n \to \mathbb{R}$ we can define a linear homotopy $h: [0, 1]\times\mathbb{T}^d_n \to \mathbb{R}$:
+$$
+    h(t, \sigma) = (1 - t)\cdot f_0(\sigma) + t\cdot f_1(\sigma)
+$$
+
+\par The moment of time $t\in [0, 1]$ such there exist a pair of cells $\sigma_0, \sigma_1\in\mathbb{T}^d_n$ such that $h(t, \sigma_0) = h(t, \sigma_1)$ is a moment of transposition of these cells during the homotopy (the probability, that this will be full segment is 0 for pair of independent barycentric cubical tori).
+\par We have found all transposing pairs like this, classified them and calculated how these transpositions cahnges the Depth Poset. The distribution of calculated pairs of filtration we can see in the Figure \ref{fig:pairs_distribution}.
