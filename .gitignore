@@ -173,4 +173,5 @@ results
 *.toc
 
 # technical pictures
-pics/
+/pics/
+/raports/pics/!
