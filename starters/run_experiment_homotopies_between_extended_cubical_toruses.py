@@ -18,11 +18,11 @@ import pandas as pd
 import pickle as pkl
 
 # execution parameters
-run_slurm = False
-run_native = True
+run_slurm = True
+run_native = False
 
 # How many pairs we should calculate
-max_cases_per_size = 6
+max_cases_per_size = None
 
 # we will calculate both homotopies A->B and B->A if True
 both_directions = False
@@ -30,8 +30,7 @@ both_directions = False
 # dict, keys are dimensions, values are maximal sizes of the complexes
 # There will no be constrains, if it's None
 dim_max_sizes = {
-    1: 6,
-    2: 6,
+    2: +np.inf,
 }
 if dim_max_sizes is None:
     dim_size_cond = lambda row: True
@@ -115,7 +114,6 @@ if run_slurm:
         capture_output=True,
         text=True
     )
-
     # Check for errors
     if result.returncode != 0:
         print("Error submitting job:")

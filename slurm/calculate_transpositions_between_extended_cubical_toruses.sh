@@ -1,7 +1,7 @@
 #!/bin/bash
 #SBATCH --ntasks=1
 #
-#SBATCH --job-name=transpositions_during_homotopies_between_extended_cubical_toruses
+#SBATCH --job-name=BCTE-homotopy
 #SBATCH --output=logs/transpositions_during_homotopies_between_extended_cubical_toruses/output_%j.log
 #
 #SBATCH --time=72:00:00

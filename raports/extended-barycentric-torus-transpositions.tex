@@ -44,37 +44,6 @@ $$
 
 \section{Switch Types Distributions}
 
-\par The distribution of transpositions types for the model $\mathbb{T}^{1}_n$ we can see in the figure Fig. \ref{fig:typesdistribution1}.
-\begin{figure}[htbp]
-\centering
-\begin{subfigure}[b]{0.45\textwidth}
-    \includegraphics[width=\linewidth]{pics/torus-transpositions-extended/transposition-types-complex-dim1-subposet-dim0-drop-no-switches-False.png}
-    \caption{Cells dimension 0}
-    \label{fig:complex1cells0}
-\end{subfigure}
-\hfill
-\begin{subfigure}[b]{0.45\textwidth}
-    \includegraphics[width=\linewidth]{pics/torus-transpositions-extended/transposition-types-complex-dim1-subposet-dim1-drop-no-switches-False.png}
-    \caption{Cells dimension 1}
-    \label{fig:complex1cells1}
-\end{subfigure}
-\vspace{0.5cm}
-\begin{subfigure}[b]{0.45\textwidth}
-    \includegraphics[width=\linewidth]{pics/torus-transpositions-extended/transposition-types-complex-dim1-subposet-dim0-drop-no-switches-True.png}
-    \caption{Cells dimension 0 (without no switch transpositions)}
-    \label{fig:complex1cells0onlyswitch}
-\end{subfigure}
-\hfill
-\begin{subfigure}[b]{0.45\textwidth}
-    \includegraphics[width=\linewidth]{pics/torus-transpositions-extended/transposition-types-complex-dim1-subposet-dim1-drop-no-switches-True.png}
-    \caption{Cells dimension 1 (without no switch transpositions)}
-    \label{fig:complex1cells1onlyswitch}
-\end{subfigure}
-\caption{The switch type distribution for $\mathbb{T}_n^{1}$}
-\label{fig:typesdistribution1}
-\end{figure}
-
-
 \par The distribution of transpositions types for the model $\mathbb{T}^{2}_n$ we can see in the figure Fig. \ref{fig:typesdistribution2}.
 \begin{figure}[htbp]
 \centering
@@ -132,33 +101,16 @@ $$
 \end{itemize}
 \par The distribution of the similarity scores for different models $\mathbb{T}^{dim}_n$ we can see in the following figures:
 
-\begin{tabular}{lll}
+\begin{tabular}{ll}
 \toprule
-dim & 1 & 2 \\
+dim & 2 \\
 \midrule
-birth\_relation\_cell\_similarity & Fig. \ref{fig:birthrelationcellsimilaritycomplex1} & Fig. \ref{fig:birthrelationcellsimilaritycomplex2} \\
-death\_relation\_cell\_similarity & Fig. \ref{fig:deathrelationcellsimilaritycomplex1} & Fig. \ref{fig:deathrelationcellsimilaritycomplex2} \\
-poset\_closure\_arcs\_cell\_similarity & Fig. \ref{fig:posetclosurearcscellsimilaritycomplex1} & Fig. \ref{fig:posetclosurearcscellsimilaritycomplex2} \\
-poset\_reduction\_arcs\_cell\_similarity & Fig. \ref{fig:posetreductionarcscellsimilaritycomplex1} & Fig. \ref{fig:posetreductionarcscellsimilaritycomplex2} \\
+birth\_relation\_cell\_similarity & Fig. \ref{fig:birthrelationcellsimilaritycomplex2} \\
+death\_relation\_cell\_similarity & Fig. \ref{fig:deathrelationcellsimilaritycomplex2} \\
+poset\_closure\_arcs\_cell\_similarity & Fig. \ref{fig:posetclosurearcscellsimilaritycomplex2} \\
+poset\_reduction\_arcs\_cell\_similarity & Fig. \ref{fig:posetreductionarcscellsimilaritycomplex2} \\
 \bottomrule
 \end{tabular}
-\begin{figure}[htbp]
-\centering
-\begin{subfigure}[b]{0.45\textwidth}
-    \includegraphics[width=\linewidth]{pics/torus-transpositions-extended/score-birth-relation-cell-similarity-complex-dim1-transpositions-dim0.png}
-    \caption{Cells dimension 0}
-    \label{fig:birthrelationcellsimilaritycomplex1cells0}
-\end{subfigure}
-\hfill
-\begin{subfigure}[b]{0.45\textwidth}
-    \includegraphics[width=\linewidth]{pics/torus-transpositions-extended/score-birth-relation-cell-similarity-complex-dim1-transpositions-dim1.png}
-    \caption{Cells dimension 1}
-    \label{fig:birthrelationcellsimilaritycomplex1cells1}
-\end{subfigure}
-\caption{Similarity score birth\_relation\_cell\_similarity for $\mathbb{T}_n^{1}$}
-\label{fig:birthrelationcellsimilaritycomplex1}
-\end{figure}
-
 \begin{figure}[htbp]
 \centering
 \begin{subfigure}[b]{0.3\textwidth}
@@ -180,23 +132,6 @@ poset\_reduction\_arcs\_cell\_similarity & Fig. \ref{fig:posetreductionarcscells
 \end{subfigure}
 \caption{Similarity score birth\_relation\_cell\_similarity for $\mathbb{T}_n^{2}$}
 \label{fig:birthrelationcellsimilaritycomplex2}
-\end{figure}
-
-\begin{figure}[htbp]
-\centering
-\begin{subfigure}[b]{0.45\textwidth}
-    \includegraphics[width=\linewidth]{pics/torus-transpositions-extended/score-death-relation-cell-similarity-complex-dim1-transpositions-dim0.png}
-    \caption{Cells dimension 0}
-    \label{fig:deathrelationcellsimilaritycomplex1cells0}
-\end{subfigure}
-\hfill
-\begin{subfigure}[b]{0.45\textwidth}
-    \includegraphics[width=\linewidth]{pics/torus-transpositions-extended/score-death-relation-cell-similarity-complex-dim1-transpositions-dim1.png}
-    \caption{Cells dimension 1}
-    \label{fig:deathrelationcellsimilaritycomplex1cells1}
-\end{subfigure}
-\caption{Similarity score death\_relation\_cell\_similarity for $\mathbb{T}_n^{1}$}
-\label{fig:deathrelationcellsimilaritycomplex1}
 \end{figure}
 
 \begin{figure}[htbp]
@@ -224,23 +159,6 @@ poset\_reduction\_arcs\_cell\_similarity & Fig. \ref{fig:posetreductionarcscells
 
 \begin{figure}[htbp]
 \centering
-\begin{subfigure}[b]{0.45\textwidth}
-    \includegraphics[width=\linewidth]{pics/torus-transpositions-extended/score-poset-closure-arcs-cell-similarity-complex-dim1-transpositions-dim0.png}
-    \caption{Cells dimension 0}
-    \label{fig:posetclosurearcscellsimilaritycomplex1cells0}
-\end{subfigure}
-\hfill
-\begin{subfigure}[b]{0.45\textwidth}
-    \includegraphics[width=\linewidth]{pics/torus-transpositions-extended/score-poset-closure-arcs-cell-similarity-complex-dim1-transpositions-dim1.png}
-    \caption{Cells dimension 1}
-    \label{fig:posetclosurearcscellsimilaritycomplex1cells1}
-\end{subfigure}
-\caption{Similarity score poset\_closure\_arcs\_cell\_similarity for $\mathbb{T}_n^{1}$}
-\label{fig:posetclosurearcscellsimilaritycomplex1}
-\end{figure}
-
-\begin{figure}[htbp]
-\centering
 \begin{subfigure}[b]{0.3\textwidth}
     \includegraphics[width=\linewidth]{pics/torus-transpositions-extended/score-poset-closure-arcs-cell-similarity-complex-dim2-transpositions-dim0.png}
     \caption{Cells dimension 0}
@@ -260,23 +178,6 @@ poset\_reduction\_arcs\_cell\_similarity & Fig. \ref{fig:posetreductionarcscells
 \end{subfigure}
 \caption{Similarity score poset\_closure\_arcs\_cell\_similarity for $\mathbb{T}_n^{2}$}
 \label{fig:posetclosurearcscellsimilaritycomplex2}
-\end{figure}
-
-\begin{figure}[htbp]
-\centering
-\begin{subfigure}[b]{0.45\textwidth}
-    \includegraphics[width=\linewidth]{pics/torus-transpositions-extended/score-poset-reduction-arcs-cell-similarity-complex-dim1-transpositions-dim0.png}
-    \caption{Cells dimension 0}
-    \label{fig:posetreductionarcscellsimilaritycomplex1cells0}
-\end{subfigure}
-\hfill
-\begin{subfigure}[b]{0.45\textwidth}
-    \includegraphics[width=\linewidth]{pics/torus-transpositions-extended/score-poset-reduction-arcs-cell-similarity-complex-dim1-transpositions-dim1.png}
-    \caption{Cells dimension 1}
-    \label{fig:posetreductionarcscellsimilaritycomplex1cells1}
-\end{subfigure}
-\caption{Similarity score poset\_reduction\_arcs\_cell\_similarity for $\mathbb{T}_n^{1}$}
-\label{fig:posetreductionarcscellsimilaritycomplex1}
 \end{figure}
 
 \begin{figure}[htbp]
