@@ -127,7 +127,7 @@ if run_native:
     for i, (input0, input1) in enumerate(df_pairs[['input0', 'input1']].values):
         print(f'Runing Process {i + 1}/{len(df_pairs)}')
         result = subprocess.run(
-            ['python', 'scripts/calculate_transpositions_during_homotopy_between_extended_cubical_toruses.py', input0, input1],
+            ['python', 'scripts/calculate_transpositions_during_homotopy_between_extended_cubical_toruses_facilitated.py', input0, input1],
             capture_output=True,
             text=True
         )
