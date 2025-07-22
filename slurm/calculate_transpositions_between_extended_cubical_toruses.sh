@@ -20,8 +20,11 @@ echo "PARAMS:"
 echo "path0=$path0"
 echo "path1=$path1"
 
+echo "DATETIME:"
+date
+
 source venv/bin/activate
 
-python scripts/calculate_transpositions_during_homotopy_between_extended_cubical_toruses.py "$path0" "$path1"
+python scripts/calculate_transpositions_during_homotopy_between_extended_cubical_toruses_facilitated.py "$path0" "$path1"
 
 deactivate

@@ -18,8 +18,8 @@ import pandas as pd
 import pickle as pkl
 
 # execution parameters
-run_slurm = False
-run_native = True
+run_slurm = True
+run_native = False
 
 # How many pairs we should calculate
 max_cases_per_size = None

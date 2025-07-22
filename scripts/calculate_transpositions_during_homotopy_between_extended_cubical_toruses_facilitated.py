@@ -81,10 +81,16 @@ def collect_transpositions_during_homotopy(ctc0: CubicalTorusComplex, ctc1: Cubi
         cells, dims = cells0, dims0
         del cells0, cells1, dims0, dims1
 
+        print(f'len(fvals0) = {len(fvals0)}')
+        print(f'len(fvals1) = {len(fvals1)}')
+        
         # find the cross_parameters (times) and coresponding filtration values
         cross_parameters = get_cross_parameters(fvals0, fvals1, filter_outside=True)
         cross_parameters[np.tril_indices_from(cross_parameters)] = np.nan
+        print(f'cross_parameters.shape = {cross_parameters.shape}')
         cross_values = (1 - cross_parameters)*fvals0 + cross_parameters*fvals1
+        print(f'cross_values.shape = {cross_values.shape}')
+        
 
         # find the indices of non-filtered cells and sort them by time 
         transposition_indices = np.argwhere(~np.isnan(cross_parameters))
