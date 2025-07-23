@@ -110,6 +110,7 @@ def collect_transpositions_during_homotopy(ctc0: CubicalTorusComplex, ctc1: Cubi
 
         # consecutively define the transpositions
         df = []
+        raporting_iterations = np.linspace(0, len(transposition_indices) - 1, 100).astype(int) # fixing indinces to print time status
         for i, (i0, i1) in enumerate(transposition_indices):
             transposition = Transposition(border_matrix=current_border_matrix, 
                                           index0=current_order.index(cells[i0]), 
@@ -131,7 +132,8 @@ def collect_transpositions_during_homotopy(ctc0: CubicalTorusComplex, ctc1: Cubi
                     with Timer() as timer_score:
                         val = score(dp_current, dp_next)
                         df[-1].update({score.__name__: val})
-                    print(f'{i}/{len(transposition_indices)} - The similarity score {score} have been found in {timer_score.duration:.4f} seconds.')
+                    if i in raporting_iterations:
+                        print(f'{i}/{len(transposition_indices)} - The similarity score {score.__name__} have been found in {timer_score.duration:.4f} seconds.')
 
             # update the order, dims and border matrix
             current_order = transposition.next_order()

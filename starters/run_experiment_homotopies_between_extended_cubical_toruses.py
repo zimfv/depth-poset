@@ -30,7 +30,7 @@ both_directions = False
 # dict, keys are dimensions, values are maximal sizes of the complexes
 # There will no be constrains, if it's None
 dim_max_sizes = {
-    2: 12,
+    2: +np.inf,
 }
 if dim_max_sizes is None:
     dim_size_cond = lambda row: True
@@ -110,7 +110,7 @@ if not os.path.exists('logs/transpositions_during_homotopies_between_extended_cu
 # Submit the SLURM array job and capture output
 if run_slurm:
     result = subprocess.run(
-        ['sbatch', f'--array=0-{len(df_pairs) - 1}', 'slurm/calculate_transpositions_between_extended_cubical_toruses.sh'],
+        ['sbatch', f'--array=1-{len(df_pairs)}', 'slurm/calculate_transpositions_between_extended_cubical_toruses.sh'],
         capture_output=True,
         text=True
     )
