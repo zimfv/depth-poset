@@ -27,15 +27,15 @@ max_cases_per_size = None
 # we will calculate both homotopies A->B and B->A if True
 both_directions = False
 
-# dict, keys are dimensions, values are maximal sizes of the complexes
+# dict, keys are dimensions, values are minmal and maximal sizes of the complexes
 # There will no be constrains, if it's None
-dim_max_sizes = {
-    2: +np.inf,
+dim_minmax_sizes = {
+    2: (15, 40),
 }
-if dim_max_sizes is None:
+if dim_minmax_sizes is None:
     dim_size_cond = lambda row: True
 else:
-    dim_size_cond = lambda row: np.any([(row['dim'] == key) and (row['n'] <= value) for key, value in dim_max_sizes.items()])
+    dim_size_cond = lambda row: np.any([(row['dim'] == key) and (row['n'] <= maxval) and (row['n'] >= minval) for key, (minval, maxval) in dim_minmax_sizes.items()])
 
 # define file paths
 directory = "results/scores-on-barycentric-cubical-toruses-extended"

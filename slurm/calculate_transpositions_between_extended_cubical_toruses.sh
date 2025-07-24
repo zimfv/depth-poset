@@ -4,7 +4,7 @@
 #SBATCH --job-name=BCTE-homotopy
 #SBATCH --output=logs/transpositions_during_homotopies_between_extended_cubical_toruses/output_%j.log
 #
-#SBATCH --time=72:00:00
+#SBATCH --time=120:00:00
 #SBATCH --mem=16G
 
 echo "SLURM_ARRAY_TASK_ID = '$SLURM_ARRAY_TASK_ID'"
