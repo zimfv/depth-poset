@@ -1,4 +1,5 @@
 import networkx as nx
+from collections.abc import Iterable
 
 
 def get_unique_list(l) -> list:
@@ -265,14 +266,14 @@ class Poset:
 		g = self.get_transitive_closure()
 		return (b, a) in g.edges
 		
-	def get_descendats(self, root, include=True):
+	def _get_descendants_from_plural_roots(self, roots: list, include: bool=True):
 		"""
-		Returns the subposet of all descendants of the root - nodes, higher than the root.
+		Returns the subposet of all descendants of the given roots - nodes, higher than any of these roots.
 
 		Parameters:
 		-----------
-		root : object
-			The existing element in Poset.nodes, the root of the decnedants subposet.
+		roots: list
+			The existing elements in Poset.nodes, the roots of the decnedants subposet.
 
 		include: bool
 			The root will be included into poset, if it's True.
@@ -282,10 +283,69 @@ class Poset:
 		subposet: Poset
 			The subposet of all nodes, higher than given.
 		"""
+		for root in roots:
+			if root not in self.nodes:
+				raise ValueError(f'All given roots should be the nodes of the Poset, but {root} is not.')
+		graph = self.get_transitive_closure()
+		descendants = [b for (a, b) in graph.edges if a in roots]
+		if include:
+			descendants += list(roots)
+		node_condition = lambda node: node in descendants
+		subposet = self.subposet(node_condition=node_condition)
+		return subposet 
+
+	def get_descendats(self, root, include=True):
+		"""
+		Returns the subposet of all descendants of the root - nodes, higher than the root.
+
+		Parameters:
+		-----------
+		root: object
+			The existing element in Poset.nodes, the root of the decnedants subposet.
+			If the list of nodes is given, then `self._get_descendants_from_plural_roots` will be called
+
+		include: bool
+			The root will be included into poset, if it's True.
+
+		Returns:
+		--------
+		subposet: Poset
+			The subposet of all nodes, higher than given.
+		"""
+		if isinstance(root, Iterable) and (root not in self.nodes):
+			return self._get_descendants_from_plural_roots(roots=root, include=include)
 		if include:
 			node_condition = lambda node: self.lower(node, root)
 		else:
 			node_condition = lambda node: self.lower(node, root) and (node != root)
+		subposet = self.subposet(node_condition=node_condition)
+		return subposet 
+
+	def _get_ancestors_from_plural_roots(self, roots: list, include: bool=True):
+		"""
+		Returns the subposet of all ancestors of the given roots - nodes, higher than any of these roots.
+
+		Parameters:
+		-----------
+		roots: list
+			The existing elements in Poset.nodes, the roots of the decnedants subposet.
+
+		include: bool
+			The root will be included into poset, if it's True.
+
+		Returns:
+		--------
+		subposet: Poset
+			The subposet of all nodes, higher than given.
+		"""
+		for root in roots:
+			if root not in self.nodes:
+				raise ValueError(f'All given roots should be the nodes of the Poset, but {root} is not.')
+		graph = self.get_transitive_closure()
+		ancestors = [a for (a, b) in graph.edges if b in roots]
+		if include:
+			ancestors += list(roots)
+		node_condition = lambda node: node in ancestors
 		subposet = self.subposet(node_condition=node_condition)
 		return subposet 
 
@@ -295,8 +355,9 @@ class Poset:
 
 		Parameters:
 		-----------
-		root : object
+		root: object
 			The existing element in Poset.nodes, the root of the ancestors subposet.
+			If the list of nodes is given, the `self._get_ancestors_from_plural_roots` will be called
 
 		include: bool
 			The root will be included into poset, if it's True.
@@ -306,6 +367,10 @@ class Poset:
 		subposet: Poset
 			The subposet of all nodes, lower than given.
 		"""
+		if isinstance(root, Iterable) and (root not in self.nodes):
+			return self._get_ancestors_from_plural_roots(roots=root, include=include)
+		else:
+			return self._get_ancestors_from_plural_roots(roots=[root], include=include)
 		if include:
 			node_condition = lambda node: self.lower(node, root)
 		else:
