@@ -115,16 +115,25 @@ def test2():
     boundary_angles = np.arange(len(boundary))/len(boundary) * 2*np.pi
 
 
+    x = np.arange(mask.shape[0])
+    y = np.arange(mask.shape[1])
+    z = x.reshape(1, -1) + 1j*y.reshape(-1, 1)
+
     zs = boundary_x + 1j*boundary_y
     z_center = center_x + 1j*center_y
     
+    zx = np.append(zs, zs[0]).real
+    zy = np.append(zs, zs[0]).imag
+    zx = np.searchsorted(x, zx)
+    zy = np.searchsorted(y, zy)
+
     f = get_map_disk_to_unit(z_center, zs)
 
     cmap = plt.get_cmap().copy()
     cmap.set_bad(color='gray')
 
     fig, axs = plt.subplots(2, 4, figsize=(16, 8))
-    for (i_col, repr), (i_row, z) in itertools.product(enumerate([np.real, np.imag, np.abs, np.angle]), enumerate([z0, f(z0)])):
+    for (i_col, repr), (i_row, z) in itertools.product(enumerate([np.real, np.imag, np.abs, np.angle]), enumerate([z, f(z)])):
         axs[i_row, i_col].set_title(f'{repr.__name__}')
         img = repr(z)
         
@@ -137,11 +146,10 @@ def test2():
         axs[i_row, i_col].set_yticks(np.linspace(0, len(y)-1, 5).astype(int), y[np.linspace(0, len(y)-1, 5).astype(int)])
         axs[i_row, i_col].grid(True)
 
-
     plt.tight_layout()
     plt.show()
 
 
 if __name__ == '__main__':
-    test1()
-    #test2() # there is some core issue
+    #test1()
+    test2() # there is some core issue

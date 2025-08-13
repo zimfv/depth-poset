@@ -4,7 +4,7 @@ from scipy.spatial import Delaunay
 import triangle
 
 
-def triangulate_complex_numbers(zs, fix_perimeter=True):
+def triangulate_complex_numbers(zs, fix_perimeter=False):
     """
     Returns the triangulation of the set of complex numbers on the complex plane
 
@@ -16,6 +16,7 @@ def triangulate_complex_numbers(zs, fix_perimeter=True):
     fix_perimeter: bool
         Adds the constrain, that there should be edges, connecting neihbour numbers in the order, if it's True
         If Flase - just compute Delaunay triangulation
+        We shoud fix the perimeter, but this can kill the kernel, so we refused to do that and set the parameter False.
 
     Returns:
     --------
@@ -28,6 +29,7 @@ def triangulate_complex_numbers(zs, fix_perimeter=True):
         tri = tri.simplices
     else:
         segments = np.transpose([np.arange(len(zs)), (np.arange(len(zs)) + 1)%len(zs)])
+        segments = np.sort(segments, axis=1)
         tri = triangle.triangulate(dict(vertices=points, segments=segments), "p")
         assert (tri['vertices'] == points).all()
         tri = tri['triangles']
