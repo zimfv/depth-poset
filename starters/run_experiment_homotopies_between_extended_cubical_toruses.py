@@ -18,8 +18,8 @@ import pandas as pd
 import pickle as pkl
 
 # execution parameters
-run_slurm = True
-run_native = False
+run_slurm = False
+run_native = True
 
 # How many pairs we should calculate
 max_cases_per_size = None
@@ -30,7 +30,8 @@ both_directions = False
 # dict, keys are dimensions, values are minmal and maximal sizes of the complexes
 # There will no be constrains, if it's None
 dim_minmax_sizes = {
-    2: (15, 40),
+    2: (3, 4),
+    #2: (3, 13),
 }
 if dim_minmax_sizes is None:
     dim_size_cond = lambda row: True
@@ -39,7 +40,7 @@ else:
 
 # define file paths
 directory = "results/scores-on-barycentric-cubical-toruses-extended"
-paths = np.sort([f'{directory}/{f}' for f in os.listdir(directory)])
+paths = np.sort([f'{directory}/{f}' for f in os.listdir(directory)]).astype(str)
 
 paths = paths[pd.Series(paths).apply(lambda s: s.split('.')[0].split('/')[-1]).values > '2024-12-26 18:04:00']
 

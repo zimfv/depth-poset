@@ -100,6 +100,13 @@ def jacard_index(set0: set, set1: set) -> float:
     return len(set0 & set1) / len(set0 | set1)
 
 
+def symetric_difference_size(set0: set, set1: set) -> int:
+    """
+    Returns the size of the symetric difference of 2 sets.
+    """
+    return len(set0 ^ set1)
+
+
 def get_cross_parameters(y0, y1, t0=0, t1=1, filter_outside=True):
     """
     Returns the matrix of cross parameters between two arrays.

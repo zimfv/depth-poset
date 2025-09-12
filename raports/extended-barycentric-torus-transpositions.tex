@@ -90,13 +90,13 @@ $$
 \section{Similarity Scores}
 
 \begin{itemize}
-\item \textbf{birth\_relation\_cell\_similarity} - The Jacard index of arcs (edges) in the birth relation (given by row left to right reduction algorithm).
+\item \textbf{birth\_relation\_cell\_similarity} - The size of symmetric difference of arcs (edges) in the birth relation (given by row left to right reduction algorithm).
     Consider 2 birth-death pairs are similar if they corespond the similar cells.
-\item \textbf{death\_relation\_cell\_similarity} - The Jacard index of arcs (edges) in the death relation (given by column bottom to top reduction algorithm).
+\item \textbf{death\_relation\_cell\_similarity} - The size of symmetric difference of arcs (edges) in the death relation (given by column bottom to top reduction algorithm).
     Consider 2 birth-death pairs are similar if they corespond the similar cells.
-\item \textbf{poset\_closure\_arcs\_cell\_similarity} - The Jacard index of arcs (edges) in the transitive closure of the Depth Posets.
+\item \textbf{poset\_closure\_arcs\_cell\_similarity} - The size of symmetric difference of arcs (edges) in the transitive closure of the Depth Posets.
     Consider 2 birth-death pairs are similar if they corespond the similar cells.
-\item \textbf{poset\_reduction\_arcs\_cell\_similarity} - The Jacard index of arcs (edges) in the transitive reduction of the Depth Posets.
+\item \textbf{poset\_reduction\_arcs\_cell\_similarity} - The size of symmetric difference of arcs (edges) in the transitive reduction of the Depth Posets.
     Consider 2 birth-death pairs are similar if they corespond the similar cells.
 \end{itemize}
 \par The distribution of the similarity scores for different models $\mathbb{T}^{dim}_n$ we can see in the following figures:
