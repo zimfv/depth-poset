@@ -18,8 +18,8 @@ import pandas as pd
 import pickle as pkl
 
 # execution parameters
-run_slurm = False
-run_native = True
+run_slurm = True
+run_native = False
 
 # How many pairs we should calculate
 max_cases_per_size = None
@@ -30,8 +30,7 @@ both_directions = False
 # dict, keys are dimensions, values are minmal and maximal sizes of the complexes
 # There will no be constrains, if it's None
 dim_minmax_sizes = {
-    2: (3, 4),
-    #2: (3, 13),
+    2: (3, 13),
 }
 if dim_minmax_sizes is None:
     dim_size_cond = lambda row: True
