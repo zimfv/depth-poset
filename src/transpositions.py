@@ -40,7 +40,7 @@ class Transposition:
         
         self.order = order
         if self.order is None:
-            self.order = list(np.arange(len(self.border_matrix)))
+            self.order = list(np.arange(self.border_matrix.shape[0]))
 
         self.dims = dims
         if self.dims is None:
