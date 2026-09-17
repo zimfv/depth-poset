@@ -571,3 +571,31 @@ class DepthPoset(Poset):
 
 		subposet = self.subposet(node_condition=node_condition)
 		return subposet
+
+	def get_succ1(self, root: ShallowPair) -> list[ShallowPair]:
+		"""
+		Returns the list of shallow pairs, which are succesors by relation, defined in bottom_to_top_column_reduction algorithm
+		"""
+		succ1 = [node for node in self.nodes if (root.death_index, node.death_index) in self._b0_set]
+		return succ1
+
+	def get_pred1(self, root: ShallowPair):
+		"""
+		Returns the list of shallow pairs, which are predecessors by relation, defined in bottom_to_top_column_reduction algorithm
+		"""
+		pred1 = [node for node in self.nodes if (node.death_index, root.death_index) in self._b0_set]
+		return pred1
+	
+	def get_succ2(self, root: ShallowPair) -> list[ShallowPair]:
+		"""
+		Returns the list of shallow pairs, which are succesors by relation, defined in left_to_right_row_reduction algorithm
+		"""
+		succ2 = [node for node in self.nodes if (node.birth_index, root.birth_index) in self._b1_set]
+		return succ2
+
+	def get_pred2(self, root: ShallowPair):
+		"""
+		Returns the list of shallow pairs, which are predecessors by relation, defined in left_to_right_row_reduction algorithm
+		"""
+		pred2 = [node for node in self.nodes if (root.birth_index, node.birth_index) in self._b1_set]
+		return pred2

@@ -8,7 +8,10 @@ from src import depth
 from src.utils_lefschetz import get_dims_from_border_matrix
 
 class Transposition:
-    def __init__(self, border_matrix, index0: int, index1: int, order: list=None, dims: list=None, dp: depth.DepthPoset=None):
+    def __init__(self, border_matrix, index0: int, index1: int, 
+                 order: list | None=None, 
+                 dims: list | None=None, 
+                 dp: depth.DepthPoset | None=None):
         """
         Initializes a Transposition instance.
 
