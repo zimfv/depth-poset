@@ -22,6 +22,14 @@ def resolve_eq_params(func):
     return wrapper
 
 
+def set_tuples_int(func):
+    @wraps(func)
+    def wrapper(*args, **kwargs):
+        res = {(int(a), int(b)) for a, b in func(*args, **kwargs)}
+        return res
+    return wrapper
+
+
 def oplus(*args):
     res = set()
     for arg in args:
@@ -51,7 +59,8 @@ def get_pred2(dp: DepthPoset, a: int, b: int):
     return {node.source for node in dp.get_pred2(root)}
 
 
-class Eq8(Equation):
+class Eq08(Equation):
+    @set_tuples_int
     @resolve_eq_params
     def left(self, dp_bt, dp_at, x, y, a, b):
         r"""
@@ -59,6 +68,7 @@ class Eq8(Equation):
         """
         return get_succ1(dp_at, a, y)
 
+    @set_tuples_int
     @resolve_eq_params
     def right(self, dp_bt, dp_at, x, y, a, b):
         r"""
@@ -71,7 +81,8 @@ class Eq8(Equation):
         )
 
 
-class Eq9(Equation):
+class Eq09(Equation):
+    @set_tuples_int
     @resolve_eq_params
     def left(self, dp_bt, dp_at, x, y, a, b):
         r"""
@@ -79,6 +90,7 @@ class Eq9(Equation):
         """
         return get_succ1(dp_at, x, b)
 
+    @set_tuples_int
     @resolve_eq_params
     def right(self, dp_bt, dp_at, x, y, a, b):
         r"""
@@ -88,6 +100,7 @@ class Eq9(Equation):
 
     
 class Eq10(Equation):
+    @set_tuples_int
     @resolve_eq_params
     def left(self, dp_bt, dp_at, x, y, a, b):
         r"""
@@ -95,6 +108,7 @@ class Eq10(Equation):
         """
         return get_pred1(dp_at, a, y)
 
+    @set_tuples_int
     @resolve_eq_params
     def right(self, dp_bt, dp_at, x, y, a, b):
         r"""
@@ -104,6 +118,7 @@ class Eq10(Equation):
 
 
 class Eq11(Equation):
+    @set_tuples_int
     @resolve_eq_params
     def left(self, dp_bt, dp_at, x, y, a, b):
         r"""
@@ -111,10 +126,11 @@ class Eq11(Equation):
         """
         return get_pred1(dp_at, x, b)
 
+    @set_tuples_int
     @resolve_eq_params
     def right(self, dp_bt, dp_at, x, y, a, b):
         r"""
-        $\text{Pred}_1^\text{bt}(a, b) \oplus {(a, y)}$
+        $\text{Pred}_1^\text{bt}(a, b) \oplus \{(a, y)\}$
         """
         return oplus(
             get_pred1(dp_bt, a, b), 
@@ -123,6 +139,7 @@ class Eq11(Equation):
 
 
 class Eq12(Equation):
+    @set_tuples_int
     @resolve_eq_params
     def left(self, dp_bt, dp_at, x, y, a, b):
         r"""
@@ -130,6 +147,7 @@ class Eq12(Equation):
         """
         return get_succ2(dp_at, a, y)
 
+    @set_tuples_int
     @resolve_eq_params
     def right(self, dp_bt, dp_at, x, y, a, b):
         r"""
@@ -141,6 +159,7 @@ class Eq12(Equation):
         )
 
 class Eq13(Equation):
+    @set_tuples_int
     @resolve_eq_params
     def left(self, dp_bt, dp_at, x, y, a, b):
         r"""
@@ -148,6 +167,7 @@ class Eq13(Equation):
         """
         return get_succ2(dp_at, x, b)
 
+    @set_tuples_int
     @resolve_eq_params
     def right(self, dp_bt, dp_at, x, y, a, b):
         r"""
