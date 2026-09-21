@@ -58,9 +58,49 @@ def get_pred2(dp: DepthPoset, a: int, b: int):
     #return {node.source for node in dp.get_row_left_to_right_reduction().get_predecessors(root).nodes}
     return {node.source for node in dp.get_pred2(root)}
 
+def get_l_set(dp: DepthPoset, a: int | None=None, b: int | None=None, x: int | None=None, y: int | None=None):
+    r"""
+    $\mathcal{L} = \{(s, t)\in \text{BD}:\; f(t) < f(y)\}$
+    """
+    fy = None
+    for node in dp.nodes:
+        if node.source[0] == y:
+            fy = node.birth_index
+            break
+        if node.source[1] == y:
+            fy = node.death_index
+            break
+                
+    return {node.source for node in dp.nodes if node.death_index < fy}
+
+
+def get_m_set(dp: DepthPoset, a: int | None=None, b: int | None=None, x: int | None=None, y: int | None=None):
+    r"""
+    $\mathcal{M} = \{(s, t)\in \text{BD}:\; f(y) < f(t) < f(b)\}$
+    """
+    fy = None
+    fb = None
+    for node in dp.nodes:
+        if node.source[0] == y:
+            fy = node.birth_index
+            break
+        if node.source[1] == y:
+            fy = node.death_index
+            break
+    for node in dp.nodes:
+        if node.source[0] == b:
+            fb = node.birth_index
+            break
+        if node.source[1] == b:
+            fb = node.death_index
+            break
+    return {node.source for node in dp.nodes if (fy < node.death_index) & (node.death_index < fb)}
+
+    
+    
 
 class Eq08(Equation):
-    @set_tuples_int
+    #@set_tuples_int
     @resolve_eq_params
     def left(self, dp_bt, dp_at, x, y, a, b):
         r"""
@@ -68,7 +108,7 @@ class Eq08(Equation):
         """
         return get_succ1(dp_at, a, y)
 
-    @set_tuples_int
+    #@set_tuples_int
     @resolve_eq_params
     def right(self, dp_bt, dp_at, x, y, a, b):
         r"""
@@ -82,7 +122,7 @@ class Eq08(Equation):
 
 
 class Eq09(Equation):
-    @set_tuples_int
+    #@set_tuples_int
     @resolve_eq_params
     def left(self, dp_bt, dp_at, x, y, a, b):
         r"""
@@ -90,7 +130,7 @@ class Eq09(Equation):
         """
         return get_succ1(dp_at, x, b)
 
-    @set_tuples_int
+    #@set_tuples_int
     @resolve_eq_params
     def right(self, dp_bt, dp_at, x, y, a, b):
         r"""
@@ -100,7 +140,7 @@ class Eq09(Equation):
 
     
 class Eq10(Equation):
-    @set_tuples_int
+    #@set_tuples_int
     @resolve_eq_params
     def left(self, dp_bt, dp_at, x, y, a, b):
         r"""
@@ -108,7 +148,7 @@ class Eq10(Equation):
         """
         return get_pred1(dp_at, a, y)
 
-    @set_tuples_int
+    #@set_tuples_int
     @resolve_eq_params
     def right(self, dp_bt, dp_at, x, y, a, b):
         r"""
@@ -118,7 +158,7 @@ class Eq10(Equation):
 
 
 class Eq11(Equation):
-    @set_tuples_int
+    #@set_tuples_int
     @resolve_eq_params
     def left(self, dp_bt, dp_at, x, y, a, b):
         r"""
@@ -126,7 +166,7 @@ class Eq11(Equation):
         """
         return get_pred1(dp_at, x, b)
 
-    @set_tuples_int
+    #@set_tuples_int
     @resolve_eq_params
     def right(self, dp_bt, dp_at, x, y, a, b):
         r"""
@@ -139,7 +179,7 @@ class Eq11(Equation):
 
 
 class Eq12(Equation):
-    @set_tuples_int
+    #@set_tuples_int
     @resolve_eq_params
     def left(self, dp_bt, dp_at, x, y, a, b):
         r"""
@@ -147,7 +187,7 @@ class Eq12(Equation):
         """
         return get_succ2(dp_at, a, y)
 
-    @set_tuples_int
+    #@set_tuples_int
     @resolve_eq_params
     def right(self, dp_bt, dp_at, x, y, a, b):
         r"""
@@ -159,7 +199,7 @@ class Eq12(Equation):
         )
 
 class Eq13(Equation):
-    @set_tuples_int
+    #@set_tuples_int
     @resolve_eq_params
     def left(self, dp_bt, dp_at, x, y, a, b):
         r"""
@@ -167,10 +207,50 @@ class Eq13(Equation):
         """
         return get_succ2(dp_at, x, b)
 
-    @set_tuples_int
+    #@set_tuples_int
     @resolve_eq_params
     def right(self, dp_bt, dp_at, x, y, a, b):
         r"""
         $\text{Succ}_2^\text{bt}(a, b)$
         """
         return get_succ2(dp_bt, a, b)
+
+
+class Eq14(Equation):
+    #@set_tuples_int
+    @resolve_eq_params
+    def left(self, dp_bt, dp_at, x, y, a, b):
+        r"""
+        $\text{Pred}_2^\text{at}(a, y)$
+        """
+        return get_pred2(dp_at, a, y)
+
+    #@set_tuples_int
+    @resolve_eq_params
+    def right(self, dp_bt, dp_at, x, y, a, b):
+        r"""
+        $[\text{Pred}_2^\text{bt}(a, b) \cap \mathcal{L}]$
+        """
+        return get_pred2(dp_bt, a, b) & get_l_set(dp_bt, a, b, x, y)
+
+
+class Eq15(Equation):
+    #@set_tuples_int
+    @resolve_eq_params
+    def left(self, dp_bt, dp_at, x, y, a, b):
+        r"""
+        $\text{Pred}_2^\text{at}(x, b)$
+        """
+        return get_pred2(dp_at, x, b)
+
+    #@set_tuples_int
+    @resolve_eq_params
+    def right(self, dp_bt, dp_at, x, y, a, b):
+        r"""
+        $\text{Pred}_2^\text{bt}(x, y) \oplus \{(a, y)\} \oplus [\text{Pred}_2^\text{bt}(a, b) \cap \mathcal{M}]$
+        """
+        return oplus(
+            get_pred2(dp_bt, x, y), 
+            {(a, y)}, 
+            get_pred2(dp_bt, a, b) & get_m_set(dp_bt, a, b, x, y)
+        )
