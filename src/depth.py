@@ -384,6 +384,8 @@ class DepthPoset(Poset):
 		obj = cls(nodes=nodes, edges=edges)
 		obj._b0_set = set((e0, e1) for e0, e1 in b0) # define the reduct_column_bottom_to_top pairs
 		obj._b1_set = set((e0, e1) for e0, e1 in b1) # define the reduct_row_left_to_right pairs
+		if sources is not None:
+			obj._sources = np.array(sources)
 
 		return obj
 
@@ -590,12 +592,16 @@ class DepthPoset(Poset):
 		"""
 		Returns the list of shallow pairs, which are succesors by relation, defined in left_to_right_row_reduction algorithm
 		"""
-		succ2 = [node for node in self.nodes if (node.birth_index, root.birth_index) in self._b1_set]
+		#succ2 = [node for node in self.nodes if (node.birth_index, root.birth_index) in self._b1_set]
+		# there are reversed relations in self._b1_set
+		succ2 = [node for node in self.nodes if (root.birth_index, node.birth_index) in self._b1_set]
 		return succ2
 
 	def get_pred2(self, root: ShallowPair):
 		"""
 		Returns the list of shallow pairs, which are predecessors by relation, defined in left_to_right_row_reduction algorithm
 		"""
-		pred2 = [node for node in self.nodes if (root.birth_index, node.birth_index) in self._b1_set]
+		#pred2 = [node for node in self.nodes if (root.birth_index, node.birth_index) in self._b1_set]
+		# there are reversed relations in self._b1_set 
+		pred2 = [node for node in self.nodes if (node.birth_index, root.birth_index) in self._b1_set]
 		return pred2

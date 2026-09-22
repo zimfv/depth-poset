@@ -100,7 +100,6 @@ def get_m_set(dp: DepthPoset, a: int | None=None, b: int | None=None, x: int | N
     
 
 class Eq08(Equation):
-    #@set_tuples_int
     @resolve_eq_params
     def left(self, dp_bt, dp_at, x, y, a, b):
         r"""
@@ -108,7 +107,6 @@ class Eq08(Equation):
         """
         return get_succ1(dp_at, a, y)
 
-    #@set_tuples_int
     @resolve_eq_params
     def right(self, dp_bt, dp_at, x, y, a, b):
         r"""
@@ -122,7 +120,6 @@ class Eq08(Equation):
 
 
 class Eq09(Equation):
-    #@set_tuples_int
     @resolve_eq_params
     def left(self, dp_bt, dp_at, x, y, a, b):
         r"""
@@ -130,7 +127,6 @@ class Eq09(Equation):
         """
         return get_succ1(dp_at, x, b)
 
-    #@set_tuples_int
     @resolve_eq_params
     def right(self, dp_bt, dp_at, x, y, a, b):
         r"""
@@ -140,7 +136,6 @@ class Eq09(Equation):
 
     
 class Eq10(Equation):
-    #@set_tuples_int
     @resolve_eq_params
     def left(self, dp_bt, dp_at, x, y, a, b):
         r"""
@@ -148,7 +143,6 @@ class Eq10(Equation):
         """
         return get_pred1(dp_at, a, y)
 
-    #@set_tuples_int
     @resolve_eq_params
     def right(self, dp_bt, dp_at, x, y, a, b):
         r"""
@@ -158,7 +152,6 @@ class Eq10(Equation):
 
 
 class Eq11(Equation):
-    #@set_tuples_int
     @resolve_eq_params
     def left(self, dp_bt, dp_at, x, y, a, b):
         r"""
@@ -166,7 +159,6 @@ class Eq11(Equation):
         """
         return get_pred1(dp_at, x, b)
 
-    #@set_tuples_int
     @resolve_eq_params
     def right(self, dp_bt, dp_at, x, y, a, b):
         r"""
@@ -179,7 +171,6 @@ class Eq11(Equation):
 
 
 class Eq12(Equation):
-    #@set_tuples_int
     @resolve_eq_params
     def left(self, dp_bt, dp_at, x, y, a, b):
         r"""
@@ -187,7 +178,6 @@ class Eq12(Equation):
         """
         return get_succ2(dp_at, a, y)
 
-    #@set_tuples_int
     @resolve_eq_params
     def right(self, dp_bt, dp_at, x, y, a, b):
         r"""
@@ -199,7 +189,6 @@ class Eq12(Equation):
         )
 
 class Eq13(Equation):
-    #@set_tuples_int
     @resolve_eq_params
     def left(self, dp_bt, dp_at, x, y, a, b):
         r"""
@@ -207,7 +196,6 @@ class Eq13(Equation):
         """
         return get_succ2(dp_at, x, b)
 
-    #@set_tuples_int
     @resolve_eq_params
     def right(self, dp_bt, dp_at, x, y, a, b):
         r"""
@@ -217,7 +205,6 @@ class Eq13(Equation):
 
 
 class Eq14(Equation):
-    #@set_tuples_int
     @resolve_eq_params
     def left(self, dp_bt, dp_at, x, y, a, b):
         r"""
@@ -225,7 +212,6 @@ class Eq14(Equation):
         """
         return get_pred2(dp_at, a, y)
 
-    #@set_tuples_int
     @resolve_eq_params
     def right(self, dp_bt, dp_at, x, y, a, b):
         r"""
@@ -235,7 +221,6 @@ class Eq14(Equation):
 
 
 class Eq15(Equation):
-    #@set_tuples_int
     @resolve_eq_params
     def left(self, dp_bt, dp_at, x, y, a, b):
         r"""
@@ -243,7 +228,6 @@ class Eq15(Equation):
         """
         return get_pred2(dp_at, x, b)
 
-    #@set_tuples_int
     @resolve_eq_params
     def right(self, dp_bt, dp_at, x, y, a, b):
         r"""
@@ -253,4 +237,42 @@ class Eq15(Equation):
             get_pred2(dp_bt, x, y), 
             {(a, y)}, 
             get_pred2(dp_bt, a, b) & get_m_set(dp_bt, a, b, x, y)
+        )
+
+
+class Eq16(Equation):
+    @resolve_eq_params
+    def left(self, dp_bt, dp_at, x, y, a, b):
+        r"""
+        $\text{Succ}_1^\text{at}(x, y)$
+        """
+        return get_succ1(dp_at, x, y)
+
+    @resolve_eq_params
+    def right(self, dp_bt, dp_at, x, y, a, b):
+        r"""
+        $\text{Succ}_1^\text{bt}(x, y) \oplus \{(a, b)\} \oplus \text{Succ}_1^\text{bt}(a, b)$
+        """
+        return oplus(
+            get_succ1(dp_bt, x, y), 
+            {(a, b)}, 
+            get_succ1(dp_bt, a, b)
+        )
+
+class Eq17(Equation):
+    @resolve_eq_params
+    def left(self, dp_bt, dp_at, x, y, a, b):
+        r"""
+        $\text{Pred}_1^\text{at}(a, b)$
+        """
+        return get_pred1(dp_at, a, b)
+
+    @resolve_eq_params
+    def right(self, dp_bt, dp_at, x, y, a, b):
+        r"""
+        $\text{Pred}_1^\text{bt}(a, b) \oplus \{(x, y)\}$
+        """
+        return oplus(
+            get_pred1(dp_bt, a, b), 
+            {(x, y)}
         )
