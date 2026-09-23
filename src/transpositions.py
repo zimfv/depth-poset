@@ -189,6 +189,8 @@ class Transposition:
             a, x, y, b = self.index0, self.index1, self.paired_index1, self.paired_index0
         elif self.type == 'death-death':
             a, x, y, b = self.paired_index0, self.paired_index1, self.index1, self.index0
+            a, b, x, y = x, y, a, b
+            assert (a < x) and (x < y) and (y < b)
         elif self.type == 'birth-death':
             a, b, x, y = self.paired_index0, self.index0, self.index1, self.paired_index1
         else:
@@ -297,6 +299,16 @@ class Transposition:
                 case _:
                     self.switch = "no switch"
             return self.switch
+
+    def is_nested(self):
+        """
+        Returns True if the transpositions cells are nested: there are touching cells in classifying_matrix
+        """
+        if self.get_switch_type() in ["switch forward", "switch backward", "no switch"]:
+            delta = np.array(self.get_classifying_matrix(reduce_matrix=True))
+            return delta.sum() >= 3
+        return False
+
 
     def to_dict(self) -> dict:
         """
