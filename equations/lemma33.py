@@ -575,3 +575,124 @@ class Eq55(Equation):
         $\{(b, s) | U_2^\text{bt}[b, s] = 1\}$
         """
         return {(b, s) for s, t in dp_at._b1_set if t == b}
+
+
+# No switch, no nested cases
+class EqSucc1ab(Equation):
+    @resolve_eq_params
+    def left(self, dp_bt, dp_at, x, y, a, b):
+        r"""
+        $\text{Succ}_1^\text{at}(a, b)$
+        """
+        return get_succ1(dp_at, a, b)
+    
+    @resolve_eq_params
+    def right(self, dp_bt, dp_at, x, y, a, b):
+        r"""
+        $\text{Succ}_1^\text{bt}(a, b)$
+        """
+        return get_succ1(dp_bt, a, b)
+
+class EqSucc1xy(Equation):
+    @resolve_eq_params
+    def left(self, dp_bt, dp_at, x, y, a, b):
+        r"""
+        $\text{Succ}_1^\text{at}(x, y)$
+        """
+        return get_succ1(dp_at, x, y)
+    
+    @resolve_eq_params
+    def right(self, dp_bt, dp_at, x, y, a, b):
+        r"""
+        $\text{Succ}_1^\text{bt}(x, y)$
+        """
+        return get_succ1(dp_bt, x, y)
+    
+class EqPred1ab(Equation):
+    @resolve_eq_params
+    def left(self, dp_bt, dp_at, x, y, a, b):
+        r"""
+        $\text{Pred}_1^\text{at}(a, b)$
+        """
+        return get_pred1(dp_at, a, b)
+    
+    @resolve_eq_params
+    def right(self, dp_bt, dp_at, x, y, a, b):
+        r"""
+        $\text{Pred}_1^\text{bt}(a, b)$
+        """
+        return get_pred1(dp_bt, a, b)
+
+class EqPred1xy(Equation):
+    @resolve_eq_params
+    def left(self, dp_bt, dp_at, x, y, a, b):
+        r"""
+        $\text{Pred}_1^\text{at}(x, y)$
+        """
+        return get_pred1(dp_at, x, y)
+    
+    @resolve_eq_params
+    def right(self, dp_bt, dp_at, x, y, a, b):
+        r"""
+        $\text{Pred}_1^\text{bt}(x, y)$
+        """
+        return get_pred1(dp_bt, x, y)
+    
+class EqSucc2ab(Equation):
+    @resolve_eq_params
+    def left(self, dp_bt, dp_at, x, y, a, b):
+        r"""
+        $\text{Succ}_2^\text{at}(a, b)$
+        """
+        return get_succ2(dp_at, a, b)
+    
+    @resolve_eq_params
+    def right(self, dp_bt, dp_at, x, y, a, b):
+        r"""
+        $\text{Succ}_2^\text{bt}(a, b)$
+        """
+        return get_succ2(dp_bt, a, b)
+
+class EqSucc2xy(Equation):
+    @resolve_eq_params
+    def left(self, dp_bt, dp_at, x, y, a, b):
+        r"""
+        $\text{Succ}_2^\text{at}(x, y)$
+        """
+        return get_succ2(dp_at, x, y)
+    
+    @resolve_eq_params
+    def right(self, dp_bt, dp_at, x, y, a, b):
+        r"""
+        $\text{Succ}_2^\text{bt}(x, y)$
+        """
+        return get_succ2(dp_bt, x, y)
+
+class EqPred2ab(Equation):
+    @resolve_eq_params
+    def left(self, dp_bt, dp_at, x, y, a, b):
+        r"""
+        $\text{Pred}_2^\text{at}(a, b)$
+        """
+    
+    @resolve_eq_params
+    def right(self, dp_bt, dp_at, x, y, a, b):
+        r"""
+        $\text{Pred}_2^\text{bt}(a, b)$
+        """
+        return get_pred2(dp_bt, a, b)
+
+class EqPred2xy(Equation):
+    @resolve_eq_params
+    def left(self, dp_bt, dp_at, x, y, a, b):
+        r"""
+        $\text{Pred}_2^\text{at}(x, y)$
+        """
+        return get_pred2(dp_at, x, y)
+    
+    @resolve_eq_params
+    def right(self, dp_bt, dp_at, x, y, a, b):
+        r"""
+        $\text{Pred}_2^\text{bt}(x, y)$
+        """
+        return get_pred2(dp_bt, x, y)
