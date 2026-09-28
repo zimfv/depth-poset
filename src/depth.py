@@ -295,6 +295,7 @@ class ShallowPair:
 		self.dim = dim
 		self.source = source
 
+
 	def __repr__(self):
 		return f'ShallowPair([{self.birth_value:.4f}, {self.death_value:.4f}]{f", source={self.source}" if self.source is not None else ""}, dim={self.dim})'
 
@@ -340,6 +341,9 @@ class ShallowPair:
 				return False
 		return True
 
+	def update_source(self, new_source):
+		self.source = new_source
+		return self
 
 
 class DepthPoset(Poset):
@@ -403,6 +407,21 @@ class DepthPoset(Poset):
 			node_condition = lambda node: True
 
 		return cls.from_border_matrix(matrix, dims, filter_values, sources=simplices).subposet(node_condition=node_condition)
+
+	def update_sources(self, sources):
+		"""
+		"""
+		self._sources = list(sources)
+
+		for node in self.nodes:
+			new_source = (self._sources[node.birth_index], self._sources[node.death_index])
+			node.update_source(new_source)
+
+		for node0, node1 in self.edges:
+			new_source0 = (self._sources[node0.birth_index], self._sources[node0.death_index])
+			new_source1 = (self._sources[node1.birth_index], self._sources[node1.death_index])
+			node0.update_source(new_source0)
+			node1.update_source(new_source1)
 
 	def get_dim(self):
 		"""
