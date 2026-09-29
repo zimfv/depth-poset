@@ -185,12 +185,22 @@ class Transposition:
         self.get_transposition_type()
         self.define_pairs()
 
+        #if self.type == 'birth-birth':
+        #    a, x, y, b = self.index0, self.index1, self.paired_index1, self.paired_index0
+        #elif self.type == 'death-death':
+        #    a, x, y, b = self.paired_index0, self.paired_index1, self.index1, self.index0
+        #    a, b, x, y = x, y, a, b
+        #    assert (a < x) and (x < y) and (y < b)
+        #elif self.type == 'birth-death':
+        #    a, b, x, y = self.paired_index0, self.index0, self.index1, self.paired_index1
         if self.type == 'birth-birth':
             a, x, y, b = self.index0, self.index1, self.paired_index1, self.paired_index0
+            if x < a:
+                a, b, x, y = x, y, a, b
         elif self.type == 'death-death':
             a, x, y, b = self.paired_index0, self.paired_index1, self.index1, self.index0
-            a, b, x, y = x, y, a, b
-            assert (a < x) and (x < y) and (y < b)
+            if b < y:
+                a, b, x, y = x, y, a, b
         elif self.type == 'birth-death':
             a, b, x, y = self.paired_index0, self.index0, self.index1, self.paired_index1
         else:

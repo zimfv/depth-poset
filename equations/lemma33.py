@@ -674,6 +674,8 @@ class EqPred2ab(Equation):
         r"""
         $\text{Pred}_2^\text{at}(a, b)$
         """
+        return get_pred2(dp_at, a, b)
+
     
     @resolve_eq_params
     def right(self, dp_bt, dp_at, x, y, a, b):
