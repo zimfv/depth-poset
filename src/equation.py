@@ -35,4 +35,8 @@ class Equation:
     def __repr__(self):
         return f'Eq({self.__str__()[1:-1]})'
 
+    def __hash__(self):
+        return hash(type(self))
     
+    def __eq__(self, other):
+        return type(self) is type(other)

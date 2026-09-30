@@ -455,6 +455,43 @@ class Eq37(Equation):
         )
 
 
+class Eq46(Equation):
+    @resolve_eq_params
+    def left(self, dp_bt, dp_at, x, y, a, b):
+        r"""
+        $\text{Pred}_1^\text{bt}(a, b)$
+        """
+        return get_pred1(dp_bt, a, b)
+
+    @resolve_eq_params
+    def right(self, dp_bt, dp_at, x, y, a, b):
+        r"""
+        $\text{Pred}_1^\text{at}(x, b) \oplus \{(x, y)\} \oplus [\text{Pred}_1^\text{at}(a, y) \cap \mathcal{N}]$
+        """
+        return oplus(
+            get_pred1(dp_at, x, b), 
+            {(x, y)}, 
+            get_pred1(dp_at, a, y) & get_n_set(dp_at, a, b, x, y)
+        )
+
+class Eq47(Equation):
+    @resolve_eq_params
+    def left(self, dp_bt, dp_at, x, y, a, b):
+        r"""
+        $\text{Pred}_1^\text{bt}(x, y)$
+        """
+        return get_pred1(dp_bt, x, y)
+
+    @resolve_eq_params
+    def right(self, dp_bt, dp_at, x, y, a, b):
+        r"""
+        $[\text{Pred}_1^\text{at}(a, y) \cap \mathcal{B}]$
+        """
+        return get_pred1(dp_at, a, y) & get_b_set(dp_at, a, b, x, y)
+
+
+
+
 # birth-death transpositions
 class Eq48(Equation):
     @resolve_eq_params
