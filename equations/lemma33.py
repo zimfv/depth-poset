@@ -38,24 +38,32 @@ def oplus(*args):
     return res
 
 
+
+def get_root(dp: DepthPoset, a: int, b: int):
+    try:
+        return [node for node in dp.nodes if node.source == (a, b)][0]
+    except IndexError:
+        raise IndexError(f'No such node in the Depth Poset')
+
+
 # get set functions
 def get_succ1(dp: DepthPoset, a: int, b: int):
-    root = [node for node in dp.nodes if node.source == (a, b)][0]
+    root = get_root(dp, a, b)
     #return {node.source for node in dp.get_column_bottom_to_top_reduction().get_succesors(root).nodes}
     return {node.source for node in dp.get_succ1(root)}
     
 def get_pred1(dp: DepthPoset, a: int, b: int):
-    root = [node for node in dp.nodes if node.source == (a, b)][0]
+    root = get_root(dp, a, b)
     #return {node.source for node in dp.get_column_bottom_to_top_reduction().get_predecessors(root).nodes}
     return {node.source for node in dp.get_pred1(root)}
     
 def get_succ2(dp: DepthPoset, a: int, b: int):
-    root = [node for node in dp.nodes if node.source == (a, b)][0]
+    root = get_root(dp, a, b)
     #return {node.source for node in dp.get_row_left_to_right_reduction().get_succesors(root).nodes}
     return {node.source for node in dp.get_succ2(root)}
     
 def get_pred2(dp: DepthPoset, a: int, b: int):
-    root = [node for node in dp.nodes if node.source == (a, b)][0]
+    root = get_root(dp, a, b)
     #return {node.source for node in dp.get_row_left_to_right_reduction().get_predecessors(root).nodes}
     return {node.source for node in dp.get_pred2(root)}
 
@@ -534,7 +542,7 @@ class Eq50(Equation):
     @resolve_eq_params
     def right(self, dp_bt, dp_at, x, y, a, b):
         r"""
-        $\{(t, x)| U_1^\text{bt}[t, x] = 1\}$
+        $\{(t, x):\; U_1^\text{bt}[t, x] = 1\}$
         """
         return {(t, x) for t, s in dp_bt._b0_set if s == x}
 
@@ -609,7 +617,7 @@ class Eq55(Equation):
     @resolve_eq_params
     def right(self, dp_bt, dp_at, x, y, a, b):
         r"""
-        $\{(b, s) | U_2^\text{bt}[b, s] = 1\}$
+        $\{(b, s) :\; U_2^\text{bt}[b, s] = 1\}$
         """
         return {(b, s) for s, t in dp_at._b1_set if t == b}
 
