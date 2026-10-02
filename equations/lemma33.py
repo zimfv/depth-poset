@@ -542,9 +542,13 @@ class Eq50(Equation):
     @resolve_eq_params
     def right(self, dp_bt, dp_at, x, y, a, b):
         r"""
-        $\{(t, x):\; U_1^\text{bt}[t, x] = 1\}$
+        $\{(s, t)\in \text{BD}:\; U_1^\text{bt}[t, x] = 1\}$
         """
-        return {(t, x) for t, s in dp_bt._b0_set if s == x}
+        return {(s, t) for s, t in map(lambda node: node.source, dp_bt.nodes) if (t, x) in dp_bt._b0_set}
+        #r"""
+        #$\{(t, x):\; U_1^\text{bt}[t, x] = 1\}$
+        #"""
+        #return {(t, x) for t, s in dp_bt._b0_set if s == x}
 
 class Eq51(Equation):
     @resolve_eq_params
@@ -617,9 +621,13 @@ class Eq55(Equation):
     @resolve_eq_params
     def right(self, dp_bt, dp_at, x, y, a, b):
         r"""
-        $\{(b, s) :\; U_2^\text{bt}[b, s] = 1\}$
+        $\{(s, t)\in \text{BD}:\; U_2^\text{bt}[b, s] = 1\}$
         """
-        return {(b, s) for s, t in dp_at._b1_set if t == b}
+        return {(s, t) for s, t in map(lambda node: node.source, dp_bt.nodes) if (s, b) in dp_bt._b0_set}
+        #r"""
+        #$\{(b, s) :\; U_2^\text{bt}[b, s] = 1\}$
+        #"""
+        #return {(b, s) for s, t in dp_at._b1_set if t == b}
 
 
 # No switch, no nested cases
