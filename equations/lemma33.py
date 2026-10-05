@@ -77,6 +77,7 @@ def get_source_cell_filtration_index(source_cell, nodes: list[ShallowPair]) -> i
         if node.source[1] == source_cell:
             return node.death_index
 
+
 def get_l_set(dp: DepthPoset, a: int | None=None, b: int | None=None, x: int | None=None, y: int | None=None):
     r"""
     $\mathcal{L} = \{(s, t)\in \text{BD}:\; f(t) < f(y)\}$
@@ -106,6 +107,40 @@ def get_n_set(dp: DepthPoset, a: int | None=None, b: int | None=None, x: int | N
     fx = get_source_cell_filtration_index(x, dp.nodes)
     fa = get_source_cell_filtration_index(a, dp.nodes)
     return {node.source for node in dp.nodes if (fx > node.birth_index) & (node.birth_index > fa)}
+
+
+# my temp-sets (for eqs 50, 55)
+def get_a1_set(dp: DepthPoset, a: int | None=None, b: int | None=None, x: int | None=None, y: int | None=None):
+    r"""
+    $A_1 = \{(s, t)\in \text{BD}:\; f(a) < f(s) < f(t) < f(x)\}$
+    """
+    fa = get_source_cell_filtration_index(a, dp.nodes)
+    fx = get_source_cell_filtration_index(x, dp.nodes)
+    return {node.source for node in dp.nodes if (fx > node.death_index) & (node.birth_index > fa)}
+
+def get_a2_set(dp: DepthPoset, a: int | None=None, b: int | None=None, x: int | None=None, y: int | None=None):
+    r"""
+    $A_2 = \{(s, t)\in \text{BD}:\; f(b) < f(s) < f(t) < f(y)\}$
+    """
+    fb = get_source_cell_filtration_index(b, dp.nodes)
+    fy = get_source_cell_filtration_index(y, dp.nodes)
+    return {node.source for node in dp.nodes if (fy > node.death_index) & (node.birth_index > fb)}
+
+def get_b1_set(dp: DepthPoset, a: int | None=None, b: int | None=None, x: int | None=None, y: int | None=None):
+    r"""
+    $B_1 = \{(s, t)\in \text{BD}:\; U_1[t, x] = 1\}$
+    """
+    fx = get_source_cell_filtration_index(x, dp.nodes)
+    fts = [ft for ft, fi in dp._b0_set if fi == fx]
+    return {node.source for node in dp.nodes if node.death_index in fts}
+
+def get_b2_set(dp: DepthPoset, a: int | None=None, b: int | None=None, x: int | None=None, y: int | None=None):
+    r"""
+    $B_2 = \{(s, t)\in \text{BD}:\; U_2[b, s] = 1\}$
+    """
+    fb = get_source_cell_filtration_index(b, dp.nodes)
+    fss = [fs for fs, fi in dp._b1_set if fi == fb]
+    return {node.source for node in dp.nodes if node.birth_index in fss}
 
 
 
@@ -751,3 +786,66 @@ class EqPred2xy(Equation):
         $\text{Pred}_2^\text{bt}(x, y)$
         """
         return get_pred2(dp_bt, x, y)
+
+
+
+# My modification of equations 50, 55
+class Eq50a(Equation):
+    @resolve_eq_params
+    def left(self, dp_bt, dp_at, x, y, a, b):
+        r"""
+        $\text{Pred}_1^\text{at}(a, x)$
+        """
+        return get_pred1(dp_at, a, x)
+
+    @resolve_eq_params
+    def right(self, dp_bt, dp_at, x, y, a, b):
+        r"""
+        $A_1^\text{bt} \cap B_1^\text{bt}$
+        """
+        return get_a1_set(dp_bt, a, b, x, y) & get_b1_set(dp_bt, a, b, x, y)
+    
+class Eq50b(Equation):
+    @resolve_eq_params
+    def left(self, dp_bt, dp_at, x, y, a, b):
+        r"""
+        $\text{Pred}_1^\text{at}(a, x)$
+        """
+        return get_pred1(dp_at, a, x)
+
+    @resolve_eq_params
+    def right(self, dp_bt, dp_at, x, y, a, b):
+        r"""
+        $A_1^\text{bt} \cap B_1^\text{at}$
+        """
+        return get_a1_set(dp_bt, a, b, x, y) & get_b1_set(dp_at, a, b, x, y)
+
+class Eq55a(Equation):
+    @resolve_eq_params
+    def left(self, dp_bt, dp_at, x, y, a, b):
+        r"""
+        $\text{Pred}_2^\text{at}(b, y)$
+        """
+        return get_pred2(dp_at, b, y)
+
+    @resolve_eq_params
+    def right(self, dp_bt, dp_at, x, y, a, b):
+        r"""
+        $A_2^\text{bt} \cap B_2^\text{bt}$
+        """
+        return get_a2_set(dp_bt, a, b, x, y) & get_b2_set(dp_bt, a, b, x, y)
+
+class Eq55b(Equation):
+    @resolve_eq_params
+    def left(self, dp_bt, dp_at, x, y, a, b):
+        r"""
+        $\text{Pred}_2^\text{at}(b, y)$
+        """
+        return get_pred2(dp_at, b, y)
+
+    @resolve_eq_params
+    def right(self, dp_bt, dp_at, x, y, a, b):
+        r"""
+        $A_2^\text{bt} \cap B_2^\text{at}$
+        """
+        return get_a2_set(dp_bt, a, b, x, y) & get_b2_set(dp_at, a, b, x, y)

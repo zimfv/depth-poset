@@ -203,6 +203,9 @@ class Transposition:
                 a, b, x, y = x, y, a, b
         elif self.type == 'birth-death':
             a, b, x, y = self.paired_index0, self.index0, self.index1, self.paired_index1
+            if a > y:
+                a, b, x, y = y, x, b, a
+
         else:
             msg = f"The transposition {self} have type {self.type}, but should have one of three: 'birth-birth', 'death-death' or 'birth-death'."
             raise ValueError(msg)
