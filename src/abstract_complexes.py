@@ -46,7 +46,8 @@ def get_random_invertible_matrix_over_GF2(n):
     Returns random invertible matrix shape (n, n) over GF2
     """
     while True:
-        A = GF2.Random((n, n))
+        seed = np.random.randint(0, 2**32, dtype=np.uint32)
+        A = GF2.Random((n, n), seed=int(seed))
         if GF2._det(A) != 0:
             return A
 

@@ -324,6 +324,42 @@ class Eq17(Equation):
         )
 
 
+class Eq26(Equation):
+    @resolve_eq_params
+    def left(self, dp_bt, dp_at, x, y, a, b):
+        r"""
+        $\text{Pred}_2^\text{bt}(a, b)$
+        """
+        return get_pred2(dp_bt, a, b)
+
+    @resolve_eq_params
+    def right(self, dp_bt, dp_at, x, y, a, b):
+        r"""
+        $\text{Pred}_2^\text{at}(a, y) \oplus \{(x, y)\} \oplus [\text{Pred}_2^\text{at}(x, b) \cap \mathcal{M}]$
+        """
+        return oplus(
+            get_pred2(dp_at, a, y), 
+            {(x, y)},
+            get_pred2(dp_at, x, b) & get_m_set(dp_at, a, b, x, y)
+        )
+
+class Eq27(Equation):
+    @resolve_eq_params
+    def left(self, dp_bt, dp_at, x, y, a, b):
+        r"""
+        $\text{Pred}_2^\text{bt}(x, y)$
+        """
+        return get_pred2(dp_bt, x, y)
+
+    @resolve_eq_params
+    def right(self, dp_bt, dp_at, x, y, a, b):
+        r"""
+        $[\text{Pred}_2^\text{at}(x, b) \cap \mathcal{L}]$
+        """
+        return get_pred2(dp_at, x, b) & get_l_set(dp_at, a, b, x, y)
+
+
+
 # death-death transpositions
 class Eq28(Equation):
     @resolve_eq_params
