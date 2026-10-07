@@ -95,6 +95,7 @@ We checked 38 equations. And we can see the distribution of transposiions, satys
 
 # Incorrect Equations
 We have 2 transpositions, such that some equations are incorrect.
+We will list some examples.
 
 ## Transposition <7, 8> in complex 0
 Here is a __birth-death__ __switch forward__ transposition <7, 8>.
