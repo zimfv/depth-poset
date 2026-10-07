@@ -30,3 +30,14 @@ $$
 $$
 
 and define $\Delta_k$ from $\Delta_k'$ by random column permutation.
+
+
+Test 1: $\Delta_k$
+
+Test 2: $\mathbf{F}_2$
+
+Test 3: $n_k \times n_{k-1}$
+
+Test 4: $\mathbf{F}_2^{n_k \times n_{k-1}}$
+
+Test 5: $\Delta_k \in \mathbf{F}_2^{n_k \times n_{k-1}}$
