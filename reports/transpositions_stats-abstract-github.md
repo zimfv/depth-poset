@@ -141,7 +141,7 @@ $$
 a = 2, \; b = 8, \; x = 3, \; y = 14
 $$
 
-<img src="transpositions_stats-abstract.assets/image-a85187c1bd54.png" width="1200">
+<img src="transpositions_stats-abstract.assets/image-dc7ac5686aca.png" width="1200">
 
 ### Birth Death Pairs
 |                          |                                                                                                                                                                                                                                   |
@@ -156,7 +156,12 @@ $$
 | After the transposition  | $\{(24, 27), (41, 43), (43, 46), (25, 32), (44, 45), (26, 27), (31, 32), (29, 32), (39, 42), (22, 32), (24, 26), (41, 42), (6, 8), (6, 14), (42, 44), (24, 32), (26, 29), (43, 45), (29, 31), (39, 41), (39, 44), (23, 27), (22, 31), (39, 47), (8, 14), (40, 46), (7, 9), (41, 44), (25, 27), (42, 43), (24, 31), (42, 46), (21, 23), (26, 31), (44, 46), (22, 27), (23, 26), (40, 42), (22, 24), (39, 46), (23, 29), (39, 43), (23, 32), (6, 9), (7, 8)\}$ | $\{(35, 30), (4, 3), (3, 1), (20, 17), (38, 35), (5, 1), (33, 30), (17, 12), (34, 28), (17, 15), (19, 18), (37, 33), (19, 15), (37, 36), (15, 11), (16, 10), (18, 10), (20, 13), (18, 13), (20, 10), (5, 0), (20, 19), (34, 30), (34, 33), (2, 1), (37, 35), (15, 13), (33, 28), (16, 15), (18, 15), (20, 12), (20, 18), (12, 11), (35, 34), (20, 15), (5, 2), (38, 33), (38, 36), (17, 10), (17, 16), (17, 13), (2, 0), (19, 16), (13, 12), (30, 28), (15, 12), (16, 11)\}$ |
 
 ### Successors and Predecessers
-No such node in the Depth Poset
+|                 | $\text{Set}^\text{bt}(2, 8)$                         | $\text{Set}^\text{bt}(3, 14)$                 | $\text{Set}^\text{at}(2, 8)$                         | $\text{Set}^\text{at}(3, 14)$                         |
+|:----------------|:-----------------------------------------------------|:----------------------------------------------|:-----------------------------------------------------|:------------------------------------------------------|
+| $\text{Succ}_1$ | $\text{Succ}_1^\text{bt}(2, 8) = \emptyset$          | $\text{Succ}_1^\text{bt}(3, 14) = \emptyset$  | $\text{Succ}_1^\text{at}(2, 8) = \{(3, 14)\}$        | $\text{Succ}_1^\text{at}(3, 14) = \emptyset$          |
+| $\text{Pred}_1$ | $\text{Pred}_1^\text{bt}(2, 8) = \{(4, 6), (5, 7)\}$ | $\text{Pred}_1^\text{bt}(3, 14) = \{(4, 6)\}$ | $\text{Pred}_1^\text{at}(2, 8) = \{(4, 6), (5, 7)\}$ | $\text{Pred}_1^\text{at}(3, 14) = \{(4, 6), (2, 8)\}$ |
+| $\text{Succ}_2$ | $\text{Succ}_2^\text{bt}(2, 8) = \{(0, 9)\}$         | $\text{Succ}_2^\text{bt}(3, 14) = \emptyset$  | $\text{Succ}_2^\text{at}(2, 8) = \{(0, 9)\}$         | $\text{Succ}_2^\text{at}(3, 14) = \emptyset$          |
+| $\text{Pred}_2$ | $\text{Pred}_2^\text{bt}(2, 8) = \{(5, 7)\}$         | $\text{Pred}_2^\text{bt}(3, 14) = \{(4, 6)\}$ | $\text{Pred}_2^\text{at}(2, 8) = \{(5, 7)\}$         | $\text{Pred}_2^\text{at}(3, 14) = \{(4, 6)\}$         |
 
 ### Temp Sets
 |                                                               | Before the Transposition             | After the Transposition              |
@@ -179,7 +184,7 @@ $$
 a = 5, \; b = 7, \; x = 4, \; y = 6
 $$
 
-<img src="transpositions_stats-abstract.assets/image-75403a02dba2.png" width="1200">
+<img src="transpositions_stats-abstract.assets/image-df87de195c62.png" width="1200">
 
 ### Birth Death Pairs
 |                          |                                                                                                                                                                                                                                   |
@@ -194,7 +199,12 @@ $$
 | After the transposition  | $\{(24, 27), (41, 43), (43, 46), (25, 32), (44, 45), (26, 27), (31, 32), (29, 32), (39, 42), (22, 32), (24, 26), (41, 42), (6, 8), (6, 14), (42, 44), (24, 32), (26, 29), (43, 45), (29, 31), (39, 41), (39, 44), (23, 27), (22, 31), (39, 47), (40, 46), (7, 9), (41, 44), (25, 27), (42, 43), (24, 31), (42, 46), (21, 23), (26, 31), (44, 46), (22, 27), (23, 26), (40, 42), (22, 24), (39, 46), (23, 29), (39, 43), (23, 32), (6, 9), (7, 8)\}$ | $\{(35, 30), (4, 3), (3, 1), (20, 17), (5, 4), (38, 35), (5, 1), (33, 30), (17, 12), (34, 28), (17, 15), (19, 18), (37, 33), (19, 15), (37, 36), (15, 11), (16, 10), (18, 10), (20, 13), (18, 13), (20, 10), (5, 0), (20, 19), (5, 3), (34, 30), (34, 33), (2, 1), (37, 35), (15, 13), (33, 28), (16, 15), (18, 15), (20, 12), (20, 18), (12, 11), (35, 34), (20, 15), (5, 2), (38, 33), (38, 36), (17, 10), (17, 16), (17, 13), (2, 0), (19, 16), (13, 12), (30, 28), (15, 12), (16, 11)\}$ |
 
 ### Successors and Predecessers
-No such node in the Depth Poset
+|                 | $\text{Set}^\text{bt}(5, 7)$                         | $\text{Set}^\text{bt}(4, 6)$                                  | $\text{Set}^\text{at}(5, 7)$                                          | $\text{Set}^\text{at}(4, 6)$                                  |
+|:----------------|:-----------------------------------------------------|:--------------------------------------------------------------|:----------------------------------------------------------------------|:--------------------------------------------------------------|
+| $\text{Succ}_1$ | $\text{Succ}_1^\text{bt}(5, 7) = \{(0, 9), (2, 8)\}$ | $\text{Succ}_1^\text{bt}(4, 6) = \{(3, 14), (0, 9), (2, 8)\}$ | $\text{Succ}_1^\text{at}(5, 7) = \{(0, 9), (2, 8)\}$                  | $\text{Succ}_1^\text{at}(4, 6) = \{(3, 14), (0, 9), (2, 8)\}$ |
+| $\text{Pred}_1$ | $\text{Pred}_1^\text{bt}(5, 7) = \emptyset$          | $\text{Pred}_1^\text{bt}(4, 6) = \emptyset$                   | $\text{Pred}_1^\text{at}(5, 7) = \emptyset$                           | $\text{Pred}_1^\text{at}(4, 6) = \emptyset$                   |
+| $\text{Succ}_2$ | $\text{Succ}_2^\text{bt}(5, 7) = \{(0, 9), (2, 8)\}$ | $\text{Succ}_2^\text{bt}(4, 6) = \{(3, 14)\}$                 | $\text{Succ}_2^\text{at}(5, 7) = \{(3, 14), (4, 6), (0, 9), (2, 8)\}$ | $\text{Succ}_2^\text{at}(4, 6) = \{(3, 14)\}$                 |
+| $\text{Pred}_2$ | $\text{Pred}_2^\text{bt}(5, 7) = \emptyset$          | $\text{Pred}_2^\text{bt}(4, 6) = \emptyset$                   | $\text{Pred}_2^\text{at}(5, 7) = \emptyset$                           | $\text{Pred}_2^\text{at}(4, 6) = \{(5, 7)\}$                  |
 
 ### Temp Sets
 |                                                               | Before the Transposition                                                                                                                                                                         | After the Transposition                                                                                                                                                                          |
@@ -217,7 +227,7 @@ $$
 a = 3, \; b = 14, \; x = 15, \; y = 26
 $$
 
-<img src="transpositions_stats-abstract.assets/image-b3681711d6ea.png" width="1200">
+<img src="transpositions_stats-abstract.assets/image-6f19571fa0ea.png" width="1200">
 
 ### Birth Death Pairs
 |                          |                                                                                                                                                                                                                                   |
@@ -272,7 +282,7 @@ $$
 a = 15, \; b = 26, \; x = 16, \; y = 25
 $$
 
-<img src="transpositions_stats-abstract.assets/image-5445e4c35837.png" width="1200">
+<img src="transpositions_stats-abstract.assets/image-9f3ae5aad2ee.png" width="1200">
 
 ### Birth Death Pairs
 |                          |                                                                                                                                                                                                                                   |
@@ -321,7 +331,7 @@ $$
 a = 34, \; b = 42, \; x = 36, \; y = 41
 $$
 
-<img src="transpositions_stats-abstract.assets/image-0bc7c5f41579.png" width="1200">
+<img src="transpositions_stats-abstract.assets/image-ee1abcd79e49.png" width="1200">
 
 ### Birth Death Pairs
 |                          |                                                                                                                                                                                                                                   |
@@ -370,7 +380,7 @@ $$
 a = 4, \; b = 7, \; x = 8, \; y = 35
 $$
 
-<img src="transpositions_stats-abstract.assets/image-2181bcdf8fdc.png" width="1200">
+<img src="transpositions_stats-abstract.assets/image-6e1d8fb6ffc2.png" width="1200">
 
 ### Birth Death Pairs
 |                          |                                                                                                                                                                                                                                   |
@@ -425,7 +435,7 @@ $$
 a = 8, \; b = 35, \; x = 36, \; y = 42
 $$
 
-<img src="transpositions_stats-abstract.assets/image-6c96be39cdc7.png" width="1200">
+<img src="transpositions_stats-abstract.assets/image-3e238a5bf8b7.png" width="1200">
 
 ### Birth Death Pairs
 |                          |                                                                                                                                                                                                                                   |
