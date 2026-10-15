@@ -3,12 +3,15 @@ from src.transpositions import Transposition
 from src.equation import Equation
 from functools import wraps
 
+import itertools
 
 # class method wrappers
 def resolve_eq_params(func):
     @wraps(func)
-    def wrapper(self, transposition: Transposition, dp_bt: DepthPoset | None = None, dp_at: DepthPoset | None = None, 
+    def wrapper(self, transposition: Transposition | None = None, dp_bt: DepthPoset | None = None, dp_at: DepthPoset | None = None, 
                 x: int | None = None, y: int | None = None, a: int | None = None, b: int | None = None, **kwargs,):
+        if (transposition is None) and any(arg is None for arg in [a, b, x, y, dp_bt, dp_at]):
+            raise ValueError('Udefined arguements')
         if dp_bt is None:
             dp_bt = transposition.dp
 
@@ -43,7 +46,11 @@ def get_root(dp: DepthPoset, a: int, b: int):
     try:
         return [node for node in dp.nodes if node.source == (a, b)][0]
     except IndexError:
-        raise IndexError(f'No such node in the Depth Poset')
+        msg = 'No such node in the Depth Poset.\n'
+        msg += f'There is no source {(a, b)} in the Depth Poset with nodes:\n'
+        for batch in itertools.batched(dp.nodes, 2):
+            msg += ', '.join([node.__repr__() for node in batch]) + ',\n'
+        raise IndexError(msg)
 
 
 # get set functions
