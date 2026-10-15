@@ -87,6 +87,9 @@ def reduct_column_bottom_to_top(delta, stop_condition=None, log_path=None):
 		# delete rows s and t and columns s and t from delta0
 		delta0[(s, t), :] = 0
 		delta0[:, (s, t)] = 0
+		#delta0[t, :] = 0
+		#delta0[:, t] = 0
+
 
 		i += 1
 
