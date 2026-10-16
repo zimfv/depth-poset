@@ -110,19 +110,19 @@ $$
 a < x < y < b
 $$
 
-<img src="transpositions_stats-example.assets/image-074bcb7ced1c.png" width="1200">
+<img src="transpositions_stats-example.assets/image-bb2217b77ed5.png" width="1200">
 
 ### Birth Death Pairs
-|                          |                                                                   |
-|:-------------------------|:------------------------------------------------------------------|
-| Before the transposition | $\{(8, 14), (2, 7), (10, 13), (11, 12), (4, 5), (3, 6), (1, 9)\}$ |
-| After the transposition  | $\{(8, 14), (2, 7), (10, 13), (11, 12), (4, 5), (3, 6), (1, 9)\}$ |
+|                          |                                      |
+|:-------------------------|:-------------------------------------|
+| Before the transposition | $\{(4, 5), (1, 9), (2, 7), (3, 6)\}$ |
+| After the transposition  | $\{(4, 5), (1, 9), (2, 7), (3, 6)\}$ |
 
 ### Relations
-|                          | Algorithm 1                    | Algorithm 2                          |
-|:-------------------------|:-------------------------------|:-------------------------------------|
-| Before the transposition | $\{(6, 7), (12, 13), (5, 7)\}$ | $\{(3, 1), (1, 0), (2, 1), (4, 2)\}$ |
-| After the transposition  | $\{(12, 13), (5, 7)\}$         | $\{(1, 0), (3, 1), (2, 1), (4, 2)\}$ |
+|                          | Algorithm 1          | Algorithm 2                  |
+|:-------------------------|:---------------------|:-----------------------------|
+| Before the transposition | $\{(6, 7), (5, 7)\}$ | $\{(3, 1), (2, 1), (4, 2)\}$ |
+| After the transposition  | $\{(5, 7)\}$         | $\{(3, 1), (2, 1), (4, 2)\}$ |
 
 ### Successors and Predecessers
 |                 | $\text{Set}^\text{bt}(2, 7)$                         | $\text{Set}^\text{bt}(3, 6)$                 | $\text{Set}^\text{at}(2, 7)$                 | $\text{Set}^\text{at}(3, 6)$                 |
@@ -159,7 +159,7 @@ $$
 a < b < x < y
 $$
 
-<img src="transpositions_stats-example.assets/image-5076dc682e6e.png" width="1200">
+<img src="transpositions_stats-example.assets/image-3064028520fc.png" width="1200">
 
 ### Birth Death Pairs
 |                          |                                                                   |
@@ -168,10 +168,10 @@ $$
 | After the transposition  | $\{(2, 8), (10, 13), (11, 12), (4, 5), (3, 6), (1, 9), (7, 14)\}$ |
 
 ### Relations
-|                          | Algorithm 1                    | Algorithm 2                                            |
-|:-------------------------|:-------------------------------|:-------------------------------------------------------|
-| Before the transposition | $\{(6, 7), (12, 13), (5, 7)\}$ | $\{(3, 1), (1, 0), (2, 1), (4, 2)\}$                   |
-| After the transposition  | $\{(6, 8), (12, 13)\}$         | $\{(11, 7), (2, 1), (3, 1), (10, 7), (4, 2), (1, 0)\}$ |
+|                          | Algorithm 1                    | Algorithm 2                                    |
+|:-------------------------|:-------------------------------|:-----------------------------------------------|
+| Before the transposition | $\{(6, 7), (12, 13), (5, 7)\}$ | $\{(3, 1), (2, 1), (4, 2)\}$                   |
+| After the transposition  | $\{(6, 8), (12, 13)\}$         | $\{(11, 7), (2, 1), (3, 1), (10, 7), (4, 2)\}$ |
 
 ### Successors and Predecessers
 |                 | $\text{Set}^\text{bt}(2, 7)$                         | $\text{Set}^\text{bt}(8, 14)$                | $\text{Set}^\text{at}(2, 8)$                 | $\text{Set}^\text{at}(7, 14)$                             |
@@ -218,19 +218,19 @@ $$
 a < b < x < y
 $$
 
-<img src="transpositions_stats-example.assets/image-7c5d2616e6bf.png" width="1200">
+<img src="transpositions_stats-example.assets/image-0feb123a0138.png" width="1200">
 
 ### Birth Death Pairs
-|                          |                                                                   |
-|:-------------------------|:------------------------------------------------------------------|
-| Before the transposition | $\{(8, 14), (2, 7), (10, 13), (11, 12), (4, 5), (3, 6), (1, 9)\}$ |
-| After the transposition  | $\{(8, 14), (9, 13), (2, 7), (11, 12), (4, 5), (1, 10), (3, 6)\}$ |
+|                          |                                                          |
+|:-------------------------|:---------------------------------------------------------|
+| Before the transposition | $\{(2, 7), (10, 13), (11, 12), (4, 5), (3, 6), (1, 9)\}$ |
+| After the transposition  | $\{(9, 13), (2, 7), (11, 12), (4, 5), (1, 10), (3, 6)\}$ |
 
 ### Relations
-|                          | Algorithm 1                                      | Algorithm 2                          |
-|:-------------------------|:-------------------------------------------------|:-------------------------------------|
-| Before the transposition | $\{(6, 7), (12, 13), (5, 7)\}$                   | $\{(3, 1), (1, 0), (2, 1), (4, 2)\}$ |
-| After the transposition  | $\{(7, 10), (12, 13), (5, 7), (6, 7), (5, 10)\}$ | $\{(3, 1), (1, 0), (2, 1), (4, 2)\}$ |
+|                          | Algorithm 1                                      | Algorithm 2                  |
+|:-------------------------|:-------------------------------------------------|:-----------------------------|
+| Before the transposition | $\{(6, 7), (12, 13), (5, 7)\}$                   | $\{(3, 1), (2, 1), (4, 2)\}$ |
+| After the transposition  | $\{(7, 10), (12, 13), (5, 7), (6, 7), (5, 10)\}$ | $\{(3, 1), (2, 1), (4, 2)\}$ |
 
 ### Successors and Predecessers
 |                 | $\text{Set}^\text{bt}(1, 9)$                         | $\text{Set}^\text{bt}(10, 13)$                   | $\text{Set}^\text{at}(1, 10)$                         | $\text{Set}^\text{at}(9, 13)$                   |
