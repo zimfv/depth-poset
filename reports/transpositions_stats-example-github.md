@@ -12,7 +12,7 @@ The complex dimendion 2 with 15 cells:
 
 Its Depth Poset has 7 nodes.
 
-<img src="transpositions_stats-example.assets/image-bc0aa40f046d.png" width="1200">
+<img src="transpositions_stats-example.assets/image-297e3211a483.png" width="1200">
 
 # Transpositions
 In this data we got 11 by transposing consecutive pairs. The distribution of the transposition types is given in the table:
@@ -110,7 +110,7 @@ $$
 a < x < y < b
 $$
 
-<img src="transpositions_stats-example.assets/image-4771f625f163.png" width="1200">
+<img src="transpositions_stats-example.assets/image-ebc52e15259e.png" width="1200">
 
 ### Birth Death Pairs
 |                          |                                      |
@@ -159,7 +159,7 @@ $$
 a < b < x < y
 $$
 
-<img src="transpositions_stats-example.assets/image-39e3a523fe2e.png" width="1200">
+<img src="transpositions_stats-example.assets/image-cda6c2ec8546.png" width="1200">
 
 ### Birth Death Pairs
 |                          |                                                                   |
@@ -218,7 +218,7 @@ $$
 a < b < x < y
 $$
 
-<img src="transpositions_stats-example.assets/image-ad5eaf6dd502.png" width="1200">
+<img src="transpositions_stats-example.assets/image-7303badef208.png" width="1200">
 
 ### Birth Death Pairs
 |                          |                                                          |

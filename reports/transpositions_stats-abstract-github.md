@@ -181,7 +181,7 @@ $$
 a < x < b < y
 $$
 
-<img src="transpositions_stats-abstract.assets/image-bca4e14c474f.png" width="1200">
+<img src="transpositions_stats-abstract.assets/image-75e69f5e786e.png" width="1200">
 
 ### Birth Death Pairs
 |                          |                                               |
@@ -230,7 +230,7 @@ $$
 x < a < y < b
 $$
 
-<img src="transpositions_stats-abstract.assets/image-b3fc0fe3933b.png" width="1200">
+<img src="transpositions_stats-abstract.assets/image-8597c01fac95.png" width="1200">
 
 ### Birth Death Pairs
 |                          |                                               |
@@ -279,7 +279,7 @@ $$
 a < x < y < b
 $$
 
-<img src="transpositions_stats-abstract.assets/image-775e5f8cb5fa.png" width="1200">
+<img src="transpositions_stats-abstract.assets/image-7c0d8b5faf5b.png" width="1200">
 
 ### Birth Death Pairs
 |                          |                                               |
@@ -328,7 +328,7 @@ $$
 a < b < x < y
 $$
 
-<img src="transpositions_stats-abstract.assets/image-b57e6975a180.png" width="1200">
+<img src="transpositions_stats-abstract.assets/image-cfa198f8239e.png" width="1200">
 
 ### Birth Death Pairs
 |                          |                                                                                                                                                   |
@@ -387,7 +387,7 @@ $$
 a < x < y < b
 $$
 
-<img src="transpositions_stats-abstract.assets/image-c455a1a1ee46.png" width="1200">
+<img src="transpositions_stats-abstract.assets/image-4bedea3539b4.png" width="1200">
 
 ### Birth Death Pairs
 |                          |                                                                                                          |
@@ -440,7 +440,7 @@ $$
 a < x < y < b
 $$
 
-<img src="transpositions_stats-abstract.assets/image-ac688a2ec6b1.png" width="1200">
+<img src="transpositions_stats-abstract.assets/image-bd7e66671c53.png" width="1200">
 
 ### Birth Death Pairs
 |                          |                                                |
@@ -489,7 +489,7 @@ $$
 a < x < y < b
 $$
 
-<img src="transpositions_stats-abstract.assets/image-727382ff50e5.png" width="1200">
+<img src="transpositions_stats-abstract.assets/image-faaebc910e7a.png" width="1200">
 
 ### Birth Death Pairs
 |                          |                                                                                      |
@@ -500,7 +500,7 @@ $$
 ### Relations
 |                          | Algorithm 1                                                                                                                                                | Algorithm 2                                                                                                                            |
 |:-------------------------|:-----------------------------------------------------------------------------------------------------------------------------------------------------------|:---------------------------------------------------------------------------------------------------------------------------------------|
-| Before the transposition | $\{(42, 45), (43, 46), (41, 46), (39, 40), (39, 46), (41, 42), (40, 42), (41, 45), (42, 44), (39, 42), (43, 45), (41, 44), (43, 44), (42, 46), (39, 44)\}$ | $\{(38, 36), (36, 33), (37, 32), (38, 35), (35, 32), (36, 32), (37, 31), (38, 31), (33, 31), (37, 33), (36, 31), (38, 33)\}$           |
+| Before the transposition | $\{(42, 45), (43, 46), (41, 46), (39, 40), (40, 42), (41, 42), (39, 46), (41, 45), (42, 44), (43, 45), (39, 42), (41, 44), (43, 44), (42, 46), (39, 44)\}$ | $\{(38, 36), (36, 33), (37, 32), (38, 35), (35, 32), (36, 32), (37, 31), (38, 31), (33, 31), (37, 33), (36, 31), (38, 33)\}$           |
 | After the transposition  | $\{(42, 45), (40, 46), (43, 46), (39, 40), (39, 46), (40, 45), (42, 41), (42, 44), (40, 44), (39, 42), (43, 45), (40, 41), (43, 44), (42, 46), (39, 44)\}$ | $\{(36, 34), (38, 36), (36, 33), (37, 32), (38, 35), (35, 32), (36, 32), (37, 31), (38, 31), (33, 31), (37, 33), (36, 31), (38, 33)\}$ |
 
 ### Successors and Predecessers
@@ -542,7 +542,7 @@ $$
 a < b < x < y
 $$
 
-<img src="transpositions_stats-abstract.assets/image-e6b052aeea09.png" width="1200">
+<img src="transpositions_stats-abstract.assets/image-4a68d6dcfd6d.png" width="1200">
 
 ### Birth Death Pairs
 |                          |                                                                                                                                                   |
@@ -601,7 +601,7 @@ $$
 a < b < x < y
 $$
 
-<img src="transpositions_stats-abstract.assets/image-78ffee0728b3.png" width="1200">
+<img src="transpositions_stats-abstract.assets/image-30665ca32411.png" width="1200">
 
 ### Birth Death Pairs
 |                          |                                                                                                                                                                                         |
