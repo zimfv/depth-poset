@@ -110,7 +110,7 @@ $$
 a < x < y < b
 $$
 
-<img src="transpositions_stats-example.assets/image-bb2217b77ed5.png" width="1200">
+<img src="transpositions_stats-example.assets/image-4771f625f163.png" width="1200">
 
 ### Birth Death Pairs
 |                          |                                      |
@@ -159,7 +159,7 @@ $$
 a < b < x < y
 $$
 
-<img src="transpositions_stats-example.assets/image-3064028520fc.png" width="1200">
+<img src="transpositions_stats-example.assets/image-39e3a523fe2e.png" width="1200">
 
 ### Birth Death Pairs
 |                          |                                                                   |
@@ -218,7 +218,7 @@ $$
 a < b < x < y
 $$
 
-<img src="transpositions_stats-example.assets/image-0feb123a0138.png" width="1200">
+<img src="transpositions_stats-example.assets/image-ad5eaf6dd502.png" width="1200">
 
 ### Birth Death Pairs
 |                          |                                                          |

@@ -344,6 +344,7 @@ class ShallowPair:
 				return False
 		return True
 
+
 	def update_source(self, new_source):
 		self.source = new_source
 		return self
@@ -392,7 +393,7 @@ class DepthPoset(Poset):
 		obj._b0_set = set((e0, e1) for e0, e1 in b0) # define the reduct_column_bottom_to_top pairs
 		obj._b1_set = set((e0, e1) for e0, e1 in b1) # define the reduct_row_left_to_right pairs
 		if sources is not None:
-			obj._sources = np.array(sources)
+			obj._sources = np.array(sources, dtype=object)
 
 		return obj
 
@@ -627,3 +628,29 @@ class DepthPoset(Poset):
 		# there are reversed relations in self._b1_set 
 		pred2 = [node for node in self.nodes if (node.birth_index, root.birth_index) in self._b1_set]
 		return pred2
+
+	def get_graph_relations_by_reduct_column_bottom_to_top(self) -> nx.DiGraph:
+		"""
+		Returns the graph defined by relations from algorithm 1: Bottom to Top Column Reduction
+		"""
+		g = nx.DiGraph()
+		g.add_nodes_from(self.nodes)
+		edges = [(node0, node1) for d0, d1 in self._b0_set
+		         if (node0 := self.find_pair(death_index=d0)) is not None 
+				 if (node1 := self.find_pair(death_index=d1)) is not None]
+		
+		g.add_edges_from(edges)
+		return g
+
+	def get_graph_relations_by_reduct_row_left_to_right(self) -> nx.DiGraph:
+		"""
+		Returns the graph defined by relations from algorithm 2: Left to Right Row Reduction
+		"""
+		g = nx.DiGraph()
+		g.add_nodes_from(self.nodes)
+		edges = [(node0, node1) for b0, b1 in self._b1_set
+		         if (node0 := self.find_pair(birth_index=b0)) is not None 
+				 if (node1 := self.find_pair(birth_index=b1)) is not None]
+		
+		g.add_edges_from(edges)
+		return g

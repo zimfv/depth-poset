@@ -181,7 +181,7 @@ $$
 a < x < b < y
 $$
 
-<img src="transpositions_stats-abstract.assets/image-ad84273579ca.png" width="1200">
+<img src="transpositions_stats-abstract.assets/image-bca4e14c474f.png" width="1200">
 
 ### Birth Death Pairs
 |                          |                                               |
@@ -230,7 +230,7 @@ $$
 x < a < y < b
 $$
 
-<img src="transpositions_stats-abstract.assets/image-b8a3427a850e.png" width="1200">
+<img src="transpositions_stats-abstract.assets/image-b3fc0fe3933b.png" width="1200">
 
 ### Birth Death Pairs
 |                          |                                               |
@@ -279,7 +279,7 @@ $$
 a < x < y < b
 $$
 
-<img src="transpositions_stats-abstract.assets/image-0611e46c27e8.png" width="1200">
+<img src="transpositions_stats-abstract.assets/image-775e5f8cb5fa.png" width="1200">
 
 ### Birth Death Pairs
 |                          |                                               |
@@ -328,7 +328,7 @@ $$
 a < b < x < y
 $$
 
-<img src="transpositions_stats-abstract.assets/image-19e31e7a80f7.png" width="1200">
+<img src="transpositions_stats-abstract.assets/image-b57e6975a180.png" width="1200">
 
 ### Birth Death Pairs
 |                          |                                                                                                                                                   |
@@ -387,7 +387,7 @@ $$
 a < x < y < b
 $$
 
-<img src="transpositions_stats-abstract.assets/image-7906d7ba64cf.png" width="1200">
+<img src="transpositions_stats-abstract.assets/image-c455a1a1ee46.png" width="1200">
 
 ### Birth Death Pairs
 |                          |                                                                                                          |
@@ -440,7 +440,7 @@ $$
 a < x < y < b
 $$
 
-<img src="transpositions_stats-abstract.assets/image-616a26d36422.png" width="1200">
+<img src="transpositions_stats-abstract.assets/image-ac688a2ec6b1.png" width="1200">
 
 ### Birth Death Pairs
 |                          |                                                |
@@ -489,7 +489,7 @@ $$
 a < x < y < b
 $$
 
-<img src="transpositions_stats-abstract.assets/image-a4b0e9e1e336.png" width="1200">
+<img src="transpositions_stats-abstract.assets/image-727382ff50e5.png" width="1200">
 
 ### Birth Death Pairs
 |                          |                                                                                      |
@@ -542,7 +542,7 @@ $$
 a < b < x < y
 $$
 
-<img src="transpositions_stats-abstract.assets/image-e79aabd22b91.png" width="1200">
+<img src="transpositions_stats-abstract.assets/image-e6b052aeea09.png" width="1200">
 
 ### Birth Death Pairs
 |                          |                                                                                                                                                   |
@@ -601,7 +601,7 @@ $$
 a < b < x < y
 $$
 
-<img src="transpositions_stats-abstract.assets/image-8fadbf868420.png" width="1200">
+<img src="transpositions_stats-abstract.assets/image-78ffee0728b3.png" width="1200">
 
 ### Birth Death Pairs
 |                          |                                                                                                                                                                                         |
