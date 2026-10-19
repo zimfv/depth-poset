@@ -10,7 +10,7 @@ import os
 import pickle as pkl
 
 
-def reduct_column_bottom_to_top(delta, stop_condition=None, log_path=None):
+def reduct_column_bottom_to_top(delta, stop_condition=None, log_path: str | None=None, do_cancellation: bool=True):
 	"""
 	Returns the result of algorithm 1: Bottom to Top Column Reduction
 	from the article The Poset of Cancellations in a Filtered Complex
@@ -25,6 +25,13 @@ def reduct_column_bottom_to_top(delta, stop_condition=None, log_path=None):
 	stop_condition: None or function
 		Returns the intermediary delta for the condition, if it's not None
 
+	log_path: str or None
+		The folder where the intermediate results will be solved.
+		This will not solved the intermediate results, if it's None
+	
+	do_cancellation: bool
+		Remove both columns and rows after the iteration if True
+	
 	Returns:
 	--------
 	alpha : list of tuples
@@ -36,9 +43,6 @@ def reduct_column_bottom_to_top(delta, stop_condition=None, log_path=None):
 	delta0 : np.array shape (n, n) of ones and zeros
 		Modified border matrix, the intermediary delta for the condition, if it's not None
 
-	log_path: str or None
-		The folder where the intermediate results will be solved.
-		This will not solved the intermediate results, if it's None
 	"""
 	delta0 = np.array(delta, dtype=int)
 	b0 = []
@@ -47,11 +51,9 @@ def reduct_column_bottom_to_top(delta, stop_condition=None, log_path=None):
 	while (delta0 != 0).any():
 		# log the intermediate result
 		if log_path is not None:
-			if not os.path.exists(log_path):
-				os.makedirs(log_path)
+			os.makedirs(log_path, exist_ok=True)
 			with open(os.path.join(log_path, f'{i}.pkl'), 'wb') as file:
 				pkl.dump({'iter': i, 'delta': delta, 'b0': b0, 'alpha': alpha}, file)
-
 
 		if stop_condition is not None:
 			if stop_condition(alpha, b0, delta0):
@@ -61,8 +63,8 @@ def reduct_column_bottom_to_top(delta, stop_condition=None, log_path=None):
 		s = int(np.max(ss))
 		t = int(np.min(ts[ss == s]))
 		alpha.update({i: (s, t)})
-		# while there exists y > t such that delta0[s, y] = 1
 
+		# while there exists y > t such that delta0[s, y] = 1
 		j = 0
 		while (delta0[s, t+1:] != 0).any():
 			# log the intermediate result
@@ -85,11 +87,11 @@ def reduct_column_bottom_to_top(delta, stop_condition=None, log_path=None):
 				return alpha, b0, delta0
 
 		# delete rows s and t and columns s and t from delta0
-		delta0[(s, t), :] = 0
-		delta0[:, (s, t)] = 0
-		#delta0[t, :] = 0
-		#delta0[:, t] = 0
-
+		if do_cancellation:
+			delta0[(s, t), :] = 0
+			delta0[:, (s, t)] = 0
+		else:
+			delta0[:, t] = 0
 
 		i += 1
 
@@ -98,7 +100,7 @@ def reduct_column_bottom_to_top(delta, stop_condition=None, log_path=None):
 	return alpha, b0
 
 
-def reduct_row_left_to_right(delta, stop_condition=None, log_path=None):
+def reduct_row_left_to_right(delta, stop_condition=None, log_path: str | None=None, do_cancellation: bool=True):
 	"""
 	Returns the result of algorithm 2: Left to Right Row Reduction
 	from the article The Poset of Cancellations in a Filtered Complex
@@ -113,6 +115,13 @@ def reduct_row_left_to_right(delta, stop_condition=None, log_path=None):
 	stop_condition: None or function
 		Returns the intermediary delta for the condition, if it's not None
 
+	log_path: str or None
+		The folder where the intermediate results will be solved.
+		This will not solved the intermediate results, if it's None
+
+	do_cancellation: bool
+		Remove both columns and rows after the iteration if True
+	
 	Returns:
 	--------
 	omega : list of tuples
@@ -124,9 +133,6 @@ def reduct_row_left_to_right(delta, stop_condition=None, log_path=None):
 	delta1 : np.array shape (n, n) of ones and zeros
 		Modified border matrix, the intermediary delta for the condition, if it's not None
 
-	log_path: str or None
-		The folder where the intermediate results will be solved.
-		This will not solved the intermediate results, if it's None
 	"""
 	delta1 = np.array(delta, dtype=int)
 	b1 = []
@@ -135,8 +141,7 @@ def reduct_row_left_to_right(delta, stop_condition=None, log_path=None):
 	while (delta1 != 0).any():
 		# log the intermediate result
 		if log_path is not None:
-			if not os.path.exists(log_path):
-				os.makedirs(log_path)
+			os.makedirs(log_path, exist_ok=True)
 			with open(os.path.join(log_path, f'{j}.pkl'), 'wb') as file:
 				pkl.dump({'iter': j, 'delta': delta, 'b1': b1, 'omega': omega}, file)
 			
@@ -158,16 +163,19 @@ def reduct_row_left_to_right(delta, stop_condition=None, log_path=None):
 					return omega, b1, delta1
 			delta1[x, :] = (delta1[s, :] + delta1[x, :])%2
 
-
 		if stop_condition is not None:
 			if stop_condition(omega, b1, delta1):
 				return omega, b1, delta1
 		
 		# delete rows s and t and columns s and t from delta1
-		delta1[(s, t), :] = 0
-		delta1[:, (s, t)] = 0
+		if do_cancellation:
+			delta1[(s, t), :] = 0
+			delta1[:, (s, t)] = 0
+		else:
+			delta1[s, :] = 0
 
 		j += 1
+	
 	if stop_condition is not None:
 		return omega, b1, delta1
 	return omega, b1
@@ -192,11 +200,11 @@ def get_shallow_pairs_relations_from_reductions(alpha, b0, omega, b1):
 	return bd, r
 
 
-def get_shallow_pairs_relations(delta):
+def get_shallow_pairs_relations(delta, do_cancelation: bool=True):
 	"""
 	"""
-	alpha, b0 = reduct_column_bottom_to_top(delta)
-	omega, b1 = reduct_row_left_to_right(delta)
+	alpha, b0 = reduct_column_bottom_to_top(delta, do_cancelation=do_cancelation)
+	omega, b1 = reduct_row_left_to_right(delta, do_cancelation=do_cancelation)
 
 	return get_shallow_pairs_relations_from_reductions(alpha, b0, omega, b1)
 
@@ -354,7 +362,8 @@ class DepthPoset(Poset):
 	"""
 	"""
 	@classmethod
-	def from_border_matrix(cls, border_matrix, dims, filter_values=None, sources=None, log_path=None):
+	def from_border_matrix(cls, border_matrix, dims, filter_values=None, sources=None, 
+	                       log_path: str | None=None, do_cancellation: bool=True):
 		"""
 		Parameters:
 		-----------
@@ -375,14 +384,19 @@ class DepthPoset(Poset):
 		log_path: str or None
 			The folder where the intermediate results will be solved.
 			This will not solved the intermediate results, if it's None
+
+		do_cancelation: bool
+			Remove both columns and rows after the iteration if True
 		"""
 		if filter_values is None:
 			filter_values = np.arange(len(border_matrix))
 		#if sources is None:
 		#	sources = [None for i in range(len(border_matrix))]
 
-		alpha, b0 = reduct_column_bottom_to_top(border_matrix, log_path=None if log_path is None else os.path.join(log_path, 'reduct_column_bottom_to_top'))
-		omega, b1 = reduct_row_left_to_right(border_matrix, log_path=None if log_path is None else os.path.join(log_path, 'reduct_row_left_to_right'))
+		log_path0 = None if log_path is None else os.path.join(log_path, 'reduct_column_bottom_to_top')
+		log_path1 = None if log_path is None else os.path.join(log_path, 'reduct_row_left_to_right')
+		alpha, b0 = reduct_column_bottom_to_top(border_matrix, log_path=log_path0, do_cancellation=do_cancellation)
+		omega, b1 = reduct_row_left_to_right(border_matrix, log_path=log_path1, do_cancellation=do_cancellation)
 		bd, r = get_shallow_pairs_relations_from_reductions(alpha, b0, omega, b1)
 
 		nodes = [ShallowPair(birth_index=bdi[0], death_index=bdi[1], birth_value=filter_values[bdi[0]], death_value=filter_values[bdi[1]], 
@@ -398,19 +412,31 @@ class DepthPoset(Poset):
 		return obj
 
 	@classmethod
-	def from_simplex_tree(cls, stree: SimplexTree, remove_zero_persistant_pairs: bool=True):
+	def from_simplex_tree(cls, stree: SimplexTree, remove_zero_persistant_pairs: bool=True, 
+	                      log_path: str | None=None, do_cancellation: bool=True):
 		"""
+		stree: gh.SimplexTree
+			The Simplicial complex
+		
+		remove_zero_persistant_pairs: bool
+			Remove zero persistence pairs if True	
+
+		log_path: str or None
+			The folder where the intermediate results will be solved.
+			This will not solved the intermediate results, if it's None
+
+		do_cancelation: bool
+			Remove both columns and rows after the iteration if True
 		"""
 		simplices, matrix = get_ordered_border_matrix_from_simplex_tree(stree)
 		dims = [len(simplex) - 1 for simplex in simplices]
 		filter_values = [value for key, value in stree.get_filtration()]
 
+		obj = cls.from_border_matrix(matrix, dims, filter_values, sources=simplices, log_path=log_path, do_cancellation=do_cancellation)
 		if remove_zero_persistant_pairs:
 			node_condition = lambda node: node.birth_value != node.death_value
-		else:
-			node_condition = lambda node: True
-
-		return cls.from_border_matrix(matrix, dims, filter_values, sources=simplices).subposet(node_condition=node_condition)
+			obj = obj.subposet(node_condition=node_condition)
+		return obj
 
 	def update_sources(self, sources):
 		"""
