@@ -12,7 +12,7 @@ The complex dimendion 2 with 15 cells:
 
 Its Depth Poset has 7 nodes.
 
-<img src="transpositions_stats-example.assets/image-297e3211a483.png" width="1200">
+<img src="transpositions_stats-example.assets/image-bc0aa40f046d.png" width="1200">
 
 # Transpositions
 In this data we got 11 by transposing consecutive pairs. The distribution of the transposition types is given in the table:
@@ -28,72 +28,72 @@ In this data we got 11 by transposing consecutive pairs. The distribution of the
 We checked 40 equations. And we can see the distribution of transposiions, satysfying these equations in the tables:
 
 ## Birth-Birth Transpositions
-| Name      | Transposition Type   | Switch Type            | Formula                                                                                                                                   | Correct   | Correct, %   | Order           |
-|:----------|:---------------------|:-----------------------|:------------------------------------------------------------------------------------------------------------------------------------------|:----------|:-------------|:----------------|
-| Eq08      | birth-birth          | switch forward         | $\text{Succ}_1^\text{at}(a, y) = \text{Succ}_1^\text{bt}(x, y) \oplus \{(x, b)\} \oplus \text{Succ}_1^\text{bt}(a, b)$                    | 1/1       | 100.00%      | $a < x < y < b$ |
-| Eq09      | birth-birth          | switch forward         | $\text{Succ}_1^\text{at}(x, b) = \text{Succ}_1^\text{bt}(a, b)$                                                                           | 1/1       | 100.00%      | $a < x < y < b$ |
-| Eq10      | birth-birth          | switch forward         | $\text{Pred}_1^\text{at}(a, y) = \text{Pred}_1^\text{bt}(x, y)$                                                                           | 1/1       | 100.00%      | $a < x < y < b$ |
-| Eq11      | birth-birth          | switch forward         | $\text{Pred}_1^\text{at}(x, b) = \text{Pred}_1^\text{bt}(a, b) \oplus \{(a, y)\}$                                                         | 1/1       | 100.00%      | $a < x < y < b$ |
-| Eq12      | birth-birth          | switch forward         | $\text{Succ}_2^\text{at}(a, y) = \text{Succ}_2^\text{bt}(x, y) \oplus \{(x, b), (a, b)\}$                                                 | 1/1       | 100.00%      | $a < x < y < b$ |
-| Eq13      | birth-birth          | switch forward         | $\text{Succ}_2^\text{at}(x, b) = \text{Succ}_2^\text{bt}(a, b)$                                                                           | 1/1       | 100.00%      | $a < x < y < b$ |
-| Eq14      | birth-birth          | switch forward         | $\text{Pred}_2^\text{at}(a, y) = [\text{Pred}_2^\text{bt}(a, b) \cap \mathcal{L}]$                                                        | 1/1       | 100.00%      | $a < x < y < b$ |
-| Eq15      | birth-birth          | switch forward         | $\text{Pred}_2^\text{at}(x, b) = \text{Pred}_2^\text{bt}(x, y) \oplus \{(a, y)\} \oplus [\text{Pred}_2^\text{bt}(a, b) \cap \mathcal{M}]$ | 1/1       | 100.00%      | $a < x < y < b$ |
-| Eq16      | birth-birth          | no switch (nested)     | $\text{Succ}_1^\text{at}(x, y) = \text{Succ}_1^\text{bt}(x, y) \oplus \{(a, b)\} \oplus \text{Succ}_1^\text{bt}(a, b)$                    | 2/2       | 100.00%      | $a < x < y < b$ |
-| Eq16s     | birth-birth          | no switch (nested)     | $\text{Succ}_1^\text{at}(a, b) = \text{Succ}_1^\text{bt}(a, b) \oplus \{(x, y)\} \oplus \text{Succ}_1^\text{bt}(x, y)$                    | 0/2       | 0.00%        | $a < x < y < b$ |
-| Eq17      | birth-birth          | no switch (nested)     | $\text{Pred}_1^\text{at}(a, b) = \text{Pred}_1^\text{bt}(a, b) \oplus \{(x, y)\}$                                                         | 2/2       | 100.00%      | $a < x < y < b$ |
-| Eq17s     | birth-birth          | no switch (nested)     | $\text{Pred}_1^\text{at}(x, y) = \text{Pred}_1^\text{bt}(x, y) \oplus \{(a, b)\}$                                                         | 0/2       | 0.00%        | $a < x < y < b$ |
-| EqPred1ab | birth-birth          | no switch (not nested) | $\text{Pred}_1^\text{at}(a, b) = \text{Pred}_1^\text{bt}(a, b)$                                                                           | 1/1       | 100.00%      | $a < x < y < b$ |
-| EqPred1xy | birth-birth          | no switch (not nested) | $\text{Pred}_1^\text{at}(x, y) = \text{Pred}_1^\text{bt}(x, y)$                                                                           | 1/1       | 100.00%      | $a < x < y < b$ |
-| EqPred2ab | birth-birth          | no switch (not nested) | $\text{Pred}_2^\text{at}(a, b) = \text{Pred}_2^\text{bt}(a, b)$                                                                           | 1/1       | 100.00%      | $a < x < y < b$ |
-| EqPred2xy | birth-birth          | no switch (not nested) | $\text{Pred}_2^\text{at}(x, y) = \text{Pred}_2^\text{bt}(x, y)$                                                                           | 1/1       | 100.00%      | $a < x < y < b$ |
-| EqSucc1ab | birth-birth          | no switch (not nested) | $\text{Succ}_1^\text{at}(a, b) = \text{Succ}_1^\text{bt}(a, b)$                                                                           | 1/1       | 100.00%      | $a < x < y < b$ |
-| EqSucc1xy | birth-birth          | no switch (not nested) | $\text{Succ}_1^\text{at}(x, y) = \text{Succ}_1^\text{bt}(x, y)$                                                                           | 1/1       | 100.00%      | $a < x < y < b$ |
-| EqSucc2ab | birth-birth          | no switch (not nested) | $\text{Succ}_2^\text{at}(a, b) = \text{Succ}_2^\text{bt}(a, b)$                                                                           | 1/1       | 100.00%      | $a < x < y < b$ |
-| EqSucc2xy | birth-birth          | no switch (not nested) | $\text{Succ}_2^\text{at}(x, y) = \text{Succ}_2^\text{bt}(x, y)$                                                                           | 1/1       | 100.00%      | $a < x < y < b$ |
+| Name      | Transposition Type   | Switch Type            | Order           | Formula                                                                                                                                   | Correct (WC)   | Correct (WOC)   | Correct, % (WC)   | Correct, % (WOC)   |
+|:----------|:---------------------|:-----------------------|:----------------|:------------------------------------------------------------------------------------------------------------------------------------------|:---------------|:----------------|:------------------|:-------------------|
+| Eq08      | birth-birth          | switch forward         | $a < x < y < b$ | $\text{Succ}_1^\text{at}(a, y) = \text{Succ}_1^\text{bt}(x, y) \oplus \{(x, b)\} \oplus \text{Succ}_1^\text{bt}(a, b)$                    | 1/1            | 1/1             | 100.00%           | 100.00%            |
+| Eq09      | birth-birth          | switch forward         | $a < x < y < b$ | $\text{Succ}_1^\text{at}(x, b) = \text{Succ}_1^\text{bt}(a, b)$                                                                           | 1/1            | 1/1             | 100.00%           | 100.00%            |
+| Eq10      | birth-birth          | switch forward         | $a < x < y < b$ | $\text{Pred}_1^\text{at}(a, y) = \text{Pred}_1^\text{bt}(x, y)$                                                                           | 1/1            | 1/1             | 100.00%           | 100.00%            |
+| Eq11      | birth-birth          | switch forward         | $a < x < y < b$ | $\text{Pred}_1^\text{at}(x, b) = \text{Pred}_1^\text{bt}(a, b) \oplus \{(a, y)\}$                                                         | 1/1            | 1/1             | 100.00%           | 100.00%            |
+| Eq12      | birth-birth          | switch forward         | $a < x < y < b$ | $\text{Succ}_2^\text{at}(a, y) = \text{Succ}_2^\text{bt}(x, y) \oplus \{(x, b), (a, b)\}$                                                 | 1/1            | 1/1             | 100.00%           | 100.00%            |
+| Eq13      | birth-birth          | switch forward         | $a < x < y < b$ | $\text{Succ}_2^\text{at}(x, b) = \text{Succ}_2^\text{bt}(a, b)$                                                                           | 1/1            | 1/1             | 100.00%           | 100.00%            |
+| Eq14      | birth-birth          | switch forward         | $a < x < y < b$ | $\text{Pred}_2^\text{at}(a, y) = [\text{Pred}_2^\text{bt}(a, b) \cap \mathcal{L}]$                                                        | 1/1            | 1/1             | 100.00%           | 100.00%            |
+| Eq15      | birth-birth          | switch forward         | $a < x < y < b$ | $\text{Pred}_2^\text{at}(x, b) = \text{Pred}_2^\text{bt}(x, y) \oplus \{(a, y)\} \oplus [\text{Pred}_2^\text{bt}(a, b) \cap \mathcal{M}]$ | 1/1            | 1/1             | 100.00%           | 100.00%            |
+| Eq16      | birth-birth          | no switch (nested)     | $a < x < y < b$ | $\text{Succ}_1^\text{at}(x, y) = \text{Succ}_1^\text{bt}(x, y) \oplus \{(a, b)\} \oplus \text{Succ}_1^\text{bt}(a, b)$                    | 2/2            | 2/2             | 100.00%           | 100.00%            |
+| Eq16s     | birth-birth          | no switch (nested)     | $a < x < y < b$ | $\text{Succ}_1^\text{at}(a, b) = \text{Succ}_1^\text{bt}(a, b) \oplus \{(x, y)\} \oplus \text{Succ}_1^\text{bt}(x, y)$                    | 0/2            | 0/2             | 0.00%             | 0.00%              |
+| Eq17      | birth-birth          | no switch (nested)     | $a < x < y < b$ | $\text{Pred}_1^\text{at}(a, b) = \text{Pred}_1^\text{bt}(a, b) \oplus \{(x, y)\}$                                                         | 2/2            | 2/2             | 100.00%           | 100.00%            |
+| Eq17s     | birth-birth          | no switch (nested)     | $a < x < y < b$ | $\text{Pred}_1^\text{at}(x, y) = \text{Pred}_1^\text{bt}(x, y) \oplus \{(a, b)\}$                                                         | 0/2            | 0/2             | 0.00%             | 0.00%              |
+| EqPred1ab | birth-birth          | no switch (not nested) | $a < x < y < b$ | $\text{Pred}_1^\text{at}(a, b) = \text{Pred}_1^\text{bt}(a, b)$                                                                           | 1/1            | 1/1             | 100.00%           | 100.00%            |
+| EqPred1xy | birth-birth          | no switch (not nested) | $a < x < y < b$ | $\text{Pred}_1^\text{at}(x, y) = \text{Pred}_1^\text{bt}(x, y)$                                                                           | 1/1            | 1/1             | 100.00%           | 100.00%            |
+| EqPred2ab | birth-birth          | no switch (not nested) | $a < x < y < b$ | $\text{Pred}_2^\text{at}(a, b) = \text{Pred}_2^\text{bt}(a, b)$                                                                           | 1/1            | 1/1             | 100.00%           | 100.00%            |
+| EqPred2xy | birth-birth          | no switch (not nested) | $a < x < y < b$ | $\text{Pred}_2^\text{at}(x, y) = \text{Pred}_2^\text{bt}(x, y)$                                                                           | 1/1            | 1/1             | 100.00%           | 100.00%            |
+| EqSucc1ab | birth-birth          | no switch (not nested) | $a < x < y < b$ | $\text{Succ}_1^\text{at}(a, b) = \text{Succ}_1^\text{bt}(a, b)$                                                                           | 1/1            | 1/1             | 100.00%           | 100.00%            |
+| EqSucc1xy | birth-birth          | no switch (not nested) | $a < x < y < b$ | $\text{Succ}_1^\text{at}(x, y) = \text{Succ}_1^\text{bt}(x, y)$                                                                           | 1/1            | 1/1             | 100.00%           | 100.00%            |
+| EqSucc2ab | birth-birth          | no switch (not nested) | $a < x < y < b$ | $\text{Succ}_2^\text{at}(a, b) = \text{Succ}_2^\text{bt}(a, b)$                                                                           | 1/1            | 1/1             | 100.00%           | 100.00%            |
+| EqSucc2xy | birth-birth          | no switch (not nested) | $a < x < y < b$ | $\text{Succ}_2^\text{at}(x, y) = \text{Succ}_2^\text{bt}(x, y)$                                                                           | 1/1            | 1/1             | 100.00%           | 100.00%            |
 
 ## Death-Death Transpositions
-| Name      | Transposition Type   | Switch Type            | Formula                                                                                                                                  | Correct   | Correct, %   | Order           |
-|:----------|:---------------------|:-----------------------|:-----------------------------------------------------------------------------------------------------------------------------------------|:----------|:-------------|:----------------|
-| Eq28      | death-death          | switch forward         | $\text{Succ}_1^\text{at}(x, b) = \text{Succ}_1^\text{bt}(x, y) \oplus \{(a, y), (a, b)\}$                                                | 2/2       | 100.00%      | $a < x < y < b$ |
-| Eq29      | death-death          | switch forward         | $\text{Succ}_1^\text{at}(a, y) = \text{Succ}_1^\text{bt}(a, b)$                                                                          | 2/2       | 100.00%      | $a < x < y < b$ |
-| Eq30      | death-death          | switch forward         | $\text{Pred}_1^\text{at}(x, b) = [\text{Pred}_1^\text{bt}(a, b) \cap \mathcal{B}]$                                                       | 2/2       | 100.00%      | $a < x < y < b$ |
-| Eq31      | death-death          | switch forward         | $\text{Pred}_1^\text{at}(a, y) = \text{Pred}_1^\text{bt}(x, y) \oplus \{(x, b)\} \oplus[\text{Pred}_1^\text{bt}(a, b) \cap \mathcal{N}]$ | 2/2       | 100.00%      | $a < x < y < b$ |
-| Eq32      | death-death          | switch forward         | $\text{Succ}_2^\text{at}(x, b) = \text{Succ}_2^\text{bt}(x, y) \oplus \{(a, y)\} \oplus \text{Succ}_2^\text{bt}(a, b)$                   | 2/2       | 100.00%      | $a < x < y < b$ |
-| Eq33      | death-death          | switch forward         | $\text{Succ}_2^\text{at}(a, y) = \text{Succ}_2^\text{bt}(a, b)$                                                                          | 2/2       | 100.00%      | $a < x < y < b$ |
-| Eq34      | death-death          | switch forward         | $\text{Pred}_2^\text{at}(x, b) = \text{Pred}_2^\text{bt}(x, y)$                                                                          | 2/2       | 100.00%      | $a < x < y < b$ |
-| Eq35      | death-death          | switch forward         | $\text{Pred}_2^\text{at}(a, y) = \text{Pred}_2^\text{bt}(a, b) \oplus \{(x, b)\}$                                                        | 2/2       | 100.00%      | $a < x < y < b$ |
-| EqPred1ab | death-death          | no switch (not nested) | $\text{Pred}_1^\text{at}(a, b) = \text{Pred}_1^\text{bt}(a, b)$                                                                          | 2/2       | 100.00%      | $a < x < y < b$ |
-| EqPred1xy | death-death          | no switch (not nested) | $\text{Pred}_1^\text{at}(x, y) = \text{Pred}_1^\text{bt}(x, y)$                                                                          | 2/2       | 100.00%      | $a < x < y < b$ |
-| EqPred2ab | death-death          | no switch (not nested) | $\text{Pred}_2^\text{at}(a, b) = \text{Pred}_2^\text{bt}(a, b)$                                                                          | 2/2       | 100.00%      | $a < x < y < b$ |
-| EqPred2xy | death-death          | no switch (not nested) | $\text{Pred}_2^\text{at}(x, y) = \text{Pred}_2^\text{bt}(x, y)$                                                                          | 2/2       | 100.00%      | $a < x < y < b$ |
-| EqSucc1ab | death-death          | no switch (not nested) | $\text{Succ}_1^\text{at}(a, b) = \text{Succ}_1^\text{bt}(a, b)$                                                                          | 2/2       | 100.00%      | $a < x < y < b$ |
-| EqSucc1xy | death-death          | no switch (not nested) | $\text{Succ}_1^\text{at}(x, y) = \text{Succ}_1^\text{bt}(x, y)$                                                                          | 2/2       | 100.00%      | $a < x < y < b$ |
-| EqSucc2ab | death-death          | no switch (not nested) | $\text{Succ}_2^\text{at}(a, b) = \text{Succ}_2^\text{bt}(a, b)$                                                                          | 2/2       | 100.00%      | $a < x < y < b$ |
-| EqSucc2xy | death-death          | no switch (not nested) | $\text{Succ}_2^\text{at}(x, y) = \text{Succ}_2^\text{bt}(x, y)$                                                                          | 2/2       | 100.00%      | $a < x < y < b$ |
+| Name      | Transposition Type   | Switch Type            | Order           | Formula                                                                                                                                  | Correct (WC)   | Correct (WOC)   | Correct, % (WC)   | Correct, % (WOC)   |
+|:----------|:---------------------|:-----------------------|:----------------|:-----------------------------------------------------------------------------------------------------------------------------------------|:---------------|:----------------|:------------------|:-------------------|
+| Eq28      | death-death          | switch forward         | $a < x < y < b$ | $\text{Succ}_1^\text{at}(x, b) = \text{Succ}_1^\text{bt}(x, y) \oplus \{(a, y), (a, b)\}$                                                | 2/2            | 2/2             | 100.00%           | 100.00%            |
+| Eq29      | death-death          | switch forward         | $a < x < y < b$ | $\text{Succ}_1^\text{at}(a, y) = \text{Succ}_1^\text{bt}(a, b)$                                                                          | 2/2            | 2/2             | 100.00%           | 100.00%            |
+| Eq30      | death-death          | switch forward         | $a < x < y < b$ | $\text{Pred}_1^\text{at}(x, b) = [\text{Pred}_1^\text{bt}(a, b) \cap \mathcal{B}]$                                                       | 2/2            | 2/2             | 100.00%           | 100.00%            |
+| Eq31      | death-death          | switch forward         | $a < x < y < b$ | $\text{Pred}_1^\text{at}(a, y) = \text{Pred}_1^\text{bt}(x, y) \oplus \{(x, b)\} \oplus[\text{Pred}_1^\text{bt}(a, b) \cap \mathcal{N}]$ | 2/2            | 2/2             | 100.00%           | 100.00%            |
+| Eq32      | death-death          | switch forward         | $a < x < y < b$ | $\text{Succ}_2^\text{at}(x, b) = \text{Succ}_2^\text{bt}(x, y) \oplus \{(a, y)\} \oplus \text{Succ}_2^\text{bt}(a, b)$                   | 2/2            | 2/2             | 100.00%           | 100.00%            |
+| Eq33      | death-death          | switch forward         | $a < x < y < b$ | $\text{Succ}_2^\text{at}(a, y) = \text{Succ}_2^\text{bt}(a, b)$                                                                          | 2/2            | 2/2             | 100.00%           | 100.00%            |
+| Eq34      | death-death          | switch forward         | $a < x < y < b$ | $\text{Pred}_2^\text{at}(x, b) = \text{Pred}_2^\text{bt}(x, y)$                                                                          | 2/2            | 2/2             | 100.00%           | 100.00%            |
+| Eq35      | death-death          | switch forward         | $a < x < y < b$ | $\text{Pred}_2^\text{at}(a, y) = \text{Pred}_2^\text{bt}(a, b) \oplus \{(x, b)\}$                                                        | 2/2            | 2/2             | 100.00%           | 100.00%            |
+| EqPred1ab | death-death          | no switch (not nested) | $a < x < y < b$ | $\text{Pred}_1^\text{at}(a, b) = \text{Pred}_1^\text{bt}(a, b)$                                                                          | 2/2            | 2/2             | 100.00%           | 100.00%            |
+| EqPred1xy | death-death          | no switch (not nested) | $a < x < y < b$ | $\text{Pred}_1^\text{at}(x, y) = \text{Pred}_1^\text{bt}(x, y)$                                                                          | 2/2            | 2/2             | 100.00%           | 100.00%            |
+| EqPred2ab | death-death          | no switch (not nested) | $a < x < y < b$ | $\text{Pred}_2^\text{at}(a, b) = \text{Pred}_2^\text{bt}(a, b)$                                                                          | 2/2            | 2/2             | 100.00%           | 100.00%            |
+| EqPred2xy | death-death          | no switch (not nested) | $a < x < y < b$ | $\text{Pred}_2^\text{at}(x, y) = \text{Pred}_2^\text{bt}(x, y)$                                                                          | 2/2            | 2/2             | 100.00%           | 100.00%            |
+| EqSucc1ab | death-death          | no switch (not nested) | $a < x < y < b$ | $\text{Succ}_1^\text{at}(a, b) = \text{Succ}_1^\text{bt}(a, b)$                                                                          | 2/2            | 2/2             | 100.00%           | 100.00%            |
+| EqSucc1xy | death-death          | no switch (not nested) | $a < x < y < b$ | $\text{Succ}_1^\text{at}(x, y) = \text{Succ}_1^\text{bt}(x, y)$                                                                          | 2/2            | 2/2             | 100.00%           | 100.00%            |
+| EqSucc2ab | death-death          | no switch (not nested) | $a < x < y < b$ | $\text{Succ}_2^\text{at}(a, b) = \text{Succ}_2^\text{bt}(a, b)$                                                                          | 2/2            | 2/2             | 100.00%           | 100.00%            |
+| EqSucc2xy | death-death          | no switch (not nested) | $a < x < y < b$ | $\text{Succ}_2^\text{at}(x, y) = \text{Succ}_2^\text{bt}(x, y)$                                                                          | 2/2            | 2/2             | 100.00%           | 100.00%            |
 
 ## Birth-Death Transpositions
-| Name      | Transposition Type   | Switch Type            | Formula                                                                              | Correct   | Correct, %   | Order           |
-|:----------|:---------------------|:-----------------------|:-------------------------------------------------------------------------------------|:----------|:-------------|:----------------|
-| Eq48      | birth-death          | switch forward         | $\text{Succ}_1^\text{at}(a, x) = \text{Succ}_1^\text{bt}(a, b)$                      | 2/2       | 100.00%      | $a < b < x < y$ |
-| Eq49      | birth-death          | switch forward         | $\text{Succ}_1^\text{at}(b, y) = \text{Succ}_1^\text{bt}(x, y)$                      | 2/2       | 100.00%      | $a < b < x < y$ |
-| Eq50      | birth-death          | switch forward         | $\text{Pred}_1^\text{at}(a, x) = \{(s, t)\in \text{BD}:\; U_1^\text{bt}[t, x] = 1\}$ | 0/2       | 0.00%        | $a < b < x < y$ |
-| Eq50a     | birth-death          | switch forward         | $\text{Pred}_1^\text{at}(a, x) = A_1^\text{bt} \cap B_1^\text{bt}$                   | 0/2       | 0.00%        | $a < b < x < y$ |
-| Eq50b     | birth-death          | switch forward         | $\text{Pred}_1^\text{at}(a, x) = A_1^\text{bt} \cap B_1^\text{at}$                   | 2/2       | 100.00%      | $a < b < x < y$ |
-| Eq51      | birth-death          | switch forward         | $\text{Pred}_1^\text{at}(b, y) = \text{Pred}_1^\text{bt}(x, y)$                      | 2/2       | 100.00%      | $a < b < x < y$ |
-| Eq52      | birth-death          | switch forward         | $\text{Succ}_2^\text{at}(a, x) = \text{Succ}_2^\text{bt}(a, b)$                      | 2/2       | 100.00%      | $a < b < x < y$ |
-| Eq53      | birth-death          | switch forward         | $\text{Succ}_2^\text{at}(b, y) = \text{Succ}_2^\text{bt}(x, y)$                      | 2/2       | 100.00%      | $a < b < x < y$ |
-| Eq54      | birth-death          | switch forward         | $\text{Pred}_2^\text{at}(a, x) = \text{Pred}_2^\text{bt}(a, b)$                      | 2/2       | 100.00%      | $a < b < x < y$ |
-| Eq55      | birth-death          | switch forward         | $\text{Pred}_2^\text{at}(b, y) = \{(s, t)\in \text{BD}:\; U_2^\text{bt}[b, s] = 1\}$ | 1/2       | 50.00%       | $a < b < x < y$ |
-| Eq55a     | birth-death          | switch forward         | $\text{Pred}_2^\text{at}(b, y) = A_2^\text{bt} \cap B_2^\text{bt}$                   | 1/2       | 50.00%       | $a < b < x < y$ |
-| Eq55b     | birth-death          | switch forward         | $\text{Pred}_2^\text{at}(b, y) = A_2^\text{bt} \cap B_2^\text{at}$                   | 2/2       | 100.00%      | $a < b < x < y$ |
-| EqPred1ab | birth-death          | no switch (not nested) | $\text{Pred}_1^\text{at}(a, b) = \text{Pred}_1^\text{bt}(a, b)$                      | 1/1       | 100.00%      | $a < x < b < y$ |
-| EqPred1xy | birth-death          | no switch (not nested) | $\text{Pred}_1^\text{at}(x, y) = \text{Pred}_1^\text{bt}(x, y)$                      | 1/1       | 100.00%      | $a < x < b < y$ |
-| EqPred2ab | birth-death          | no switch (not nested) | $\text{Pred}_2^\text{at}(a, b) = \text{Pred}_2^\text{bt}(a, b)$                      | 1/1       | 100.00%      | $a < x < b < y$ |
-| EqPred2xy | birth-death          | no switch (not nested) | $\text{Pred}_2^\text{at}(x, y) = \text{Pred}_2^\text{bt}(x, y)$                      | 1/1       | 100.00%      | $a < x < b < y$ |
-| EqSucc1ab | birth-death          | no switch (not nested) | $\text{Succ}_1^\text{at}(a, b) = \text{Succ}_1^\text{bt}(a, b)$                      | 1/1       | 100.00%      | $a < x < b < y$ |
-| EqSucc1xy | birth-death          | no switch (not nested) | $\text{Succ}_1^\text{at}(x, y) = \text{Succ}_1^\text{bt}(x, y)$                      | 1/1       | 100.00%      | $a < x < b < y$ |
-| EqSucc2ab | birth-death          | no switch (not nested) | $\text{Succ}_2^\text{at}(a, b) = \text{Succ}_2^\text{bt}(a, b)$                      | 1/1       | 100.00%      | $a < x < b < y$ |
-| EqSucc2xy | birth-death          | no switch (not nested) | $\text{Succ}_2^\text{at}(x, y) = \text{Succ}_2^\text{bt}(x, y)$                      | 1/1       | 100.00%      | $a < x < b < y$ |
+| Name      | Transposition Type   | Switch Type            | Order           | Formula                                                                              | Correct (WC)   | Correct (WOC)   | Correct, % (WC)   | Correct, % (WOC)   |
+|:----------|:---------------------|:-----------------------|:----------------|:-------------------------------------------------------------------------------------|:---------------|:----------------|:------------------|:-------------------|
+| Eq48      | birth-death          | switch forward         | $a < b < x < y$ | $\text{Succ}_1^\text{at}(a, x) = \text{Succ}_1^\text{bt}(a, b)$                      | 2/2            | 2/2             | 100.00%           | 100.00%            |
+| Eq49      | birth-death          | switch forward         | $a < b < x < y$ | $\text{Succ}_1^\text{at}(b, y) = \text{Succ}_1^\text{bt}(x, y)$                      | 2/2            | 2/2             | 100.00%           | 100.00%            |
+| Eq50      | birth-death          | switch forward         | $a < b < x < y$ | $\text{Pred}_1^\text{at}(a, x) = \{(s, t)\in \text{BD}:\; U_1^\text{bt}[t, x] = 1\}$ | 0/2            | 0/2             | 0.00%             | 0.00%              |
+| Eq50a     | birth-death          | switch forward         | $a < b < x < y$ | $\text{Pred}_1^\text{at}(a, x) = A_1^\text{bt} \cap B_1^\text{bt}$                   | 0/2            | 2/2             | 0.00%             | 100.00%            |
+| Eq50b     | birth-death          | switch forward         | $a < b < x < y$ | $\text{Pred}_1^\text{at}(a, x) = A_1^\text{bt} \cap B_1^\text{at}$                   | 2/2            | 2/2             | 100.00%           | 100.00%            |
+| Eq51      | birth-death          | switch forward         | $a < b < x < y$ | $\text{Pred}_1^\text{at}(b, y) = \text{Pred}_1^\text{bt}(x, y)$                      | 2/2            | 2/2             | 100.00%           | 100.00%            |
+| Eq52      | birth-death          | switch forward         | $a < b < x < y$ | $\text{Succ}_2^\text{at}(a, x) = \text{Succ}_2^\text{bt}(a, b)$                      | 2/2            | 2/2             | 100.00%           | 100.00%            |
+| Eq53      | birth-death          | switch forward         | $a < b < x < y$ | $\text{Succ}_2^\text{at}(b, y) = \text{Succ}_2^\text{bt}(x, y)$                      | 2/2            | 2/2             | 100.00%           | 100.00%            |
+| Eq54      | birth-death          | switch forward         | $a < b < x < y$ | $\text{Pred}_2^\text{at}(a, x) = \text{Pred}_2^\text{bt}(a, b)$                      | 2/2            | 2/2             | 100.00%           | 100.00%            |
+| Eq55      | birth-death          | switch forward         | $a < b < x < y$ | $\text{Pred}_2^\text{at}(b, y) = \{(s, t)\in \text{BD}:\; U_2^\text{bt}[b, s] = 1\}$ | 1/2            | 1/2             | 50.00%            | 50.00%             |
+| Eq55a     | birth-death          | switch forward         | $a < b < x < y$ | $\text{Pred}_2^\text{at}(b, y) = A_2^\text{bt} \cap B_2^\text{bt}$                   | 1/2            | 2/2             | 50.00%            | 100.00%            |
+| Eq55b     | birth-death          | switch forward         | $a < b < x < y$ | $\text{Pred}_2^\text{at}(b, y) = A_2^\text{bt} \cap B_2^\text{at}$                   | 2/2            | 2/2             | 100.00%           | 100.00%            |
+| EqPred1ab | birth-death          | no switch (not nested) | $a < x < b < y$ | $\text{Pred}_1^\text{at}(a, b) = \text{Pred}_1^\text{bt}(a, b)$                      | 1/1            | 1/1             | 100.00%           | 100.00%            |
+| EqPred1xy | birth-death          | no switch (not nested) | $a < x < b < y$ | $\text{Pred}_1^\text{at}(x, y) = \text{Pred}_1^\text{bt}(x, y)$                      | 1/1            | 1/1             | 100.00%           | 100.00%            |
+| EqPred2ab | birth-death          | no switch (not nested) | $a < x < b < y$ | $\text{Pred}_2^\text{at}(a, b) = \text{Pred}_2^\text{bt}(a, b)$                      | 1/1            | 1/1             | 100.00%           | 100.00%            |
+| EqPred2xy | birth-death          | no switch (not nested) | $a < x < b < y$ | $\text{Pred}_2^\text{at}(x, y) = \text{Pred}_2^\text{bt}(x, y)$                      | 1/1            | 1/1             | 100.00%           | 100.00%            |
+| EqSucc1ab | birth-death          | no switch (not nested) | $a < x < b < y$ | $\text{Succ}_1^\text{at}(a, b) = \text{Succ}_1^\text{bt}(a, b)$                      | 1/1            | 1/1             | 100.00%           | 100.00%            |
+| EqSucc1xy | birth-death          | no switch (not nested) | $a < x < b < y$ | $\text{Succ}_1^\text{at}(x, y) = \text{Succ}_1^\text{bt}(x, y)$                      | 1/1            | 1/1             | 100.00%           | 100.00%            |
+| EqSucc2ab | birth-death          | no switch (not nested) | $a < x < b < y$ | $\text{Succ}_2^\text{at}(a, b) = \text{Succ}_2^\text{bt}(a, b)$                      | 1/1            | 1/1             | 100.00%           | 100.00%            |
+| EqSucc2xy | birth-death          | no switch (not nested) | $a < x < b < y$ | $\text{Succ}_2^\text{at}(x, y) = \text{Succ}_2^\text{bt}(x, y)$                      | 1/1            | 1/1             | 100.00%           | 100.00%            |
 
 # Incorrect Equations
 We have 4 transpositions, such that some equations are incorrect.
@@ -110,7 +110,7 @@ $$
 a < x < y < b
 $$
 
-<img src="transpositions_stats-example.assets/image-ebc52e15259e.png" width="1200">
+<img src="transpositions_stats-example.assets/image-e412684fc8ec.png" width="1200">
 
 ### Birth Death Pairs
 |                          |                                      |
@@ -159,7 +159,7 @@ $$
 a < b < x < y
 $$
 
-<img src="transpositions_stats-example.assets/image-cda6c2ec8546.png" width="1200">
+<img src="transpositions_stats-example.assets/image-4288dfc04113.png" width="1200">
 
 ### Birth Death Pairs
 |                          |                                                                   |
@@ -218,7 +218,7 @@ $$
 a < b < x < y
 $$
 
-<img src="transpositions_stats-example.assets/image-7303badef208.png" width="1200">
+<img src="transpositions_stats-example.assets/image-cd65a4f91a87.png" width="1200">
 
 ### Birth Death Pairs
 |                          |                                                          |
