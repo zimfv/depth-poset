@@ -35,8 +35,8 @@ def get_boundary_matrix_ranks(ns, bs):
     y = (ns - bs)
     rs = np.linalg.solve(A[:-1], y[:-1]).astype(int)
 
-    if (A[-1]@rs != y[-1]).any():
-        raise ValueError('')
+    if np.any(rs < 0) or np.any(rs > np.minimum(ns[:-1], ns[1:])):
+        raise ValueError("Impossible boundary matrix ranks")
     
     return rs
 

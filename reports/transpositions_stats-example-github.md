@@ -24,7 +24,7 @@ In this data we got 11 by transposing consecutive pairs. The distribution of the
 | death-death          |                    0 |                        2 |                2 |
 
 
-# Equations
+# Equations Detailed
 We checked 40 equations. And we can see the distribution of transposiions, satysfying these equations in the tables:
 
 ## Birth-Birth Transpositions
@@ -95,6 +95,43 @@ We checked 40 equations. And we can see the distribution of transposiions, satys
 | EqSucc2ab | birth-death          | no switch (not nested) | $a < x < b < y$ | $\text{Succ}_2^\text{at}(a, b) = \text{Succ}_2^\text{bt}(a, b)$                      | 1/1            | 1/1             | 100.00%           | 100.00%            |
 | EqSucc2xy | birth-death          | no switch (not nested) | $a < x < b < y$ | $\text{Succ}_2^\text{at}(x, y) = \text{Succ}_2^\text{bt}(x, y)$                      | 1/1            | 1/1             | 100.00%           | 100.00%            |
 
+## Equations Correctness Variants 
+The Equations Eq08, Eq09, Eq10, Eq11, Eq12, Eq13, Eq14, Eq15 corespond the __birth-birth switch forward case__.
+The correctness distribution for such cases is given in the table:
+| Eq08   | Eq09   | Eq10   | Eq11   | Eq12   | Eq13   | Eq14   | Eq15   |   count (WC) |   count (WOC) | portion, % (WC)   | portion, % (WOC)   |
+|:-------|:-------|:-------|:-------|:-------|:-------|:-------|:-------|-------------:|--------------:|:------------------|:-------------------|
+| ✔      | ✔      | ✔      | ✔      | ✔      | ✔      | ✔      | ✔      |            1 |             1 | 100.00%           | 100.00%            |
+
+The Equations Eq16, Eq16s, Eq17, Eq17s corespond the __birth-birth no switch nested case__.
+The correctness distribution for such cases is given in the table:
+| Eq16   | Eq16s   | Eq17   | Eq17s   |   count (WC) |   count (WOC) | portion, % (WC)   | portion, % (WOC)   |
+|:-------|:--------|:-------|:--------|-------------:|--------------:|:------------------|:-------------------|
+| ✔      | ✘       | ✔      | ✘       |            2 |             2 | 100.00%           | 100.00%            |
+
+The Equations Eq28, Eq29, Eq30, Eq31, Eq32, Eq33, Eq34, Eq35 corespond the __death-death switch forward case__.
+The correctness distribution for such cases is given in the table:
+| Eq28   | Eq29   | Eq30   | Eq31   | Eq32   | Eq33   | Eq34   | Eq35   |   count (WC) |   count (WOC) | portion, % (WC)   | portion, % (WOC)   |
+|:-------|:-------|:-------|:-------|:-------|:-------|:-------|:-------|-------------:|--------------:|:------------------|:-------------------|
+| ✔      | ✔      | ✔      | ✔      | ✔      | ✔      | ✔      | ✔      |            2 |             2 | 100.00%           | 100.00%            |
+
+The Equations Eq48, Eq49, Eq50, Eq50a, Eq50b, Eq51, Eq52, Eq53, Eq54, Eq55, Eq55a, Eq55b corespond the __birth-death switch forward case__.
+The correctness distribution for such cases is given in the table:
+| Eq48   | Eq49   | Eq50   | Eq50a   | Eq50b   | Eq51   | Eq52   | Eq53   | Eq54   | Eq55   | Eq55a   | Eq55b   |   count (WC) |   count (WOC) | portion, % (WC)   | portion, % (WOC)   |
+|:-------|:-------|:-------|:--------|:--------|:-------|:-------|:-------|:-------|:-------|:--------|:--------|-------------:|--------------:|:------------------|:-------------------|
+| ✔      | ✔      | ✘      | ✘       | ✔       | ✔      | ✔      | ✔      | ✔      | ✘      | ✘       | ✔       |            1 |               | 50.00%            |                    |
+| ✔      | ✔      | ✘      | ✘       | ✔       | ✔      | ✔      | ✔      | ✔      | ✔      | ✔       | ✔       |            1 |               | 50.00%            |                    |
+| ✔      | ✔      | ✘      | ✔       | ✔       | ✔      | ✔      | ✔      | ✔      | ✘      | ✔       | ✔       |              |             1 |                   | 50.00%             |
+| ✔      | ✔      | ✘      | ✔       | ✔       | ✔      | ✔      | ✔      | ✔      | ✔      | ✔       | ✔       |              |             1 |                   | 50.00%             |
+
+The Equations EqPred1ab, EqPred1xy, EqPred2ab, EqPred2xy, EqSucc1ab, EqSucc1xy, EqSucc2ab, EqSucc2xy corespond the __birth-birth no switch not nested, death-death no switch not nested, birth-death no switch nested and birth-death no switch not nested cases__.
+The correctness distribution for such cases is given in the table:
+| EqPred1ab   | EqPred1xy   | EqPred2ab   | EqPred2xy   | EqSucc1ab   | EqSucc1xy   | EqSucc2ab   | EqSucc2xy   |   count (WC) |   count (WOC) | portion, % (WC)   | portion, % (WOC)   |
+|:------------|:------------|:------------|:------------|:------------|:------------|:------------|:------------|-------------:|--------------:|:------------------|:-------------------|
+| ✔           | ✔           | ✔           | ✔           | ✔           | ✔           | ✔           | ✔           |            4 |             4 | 100.00%           | 100.00%            |
+
+
+
+
 # Incorrect Equations
 We have 4 transpositions, such that some equations are incorrect.
 We will list some examples.
@@ -110,7 +147,7 @@ $$
 a < x < y < b
 $$
 
-<img src="transpositions_stats-example.assets/image-5a2fea288fa3.png" width="1200">
+<img src="transpositions_stats-example.assets/image-e412684fc8ec.png" width="1200">
 
 ### Birth Death Pairs
 |                          |                                      |
@@ -167,7 +204,7 @@ $$
 a < b < x < y
 $$
 
-<img src="transpositions_stats-example.assets/image-add5679d9a4a.png" width="1200">
+<img src="transpositions_stats-example.assets/image-4288dfc04113.png" width="1200">
 
 ### Birth Death Pairs
 |                          |                                                                   |
@@ -236,7 +273,7 @@ $$
 a < b < x < y
 $$
 
-<img src="transpositions_stats-example.assets/image-cb9afb0acf55.png" width="1200">
+<img src="transpositions_stats-example.assets/image-cd65a4f91a87.png" width="1200">
 
 ### Birth Death Pairs
 |                          |                                                          |
